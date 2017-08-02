@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Yandex challenge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="myForm">
+		<input type="text" id="input-fio" placeholder="FIO" name="fio" required>
+		<input type="email" id="input-email" list="autocmpl" placeholder="Email" name="email" required>
+		<datalist id = "autocmpl">
+			<option value = "@ya.ru" disabled></option>
+			<option value = "@yandex.ru" disabled></option>
+			<option value = "@yandex.ua" disabled></option>
+			<option value = "@yandex.by" disabled></option>
+			<option value = "@yandex.kz" disabled></option>
+			<option value = "@yandex.com" disabled></option>
+		</datalist>
+		<input type="tel" id="input-phone" name="phone" required>
+        <button type="submit" id="submitBtn">test</button>
+    </form>
+	<div id="resultContainer">
+		<p>Change responce type:</p>
+		<select id="responceType">
+			<option value="success.json">success</option>
+			<option value="progress.json">progress</option>
+			<option value="error.json">error</option>
+		</select>
+		<p>Data to server:</p>
+		<p id="dataToServer"></p>
+		<p>Info from server:</p>
+		<p id="dataFromServer"></p>
+	</div>
+<!-- scripts -->
+<script src="formatter.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
