@@ -1,0 +1,93 @@
+@require "normalize.css"
+
+.form-wrapper
+	position absolute
+	width 100%
+	min-height 100%
+	display flex
+	flex-direction column
+	justify-content center
+	align-items center
+
+#myForm
+	display flex
+	flex-direction column
+	width 100%
+	max-width 600px
+	padding 12px
+	background: #f3f1ed
+	input
+		background none
+		font-size 16px
+		font-family Helvetica, Arial, sans-serif
+		width 100%
+		display block
+		box-shadow 0 2px #dad8d5
+		border none
+		box-sizing border-box
+		margin 10px 0
+		&:focus
+			box-shadow 0 2px #ffdb4d
+		&.error
+			border 1px solid red
+			box-shadow none
+		&.valid 
+			border 1px solid green
+			
+#resultContainer
+	margin-top 20px
+	display flex
+	flex-direction column
+	width 100%
+	max-width 600px
+	padding 12px
+	p
+		margin 0
+		
+.btn
+	font-size 16px
+	margin-top 10px
+	padding 10px
+	border none
+	background rgba(255,219,77,1)
+	span
+		display block
+		transition all .3s
+		position relative
+		&:after
+			display none
+			position absolute
+			right 0
+			bottom 0
+			content ""
+			width 16px
+			height 16px
+			background center center no-repeat
+			background-clip border-box
+			background-size cover
+			border-radius 50%
+			border .15em solid
+			border-color currentColor currentColor currentColor transparent
+	&--progress
+		background #ffdb4d80
+		span
+			margin-right 20px
+			&:after
+				display block
+				animation ld-cycle 1s infinite
+	&--error
+		background #fc694a
+	&--success
+		background #00ff78
+	
+@keyframes ld-cycle{
+	0%,100% {
+		animation-timing-function:cubic-bezier(0.5,0.5,0.5,0.5)
+	}
+	0% {
+		transform:rotate(0)
+	}
+	100% {
+		transform:rotate(360deg)
+	}
+}
