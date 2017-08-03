@@ -61,7 +61,10 @@ const MyForm = {
 				let resultContainer = document.getElementById('resultContainer');
 				let dataFromServer = document.getElementById('dataFromServer');
 				let submitBtn = document.getElementById('submitBtn');
-				
+				if (submitBtn.hasAttribute('disabled')) {
+					submitBtn.removeAttribute('disabled');
+				}
+
 				switch(res.status) {
 					case 'success':
 						resultContainer.className = 'success';
@@ -72,6 +75,7 @@ const MyForm = {
 						var now = new Date();
 						resultContainer.className = 'progress';
 						submitBtn.className = 'btn btn--progress';
+						submitBtn.setAttribute('disabled','');
 						dataFromServer.innerHTML = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds() + ' '  + xhr.responseText;
 						setTimeout(() => this.sendData(data),parseInt(res.timeout));
 						break;
