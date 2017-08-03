@@ -19,7 +19,7 @@ const MyForm = {
 		let errorFields = [];
 		
 		//fio
-		let reg = /[^a-zA-Zа-яА-Я\ \-]/i // разрешены только буквы, пробелы и тире
+		let reg = /[^a-zа-я\ \-]/i // разрешены только буквы, пробелы и тире
 		let words = data['fio'].split(' ')
 		let rightAmount = words.every((word) => word.length>0); // Хотя бы одна буква в слове
 		let wordCount =  words.length;  // количество слов
@@ -29,10 +29,11 @@ const MyForm = {
 		}
 		
 		//email
-		reg = /.+@.+\..+/i; // html5 умеет валидировать email, так что я не уверен, что эта проверка тут уместна
-		let BadEmail = data['email'].search(reg);
+		reg = /[a-z][\w\-\.]*\w/i  //Логин может состоять из латинских символов, цифр, одинарного дефиса или точки. Он должен начинаться с буквы, заканчиваться буквой или цифрой
 		let mailType = data['email'].split('@')[1];
-		if (BadEmail || !yandexMails.includes(mailType)) { // не является почтовым адресом или не от яндекс
+		let toCheck = data['email'].split('@')[0];
+		let validMail = toCheck.match(reg) ? toCheck.match(reg)[0] === toCheck : false; //если можно проверить и есть полное соответствие
+		if (!validMail || !yandexMails.includes(mailType)) { // не является почтовым адресом или не от яндекс
 			isValid = false;
 			errorFields.push('input-email');
 		}
@@ -115,7 +116,7 @@ const MyForm = {
 		let datalist = document.getElementById('autocmpl');
 		let listItems = datalist.getElementsByTagName('option');
 		let strArr = emailInput.value.split("@");
-		if (strArr.length === 2) {
+		if (strArr.length === 2 && !yandexMails.includes(strArr[1])) {
 			Array.from(listItems).map((item,i) => {
 				item.removeAttribute('disabled');
 				item.value = strArr[0] + '@' + yandexMails[i];
