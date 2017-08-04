@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,30 +10,30 @@
 <body>
 	<div class="form-wrapper">
 	    <form id="myForm">
-			<span class="input-field">
-				<span>ФИО</span>
-				<input type="text" id="input-fio" placeholder="Иванов Иван Иванович" name="fio" required>
-			</span>
+		<span class="input-field">
+			<span>ФИО</span>
+			<input type="text" id="input-fio" placeholder="Иванов Иван Иванович" name="fio" required>
+		</span>
 		
-			<span class="input-field">
-				<span>Email</span>
-				<input type="email" id="input-email" list="autocmpl" placeholder="yourmail@yandex.ru" name="email" required>
-				<datalist id = "autocmpl">
-					<option value = "@ya.ru" disabled></option>
-					<option value = "@yandex.ru" disabled></option>
-					<option value = "@yandex.ua" disabled></option>
-					<option value = "@yandex.by" disabled></option>
-					<option value = "@yandex.kz" disabled></option>
-					<option value = "@yandex.com" disabled></option>
-				</datalist>
-			</span>
+		<span class="input-field">
+			<span>Email</span>
+			<input type="email" id="input-email" list="autocmpl" placeholder="yourmail@yandex.ru" name="email" required>
+			<datalist id = "autocmpl">
+				<option value = "@ya.ru" disabled></option>
+				<option value = "@yandex.ru" disabled></option>
+				<option value = "@yandex.ua" disabled></option>
+				<option value = "@yandex.by" disabled></option>
+				<option value = "@yandex.kz" disabled></option>
+				<option value = "@yandex.com" disabled></option>
+			</datalist>
+		</span>
 			
-			<span class="input-field">
-				<span>Телефон</span>
-				<input type="tel" id="input-phone" name="phone" required>
-			</span>
+		<span class="input-field">
+			<span>Телефон</span>
+			<input type="tel" id="input-phone" name="phone" required>
+		</span>
 	        <button type="submit" id="submitBtn" class="btn">
-				<span>Отправить</span>
+			<span>Отправить</span>
 	        </button>
 	    </form>
 	    <div id="resultContainer">
