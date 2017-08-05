@@ -18,8 +18,8 @@ const MyForm = {
 		let isValid = true;
 		let errorFields = [];
 		
-		//fio
-		let reg = /[^a-zа-я\ \-]/i // разрешены только буквы, пробелы и тире
+		//ФИО
+		let reg = /[^A-zА-я\ \-]/ // разрешены только буквы, пробелы и тире
 		let words = data['fio'].split(' ')
 		let rightAmount = words.every((word) => word.length>0); // Хотя бы одна буква в слове
 		let wordCount =  words.length;  // количество слов
@@ -29,20 +29,21 @@ const MyForm = {
 		}
 		
 		//email
-		reg = /[a-z]*[\w\-\.]*\w/i  //Логин может состоять из латинских символов, цифр, одинарного дефиса или точки. Он должен начинаться с буквы, заканчиваться буквой или цифрой
-		let mailType = data['email'].split('@')[1];
-		let toCheck = data['email'].split('@')[0];
-		let validMail = toCheck.match(reg) ? toCheck.match(reg)[0] === toCheck : false; //если можно проверить и есть полное соответствие
-		if (!validMail || !yandexMails.includes(mailType)) { // не является почтовым адресом или не от яндекс
+		//Логин может состоять из латинских символов, цифр, одинарного дефиса или точки. Он должен начинаться с буквы, заканчиваться буквой или цифрой.
+		reg = /^[A-z]+[A-z\d]*[\.\-]?[A-z\d]+$/;
+		let mailDomain = data['email'].split('@')[1];
+		let login = data['email'].split('@')[0];
+		let validMail = reg.test(login); //полное соответствие регулярному
+		if (!validMail || !yandexMails.includes(mailDomain)) { // ошибка валидации или домен не от яндекса
 			isValid = false;
 			errorFields.push('input-email');
 		}
-			
+
 		//телефон
-		reg = /\d/g; //так как телефон работает по маске - просто нахожу все цифры
+		reg = /\d/g; // так как телефон работает по маске - просто нахожу все цифры
 		let summ = 0;
 		let nums = data['phone'].match(reg);
-		nums.map(num => summ+=parseInt(num)); //и считаю их сумму
+		nums.map(num => summ+=parseInt(num)); // и считаю их сумму
 		if (summ >30 || nums.length!== 11) { // неправильная сумма или длина номера
 			isValid = false;
 			errorFields.push('input-phone');
@@ -52,7 +53,6 @@ const MyForm = {
 	sendData(data) {
 		let xhr = new XMLHttpRequest();
 		let urlParams = Object.keys(data).map(i => i+'='+ encodeURIComponent(data[i])).join('&'); 
-		//console.log(urlParams);
 		xhr.open('GET', serverAddr + '?'+urlParams, true); // наверное это излишне, но будь сервер настоящим - нужно было бы передать данные с формы
 		xhr.setRequestHeader('Content-Type','application/json');
 		xhr.send();
