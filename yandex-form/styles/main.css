@@ -25,6 +25,7 @@
   font-family: Helvetica, Arial, sans-serif;
   width: 100%;
   display: block;
+  outline: none;
   box-shadow: 0 2px #dad8d5;
   border: none;
   box-sizing: border-box;
