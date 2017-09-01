@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ru-RU">
+<head>
+    <title>topdeck.pw - только лучшие колоды</title>
+    <meta name="description" content="Самые актуальные колоды в текущей мете, гайды, новости Hearthstone" />
+    <meta name="keywords" content="хс, hs, hearthstone, колоды, легенда">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta property="og:locale" content="ru_RU"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="topdeck.pw - только лучшие колоды"/>
+    <meta property="og:description" content="Самые актуальные колоды в текущей мете, гайды, новости Hearthstone"/>
+    <meta property="og:image" content="http://topdeck.pw/img/social.png"/>
+    <meta property="og:url" content="http://topdeck.pw"/>
+    <meta property="og:site_name" content="topdeck.pw"/>
+    <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700i,900|Scada:400,700&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.min.css">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+</head>
+<body>
+<header class="main-header">
+<nav class="main-navigation">
+    <a href="#" class="main-logo"></a>
+    <button class="mobile-btn"><i class="mobile-menu-btn"></i></button>
+    <ul>
+        <li class="menu-item">
+            <ul class="submenu">
+                <li><a href=#>Для новичков</a></li>
+                <li><a href=#>Приключения</a></li>
+                <li><a href=#>Арена</a></li>
+            </ul>
+            <a href="#">Гайды</a>
+        </li>
+        <li class="menu-item">
+            <a href="#">Новости</a>
+        </li>
+        <li class="menu-item">
+            <ul class="submenu">
+                <li><a href=#>На разбойника</a></li>
+                <li><a href=#>На паладина</a></li>
+                <li><a href=#>На варлока</a></li>
+                <li><a href=#>На шамана</a></li>
+                <li><a href=#>На приста</a></li>
+                <li><a href=#>На война</a></li>
+                <li><a href=#>На ханта</a></li>
+                <li><a href=#>На мага</a></li>
+            </ul>
+        <a href="#">Колоды</a>
+    </ul>
+</nav>
+</header>
+<section class="deck-section">
+<div class="streams">
+    <div class="streams-list"></div>
+</div>
+
+<div class="tier-decks">
+    <div class="tier-decks-one">
+        <h1 class="tier-name"><i class="icon-crown one"></i><span>Tier 1 колоды</span></h1>
+        <div class="decks">
+            <div class="deck">
+                <a class="tier-deck-img murlo-pal" href="pages/deck.html">
+                    <i class="icon-link"></i>
+                </a>
+                <div class="tier-deck-info">
+                    <a href="pages/deck.html">Мурлодин<span class="dust-cost">9190</span></a>
+                </div>
+            </div>
+            <div class="deck">
+                <a class="tier-deck-img pirate-war" href="pages/deck.html">
+                    <i class="icon-link"></i>
+                </a>
+                <div class="tier-deck-info">
+                    <a href="pages/deck.html">Пират воин <span class="dust-cost">6010</span></a>
+                </div>
+            </div>
+            <div class="deck">
+                <a class="tier-deck-img secret-mage" href="pages/deck.html">
+                    <i class="icon-link two"></i>
+                </a>
+                <div class="tier-deck-info">
+                    <a href="pages/deck.html">Секрет маг<span class="dust-cost">4040</span></a>
+                </div>
+            </div>
+            <div class="deck">
+                <a class="tier-deck-img token-druid" href="pages/deck.html">
+                    <i class="icon-link"></i>
+                </a>
+                <div class="tier-deck-info">
+                    <a href="pages/deck.html">Токен друид<span class="dust-cost">5080</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tier-other">
+        <div class="chart-popular">
+            <h2><span class="icon-percent"></span>Статистика:</h2>
+            <ul class="main-chart">
+                <li id="deck-bar-0">
+                    <span></span>
+                    <p>Воин</p>
+                </li>
+                <li id="deck-bar-1">
+                    <span></span>
+                    <p>Чернокнижник</p>
+                </li>
+                <li id="deck-bar-2">
+                    <span></span>
+                    <p>Шаман</p>
+                </li>
+                <li id="deck-bar-3">
+                    <span></span>
+                    <p>Разбойница</p>
+                </li>
+                <li id="deck-bar-4">
+                    <span></span>
+                    <p>Жрец</p>
+                </li>
+                <li id="deck-bar-5">
+                    <span></span>
+                    <p>Паладин</p>
+                </li>
+                <li id="deck-bar-6">
+                    <span></span>
+                    <p>Маг</p>
+                </li>
+                <li id="deck-bar-7">
+                    <span></span>
+                    <p>Охотник</p>
+                </li>
+                <li id="deck-bar-8">
+                    <span></span>
+                    <p>Друид</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier-decks-two">
+            <h2><i class="icon-crown two"></i>Tier 2 колоды</h2>
+            <div class="deck2">
+                <a class="tier2-deck-img warrior" href="pages/deck.html">
+                    <span class="deck-name">Контроль воин</span>
+                    <span class="dust-cost">9100</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img paladin" href="pages/deck.html">
+                    <span class="deck-name">Контроль паладин</span>
+                    <span class="dust-cost">9680</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img mage" href="pages/deck.html">
+                    <span class="deck-name">Фриз маг</span>
+                    <span class="dust-cost">8080</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img hunt" href="pages/deck.html">
+                    <span class="deck-name">Мид хант</span>
+                    <span class="dust-cost">2360</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img priest" href="pages/deck.html">
+                    <span class="deck-name">Пурифай прист</span>
+                    <span class="dust-cost">3520</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img rogue" href="pages/deck.html">
+                    <span class="deck-name">Квест рога</span>
+                    <span class="dust-cost">5660</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="tier-decks-three">
+            <h2><i class="icon-crown three"></i>Tier 3 колоды</h2>
+            <div class="deck2">
+                <a class="tier2-deck-img shaman" href="pages/deck.html">
+                    <span class="deck-name">Контроль шаман</span>
+                    <span class="dust-cost">6120</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img mage" href="pages/deck.html">
+                    <span class="deck-name">Темпо маг</span>
+                    <span class="dust-cost">7080</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img shaman" href="pages/deck.html">
+                    <span class="deck-name">Элем-шаман</span>
+                    <span class="dust-cost">6650</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img warlock" href="pages/deck.html">
+                    <span class="deck-name">Зулок</span>
+                    <span class="dust-cost">3080</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img hunt" href="pages/deck.html">
+                    <span class="deck-name">Фейс хант</span>
+                    <span class="dust-cost">2760</span>
+                </a>
+            </div>
+            <div class="deck2">
+                <a class="tier2-deck-img priest" href="pages/deck.html">
+                    <span class="deck-name">Н'зот прист</span>
+                    <span class="dust-cost">8860</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="news-section">
+    <article class="block news">
+        <div class="image-wrapper" style="background-image: url('img/news/1.jpg')">
+            <div class="image"> Подробнее... </div>
+        </div>
+        <div class="details">
+            <div class="title">Мета деки - спустя месяц после выходы Ун'Горо</div>
+            <div class="desc">
+                Обзор самых актуальных колод на текущий момент.
+            </div>
+            <div class="date">10 Мая 2017</div>
+        </div>
+    </article>
+
+    <article class="block news">
+        <div class="image-wrapper" style="background-image: url('img/news/2.jpg')">
+            <div class="image"> Подробнее... </div>
+        </div>
+        <div class="details">
+            <div class="title">Чем играют стримеры?</div>
+            <div class="desc">
+                Подборка из самых интересных колод пяти самых популярных стримеров по Hearthstone
+            </div>
+            <div class="date">08 Мая 2017</div>
+        </div>
+    </article>
+
+    <article class="block news">
+        <div class="image-wrapper" style="background-image: url('img/news/3.jpg')">
+            <div class="image"> Подробнее... </div>
+        </div>
+        <div class="details">
+            <div class="title">Агрессивный пират воин</div>
+            <div class="desc">
+                Гайд по самой популярной колоде в текущем патче
+            </div>
+            <div class="date">06 Апреля 2017</div>
+        </div>
+    </article>
+
+    <article class="block news">
+        <div class="image-wrapper" style="background-image: url('img/news/4.jpg')">
+            <div class="image"> Подробнее... </div>
+        </div>
+        <div class="details">
+            <div class="title">Перевод интервью с Kibler</div>
+            <div class="desc">
+                Интерьвю с популярным англогоязычным стример и комментатором Брайаном Киблером
+            </div>
+            <div class="date">03 Апреля 2017</div>
+        </div>
+    </article>
+</section>
+
+<footer class="page-footer">
+    <div class="footer-inner">
+        <nav>
+            <h3>Навигация</h3>
+            <ul class="bot-nav">
+                <li><a href="/">Главная</a></li>
+                <li><a href="">Гайды</a></li>
+                <li><a href="">Новости</a></li>
+                <li><a href="">Колоды</a></li>
+            </ul>
+        </nav>
+        <div>
+            <h3>Игра</h3>
+            <ul class="bot-nav">
+                <li><a href="http://eu.battle.net/hearthstone/ru/">Официальный сайт</a></li>
+                <li><a href="http://hearthstone.gamepedia.com/Hearthstone_Wiki">Hearthstone Wiki</a></li>
+                <li><a href="https://eu.battle.net/forums/ru/hearthstone/">Форум</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Об этом сайте</h3>
+            <ul class="list-unstyled">
+                <li><a href="mailto:deadrime@yahoo.com">Обратная связь</a></li>
+                <li><a href="">О сайте</a></li>
+                <li><a href="">Правила</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<div id="show-card"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--Если не удалось скачать с гугла - подключаем локально-->
+<script>window.jQuery || document.write('<script src="js/jquery/jquery-3.2.1.min.js"><\/script>')</script>
+<script async type="text/javascript" src="js/cardsbd.min.js"></script>
+<script async type="text/javascript" src="js/carts.min.js"></script>
+<script async type="text/javascript" src="js/main.min.js"></script>
+<script async type="text/javascript" src="js/slick/slick.min.js"></script>
+<script async type="text/javascript" src="js/streams.min.js"></script>
+</body>
+</html>
