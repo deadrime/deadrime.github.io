@@ -12,28 +12,27 @@ const MyForm = {
 		let phone = form['input-phone'].value;
 		let email = form['input-email'].value;
 		return {fio,phone,email};
-		
 	},
 	validate(data){
 		let isValid = true;
 		let errorFields = [];
-		
+
 		//ФИО
-		let reg = /[^A-zА-я\ \-]/ // разрешены только буквы, пробелы и тире
-		let words = data['fio'].split(' ')
-		let rightAmount = words.every((word) => word.length>0); // Хотя бы одна буква в слове
-		let wordCount =  words.length;  // количество слов
-		if (wordCount !==3 || reg.test(data['fio']) || !rightAmount) { 
-			isValid = false;
-			errorFields.push('input-fio');
-		}
-		
+        // 3 слова, хотя бы одна буква, слово может содержать один дефис, не может заканчиться на что-то кроме буквы
+		let reg = /^([А-я]+(\-?[А-я]+)*\s+[А-я]+(\-?[А-я]+)*\s+[А-я]+(\-?[А-я]+)*)$/;
+        let fio = data['fio'];
+        let validFio = reg.test(fio);
+        if (!validFio) {
+            isValid = false;
+            errorFields.push('input-fio');
+        }
+
 		//email
 		//Логин может состоять из латинских символов, цифр, одинарного дефиса или точки. Он должен начинаться с буквы, заканчиваться буквой или цифрой.
 		reg = /^[A-z]+[A-z\d]*[\.\-]?[A-z\d]+$/;
 		let mailDomain = data['email'].split('@')[1];
 		let login = data['email'].split('@')[0];
-		let validMail = reg.test(login); //полное соответствие регулярному
+		let validMail = reg.test(login); //соответствие регулярному
 		if (!validMail || !yandexMails.includes(mailDomain)) { // ошибка валидации или домен не от яндекса
 			isValid = false;
 			errorFields.push('input-email');
@@ -52,7 +51,7 @@ const MyForm = {
 	},
 	sendData(data) {
 		let xhr = new XMLHttpRequest();
-		let urlParams = Object.keys(data).map(i => i+'='+ encodeURIComponent(data[i])).join('&'); 
+		let urlParams = Object.keys(data).map(i => i+'='+ encodeURIComponent(data[i])).join('&');
 		xhr.open('GET', serverAddr + '?'+urlParams, true); // наверное это излишне, но будь сервер настоящим - нужно было бы передать данные с формы
 		xhr.setRequestHeader('Content-Type','application/json');
 		xhr.send();
@@ -65,7 +64,6 @@ const MyForm = {
 				if (submitBtn.hasAttribute('disabled')) {
 					submitBtn.removeAttribute('disabled');
 				}
-
 				switch(res.status) {
 					case 'success':
 						resultContainer.className = 'success';
@@ -73,7 +71,7 @@ const MyForm = {
 						dataFromServer.innerHTML = xhr.responseText;
 						break;
 					case 'progress':
-						var now = new Date();
+						let now = new Date();
 						resultContainer.className = 'progress';
 						submitBtn.className = 'btn btn--progress';
 						submitBtn.setAttribute('disabled','');
@@ -90,11 +88,11 @@ const MyForm = {
 		}
 	},
 	submit() {
-		let data = this.getData();		
+		let data = this.getData();
 		let valRes = this.validate(data);
 		let isValid = valRes['isValid'], errorFields= valRes['errorFields'];
-			
-		if (!isValid) {  
+
+		if (!isValid) {
 			Array.from(form).map(i => { // расставление классов
 				if (errorFields.includes(i.id)) {
 					i.classList.add('error');
@@ -107,12 +105,11 @@ const MyForm = {
 		else {
 			Array.from(form).map(i => i.classList.remove('error'));
 			let dataToServer = document.getElementById('dataToServer');
-			let resultStr = JSON.stringify(data);
-			dataToServer.innerHTML = resultStr;
+            dataToServer.innerHTML = JSON.stringify(data);
 			this.sendData(data);
 		}
-	},	
-	autocompleteEmail() { // подумал что ошибок будет меньше если помочь пользователю выбрать почтовый домен
+	},
+	autocompleteEmail() { // подумал что ошибок будет меньше, если помочь пользователю выбрать почтовый домен
 		let datalist = document.getElementById('autocmpl');
 		let listItems = datalist.getElementsByTagName('option');
 		let strArr = emailInput.value.split("@");
@@ -123,7 +120,7 @@ const MyForm = {
 			});
 		}
 	}
-}
+};
 
 let emailInput = form['input-email'];
 emailInput.addEventListener('input', MyForm.autocompleteEmail);
