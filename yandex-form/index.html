@@ -1,54 +1,65 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Yandex challenge</title>
-    <link rel="stylesheet" href="styles/main.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Yandex challenge</title>
+	<link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-	<div class="form-wrapper">
-	    <form id="myForm">
+<div class="form-wrapper">
+	<form id="myForm">
+			<span class="input-field">
+				<span>ФИО</span>
+				<input type="text" id="input-fio" placeholder="Иванов Иван Иванович" name="fio" required>
+			</span>
+
 		<span class="input-field">
-			<span>ФИО</span>
-			<input type="text" id="input-fio" placeholder="Иванов Иван Иванович" name="fio" required>
-		</span>
-		
+				<span>Email</span>
+				<input type="email" id="input-email" list="autocmpl" placeholder="yourmail@yandex.ru" name="email" required>
+				<datalist id = "autocmpl">
+					<option value = "@ya.ru" disabled></option>
+					<option value = "@yandex.ru" disabled></option>
+					<option value = "@yandex.ua" disabled></option>
+					<option value = "@yandex.by" disabled></option>
+					<option value = "@yandex.kz" disabled></option>
+					<option value = "@yandex.com" disabled></option>
+				</datalist>
+			</span>
+
 		<span class="input-field">
-			<span>Email</span>
-			<input type="email" id="input-email" list="autocmpl" placeholder="yourmail@yandex.ru" name="email" required>
-			<datalist id = "autocmpl">
-				<option value = "@ya.ru" disabled></option>
-				<option value = "@yandex.ru" disabled></option>
-				<option value = "@yandex.ua" disabled></option>
-				<option value = "@yandex.by" disabled></option>
-				<option value = "@yandex.kz" disabled></option>
-				<option value = "@yandex.com" disabled></option>
-			</datalist>
-		</span>
-			
-		<span class="input-field">
-			<span>Телефон</span>
-			<input type="tel" id="input-phone" name="phone" required>
-		</span>
-	        <button type="submit" id="submitBtn" class="btn">
+				<span>Телефон</span>
+				<input type="tel" id="input-phone" title="Телефон" name="phone" required>
+			</span>
+		<button type="submit" id="submitBtn" class="btn">
 			<span>Отправить</span>
-	        </button>
-	    </form>
-	    <div id="resultContainer">
-			<p>Изменить тип ответа от сервера:</p>
-			<select id="responceType">
-				<option value="server-response/success.json">success</option>
-				<option value="server-response/progress.json">progress</option>
-				<option value="server-response/error.json">error</option>
-			</select>
-			<p>Переданная на сервер информация:</p>
-			<p id="dataToServer"></p>
-			<p>Полученная от сервера информация:</p>
-			<p id="dataFromServer"></p>
-		</div>
+		</button>
+	</form>
+	<div id="resultContainer">
+		<p>Установить значения в форму:</p>
+		<form id="set-data">
+			<p>ФИО</p>
+			<input id="set-fio" placeholder="Иванов Иван Иванович" name="fio" required>
+			<p>Email</p>
+			<input id="set-email" placeholder="test@ya.ru" name="email" required>
+			<p>Телефон</p>
+			<input id="set-phone" placeholder="+7(111)111-11-11" name="phone" required>
+			<br>
+			<input type="submit" name="Изменить" class="btn">
+		</form>
+		<p>Изменить тип ответа от сервера:</p>
+		<select id="responceType" title="Тип ответа от сервера">
+			<option value="server-response/success.json">success</option>
+			<option value="server-response/progress.json">progress</option>
+			<option value="server-response/error.json">error</option>
+		</select>
+		<p>Переданная на сервер информация:</p>
+		<p id="dataToServer"></p>
+		<p>Полученная от сервера информация:</p>
+		<p id="dataFromServer"></p>
 	</div>
+</div>
 <!-- scripts -->
 <script src="formatter.min.js"></script>
 <script src="index.js"></script>
