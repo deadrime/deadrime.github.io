@@ -1,4 +1,18 @@
-# My little portfolio
- * [hs-fun-site](https://deadrime.github.io/hs-fun-site/) - фан сайт по игре Hearthstone
- * [hs-vue](https://deadrime.github.io/hs-vue/) - первый опыт в vue.js, база карт и составитель колод для игры Hearthstone
- * [yandex-form](https://deadrime.github.io/yandex-form) - тестовое задание для школы node.js от yandex
+# Мое небольшое портфолио
+
+## Домашние проекты
+То, что я делал для себя
+ * [hs-fun-site](https://deadrime.github.io/hs-fun-site/) - фан-сайт по игре Hearthstone. Создавался, как курсовая работа по предмету "Веб-технологии", в репозитории лежит также пояснительная записка, может хоть кто-то оценит ;)
+ * [hs-vue](https://deadrime.github.io/hs-vue/) - первый опыт в vue.js, база карт и составитель колод для игры Hearthstone.
+ * [yandex-form](https://deadrime.github.io/yandex-form) - тестовое задание для школы node.js от yandex.
+
+## Сайты на заказ
+* [pro-remont.net](http://pro-remont.net) - сайт для ремонтной компании PRO-ремонт. Дизайн и верстка полностью с нуля, с оглядкой на печатную продукцию компании.
+
+## Практика верстки
+В репозиториях лежат макеты, по которым я верстал, в форматах .sketch, .fig или .psd, а так же изображение макета во всю высоту в .png
+
+Буду постепенно дорабатывать уже свертсанные макеты, добавляя функциональность и адаптивную верстку.
+
+Критика и замечания только приветствуются (особенно по-поводу БЭМ).
+ * [ChatApp](https://deadrime.github.io/chat-app)
