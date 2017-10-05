@@ -1,0 +1,749 @@
+body, html
+  margin 0
+  padding 0
+  font-family: HelveticaNeueCyr, sans-serif;
+  min-width 540px
+
+.btn
+  outline none
+  cursor pointer
+&:focus
+  outline none
+
+.top-nav
+  display flex
+  position fixed
+  z-index 100
+  top 0
+  left 0
+  width 100%
+  background: #fff
+  height 46px
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  &__top-nav--active
+    display flex
+  &__inner
+    width 100%
+    height 100%
+    max-width 1200px
+    margin 0 auto
+    position relative
+    display: flex;
+    justify-content space-between
+  &__menu
+    margin 0
+    padding 0 6px
+    height 100%
+    display flex
+    list-style none
+    &__item
+      height 100%
+      padding 0 12px
+      margin 0
+      margin-right: 10px;
+      &>a
+        display flex
+        align-items center
+        height 100%
+        text-decoration none
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: 13px;
+        color: #657786;
+        i
+          font-size: 18px;
+          padding-right: 6px;
+          padding-left: 1px;
+  &__twitter-icon
+    position: absolute;
+    top: 0;
+    width: 19px;
+    height: 100%;
+    background: url(../img/icons/ic_twitter.svg) center no-repeat;
+    left: calc(50% - 10px);
+  &__right-bar
+    display flex
+    justify-content flex-end
+    align-items center
+    padding-right 2px
+  &__mobile-btn
+    cursor pointer
+    display none
+    border none
+    background none
+    justify-content center
+    align-items center
+    span
+      width 36px
+      height 4px
+      border-radius 4px
+      background: #1b95e0
+      position relative
+      &:before, &:after
+        content ''
+        width 36px
+        border-radius 4px
+        height 4px
+        background #1b95e0
+        position absolute
+        left 0
+      &:after
+        top 8px
+      &:before
+        top -8px
+
+
+.right-bar
+  &__tweet
+    border none
+    width: 74px;
+    height: 34px;
+    background: #1B95E0;
+    border-radius: 100px;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+  &__profile
+    background #FC494C
+    border none
+    width 32px
+    height 32px
+    display flex
+    justify-content center
+    align-items center
+    border-radius 50%
+    margin-right: 18px;
+    padding 0
+    overflow hidden
+    img
+      width 100%
+      height 100%
+  &__search
+    width 220px
+    height 32px
+    padding-left 14px
+    background: #F5F8FA;
+    border: 1px solid #E6ECF0;
+    box-sizing: border-box;
+    border-radius: 100px;
+    background-image url("../img/icons/ic_search.svg")
+    background-repeat no-repeat
+    background-position: right 10px center;
+    margin-right: 16px;
+    letter-spacing: -0.036em;
+    outline none
+    font-family: HelveticaNeueCyr
+    &:focus
+      outline none
+
+.hero-section
+  margin-top 46px
+  &__bg
+    width 100%
+    height 500px
+    img
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+.b-info
+  position relative
+  display flex
+  width 100%
+  height 60px
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  &__inner
+    width 100%
+    max-width 1200px
+    margin 0 auto
+    padding 0 8px
+    box-sizing border-box
+    position relative
+    display flex
+    justify-content space-between
+    align-items center
+  &__avatar
+    width: 17.58%;
+    min-width 100px
+    height: auto;
+    position: absolute;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    bottom: -26px;
+    left: 14px;
+    img
+      width 100%
+      display block
+      height auto
+  &__edit-btn
+    background #fff
+    width: 107px;
+    height: 34px;
+    border: 1px solid #66757F;
+    box-sizing: border-box;
+    border-radius: 100px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    color: #66757F;
+    margin-right: 8px;
+
+.user-stats
+  height 100%
+  padding-left: 25%;
+  display flex
+  &__item
+    text-decoration none
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    color: #657786;
+    &__title
+      font-style: normal;
+      font-weight: bold;
+      line-height: normal;
+      font-size: 12px;
+      padding 0 16px
+      margin-bottom 1px
+    &__count
+      font-style: normal;
+      font-weight: bold;
+      line-height: normal;
+      font-size: 18px;
+    &--active
+      box-shadow: inset 0 -2px #1B95E0;
+      box-sizing border-box
+      .user-stats__item__count
+        color #1DA1F2
+
+
+.main
+  background #E6ECF0
+  display flex
+  width 100%
+  padding-top: 10px;
+  &__inner
+    display flex
+    width 100%
+    max-width 1200px
+    padding 0 8px;
+    box-sizing: border-box;
+    margin 0 auto
+
+.left-sidebar
+  padding-top: 4px;
+  padding-left: 10px;
+  display flex
+  flex-direction column
+  width: 23%;
+  box-sizing: border-box;
+  &__name
+    font-weight: bold;
+    font-size: 21px;
+    margin-bottom 6px
+    color: #14171A;
+  &__login
+    font-weight bold
+    font-size: 14px;
+    color: #657786;
+    margin-bottom 16px
+  &__description
+    font-weight: bold;
+    font-size: 14px;
+    color: #000;
+    margin-bottom 16px
+  .icon
+    background-repeat no-repeat
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 4px
+    background-position: center;
+  &__icon-item
+    text-decoration none
+    font-weight: bold;
+    font-size: 14px;
+    color: #1B95E0;
+    line-height: 1.5em;
+    display flex
+    margin-bottom: 7px;
+    i
+      font-size: 16px;
+      padding-top: 2px;
+      padding-left: 2px;
+      padding-right: 6px;
+  &__joined
+    font-weight: bold;
+    font-size: 14px;
+    color: #657786;
+    margin-bottom: 14px
+  &__photos
+    display flex
+    flex-wrap wrap
+    justify-content space-between
+    align-content: space-between;
+    img
+      width 81px
+      height 81px
+      border-radius 4px
+
+.tweets-section
+  margin-left: 2%;
+  margin-bottom 100px
+  padding-bottom 10px
+  display flex
+  flex-direction column
+  background: #fff
+  min-width: 50%
+  flex 1 0
+  &__header
+    display: flex;
+    height 44px
+    width: 100%
+    box-sizing border-box
+    box-shadow 0 1px #E6ECF0;
+    &__item
+      text-decoration none
+      padding: 12px 18px;
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: -0.195px;
+      color: #1B95E0;
+      &--active
+        color: #14171A;
+
+.single-tweet
+  padding-top 10px
+  border-bottom 1px solid #E6ECF0
+  &:nth-last-child(1)
+    border-bottom none
+  &__type-header
+    padding-left 70px
+    &__text
+      display flex
+      position relative
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: 0.01px;
+      color: #657786;
+    i
+      position absolute
+      left: -24px;
+      top: -2px;
+      font-size: 16px;
+  &__body
+    padding-left 70px
+    position relative
+    header
+      padding-top: 5px;
+      position relative
+      font-size: 14px;
+      letter-spacing: 0.25px;
+  &__name
+    font-weight 500
+  &__login, &__date
+    font-weight 600
+    padding-right: 2px;
+    color #657786
+    position relative
+  &__login::before
+    position absolute
+    bottom: 5px;
+    right: -1px;
+    content ''
+    width 2px
+    height 2px
+    background: #657786;
+  &__avatar
+    position absolute
+    left: -56px;
+    top: 8px;
+    width 48px
+    height 48px
+    border-radius 50%
+  &__user-text
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 2px;
+    padding-left: 2px;
+    margin-bottom: 12px;
+    line-height: 1.47em;
+    color: #000;
+    width: 90%;
+    &__link
+      text-decoration none
+      color #1B80D8
+  &__image-container
+    display flex
+    width 97%
+    height auto
+    margin-left 2px
+    overflow hidden
+    border-radius 5px
+    border: 1px solid #e6ecf0;
+    img
+      width 100%
+      object-fit none
+  &__retweet-text
+    padding-left 16px
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 14px;
+    letter-spacing: 0.0116667px;
+    color: #14171A;
+    padding-top: 4px;
+    p
+      margin 7px 0
+  &__buttons
+    padding-top 34px
+    display flex
+    padding-bottom: 4px;
+    &__item
+      border none
+      background none
+      cursor pointer
+      margin-right: 36px;
+      margin-left: 4px;
+      padding 0
+      display flex
+      align-items center
+      &:nth-last-child(1)
+        margin-left 0
+      span
+        font-weight: bold;
+        font-size: 12px;
+        letter-spacing: 0.01px;
+        color: #657786;
+  &__icon
+    display inline-flex
+    width 18px
+    height 18px
+    font-size 16px
+    background-repeat no-repeat
+    background-position center
+    margin-right: 8px;
+
+  &--pinned, &--retweet
+    .single-tweet__type-header
+      display flex
+  &--pinned
+    .single-tweet__type-header__icon
+      background-image url("../img/icons/ic_pinned.svg")
+    .single-tweet__image-container
+      height: 253px;
+  &--retweet
+    .icon-ic_retweet
+      &:before
+        color #17BF63
+      & + span
+        color #17BF63
+    .single-tweet__type-header__icon::before
+      color: #657786;
+  &--normal
+    .single-tweet__image-container
+      height: 380px;
+
+.right-sidebar
+  width: 24.2%;
+  display flex
+  flex-direction column
+  margin-left: 0.85%
+  section
+    padding: 18px 16px;
+    background: #fff
+    margin-bottom 10px
+  &__title
+    margin-top 0
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #14171A;
+    span
+      padding-right 10px
+      letter-spacing: -0.015em;
+    a
+      display inline-flex
+      text-decoration none
+      padding-right 7px
+      font-family: HelveticaNeueCyr;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: -0.13px;
+      color: #1B95E0;
+      position relative
+      &:before
+        content ''
+        width 2px
+        height 2px
+        position absolute
+        left -4px
+        top: 6px;
+        background: #14171A
+  &__stats-text
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0;
+    font-weight: bold;
+    line-height 1.4em
+    font-size: 14px;
+    color: #000000;
+
+.tweet-chart
+  &__bars
+    display flex
+    align-items: flex-end;
+    justify-content space-between
+    height: 70px
+    width: 96%;
+    border-bottom 2px solid #CCD6DD
+    &__item
+      width: 12.3%;
+      background: #A4D9FA;
+  &__dates
+    width: 96%;
+    display flex
+    justify-content space-between
+    font-family: HelveticaNeueCyr;
+    font-weight: bold;
+    line-height: 12px;
+    font-size: 12px;
+    color: #14171A;
+  &__link
+    display: flex;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    text-decoration none
+    font-family: HelveticaNeueCyr;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 19px;
+    font-size: 14px;
+    color: #1B95E0;
+
+.who-to-follow
+  padding 0!important
+  &__inner
+    padding: 18px 16px 0 16px;
+  &__item
+    display flex
+    align-items center
+    width 100%
+    border-bottom 1px solid #E6ECF0
+    margin-bottom: 5px;
+    padding-bottom: 2px;
+    &:nth-last-child(1)
+      border-bottom none
+    &__body
+      width 75%
+      box-sizing border-box
+      padding-left 10px
+      padding-bottom: 5px;
+    header
+      line-height: 24px;
+      width: 100%
+      white-space: nowrap;
+      overflow: hidden;
+      padding-top: 6px;
+      text-overflow: ellipsis;
+    &__img
+      display flex
+      width 25%
+      height 25%
+      max-width 48px
+      max-height 48px
+      padding-top: 6px;
+      border-radius 50%
+    &__name
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      font-size: 14px;
+      letter-spacing: -0.16px;
+      color: #000000;
+    &__login
+      text-decoration none
+      font-style: normal;
+      font-weight: bold;
+      line-height: normal;
+      font-size: 14px;
+      letter-spacing: -0.16px;
+      color: #536373;
+  &__link
+    margin-top 3px
+    border-top 1px solid #E6ECF0
+    width 100%
+    padding: 15px 16px 18px 16px;
+    box-sizing border-box
+    display inline-flex
+    align-items center
+    text-decoration none
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: -0.13px;
+    color: #1B95E0;
+    i
+      padding-right 8px
+      font-size 18px
+
+.follow-btn
+  cursor pointer
+  background none
+  border: 1px solid #1B95E0;
+  box-sizing: border-box;
+  border-radius: 100px;
+  font-style: normal;
+  font-weight: bold;
+  line-height: normal;
+  font-size: 12px;
+  padding: 6px 24px;
+  color: #1B95E0;
+
+.tweet-treads
+  padding-top 14px!important
+  padding-bottom 8px!important
+  &__item
+    padding-top 2px
+    margin-bottom: 10px;
+    display flex
+    flex-direction column
+    a
+      text-decoration none
+      font-weight: bold;
+      line-height: normal;
+      font-size: 14px;
+      letter-spacing: -0.151667px;
+      color: #1B95E0;
+    span
+      padding-top: 2px;
+      font-weight: bold;
+      line-height: normal;
+      font-size: 12px;
+      letter-spacing: -0.13px;
+      color: #657786;
+
+.copyright
+  padding-top 7px
+  padding-left 14px
+  font-weight: bold;
+  line-height: 18px;
+  font-size: 12px;
+  letter-spacing: -0.13px;
+  color: #536373;
+
+@media (max-width: 1200px)
+  .left-sidebar__photos
+    a
+      width 50%
+      padding-bottom 8px
+
+@media (max-width: 1024px)
+  .left-sidebar__photos
+    a
+      width 100%
+      text-align center
+
+@media (max-width: 980px)
+  .top-nav__twitter-icon
+    display none
+
+  .main__inner
+    flex-wrap wrap
+
+  .right-sidebar
+    width: 100%;
+    margin-left: 25%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    section
+      width (98/3)%
+      box-sizing border-box
+      &:nth-child(2)
+        margin-left 1%
+      &:nth-child(3)
+        margin-left 1%
+
+  .tweets-section
+    margin-bottom 10px
+
+  .tweet-chart
+    max-width 450px
+    margin 0 auto
+
+  .right-sidebar__stats-text , .tweet-chart__link
+    text-align center
+    justify-content: center;
+
+  .who-to-follow__item header
+    white-space normal
+    line-height normal
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+  .user-stats__item__title
+    padding 0 12px
+
+@media (max-width: 800px)
+  .top-nav__menu
+    display none
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding 0
+    height: auto;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    background: #fff;
+    &--active
+      display flex
+    &__item
+      display flex
+      width 100%
+      padding 0
+      margin 0
+      &>a
+        padding 16px
+        width 100%
+        box-sizing border-box
+        justify-content center
+
+  .top-nav__mobile-btn
+    display flex
+  .top-nav__inner
+    padding 0 10px
+@media (max-width: 640px)
+  .left-sidebar
+    width 100%
+    padding-left 0
+  .right-sidebar
+    margin-left 0
+    section
+      width (99/2)%
+      &:nth-child(3)
+        margin-left 0
+        margin-right 1%
+  .tweets-section
+    margin-left 0
+  .copyright
+    padding-left 0
+  .left-sidebar__photos
+    flex-wrap nowrap
+  .b-info__avatar
+    width: 180px;
+    bottom: -200px;
+    left auto
+    right: 14px;
+  .left-sidebar__name
+    margin-top 0
+  .user-stats
+    padding-left 0
+  .tweets-section__header
+    justify-content center
