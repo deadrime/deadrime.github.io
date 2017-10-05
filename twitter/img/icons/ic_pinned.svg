@@ -1,0 +1,14 @@
+<svg width="11" height="12" viewBox="0 0 11 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>ic_pin</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-478 125)">
+<g id="ic_pin">
+<g id="Fill 1">
+<use xlink:href="#path0_fill" transform="translate(478 -125)" fill="#1B95E0"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 6.65259 7.74L 10.304 7.74C 10.3889 7.74 10.4321 7.63824 10.3731 7.5768L 7.31883 4.40736L 7.31883 1.38L 8.08011 1.38L 8.08011 0L 2.32011 0L 2.32011 1.38L 3.08139 1.38L 3.08139 4.40736L 0.027153 7.5768C -0.031887 7.63824 0.011793 7.74 0.096273 7.74L 3.74763 7.74L 5.10939 11.677C 5.13915 11.7634 5.26107 11.7634 5.29083 11.677L 6.65259 7.74Z"/>
+</defs>
+</svg>

@@ -1,0 +1,24 @@
+<svg width="10" height="16" viewBox="0 0 10 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>ic_activity</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-751 -1969)">
+<g id="ic_activity">
+<g id="Page 1">
+<g id="Stroke 1">
+<use xlink:href="#path0_stroke" transform="translate(751.5 1975.5)" fill="#657786"/>
+</g>
+<g id="Stroke 3">
+<use xlink:href="#path1_stroke" transform="translate(759.506 1973.5)" fill="#657786"/>
+</g>
+<g id="Stroke 6">
+<use xlink:href="#path2_stroke" transform="translate(755.503 1969.5)" fill="#657786"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 0.5 0C 0.5 -0.276142 0.276142 -0.5 0 -0.5C -0.276142 -0.5 -0.5 -0.276142 -0.5 0L 0.5 0ZM -0.5 8.417C -0.5 8.69314 -0.276142 8.917 0 8.917C 0.276142 8.917 0.5 8.69314 0.5 8.417L -0.5 8.417ZM -0.5 0L -0.5 8.417L 0.5 8.417L 0.5 0L -0.5 0Z"/>
+<path id="path1_stroke" d="M 0.5 0C 0.5 -0.276142 0.276142 -0.5 0 -0.5C -0.276142 -0.5 -0.5 -0.276142 -0.5 0L 0.5 0ZM -0.5 10.418C -0.5 10.6941 -0.276142 10.918 0 10.918C 0.276142 10.918 0.5 10.6941 0.5 10.418L -0.5 10.418ZM -0.5 0L -0.5 10.418L 0.5 10.418L 0.5 0L -0.5 0Z"/>
+<path id="path2_stroke" d="M 0.5 0C 0.5 -0.276142 0.276142 -0.5 0 -0.5C -0.276142 -0.5 -0.5 -0.276142 -0.5 0L 0.5 0ZM -0.5 14.421C -0.5 14.6971 -0.276142 14.921 0 14.921C 0.276142 14.921 0.5 14.6971 0.5 14.421L -0.5 14.421ZM -0.5 0L -0.5 14.421L 0.5 14.421L 0.5 0L -0.5 0Z"/>
+</defs>
+</svg>
