@@ -1,0 +1,91 @@
+body
+  background #d2d2d2
+
+html
+  font-size 16px
+  font-family PT Sans,HelveticaNeue-Light,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+
+.instagram
+  &__list
+    padding 1em
+    display grid
+    grid-template-columns repeat(auto-fit, minmax(25rem, 1fr))
+    grid-column-gap 1em
+    grid-row-gap 1em
+
+    grid-auto-rows: 1fr
+    grid-auto-flow: row dense;
+
+.post
+  display flex
+  flex-direction column
+  align-items: center
+  color #303f46
+  font-size 1em
+  background #fff
+  width auto
+  height auto
+  box-shadow 2px 2px 15px 0px rgba(46,61,73,0.2)
+  grid-column-start: auto;
+  grid-row-start: auto;
+  border-radius: .25rem;
+  &-info__image
+    width 100%
+    max-height: 640px;
+    overflow hidden
+    img
+      width 100%
+  &-user
+    width 100%
+    display flex
+    padding 10px
+    box-sizing border-box
+    align-items center
+    &__avatar
+      width 2rem
+      height 2rem
+      border-radius 50%
+      overflow hidden
+      img
+        width 100%
+        height auto
+    &__name-wrapper
+      padding-left 0.75rem
+      display flex
+      flex-direction column
+
+  &-info
+    display flex
+    flex-direction column
+    width 100%
+    box-sizing border-box
+    padding 0.5rem 1rem
+
+  &-footer
+    flex 1 0
+    display flex
+    flex-direction column
+    justify-content flex-end
+    width 100%
+    padding 0.5rem 1rem
+    box-sizing border-box
+    font-size 1.2em
+    i
+      margin-right 0.5em
+      font-style normal
+
+
+  &--1x2
+    grid-row-end: span 2;
+  &--2x1
+    grid-column-end: span 2;
+  &--2x2
+    grid-row-end: span 2;
+    grid-column-end: span 2;
+  &--1x3
+    grid-column-end: span 3;
+  &--full
+    //grid-column: 1/-1;
+    grid-column-start 1
+    grid-column-end -1
+    grid-row-end: span 1;

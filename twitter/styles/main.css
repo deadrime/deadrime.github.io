@@ -793,6 +793,7 @@ html {
     width: 100%;
     align-items: center;
     background: #fff;
+    padding-top: 10px;
   }
   .top-nav__menu--active {
     display: flex;
