@@ -41,6 +41,10 @@ class instagrammApp {
                         if (landscape || pictureOnly) {
                             newPost.className += ' post--2x1'
                         }
+                        if (pictureOnly) {
+                            newPost.className += ' post--landscape'
+                        }
+
                         newPost.innerHTML =
                             `<header class='post-user'>
                                 <div class='post-user__avatar'><img src='${item.user.profile_picture}'></div>
