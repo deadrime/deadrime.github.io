@@ -12,28 +12,31 @@ class instagrammApp {
         }
         let data = await instagram_data.data;
         return data;
-        //
-        // return fetch('instagram_data.json')
-        //     .then( response => {
-        //         if (response.status !== 200 && response.headers.get('Content-Type') !== 'application/json') {
-        //             return Promise.reject(new Error('Cannot open file'))
-        //         }
-        //         else return Promise.resolve(response.json());
-        //     })
-        //     .then( instagram_data => {
-        //         if ('data' in instagram_data) {
-        //             console.log(instagram_data);
-        //             return Promise.resolve(instagram_data.data);
-        //         }
-        //         else return Promise.reject(new Error('Wrong data'));
-        //     })
-        //     .then( data => {
-        //         console.log(data);
-        //         return data; // я должен вернуть тут просто дату или Promise.resolve ?
-        //     })
-        //     .catch(error => {
-        //         console.log(error) // как нормально обработать ошибку?
-        //     });
+        
+        /* Вариант через промисы
+
+        return fetch('instagram_data.json')
+            .then( response => {
+                if (response.status !== 200 && response.headers.get('Content-Type') !== 'application/json') {
+                    return Promise.reject(new Error('Cannot open file'))
+                }
+                else return Promise.resolve(response.json());
+            })
+            .then( instagram_data => {
+                if ('data' in instagram_data) {
+                    console.log(instagram_data);
+                    return Promise.resolve(instagram_data.data);
+                }
+                else return Promise.reject(new Error('Wrong data'));
+            })
+            .then( data => {
+                console.log(data);
+                return data; // я должен вернуть тут просто дату или Promise.resolve ?
+            })
+            .catch(error => {
+                console.log(error) // как нормально обработать ошибку?
+            });
+        */
     }
 
     showData() {
