@@ -104,3 +104,12 @@ html {
     font-size: 14px;
   }
 }
+@media (max-width: 800px) {
+  .instagram__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .post {
+    margin-bottom: 1em;
+  }
+}
