@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<link href="main.bundle.css" rel="stylesheet"></head>
+<body>
+<h1>Крестики-нолики</h1>
+<!--
+<form name="register">
+    <input type="text" name="name" id="user-name">
+    <label for="user-name">Ваше имя</label>
+    <input type="submit" value="Играть">
+</form>
+
+<form name="publish">
+    <input type="text" name="message">
+    <input type="submit" value="Отправить">
+</form>
+-->
+<div id="modal_win" class="modal-win">
+    <div class="modal-win__inner">
+        <h1>Игра окончена!</h1>
+        <h2 id="winner-text"></h2>
+        <button class="modal-btn" id="rerun">Начать заново</button>
+    </div>
+</div>
+
+<div class="game" id="game">
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+    <div class="game-field"></div>
+</div>
+
+<div id="subscribe"></div>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>
