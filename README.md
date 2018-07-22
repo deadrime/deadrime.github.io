@@ -2,6 +2,7 @@
 
 ## Домашние проекты
 То, что я делал для себя
+ * [welistenmusic.herokuapp.com](https://welistenmusic.herokuapp.com) - музыкальный сервиc, сделанный на основе различных api других музыкальных сервисов + youtube. Стек - nuxt, mongo, koa, graphql, redis.
  * [hs-fun-site](https://deadrime.github.io/hs-fun-site/) - фан-сайт по игре Hearthstone. Создавался, как курсовая работа по предмету "Веб-технологии", в репозитории лежит также пояснительная записка, может хоть кто-то оценит ;)
  * [hs-vue](https://deadrime.github.io/hs-vue/) - первый опыт в vue.js, база карт и составитель колод для игры Hearthstone.
 
