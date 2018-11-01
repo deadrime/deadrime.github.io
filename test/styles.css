@@ -461,9 +461,7 @@
   from {
     transform: scale(0.2);
   }
-  to { 
-  transform: scale(1);
-  }
+to-transform: scale(1);
 }
 * {
   box-sizing: border-box;

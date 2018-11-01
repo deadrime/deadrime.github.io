@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body class="page">
 <div id="root"></div>
 
@@ -41,6 +40,7 @@
             </div>
         </header>
         <main class="content">
+
             <div class="content__item content__item_half content__item_main">
                 <div class="content__item-header">Главное</div>
                 <section class="main">
@@ -185,32 +185,12 @@
                         </div>
                     </div>
 
-                    <div class="scenarios__page">
-                        <div class="panel scenarios__panel">
-                            <div class="panel__icon panel__icon_light_on"></div>
-                            <div class="panel__text">
-                                <div class="panel__title">Включить свет в корридоре</div>
-                            </div>
+                    <div class="panel scenarios__panel">
+                        <div class="panel__icon panel__icon_clock"></div>
+                        <div class="panel__text">
+                            <div class="panel__title">Я ухожу</div>
                         </div>
                     </div>
-
-                    <!-- <script type="text/babel">
-                        class App extends React.Component {
-                            render() {
-                                return (
-                                    <div class="panel scenarios__panel">
-                                        <div class="panel__icon panel__icon_clock"></div>
-                                        <div class="panel__text">
-                                            <div class="panel__title">Я ухожу</div>
-                                        </div>
-                                    </div>
-                                );
-                            }
-                        }
-
-                        ReactDOM.render(<App />, document.getElementsByClassName('scenarios__page')[1]);
-                    </script> -->
-
                 </section>
             </div>
 
@@ -394,6 +374,7 @@
         </div>
     </div>
 </div>
+<div class="stats">
 </div>
 
 <div class="modal modal_knob">
@@ -439,12 +420,16 @@
     </div>
 
 </div>
+
+
 <script src="scripts.js"></script>
-<!-- <link href="bootstrap.css" rel="stylesheet" media="screen"> -->
+<link href="bootstrap.css" rel="stylesheet" media="screen">
 <style type="text/css">
     .main__greeting {
         font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 </style>
+
 </body>
+
 </html>
