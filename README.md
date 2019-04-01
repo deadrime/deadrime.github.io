@@ -7,6 +7,7 @@
 То, что я делал для себя
  * [welistenmusic.herokuapp.com](https://welistenmusic.herokuapp.com) - музыкальный сервиc, сделанный на основе различных api других музыкальных сервисов + youtube. Стек - nuxt, mongo, koa, graphql, redis.
  * [Яндекс Календарь](https://shri-todo.herokuapp.com) - проект, которой я делал, когда учился в Школе Разработки Интерфейсов (Спб, 2018). Стек - React, Redux, Immutable.js, Stylus, CSS-modules.
+ * [tny.now.sh](https://tny.now.sh/) - простенький сокращатель ссылок, умеет делать рабочие ссылки для телеги. Стек - vue, mongoose.
  * [hs-fun-site](https://deadrime.github.io/hs-fun-site/) - фан-сайт по игре Hearthstone. Создавался, как курсовая работа по предмету "Веб-технологии", в репозитории лежит также пояснительная записка, может хоть кто-то оценит ;)
  * [hs-vue](https://hs-deckbuilder.now.sh) - первый опыт в vue.js, база карт и составитель колод для игры Hearthstone. Где-то в моем профиле можно найти код.
 
