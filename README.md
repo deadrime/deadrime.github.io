@@ -16,7 +16,7 @@
  * [yandex-shri-task-2](https://yandex-shri-dist-seioxdjyae.now.sh) - задание на верстку для Школы Разработки Интерфейсов(Яндекс, 2018), куда я успешно прошел.
  * [yandex-form](https://deadrime.github.io/yandex-form) - тестовое задание для школы node.js(yandex). Сюда к сожалению не прошел, невнимательно прочитал ТЗ и не реализовал необходимый для тестирования метод.
  * [backend-node](https://github.com/deadrime/testovoe-backend-node) - требовалось поднять REST API на koa + mysql, заполнить БД и реализовать 3 контроллера для взаимодействия с ней. [Полная формулировка задания](https://github.com/deadrime/testovoe-backend-node/blob/master/ТЗ.md)
-
+ * [star-wars](https://github.com/deadrime/star-wars) - тестовое задание на vue.js, требовалось сделать простенький сайт, который позволяет просматривать информацию, которую отдает API-шка. 
  * [test-for-kickcity](https://github.com/deadrime/test-for-kickcity) - нужно было сверстать одну страничку на react + css in js
 
  * [d3-react-chart](https://github.com/deadrime/d3-react-chart) - оплачиваемое тестовое задание для блокчейн проекта, нужно было запилить market depth график на react + d3. Кажись, там сейчас сломались ручки =(
