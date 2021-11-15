@@ -5,16 +5,20 @@
 <br>
 У меня ~3.5 года опыта работы, позиционирую себя, как миддл.
 
-### Контакты:
+### Статус 🤔
+В настоящий момент не ищу работу. Но вакансию мечты конечно рассмотрю.
+
+### Контакты 🤙
 
 - [Telegram](https://t.me/deadrime)
 - [deadrime@yandex.ru](mailto:deadrime@yandex.ru)
 
-### Любимый стек
+### Любимый стек ❤️ 
+<br>
 
 <img alt="Typescript" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg" width="20px" /> <img alt="React" src="https://cdn.worldvectorlogo.com/logos/react-1.svg" width="20px" /> <img alt="GraphQL" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/GraphQL_Logo.svg/2048px-GraphQL_Logo.svg.png" width="20px" />
 
-### Опыт работы:
+### Опыт работы 🏭 
 
 <details>
   <summary>ItCanFly</summary>
@@ -117,7 +121,7 @@
   <img alt="Webpack" src="https://webpack.js.org/icon-pwa-512x512.d3dae4189855b3a72ff9.png" width="20px" />
 </details>
 
-### Домашние проекты
+### Домашние проекты 🧳
 
 <details>
   <summary>То, что я делал для себя</summary>
@@ -138,7 +142,7 @@
   </ul>
 </details>
 
-### Тестовые задания
+### Тестовые задания 🧳
 
 <details>
   <summary>Некоторые из тестовых заданий, которые я делал</summary>
