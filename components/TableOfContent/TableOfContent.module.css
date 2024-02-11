@@ -1,0 +1,5 @@
+.headingList {
+  & ol {
+    padding-left: 1rem;
+  }
+}

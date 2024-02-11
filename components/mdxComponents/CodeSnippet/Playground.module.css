@@ -1,0 +1,18 @@
+.editor {
+  font-size: 12px;
+  font-variant-ligatures: common-ligatures;
+  background-color: #fafafa;
+  border-radius: 3px;
+  font-family: var(--font-fira), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.editor textarea {
+  outline: 0;
+}
+
+.editorWrapper {
+  tab-size: 4ch;
+  max-height: 400px;
+  overflow: auto;
+  margin: 1.67em 0;
+}

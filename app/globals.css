@@ -2,28 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --font-size-small: clamp(0.8rem, 0.7308rem + 0.3077vi, 1rem);
+    --font-size-base: clamp(1rem, 0.9135rem + 0.3846vi, 1.25rem);
+    --font-size-md: clamp(1.25rem, 1.1418rem + 0.4808vi, 1.5625rem);
+    --font-size-lg: clamp(1.5625rem, 1.4273rem + 0.601vi, 1.9531rem);
+    --font-size-xl: clamp(1.9531rem, 1.7841rem + 0.7512vi, 2.4414rem);
+    --font-size-2xl: clamp(2.4414rem, 2.2301rem + 0.939vi, 3.0518rem);
+
+    --color-foreground: 226 232 240;
+    --color-background: 12, 10, 21;
+  }
+  
+  .dark {
+    color-scheme: dark;
+  }
+
+  :root[data-theme="dark"] {
+    --color-primary: 255 190 152;
+    --color-primary-light: 255 190 152;
+    --color-text: 226 232 240;
+    --color-background: 12, 10, 21;
+    --color-border: 55 65 81;
+  }
+
+  :root[data-theme="light"] {
+    --color-primary: 255 164 112;
+    --color-primary-light: 255 190 152;
+    --color-text: 30 41 59;
+    --color-background: 255 255 255;
+    --color-border: 55 65 81;
+    --color-border: 210 210 210;
   }
 }
 
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: rgb(var(--color-text));
+  background-color: rgb(var(--color-background));
+  font-size: var(--font-size-base);
+  line-height: 1.55;
 }
 
 @layer utilities {

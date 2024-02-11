@@ -5,9 +5,38 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./articles/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
+    fontSize: {
+      small: 'var(--font-size-small)',
+      base: 'var(--font-size-base)',
+      md: 'var(--font-size-md)',
+      lg: 'var(--font-size-lg)',
+      xl: 'var(--font-size-xl)',
+      '2xl': ['var(--font-size-2xl)', '1.25em'],
+    },
     extend: {
+      fontFamily: {
+        'primary': 'var(--font-primary)',
+        'code': 'var(--font-fira), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
+      },
+      colors: {
+        'text': 'rgb(var(--color-text) / <alpha-value>))',
+        'background': 'rgb(var(--color-background) / <alpha-value>))',
+        'primary': 'rgb(var(--color-primary) / <alpha-value>)',
+        'primary-light': 'var(--color-primary-light)',
+        'border': 'rgb(var(--color-border) / <alpha-value>)',
+        'gray-900': '#212326',
+        'gray-800': '#2D3035',
+        'gray-400': '#71747C',
+        'gray-300': '#959393',
+        'gray-200': '#C4C4C4',
+        'gray-50': '#E9E9E9',
+        'light-gray': '#F5F5F5',
+        'blue-primary': '#00F3FF',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

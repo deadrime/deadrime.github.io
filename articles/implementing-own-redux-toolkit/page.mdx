@@ -1,0 +1,219 @@
+{/** @type {import('next/types').Metadata} */}
+export const metadata = {
+  author: "Eugene Trofimov",
+  title: "Пишем свой redux-toolkit",
+  description:
+    "Как работает @reduxjs/toolkit, реализация его упрощенной версии",
+  topics: ["react", "redux", "typescript", "state-manager"],
+};
+
+<h2 id="motivation">Мотивация</h2>
+
+Как правило мы задумываемся о глобальном стейте, когда приложение обрастает какой-то сложной бизнес логикой и прокидывать пропсы становится больно.
+В случае с более менее легкой бизнес логикой можно обойтись `React Context`. Но когда уже не хватает и его - на помощь приходит стейт менеджер,
+например редакс. Обычно в качестве примера использования редакса показывают TODO лист, что на мой взгляд тупо - мне трудно представить
+себе туду лист, который был бы достаточно сложен, что для него бы мог потребоваться глобальный стейт.
+Скорее вы будете хранить в стейте профиль авторизованного юзера или какие-то сложные структуры,
+которые нужно уметь находить разными способами, скажем `profileById`, `profileByUsername` или `noteIdsByWeekTs`, `noteIdsByDayTs`.
+
+Глобальный стейт решает 3 основный задачи - хранить, записывать и доставать данные. Чем удобнее, тем лучше.
+Redux предлагает редьюсеры, экшены и селекторы для этих задач.
+Если говорить про стандартную реализацию, https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers,
+то про про удобство говорить не приходится, switch case конструкция для экшенов - это боль.
+Разработчики редакса тоже так подумали и изобрели красивую обертку под названием **Redux Toolkit.**
+Однако они умудрились превратить **3.33 kB** в **37 kB** и это наталкивает на мысль, что они напихали слишком много лишнего.
+Возможно, им следовало бы остановиться на методе `createSlice`,
+который позволяет создавать редьюсер и экшены без лишней головной боли, а так же хуке useSlectors.
+Именно эти вещи я и хочу реализовать самостоятельно. Это будет интересно еще и точки зрения типизации.
+
+<h2 id="api">API</h2>
+
+Для начала нужно прикинуть, что именно мы хотим получить на выходе.
+В рамках данной статьи я хочу реализовать метод createSlice, где можно было бы создать экшены и селекторы,
+а так же useSelector для доступа к данным из реакт компонента и dispatch для вызова экшенов
+
+```ts filename="usersSlice.ts"
+
+type User = {
+  id: string;
+  username: string;
+  displayName: string;
+}
+
+export const usersSlice = createSlice({
+  name: 'users',
+  defaultState: {
+    userById: {} as Record<string, User>,
+    usernameById: {} as Record<string, string>,
+  },
+  actions: {
+    addUser: (state, user: User) => {
+      // state должен иметь тот же тип, что и defaultState
+      state.userById[user.id] = user;
+      state.usernameById[user.username] = user.id;
+    },
+    deleteUser: (state, userId: string) => {
+      const user = state.userById[userId];
+      delete state.usernameById[user.username];
+      delete state.userById[userId];
+    }
+  },
+  selectors: {
+    selectUserByUsername: (state, username: string) => state.userById[state.usernameById[username]],
+  }
+});
+
+usersSlice.actions// экшены
+usersSlice.selectors// селекторы
+
+...
+
+// SomeComponent.tsx
+
+// user Должен иметь тип User
+const user = useSelector(state => state.selectUserByUsername(state.users, 'someUsername'));
+
+const addUser = useCallback(() => {
+  dispatch(
+    // Аргументом addUser должен быть объект User
+    usersSlice.actions.addUser({
+      id: '2',
+      username: 'username2',
+      displayName: 'some display name',
+    })
+  )
+})
+```
+
+<h2 id="implementation">Реализация</h2>
+
+Для начала определимся с параметрами `createSlice`.
+
+```ts heh="huh"
+type SliceActionCreator<State, Payload = any> = (
+  state: State,
+  payload: Payload
+) => void;
+
+type SliceSelector<State, Payload = unknown, SelectorReturn = unknown> = (
+  state: State,
+  payload: Payload
+) => SelectorReturn;
+
+type CreateSliceProps<
+  Name extends string,
+  State extends Record<string, unknown>,
+  Actions extends Record<string, SliceActionCreator<State>>,
+  Selectors extends Record<string, SliceSelector<State>>
+> = {
+  name: Name;
+  actions: Actions;
+  defaultState: State;
+  selectors: Selectors;
+};
+```
+
+и набросаем небольшой черновик:
+
+```ts
+export const createSlice = <
+  Name extends string,
+  State extends Record<string, unknown>,
+  Actions extends Record<string, SliceActionCreator<State>>,
+  Selectors extends Record<string, SliceSelector<State>>
+>({
+  name,
+  actions,
+  defaultState,
+  selectors,
+}: CreateSliceProps<Name, State, Actions, Selectors>) => {
+  let sliceActions; // TODO
+  let reducer; // TODO
+  let sliceSelectors; // TODO
+
+  return {
+    reducer,
+    selectors: sliceSelectors,
+    actions: sliceActions,
+  };
+};
+
+type User = {
+  id: string;
+  username: string;
+  displayName: string;
+};
+
+export const usersSlice = createSlice({
+  name: "users",
+  defaultState: {
+    userById: {} as Record<string, User>,
+    usernameById: {} as Record<string, string>,
+  },
+  actions: {
+    addUser: (state, user: User) => {
+      // state должен иметь тот же тип, что и defaultState
+      state.userById[user.id] = user;
+      state.usernameById[user.username] = user.id;
+    },
+    deleteUser: (state, userId: string) => {
+      const user = state.userById[userId];
+      delete state.usernameById[user.username];
+      delete state.userById[userId];
+    },
+  },
+  selectors: {
+    selectUserByUsername: (state, username: string) =>
+      state.userById[state.usernameById[username]],
+  },
+});
+```
+
+План работ такой - сначала реализовать экшены, потом редьюсер и в самом конце - селекторы.
+
+<h2 id="actions">Экшены</h2>
+
+Экшен представляет из себя объект с обязательным полем `type` и опциональным `payload`
+
+```ts
+type Action<Type extends string = string, Payload = unknown> = {
+  type: Type;
+  payload?: Payload;
+};
+```
+
+Пусть, если в метод createSlice прокинуты
+
+```ts
+name: 'users',
+actions: {
+  addUser: (state, user: User) => {
+    state.userById[user.id] = user;
+    state.usernameById[user.username] = user.id;
+  },
+  deleteUser: (state, userId: string) => {
+    const user = state.userById[userId];
+    delete state.usernameById[user.username];
+    delete state.userById[userId];
+  }
+},
+```
+
+то мы будем генерировать два actionType:
+
+- users/addUser
+- users/deleteUser
+
+и два экшена -
+
+```ts
+const addUser = (user: User) => ({
+  type: "users/addUser",
+  payload: user,
+});
+
+const deleteUser = (userId: string) => ({
+  type: "users/deleteUser",
+  payload: user,
+});
+```
