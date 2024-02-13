@@ -8,7 +8,7 @@ export default function Home() {
       <div className={styles.oldResume}>
         <OldResume />
       </div>
-      <Link href="/blog">Blog</Link>
+      <Link href="/blog" className='mt-8'>Блог</Link>
     </main>
   );
 }

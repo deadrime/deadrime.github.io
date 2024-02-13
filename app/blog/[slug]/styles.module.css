@@ -70,7 +70,7 @@
   }
 
   a {
-    @apply text-primary text-opacity-80;
+    @apply text-primary text-opacity-90;
 
     border-block-end: 1px solid;
 

@@ -29,7 +29,7 @@
   }
 
   :root[data-theme="light"] {
-    --color-primary: 255 164 112;
+    --color-primary: 246 142 82;
     --color-primary-light: 255 190 152;
     --color-text: 30 41 59;
     --color-background: 255 255 255;
@@ -39,6 +39,7 @@
 
   a {
     @apply text-primary;
+
     font-weight: 500;
   }
 }
@@ -46,6 +47,8 @@
 html {
   box-sizing: border-box;
   scroll-behavior: smooth;
+  width: 100vw;
+  overflow-x:hidden;
 }
 
 *,

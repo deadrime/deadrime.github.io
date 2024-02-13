@@ -34,10 +34,14 @@ const firaCode = Fira_Code({
 });
 
 const Logo = () => {
-  return <Link href={"/"} className="font-code">{'<'}Zhenya {'/>'}</Link>
+  return <Link href={"/"} className="font-code">{'<'}Zhenya{'>'}</Link>
 }
 
-// TODO: Fix 
+const FooterLogo = () => {
+  return <Link href={"/"} className="font-code">{'</'}Zhenya{'>'}</Link>
+}
+
+// TODO: Think about
 const themeHydration = `
 !function() {
   const preferredDarkModeBySystem = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -71,16 +75,19 @@ export default function RootLayout({
             maxWidth: 1180,
           }} className="w-full mx-auto px-8 py-4 flex items-center">
             <Logo />
-            <ThemeSwitcher />
+            <ThemeSwitcher className="ml-auto" />
           </header>
           <main style={{
             maxWidth: 1180,
-            padding: '0 32px',
-            margin: '0 auto'
-          }}>
+          }} className="w-full mx-auto px-8 py-4 flex items-center">
             {children}
           </main>
-          <footer className="mt-auto">TODO: Footer</footer>
+          <footer
+            style={{ maxWidth: 1180 }}
+            className="w-full mx-auto px-8 py-4 flex items-center mt-auto"
+          >
+            <FooterLogo />
+          </footer>
         </Providers>
       </body>
     </html>

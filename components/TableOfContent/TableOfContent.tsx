@@ -138,7 +138,7 @@ const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, inner
   <ol className={classNames(styles.headingList, 'flex flex-col gap-3')}>
     {items.map(i =>
       <li className='flex flex-col gap-3' key={i.id}>
-        <a href={`#${i.id}`} className={classNames('text-text text-body2', {
+        <a href={`#${i.id}`} className={classNames('text-body2', {
           ['text-primary']: activeHeadingId === i.id,
           ['text-text']: activeHeadingId !== i.id,
         })}>{i.text}</a>
