@@ -11,6 +11,7 @@ import IconCss from '@/icons/css.svg';
 import IconHtml from '@/icons/html.svg';
 import IconCopy from '@/icons/copy.svg';
 import { useTheme } from '@/components/ThemeContext';
+import { copyToClipboard } from '@/helpers/copyToClipboard'
 
 export type CodeHighlightProps = {
   code: string;
@@ -78,7 +79,7 @@ const iconByLanguage: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = 
 
 export const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language, className, caption, highlightedLines, ...props }) => (
   <div
-    className={classNames(className, styles.codeSnippet, "border border-gray-100 dark:border-gray-700 rounded-sm overflow-hidden")}
+    className={classNames(className, styles.codeSnippet, "text-body1 border border-gray-100 dark:border-gray-700 rounded-sm overflow-hidden")}
     data-lang={language}
     data-caption={caption}
     {...props}
@@ -91,7 +92,7 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language, classN
       {iconByLanguage[language] ? React.createElement(iconByLanguage[language], { className: "w-5" }) : null}
       {caption}
       <button className='ml-auto'>
-        <IconCopy />
+        <IconCopy onClick={() => copyToClipboard(code)} />
       </button>
     </div>
     <CodeHighlight

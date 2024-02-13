@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import { useTheme } from './ThemeContext';
 import { useSpring, useTrail, animated } from '@react-spring/web';
-import { CSSProperties } from 'react';
+import { CSSProperties, useCallback } from 'react';
 
 const MoonOrSun = animated.svg;
 
@@ -19,26 +19,29 @@ export const DarkModeToggle = ({
 }: any) => {
   const isDark = theme === 'dark';
 
-  function toggleColorMode(event: React.MouseEvent) {
+  const toggleColorMode = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     onChange(isDark ? 'light' : 'dark');
-  }
+  }, [isDark, onChange])
 
   const svgSpring = useSpring({
     transform: isDark ? 'rotate(40deg)' : 'rotate(90deg)',
+    immediate: false,
   });
 
   const maskSpring = useSpring({
     cx: isDark ? 10 : 25,
     cy: isDark ? 2 : 0,
+    immediate: false,
     config: {
-      mass: 3.1,
+      mass: 3,
       friction: 21,
     },
   });
 
   const sunMoonSpring = useSpring({
     r: isDark ? 8 : 5,
+    immediate: false
   });
 
   const sunDotAngles = [0, 60, 120, 180, 240, 300];
@@ -46,7 +49,7 @@ export const DarkModeToggle = ({
   const sunDotTrail = useTrail(sunDotAngles.length, {
     transform: isDark ? 0 : 1,
     transformOrigin: 'center center',
-    immediate: isDark,
+    immediate: false,
     config: {
       duration: 90,
       tension: 350,

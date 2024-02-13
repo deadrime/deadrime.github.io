@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main>
       <div className={styles.oldResume}>
         <OldResume />
       </div>
