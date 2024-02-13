@@ -96,7 +96,7 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
 
   const activeHeadingId = useActiveHeading(headings);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const content = document.getElementById(contentId)
 
     if (!content) {
@@ -118,18 +118,31 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
   const hierarchicalHeadings = useMemo(() => getHierarchicalHeadings(headings), [headings])
 
   return (
-    <HeadingList items={hierarchicalHeadings} activeHeadingId={activeHeadingId} />
+    <div className="mt-4">
+      <span className='block mb-3 font-semibold text-body2'>СОДЕРЖАНИЕ</span>
+      <HeadingList items={hierarchicalHeadings} activeHeadingId={activeHeadingId} />
+      {/* <a className={classNames('opacity-0', {
+        'opacity-100': !!activeHeadingId
+      })}>Scroll to top</a> */}
+    </div>
   )
 }
 
-const HeadingList: React.FC<{ items: HierarchicalHeading[], activeHeadingId: string }> = ({ items, activeHeadingId }) => (
-  <ol className={styles.headingList}>
+type HeadingListProps = {
+  items: HierarchicalHeading[]
+  activeHeadingId: string
+  inner?: boolean
+}
+
+const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, inner }) => (
+  <ol className={classNames(styles.headingList, 'flex flex-col gap-3')}>
     {items.map(i =>
-      <li key={i.id}>
-        <a href={`#${i.id}`} className={classNames({
+      <li className='flex flex-col gap-3' key={i.id}>
+        <a href={`#${i.id}`} className={classNames('text-text text-body2', {
           ['text-primary']: activeHeadingId === i.id,
+          ['text-text']: activeHeadingId !== i.id,
         })}>{i.text}</a>
-        {i.children?.length > 0 && <HeadingList items={i.children} activeHeadingId={activeHeadingId} />}
+        {i.children?.length > 0 && <HeadingList items={i.children} activeHeadingId={activeHeadingId} inner={true} />}
       </li>
     )}
   </ol>

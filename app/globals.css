@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --font-size-small: clamp(0.8rem, 0.7308rem + 0.3077vi, 1rem);
-    --font-size-base: clamp(1rem, 0.9135rem + 0.3846vi, 1.25rem);
-    --font-size-md: clamp(1.25rem, 1.1418rem + 0.4808vi, 1.5625rem);
+    --font-size-body2: clamp(0.8rem, 0.7308rem + 0.3077vi, 1rem);
+    --font-size-body1: clamp(1rem, 0.9135rem + 0.3846vi, 1.25rem);
+    --font-size-md: clamp(1.25rem, 1.1418rem + 0.4808vi, 1.375rem);
     --font-size-lg: clamp(1.5625rem, 1.4273rem + 0.601vi, 1.9531rem);
     --font-size-xl: clamp(1.9531rem, 1.7841rem + 0.7512vi, 2.4414rem);
     --font-size-2xl: clamp(2.4414rem, 2.2301rem + 0.939vi, 3.0518rem);
 
     --color-foreground: 226 232 240;
-    --color-background: 12, 10, 21;
+    --color-background: 23 20 31;
   }
-  
+
   .dark {
     color-scheme: dark;
   }
@@ -22,7 +22,8 @@
   :root[data-theme="dark"] {
     --color-primary: 255 190 152;
     --color-primary-light: 255 190 152;
-    --color-text: 226 232 240;
+    --color-text: 255 246 237;
+    --color-text-accent: 255 255 255;
     --color-background: 12, 10, 21;
     --color-border: 55 65 81;
   }
@@ -34,6 +35,11 @@
     --color-background: 255 255 255;
     --color-border: 55 65 81;
     --color-border: 210 210 210;
+  }
+
+  a {
+    @apply text-primary;
+    font-weight: 500;
   }
 }
 
@@ -52,8 +58,10 @@ html {
 body {
   color: rgb(var(--color-text));
   background-color: rgb(var(--color-background));
-  font-size: var(--font-size-base);
+  font-family: var(--font-base);
+  font-size: var(--font-size-body1);
   line-height: 1.55;
+  /* transition: color 250ms ease 0s, background 350ms ease 0s, border .3s; */
 }
 
 @layer utilities {

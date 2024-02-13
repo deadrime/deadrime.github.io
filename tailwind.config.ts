@@ -10,8 +10,8 @@ const config: Config = {
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     fontSize: {
-      small: 'var(--font-size-small)',
-      base: 'var(--font-size-base)',
+      body2: 'var(--font-size-body2)',
+      body1: 'var(--font-size-body1)',
       md: 'var(--font-size-md)',
       lg: 'var(--font-size-lg)',
       xl: 'var(--font-size-xl)',
@@ -23,8 +23,9 @@ const config: Config = {
         'code': 'var(--font-fira), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
       },
       colors: {
-        'text': 'rgb(var(--color-text) / <alpha-value>))',
-        'background': 'rgb(var(--color-background) / <alpha-value>))',
+        'text': 'rgb(var(--color-text) / <alpha-value>)',
+        'text-accent': 'rgb(var(--color-text-accent) / <alpha-value>)',
+        'background': 'rgb(var(--color-background) / <alpha-value>)',
         'primary': 'rgb(var(--color-primary) / <alpha-value>)',
         'primary-light': 'var(--color-primary-light)',
         'border': 'rgb(var(--color-border) / <alpha-value>)',
@@ -36,6 +37,9 @@ const config: Config = {
         'gray-50': '#E9E9E9',
         'light-gray': '#F5F5F5',
         'blue-primary': '#00F3FF',
+        'night': '#2C2636',
+        'lilac': '#615A6C',
+        'beige': '#C2B5A9',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

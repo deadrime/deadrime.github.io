@@ -5,19 +5,27 @@ import "./globals.css";
 import classNames from "classnames";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { Providers } from "./providers";
+import Link from "next/link";
+import Script from 'next/script';
+import dayjs from "dayjs";
+import 'dayjs/locale/ru';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+dayjs.extend(localizedFormat);
+dayjs.locale('ru');
 
 const primaryFont = localFont({
   src: "../fonts/IgraSans.woff2",
   weight: '400',
   style: 'normal',
   variable: '--font-primary',
-})
+});
 
 const fontTextBase = Nunito({
   subsets: ["latin", "cyrillic"],
   weight: ['300', '400', '500', '700'],
   variable: '--font-base',
-})
+  display: 'swap',
+});
 
 const firaCode = Fira_Code({
   subsets: ["latin", "cyrillic"],
@@ -26,8 +34,19 @@ const firaCode = Fira_Code({
 });
 
 const Logo = () => {
-  return <span></span>
+  return <Link href={"/"} className="font-code">{'<'}Zhenya {'/>'}</Link>
 }
+
+// TODO: Fix 
+const themeHydration = `
+!function() {
+  const preferredDarkModeBySystem = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const savedTheme = localStorage.getItem("selectedTheme");
+  const theme =  savedTheme ? savedTheme : preferredDarkModeBySystem ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', theme);
+}();
+`;
+
 
 export default function RootLayout({
   children,
@@ -35,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={classNames(
           primaryFont.variable,
@@ -44,12 +63,18 @@ export default function RootLayout({
           // 'dark',
           'min-h-screen flex flex-col gap-4'
         )}>
+        <script id="theme-hydration"
+          dangerouslySetInnerHTML={{ __html: themeHydration }}
+        />
         <Providers>
-          <header>
+          <header style={{
+            maxWidth: 1180,
+          }} className="w-full mx-auto px-8 py-4 flex items-center">
+            <Logo />
             <ThemeSwitcher />
           </header>
           <main style={{
-            maxWidth: 1200,
+            maxWidth: 1180,
             padding: '0 32px',
             margin: '0 auto'
           }}>

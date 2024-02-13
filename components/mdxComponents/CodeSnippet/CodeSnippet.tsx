@@ -37,7 +37,7 @@ export const CodeHighlight: React.FC<CodeHighlightProps> = ({ code, language = '
           style={style}
           className={classNames(styles.codeHighlight, className, 'flex overflow-x-auto py-3 font-code')}
         >
-          <div className='w-full'>
+          <div className='w-auto'>
             {tokens.map((line, i) => {
               return (
                 <div key={i} {...getLineProps({

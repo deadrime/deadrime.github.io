@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
 
 type ITheme = {
   theme: 'light' | 'dark';
@@ -11,7 +11,6 @@ export const ThemeContext = createContext<ITheme>({
   theme: 'light',
   changeTheme: () => { }
 });
-
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedTheme, setSelectedTheme] = useState<ITheme['theme']>('light');
@@ -54,12 +53,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   }, []);
 
-  const handleThemeChange = (themeName: ITheme['theme']) => {
+  const handleThemeChange = useCallback((themeName: ITheme['theme']) => {
     setSelectedTheme(themeName);
     document.documentElement.setAttribute('data-theme', themeName);
     localStorage.setItem('selectedTheme', themeName);
-  };
-
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme: selectedTheme, changeTheme: handleThemeChange }}>

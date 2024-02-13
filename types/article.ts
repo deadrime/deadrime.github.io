@@ -8,6 +8,7 @@ export type Article = {
     slug: string;
     date?: string;
     image?: string;
+    topics: string[];
   };
   component: (props: MDXProps) => JSX.Element;
 };

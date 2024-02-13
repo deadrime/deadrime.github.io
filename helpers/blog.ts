@@ -35,6 +35,23 @@ export const getAllArticles = async () => {
   return articlesData
 }
 
+export const getArticlesForTopic = async (topic: string) => {
+  const posts = await getAllArticles();
+  const withSelectedTopic = posts.filter(i => i.metadata.topics.includes(topic))
+  return withSelectedTopic;
+}
+
+export const getAllTopics = async () => {
+  const posts = await getAllArticles();
+  const result = new Set<string>();
+
+  posts.forEach((post) => {
+    post.metadata.topics.forEach(topic => result.add(topic));
+  });
+
+  return Array.from(result.values());
+}
+
 export const getArticleBySlug = async (slug: string): Promise<Article> => {
   const component = await import(`../articles/${slug}/page.mdx`);
 
