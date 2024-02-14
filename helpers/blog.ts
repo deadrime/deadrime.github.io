@@ -45,40 +45,34 @@ export const getAllTopics = async () => {
 }
 
 export const getArticleBySlug = async (slug: string): Promise<Article> => {
-  const component = await import(`../articles/${slug}/page.mdx`);
+  const { metadata, default: component } = await import(`../articles/${slug}/page.mdx`) as typeof import("*.mdx");
 
-  // console.log(path.join(process.cwd(), `/articles/${slug}/page.mdx`))
-  const postFile = fs.readFileSync(path.join(process.cwd(), `/articles/${slug}/page.mdx`));
+  const image = Array.isArray(metadata?.openGraph?.images)
+    ? metadata?.openGraph?.images[0].toString()
+    : metadata?.openGraph?.images?.toString();
 
-  const regXHeader = /#{1,6}.+/g
+  const openGraph = metadata?.openGraph && 'type' in metadata.openGraph && metadata.openGraph.type === 'article' ? metadata.openGraph : null;
 
-  const postContentString = postFile.toString('utf-8');
-
-  // console.log(typeof postContentString)
-
-  // console.log('regXHeader', regXHeader.exec(postContentString));
-
-  // // const postFile = fs.readFileSync(path.join(process.cwd(), `./articles/${slug}.mdx`));
-
-  // // read the MDX serialized content along with the frontmatter
-  // // from the .mdx blog post file
-  // const mdxSource = await serialize(postFile, {
-  //   parseFrontmatter: true, mdxOptions: {
-  //     // remarkPlugins: [remarkGfm],
-  //     rehypePlugins: [
-  //       [rehypeExternalLinks, {
-  //         rel: ['nofollow'],
-  //         target: '_blank'
-  //       }],
-  //       rehypeMdxCodeProps,
-  //     ],
-  //   }
-  // })
+  const jsonLd = {
+    "@context": "http://schema.org/",
+    "@type": "Article",
+    "author": {
+      "@type": "Person",
+      "name": "Трофимов Евгений"
+    },
+    "headline": metadata.title || openGraph?.title,
+    "image": image,
+    "datePublished": openGraph?.publishedTime,
+    "dateModified": openGraph?.modifiedTime,
+  }
 
   return {
     slug,
     // mdxSource,
-    component: component?.default,
-    metadata: component?.metadata,
+    component,
+    metadata: {
+      ...metadata as Article['metadata'],
+      jsonLd
+    },
   };
 };

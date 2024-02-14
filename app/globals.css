@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --font-size-body2: clamp(0.8rem, 0.7308rem + 0.3077vi, 1rem);
+    --font-size-body2: clamp(0.9rem, 0.7308rem + 0.3077vi, 1rem);
     --font-size-body1: clamp(1rem, 0.9135rem + 0.3846vi, 1.25rem);
     --font-size-md: clamp(1.25rem, 1.1418rem + 0.4808vi, 1.375rem);
     --font-size-lg: clamp(1.5625rem, 1.4273rem + 0.601vi, 1.9531rem);
@@ -29,7 +29,7 @@
   }
 
   :root[data-theme="light"] {
-    --color-primary: 246 142 82;
+    --color-primary: 255 152 0;
     --color-primary-light: 255 190 152;
     --color-text: 30 41 59;
     --color-background: 255 255 255;

@@ -118,8 +118,8 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
   const hierarchicalHeadings = useMemo(() => getHierarchicalHeadings(headings), [headings])
 
   return (
-    <div className="mt-4">
-      <span className='block mb-3 font-semibold text-body2'>СОДЕРЖАНИЕ</span>
+    <div className="mt-4 mb-4">
+      <span className='block mb-3 font-semibold text-lg md:text-body2'>СОДЕРЖАНИЕ</span>
       <HeadingList items={hierarchicalHeadings} activeHeadingId={activeHeadingId} />
       {/* <a className={classNames('opacity-0', {
         'opacity-100': !!activeHeadingId

@@ -9,6 +9,7 @@ export type Article = {
     date?: string;
     image?: string;
     topics: string[];
+    jsonLd: any;
   };
   component: (props: MDXProps) => JSX.Element;
 };

@@ -1,5 +1,11 @@
 import { getAllArticles } from '@/helpers/blog';
 import { BlogArticle } from './Article';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Блог - Трофимов Евгений',
+  description: 'Статьи по веб-разработке - React, Node.js, Typescript',
+}
 
 export default async function Home() {
   const articles = await getAllArticles();

@@ -2,12 +2,19 @@ import actionsTypeHightlightImg from './actions-type-hightlight.png';
 
 {/** @type {import('next/types').Metadata} */}
 export const metadata = {
-  author: "Eugene Trofimov",
+  author: "Трофимов Евгений",
   title: "Пишем свой redux-toolkit",
   description:
     "Как работает @reduxjs/toolkit, реализация его упрощенной версии",
   topics: ["react", "redux", "typescript", "state-manager"],
-  date: '2024-02-12'
+  date: '2024-02-12',
+  openGraph: {
+    type: 'article',
+    tags: ["react", "redux", "typescript", "state-manager"],
+    title: "Пишем свой redux-toolkit",
+    publishedTime: '2024-02-12',
+    authors: ["Трофимов Евгений"]
+  }
 };
 
 <h2 id="motivation">Мотивация</h2>
@@ -69,7 +76,7 @@ export const usersSlice = createSlice({
 usersSlice.actions// экшены
 usersSlice.selectors// селекторы
 
-...
+// ...
 
 // SomeComponent.tsx
 
@@ -85,7 +92,7 @@ const addUser = useCallback(() => {
       displayName: 'some display name',
     })
   )
-})
+}, [dispatch])
 ```
 
 <h2 id="implementation">Реализация</h2>
@@ -157,18 +164,20 @@ type Action<Type extends string = string, Payload = unknown> = {
 Пусть, если в метод createSlice прокинуты
 
 ```ts
-name: 'users',
-actions: {
-  addUser: (state, user: User) => {
-    state.userById[user.id] = user;
-    state.usernameById[user.username] = user.id;
-  },
-  deleteUser: (state, userId: string) => {
-    const user = state.userById[userId];
-    delete state.usernameById[user.username];
-    delete state.userById[userId];
+const props = {
+  name: 'users',
+  actions: {
+    addUser: (state, user: User) => {
+      state.userById[user.id] = user;
+      state.usernameById[user.username] = user.id;
+    },
+    deleteUser: (state, userId: string) => {
+      const user = state.userById[userId];
+      delete state.usernameById[user.username];
+      delete state.userById[userId];
+    }
   }
-},
+}
 ```
 
 то мы будем генерировать два actionType:
@@ -632,7 +641,7 @@ const Test = () => {
       console.log(store.getState())
     }}>Add new user</button>
 
-    {allUsers.map((user) => <div>
+    {allUsers.map((user) => <div key={user.username}>
       <p>{user.displayName}</p>
       <p>@{user.username}</p>
     </div>)}

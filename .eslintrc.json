@@ -1,3 +1,46 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next",
+    "plugin:mdx/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "settings": {
+    "mdx/code-blocks": true,
+    // optional, if you want to disable language mapper, set it to `false`
+    // if you want to override the default language mapper inside, you can provide your own
+    "mdx/language-mapper": {}
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "warn"
+  },
+  "overrides": [
+    {
+      "files": "**/*.mdx",
+      "extends": [
+        "next",
+        "plugin:mdx/recommended"
+      ],
+      "rules": {
+        "react/jsx-no-undef": "warn"
+      }
+    },
+    {
+      "files": "**/*.mdx/**",
+      "extends": [
+        "next",
+        "plugin:mdx/recommended"
+      ],
+      "settings": {
+        "mdx/code-blocks": true
+      },
+      "rules": {
+        "react-hooks/rules-of-hooks": "off",
+        "react/jsx-no-undef": "warn"
+      }
+    }
+  ]
 }

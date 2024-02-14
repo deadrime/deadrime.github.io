@@ -6,7 +6,6 @@ import classNames from "classnames";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { Providers } from "./providers";
 import Link from "next/link";
-import Script from 'next/script';
 import dayjs from "dayjs";
 import 'dayjs/locale/ru';
 import localizedFormat from 'dayjs/plugin/localizedFormat';
@@ -34,11 +33,11 @@ const firaCode = Fira_Code({
 });
 
 const Logo = () => {
-  return <Link href={"/"} className="font-code">{'<'}Zhenya{'>'}</Link>
+  return <Link href={"/"} className="font-code text-md">{'<'}Zhenya{'>'}</Link>
 }
 
 const FooterLogo = () => {
-  return <Link href={"/"} className="font-code">{'</'}Zhenya{'>'}</Link>
+  return <Link href={"/"} className="font-code text-md">{'</'}Zhenya{'>'}</Link>
 }
 
 // TODO: Think about
