@@ -1,0 +1,12 @@
+.companyWrapper {
+  & > * {
+    @apply pb-6;
+  }
+
+  &:last-child {
+    & > * {
+      @apply pb-0;
+    }
+
+  }
+}
