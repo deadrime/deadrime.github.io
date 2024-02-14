@@ -73,7 +73,7 @@ export default function RootLayout({
         <Providers>
           <header style={{
             maxWidth: 1180,
-          }} className="w-full mx-auto px-3 md:px-8 py-4">
+          }} className="w-full mx-auto px-3 md:px-8 py-4 flex items-center">
             <Logo />
             <ThemeSwitcher className="ml-auto" />
           </header>
