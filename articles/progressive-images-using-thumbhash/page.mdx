@@ -1,0 +1,324 @@
+import ProgressiveImageExample from './ProgressiveImageExample';
+import tgExample from './telegram-example.png';
+
+{/** @type {import('next/types').Metadata} */}
+export const metadata = {
+  author: 'Eugene Trofimov',
+  title: 'Progressive images при помощи base64 миниатюр',
+  description: 'Прогрессивная загрузка изображений при помощи создания миниатюр в thumbhash и их использование в React',
+  topics: [
+    'images',
+    'react',
+    'node.js',
+  ],
+  date: '2024-01-22'
+};
+
+<h2 id="why">Зачем оно вообще нужно</h2>
+
+Для начала поговорим про цифры. Если вы когда-нибудь делали аналитику сайта - то вы в курсе, что изображения весьма прожорливые. Скорее всего даже более прожорливые, чем ваш бандл.
+Перед тем, как пытаться оптимизировать что-либо еще - лучше начать именно с картинок.
+
+Однако даже если использовать `WEBP` или `AVIF` - картинки все равно будут весить неприлично много.
+Особенно если их много.
+При этом всегда стоит держать в голове, что среднестатистический пользователь вашего сайта скорее всего зайдет с мобильного телефона.
+И у него вряд ли будет быстрый мобильный интернет. А медленный интернет накладывает свои ограничения:
+
+1. UI может прыгать, пока все картинки не загрузятся (сделаем допущение, что вы не хотите или не можете привести все картинки к одному размеру)
+2. При медленном интернете или если сервер слишком далеко от пользователя, он будет видеть огрызки картинок, что прямо скажем не красиво.
+
+<Image
+  src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJtZTh4dGJ2bDBiMnVuZHJkMmc2cWQxZzFkdGdzOXJxYjdhbGYzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QIQTfximd3AuQ/giphy.gif"
+  alt="Раздражает, правда?"
+/>
+
+А еще пользователь у нас очень привередливый и если мы не покажем ему хоть что-то в течении первых пары секунд - скорее всего мы его потеряем.
+Именно проблему **показать хоть что-то** и призвана решить прогрессивная загрузка изображений. 
+
+Идея заключается в том, что мы показываем пользователю миниатюру в низком разрешении, пока грузим оригинальную картинку.
+
+<Image {...tgExample} alt="Пример из telegram"/>
+
+Для реализации такого подхода я выбрал либу thumbhash, она весит < 4kb и позволяет хранить хеш весом всего 30-40 байт.
+
+<CodeDemo caption="Пример использования thumbhash">
+  <ProgressiveImageExample />
+</CodeDemo>
+
+Еще примеры можно найти на официальном сайте: https://evanw.github.io/thumbhash/
+
+<h2 id="generate-thumbhash-on-client-side">Генерация thumbhash на клиенте</h2>
+
+Рассмотрим кейс, когда пользователь создает новый пост и сам загружает изображение. В этом случае сгенерировать thumb можно прямо на клиенте.
+
+Для начала загрузка изображения - тут все стандартно, подписываемся на `onChange` у инпута и достаем оттуда файл
+
+
+```tsx
+import { useCallback, useState } from "react";
+
+const loadImage = (imageUrl: string) => {
+  return new Promise<HTMLImageElement>((resolve) => {
+    const img = new Image();
+
+    img.src = imageUrl;
+
+    img.onload = () => {
+      resolve(img);
+    };
+  });
+};
+
+const getImageUrl = (file: File) => {
+  // You can implement your own upload logic here
+  // For example we just create url on client-side
+  const url = URL.createObjectURL(file); 
+  return url;
+}
+
+export default function App() {
+  const [originalImageSrc, setOriginalImageSrc] = useState("");
+
+  const handleFileUpload = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (!event.target.files?.length) {
+        return;
+      }
+      const file = event.target.files[0];
+      const url = await getImageUrl(file);
+      setOriginalImageSrc(url);
+    },
+    []
+  );
+
+  return (
+    <div className="App">
+      <input type="file" onChange={handleFileUpload} />
+      <img src={originalImageSrc} />
+    </div>
+  );
+}
+```
+
+Теперь нам необходимо считать файл как картинку, чтобы создать миниатюру.
+
+Для этого напишем небольшой хелпер, который загружает картинку по переданному url и возвращает `HTMLImageElement`
+
+```ts
+const loadImage = (imageUrl: string) => {
+  return new Promise<HTMLImageElement>((resolve) => {
+    const img = new Image();
+    img.src = imageUrl;
+
+    img.onload = () => {
+      resolve(img);
+    };
+  });
+};
+```
+
+Теперь необходимо создать миниатюру изображения, для этого воспользуемся `canvas`:
+
+```ts
+const size = Math.max(img.width, img.height);
+const w = img.width = Math.round(100 * img.width / size);
+const h = img.height = Math.round(100 * img.height / size);
+
+// Create image thumb (100x100 maximum size)
+const canvas = document.createElement('canvas');
+const c = canvas.getContext('2d');
+canvas.width = w;
+canvas.height = h;
+c.drawImage(img, 0, 0, w, h);
+```
+
+После чего достаем из полученной миниатюры [`ImageData`](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) и скармливаем полученный массив пикселей методу `rgbaToThumbHash`.
+
+Полученный **Uint8Array** я конвертирую в **base64** строку, которую мы затем можем сохранить на сервере.
+
+
+```ts hl="14,16,18"
+import { rgbaToThumbHash } from 'thumbhash';
+
+async function generateImageThumb(img: HTMLImageElement) {
+  const size = Math.max(img.width, img.height);
+  const w = img.width = Math.round(100 * img.width / size);
+  const h = img.height = Math.round(100 * img.height / size);
+
+  // // Create image thumb (100x100 maximum size)
+  const canvas = document.createElement('canvas');
+  const c = canvas.getContext('2d');
+  canvas.width = w;
+  canvas.height = h;
+  c.drawImage(img, 0, 0, w, h);
+	// Get pixels array
+  const pixels = c.getImageData(0, 0, w, h);
+	// Get thumbhash (Uint8Array)
+  const hash = rgbaToThumbHash(w, h, pixels.data);
+	// convert Uint8Array to base64 string
+  const binString = String.fromCodePoint(...hash);
+  return btoa(binString);
+}
+```
+
+В результате этих махинаций мы получаем такую строку
+
+```txt
+0ucJJgoHiHeId5eYV4d3hneYiHiPiPc=
+```
+
+Весит она всего 32 байта
+
+```ts
+new Blob(["0ucJJgoHiHeId5eYV4d3hneYiHiPiPc="]).size // 32
+```
+
+Ее можно сохранить на сервере и присылать вместе с объектом поста
+
+```ts
+[
+	{
+		id: '1',
+		title: 'Post title',
+		image: '/path/to/image1.png',
+		thumbhash: '0ucJJgoHiHeId5eYV4d3hneYiHiPiPc=',
+	},
+	...
+]
+```
+
+Далее на клиенте нужно преобразовать ее сначала в Uint8Array, а затем в base64 картинку
+
+```ts
+const thumbToImageSrc = (thumb: string) => {
+  const binString = atob(thumb);
+  const data = Uint8Array.from(binString, (m) => m.codePointAt(0));
+  const src = thumbHashToDataURL(data);
+  return src;
+};
+```
+
+Наконец нам нужен компонент, который будет запускать загрузку оригинальной картинки и отображать thumbhash миниатюру на время загрузки
+
+```tsx
+type ProgressiveImageProps = {
+	src: string;
+	thumbHash: string;
+}
+
+const ProgressiveImage: React.FC<ProgressiveImageProps> = ({ src: originalImageSrc, thumbHash }) => {
+  const thumb = useMemo(() => thumbHash ? thumbToImageSrc(thumbHash) : null, [thumbHash]);
+  const [imgSrc, setImgSrc] = useState(thumb ? thumb : originalImageSrc);
+
+  const loadOriginalImage = useCallback(async () => {
+    await loadImage(originalImageSrc);
+    setImgSrc(originalImageSrc);
+  }, [originalImageSrc]);
+
+  useEffect(() => {
+    if (thumbHash ) {
+      loadOriginalImage();
+    };
+  }, [loadOriginalImage, thumbHash]);
+
+  return (
+    <img src={imgSrc} />
+  );
+};
+```
+
+<h2 id="generate-thumbhash-on-server-side">Генерация thumbhash на сервере</h2>
+
+Скорее всего будет использоваться [`FormData`](https://developer.mozilla.org/ru/docs/Web/API/FormData), чтобы загрузить файл на сервер.
+
+```ts
+export async function POST(request: NextRequest) {
+  const formData = await request.formData();
+  const file = formData.get('file') as File;
+
+  if (!file) {
+    return NextResponse.json({
+      code: 'FILE_NOT_FOUND'
+    }, {
+      status: 404
+    });
+  }
+
+  const arrayBuffer = await file.arrayBuffer();
+	const buffer = Buffer.from(arrayBuffer);
+
+  const url = await uploadFile(buffer); // save file on your server somehow
+	const thumbhash = await generateThumbhash(buffer); // We need to implement this
+
+	return NextResponse.json({
+		url,
+    thumbhash
+  })
+}
+```
+
+<h3 id="generate-thumbhash-on-server-side-using-canvas">При помощи canvas</h3>
+
+Чтобы сгенерировать thumbhash, нужно считать данные изображения, только вот сервере у нас нет нативной поддержки canvas и нужно будет воспользоваться сторонней библиотекой, например https://www.npmjs.com/package/canvas
+
+```ts
+import { createCanvas, loadImage } from "canvas";
+
+async function loadImageAndConvertToHashWithCanvas(
+  buffer: Buffer
+) {
+  const maxSize = 100;
+	// load image
+  const image = await loadImage(buffer);
+  const width = image.width;
+  const height = image.height;
+	// calculate new size
+  const scale = Math.min(maxSize / width, maxSize / height);
+  const resizedWidth = Math.floor(width * scale);
+  const resizedHeight = Math.floor(height * scale);
+	// create thumb with new size
+  const canvas = createCanvas(resizedWidth, resizedHeight);
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(image, 0, 0, resizedWidth, resizedHeight);
+	// get pixels array
+  const imageData = ctx.getImageData(0, 0, resizedWidth, resizedHeight);
+  const rgba = new Uint8Array(imageData.data.buffer);
+	// generate thumbhash
+  const hash = rgbaToThumbHash(resizedWidth, resizedHeight, rgba);
+	// convert it to base64
+  const base64 = Buffer.from(hash).toString('base64');
+  return base64;
+}
+```
+<h3 id="generate-thumbhash-on-server-side-using-sharp">При помощи sharp</h3>
+
+Так же можно воспользоваться библиотекой sharp
+
+```ts
+import sharp from "sharp";
+
+const loadImageAndConvertToHashWithSharp = async (buffer: Buffer) => {
+	// load image
+  const sharpImage = sharp(buffer);
+  const imageMetadata = await sharpImage.metadata();
+	// calculate new size
+  const size = Math.max(imageMetadata.width || 1, imageMetadata.height || 1);
+  const w = Math.round(100 * (imageMetadata.width || 1) / size);
+  const h = Math.round(100 * (imageMetadata.height || 1) / size);
+	// create thumb with new size
+  const { data } = await sharpImage
+    .resize({
+      withoutEnlargement: true,
+      width: w,
+      height: h,
+    })
+    .ensureAlpha() // rgbaToThumbHash require 4 channals
+    .raw()
+    .toBuffer({ resolveWithObject: true })
+	// generate thumbhash
+  const hash = rgbaToThumbHash(w, h, data);
+	// convert it to base64
+  const base64 = Buffer.from(hash).toString('base64');
+  return base64;
+}
+```
