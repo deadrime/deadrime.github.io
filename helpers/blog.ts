@@ -1,14 +1,6 @@
-"use server";
 import { Article } from "@/types/article";
 import fs from 'fs';
-import { MDXProps } from "mdx/types";
-import { Metadata } from "next";
 import path from 'path';
-import { serialize } from "next-mdx-remote/serialize"
-import { MDXRemote } from "next-mdx-remote"
-import rehypeExternalLinks from 'rehype-external-links';
-import rehypeMdxCodeProps from 'rehype-mdx-code-props';
-import remarkGfm from "remark-gfm";
 
 const getDirectories = (source: string) =>
   fs.readdirSync(source, { withFileTypes: true })
