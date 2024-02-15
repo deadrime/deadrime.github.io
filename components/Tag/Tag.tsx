@@ -24,7 +24,7 @@ const Tag = <T extends ElementType = "span">({
   return (
     <Tag
       className={classNames(
-        "bg-gray-50/20 dark:bg-beige/5 rounded-3xl dark:text-beige inline-flex items-center text-body2",
+        "bg-gray-50/50 dark:bg-beige/10 rounded-3xl dark:text-beige inline-flex items-center text-body2",
         size === 'small' && 'px-3 py-[3px]',
         size === 'normal' && 'px-3 py-[6px]',
         !borderless && 'border-2 border-gray-50/50 dark:border-night text-gray-500'
