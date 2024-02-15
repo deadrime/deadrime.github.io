@@ -1,5 +1,5 @@
 import { getAllArticles } from '@/helpers/blog';
-import { BlogArticle } from './Article';
+import { BlogArticle } from '@/components/Article';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -15,9 +15,7 @@ export default async function Home() {
       {articles.map((article, index) =>
         <BlogArticle
           key={index}
-          title={String(article.metadata.title)}
-          description={String(article.metadata.title)}
-          url={`/blog/${article.slug}`}
+          article={article}
         />
       )}
     </div>

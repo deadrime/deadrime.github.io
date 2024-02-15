@@ -11,7 +11,7 @@ const data = [
   },
   {
     category: 'State management',
-    items: ["Redux", "Redux", "Toolkit", "Apollo", "Vuex"]
+    items: ["Redux", "Redux Toolkit", "Apollo", "Vuex"]
   },
   {
     category: 'Styles',
@@ -19,10 +19,10 @@ const data = [
   },
   {
     category: 'Bundlers',
-    items: ["Webpack", "Esbuild", "Rollup", "Vite", "Turbopack"]
+    items: ["Webpack", "Esbuild", "Vite", "Turbopack", "Rollup", "Gulp"]
   },
   {
-    category: 'Node.js web frameworks',
+    category: 'Node.js frameworks',
     items: ["Express", "Koa", "Socket.io"]
   },
   {
@@ -47,14 +47,14 @@ const data = [
   },
   {
     category: 'Other',
-    items: ["Webhooks", "Puppeteer", "Cheerio", "Node.js workers", "Telegram bots(telegraf)", "Ruby on Rails"]
+    items: ["Webhooks", "Puppeteer", "Cheerio", "Node.js workers", "Telegram bots", "Ruby on Rails", "Python"]
   },
 ]
 
 const Technologies = () => {
   return (
     <>
-      <h2 className="font-primary text-lg font-normal">
+      <h2 className="font-primary text-xl font-normal mt-8 md:mt-36">
         С чем работал
       </h2>
       <div className="grid gap-5 mt-11" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>

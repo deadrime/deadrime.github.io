@@ -24,16 +24,18 @@ const Tag = <T extends ElementType = "span">({
   return (
     <Tag
       className={classNames(
-        "bg-gray-50/50 dark:bg-beige/10 rounded-3xl dark:text-beige inline-flex items-center text-body2",
+        "bg-gray-50/50 dark:bg-night/30 rounded-3xl dark:text-beige inline-flex items-center text-body2",
         size === 'small' && 'px-3 py-[3px]',
         size === 'normal' && 'px-3 py-[6px]',
+        icon && '!pl-[5px]',
         !borderless && 'border-2 border-gray-50/50 dark:border-night text-gray-500'
       )}
       {...props}
     >
       {icon && React.cloneElement(icon, {
-        height: 20,
-        className: '-ml-[5px] mr-[6px]'
+        height: 22,
+        width: 22,
+        className: 'mr-[5px]'
       })}
       {children}
     </Tag>

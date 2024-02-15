@@ -1,7 +1,5 @@
 declare module '*.mdx' {
-  import { Metadata } from 'next/types';
+  import { CreateArticleProps } from '@/types/article';
 
-  export const metadata: Metadata & {
-    topics?: string[]
-  };
+  export const data: CreateArticleProps;
 }

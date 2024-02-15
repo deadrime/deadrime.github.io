@@ -1,18 +1,17 @@
 import ProgressiveImageExample from './ProgressiveImageExample';
 import tgExample from './telegram-example.png';
 
-{/** @type {import('next/types').Metadata} */}
-export const metadata = {
-  author: 'Eugene Trofimov',
-  title: 'Progressive images при помощи base64 миниатюр',
+export const data = {
+  title: "Progressive images при помощи base64 миниатюр",
   description: 'Прогрессивная загрузка изображений при помощи создания миниатюр в thumbhash и их использование в React',
+  slug: 'progressive-images-using-thumbhash',
+  publishedTime: '2024-01-22',
   topics: [
     'images',
     'react',
     'node.js',
-  ],
-  date: '2024-01-22'
-};
+  ]
+}
 
 <h2 id="why">Зачем оно вообще нужно</h2>
 

@@ -229,7 +229,7 @@ const data = [
 const MyExperience = () => {
   return (
     <>
-      <h2 className="font-primary text-lg font-normal">
+      <h2 className="font-primary text-xl font-normal mt-8 md:mt-36">
         Опыт работы
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5 my-11 pl-3 md:pl-0">
@@ -256,13 +256,10 @@ const MyExperience = () => {
               </div>
             </div>
             <div className="md:col-start-5 md:col-end-12 pl-6 md:pl-0 text-body2 md:pt-6 border-l-2 dark:border-night md:border-l-0">
-              <span className="text-text/80">
+              <span className="text-text/80 block">
                 {work.shortDescription}
               </span>
-              <span className="block mb-2 text-text/80">
-                Стек:
-              </span>
-              <div className='flex gap-2 mb-4 flex-wrap'>
+              <div className='flex gap-2 my-4 flex-wrap'>
                 {work.technologies.map(technology =>
                   <Tag borderless size='small' key={technology}>
                     {capitalize(technology)}
@@ -276,7 +273,9 @@ const MyExperience = () => {
                     Подробнее <IconArrowDown width={12} height={12} />
                   </button> */}
                 </summary>
-                {work.moreInfo}
+                <span className="text-text/80">
+                  {work.moreInfo}
+                </span>
               </details>
             </div>
           </div>

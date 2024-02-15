@@ -17,7 +17,7 @@ type ArticleLayoutProps = {
 export default async function Layout({ children, params }: ArticleLayoutProps) {
   const slug = params.slug;
   const article = await getArticleBySlug(slug);
-  const { metadata } = article;
+  const { title, description, topics, publishedTime } = article;
 
   return (
     <div>
@@ -26,20 +26,18 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
         <section className={classNames(styles.patternBg, "overflow-hidden")}>
           <header className="py-8 border-t-[6px] border-b-2 dark:border-night md:mb-10">
             <h1 className="text-2xl font-primary block mb-4">
-              {metadata.title}
+              {title}
             </h1>
             <h2 className="font-primary text-md font-normal block mb-8 dark:text-beige text-gray-600">
-              {metadata.description}
+              {description}
             </h2>
             <div className="flex gap-2 flex-wrap gap-y-1">
-              {metadata.topics?.map((i) => (
-                <Link key={i} href={`/blog/topics/${i}`} legacyBehavior passHref>
-                  <Tag as="a">{i}</Tag>
-                </Link>
+              {topics?.map((i) => (
+                <Tag key={i} as={Link} href={`/blog/topics/${i}`}>{i}</Tag>
               ))}
             </div>
             <time className="text-body2 text-lilac block mt-4">
-              {dayjs(metadata.date).format('D MMMM YYYY')}
+              {dayjs(publishedTime).format('D MMMM YYYY')}
             </time>
           </header>
         </section>

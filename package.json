@@ -37,6 +37,7 @@
     "rehype-mdx-code-props": "^1.0.0",
     "remark-code-title": "^0.2.5",
     "remark-gfm": "^4.0.0",
+    "schema-dts": "^1.1.2",
     "sharp": "^0.33.2",
     "thumbhash": "^0.1.1"
   },

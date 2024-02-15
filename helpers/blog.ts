@@ -1,4 +1,5 @@
 import { Article } from "@/types/article";
+import dayjs from "dayjs";
 import fs from 'fs';
 import path from 'path';
 
@@ -11,25 +12,27 @@ export const getAllArticles = async () => {
   const projectDir = process.cwd();
   const articles = getDirectories(path.join(projectDir, '/articles'));
 
-  const articlesData = await Promise.all(articles.map(async article => {
-    const { metadata, component } = await getArticleBySlug(article)
+  const articlesData = await Promise.all(articles.map(async slug => {
+    const article = await getArticleBySlug(slug)
 
-    return {
-      component,
-      metadata: {
-        ...metadata,
-        slug: article,
-      },
-      slug: article,
-    } as Article
-  }))
+    return article
+  }));
 
-  return articlesData
+  return articlesData.sort((a, b) => a.publishedTime - b.publishedTime);
+}
+
+export const getPaginatedArticles = async (limit: number, offset = 0) => {
+  const allArticles = await getAllArticles();
+
+  return {
+    articles: allArticles.slice(offset, limit),
+    totalCount: allArticles.length,
+  }
 }
 
 export const getArticlesForTopic = async (topic: string) => {
   const posts = await getAllArticles();
-  const withSelectedTopic = posts.filter(i => i.metadata.topics.includes(topic))
+  const withSelectedTopic = posts.filter(i => i.topics.includes(topic))
   return withSelectedTopic;
 }
 
@@ -38,41 +41,47 @@ export const getAllTopics = async () => {
   const result = new Set<string>();
 
   posts.forEach((post) => {
-    post.metadata.topics.forEach(topic => result.add(topic));
+    post.topics.forEach(topic => result.add(topic));
   });
 
   return Array.from(result.values());
 }
 
 export const getArticleBySlug = async (slug: string): Promise<Article> => {
-  const { metadata, default: component } = await import(`../articles/${slug}/page.mdx`) as typeof import("*.mdx");
+  const { data, default: component } = await import(`../articles/${slug}/page.mdx`) as typeof import("*.mdx");
 
-  const image = Array.isArray(metadata?.openGraph?.images)
-    ? metadata?.openGraph?.images[0].toString()
-    : metadata?.openGraph?.images?.toString();
+  const publishedTime = dayjs(data.publishedTime).valueOf();
+  const modifiedTime = data?.modifiedTime ? dayjs(data.modifiedTime).valueOf() : undefined;
 
-  const openGraph = metadata?.openGraph && 'type' in metadata.openGraph && metadata.openGraph.type === 'article' ? metadata.openGraph : null;
-
-  const jsonLd = {
-    "@context": "http://schema.org/",
-    "@type": "Article",
-    "author": {
-      "@type": "Person",
-      "name": "Трофимов Евгений"
-    },
-    "headline": metadata.title || openGraph?.title,
-    "image": image,
-    "datePublished": openGraph?.publishedTime,
-    "dateModified": openGraph?.modifiedTime,
+  const article: Article = {
+    component,
+    slug: data.slug || slug,
+    description: data.description,
+    publishedTime,
+    modifiedTime,
+    title: data.title,
+    topics: data.topics,
+    metadata: {
+      metadataBase: process.env.NODE_ENV === 'development' ? new URL('http://localhost:3000') : new URL('https://zhenya.dev'),
+      title: data.title,
+      description: data.description,
+      openGraph: {
+        type: 'article',
+        description: data.description,
+      },
+      jsonLd: {
+        "@type": "Article",
+        "@context": "https://schema.org",
+        author: {
+          "@type": "Person",
+          name: "Трофимов Евгений",
+          jobTitle: "Fullstack developer",
+          sameAs: "deadrime",
+          gender: "male",
+        }
+      }
+    }
   }
 
-  return {
-    slug,
-    // mdxSource,
-    component,
-    metadata: {
-      ...metadata as Article['metadata'],
-      jsonLd
-    },
-  };
+  return article;
 };

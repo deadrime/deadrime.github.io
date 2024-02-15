@@ -1,12 +1,42 @@
 .companyWrapper {
-  & > * {
+  & > div {
     @apply pb-6;
   }
 
   &:last-child {
-    & > * {
-      @apply pb-0;
+    & > div {
+      @apply pb-0 relative;
+
+      @media screen(md) {
+        &::after {
+          content: "";
+          background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--color-background)) 70%
+          );
+          height: 100%;
+          width: 2px;
+          position: absolute;
+          left: -2px;
+        }
+      }
     }
 
+    & > div:last-child {
+      &::after {
+        content: "";
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          rgb(var(--color-background)) 95%
+        );
+        height: 100%;
+        width: 2px;
+        position: absolute;
+        left: -2px;
+        bottom: 0;
+      }
+    }
   }
 }
