@@ -26,6 +26,8 @@ import IconArrowDown from '@/icons/arrowdown.svg';
 
 import classNames from 'classnames';
 import styles from './styles.module.css';
+import Tag from '../Tag/Tag';
+import { capitalize } from '@/helpers/capitalize';
 
 const technologyIcons: Record<string, React.FC<any>> = {
   next: IconNext,
@@ -104,7 +106,7 @@ const data = [
         </li>
       </ul>
     </>,
-    technologies: ['react', 'ts', 'next', 'node', 'dynamodb'],
+    technologies: ['react', 'typescript', 'next.js', 'node.js', 'dynamoDB'],
   },
   {
     companyName: 'Sber',
@@ -142,7 +144,7 @@ const data = [
       Осознал, что мы не всегда можем предсказать поведения пользователей и лишь методом проб и ошибок можно создать
       действительно удобный UI.
     </>,
-    technologies: ['react', 'ts'],
+    technologies: ['react', 'typescript'],
   },
   {
     companyName: 'Frogogo',
@@ -177,7 +179,7 @@ const data = [
         </li>
       </ul>
     </>,
-    technologies: ['react', 'ts', 'rails', 'webpack', 'esbuild', 'storybook'],
+    technologies: ['react', 'typescript', 'ruby on rails', 'webpack', 'esbuild', 'storybook'],
   },
   {
     companyName: 'ItCanFly',
@@ -224,7 +226,7 @@ const data = [
         </li>
       </ul>
     </>,
-    technologies: ['react', 'ts', 'graphQL', 'apollo', 'emotion'],
+    technologies: ['react', 'typescript', 'graphQL', 'apollo', 'emotion'],
   },
   {
     companyName: 'Прочее',
@@ -256,7 +258,7 @@ const MyExperience = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5 my-11 pl-3 md:pl-0">
         {data.map((work) => (
           <div key={work.companyName} className={classNames('contents', styles.companyWrapper)}>
-            <div className="md:col-start-2 md:col-end-4 border-l-2 border-night pt-6">
+            <div className="md:col-start-2 md:col-end-4 border-l-2 dark:border-night pt-6">
               <div className='flex items-center'>
                 {React.createElement(work.companyLogo, {
                   width: 24,
@@ -276,24 +278,23 @@ const MyExperience = () => {
                 </div>
               </div>
             </div>
-            <div className="md:col-start-5 md:col-end-12 pl-6 md:pl-0 text-body2 md:pt-6 border-l-2 border-night md:border-l-0">
+            <div className="md:col-start-5 md:col-end-12 pl-6 md:pl-0 text-body2 md:pt-6 border-l-2 dark:border-night md:border-l-0">
               <span className="text-text/80">
                 {work.shortDescription}
               </span>
-              <span className="block mb-2">
+              <span className="block mb-2 text-text/80">
                 Стек:
               </span>
               <div className='flex gap-2 mb-4'>
-                {work.technologies.map(technology => <figure key={technology}>
-                  {technologyIcons[technology]
-                    ? React.createElement(technologyIcons[technology], { width: 24, height: 24 })
-                    : <figcaption>{technology}</figcaption>
-                  }
-                </figure>)}
+                {work.technologies.map(technology =>
+                  <Tag borderless size='small' key={technology}>
+                    {capitalize(technology)}
+                  </Tag>
+                )}
               </div>
               <details className="mb-0">
-                <summary>
-                  Подробнее
+                <summary className='marker:text-primary cursor-pointer'>
+                  <span className="text-primary font-semibold">Подробнее</span>
                   {/* <button>
                     Подробнее <IconArrowDown width={12} height={12} />
                   </button> */}

@@ -33,7 +33,9 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
             </h2>
             <div className="flex gap-2 flex-wrap gap-y-1">
               {metadata.topics?.map((i) => (
-                <Tag key={i} href={`/blog/topics/${i}`}>{i}</Tag>
+                <Link key={i} href={`/blog/topics/${i}`} legacyBehavior passHref>
+                  <Tag as="a">{i}</Tag>
+                </Link>
               ))}
             </div>
             <time className="text-body2 text-lilac block mt-4">

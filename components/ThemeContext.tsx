@@ -13,7 +13,7 @@ export const ThemeContext = createContext<ITheme>({
 });
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [selectedTheme, setSelectedTheme] = useState<ITheme['theme']>('light');
+  const [selectedTheme, setSelectedTheme] = useState<ITheme['theme']>('dark');
 
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');

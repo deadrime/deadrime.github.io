@@ -1,15 +1,43 @@
-import Link from "next/link";
-import { HTMLProps } from "react";
+import { DynamicHTMLProps } from "@/types/dynamicProps";
+import classNames from "classnames";
+import React, { ReactElement } from "react";
+import { ReactNode, ElementType } from "react";
 
-const Tag: React.FC<HTMLProps<HTMLDivElement> & { children: string, href: string }> = ({ children, href }) => {
+interface Props<T> {
+  as?: T;
+  children?: ReactNode;
+  size?: 'small' | 'normal';
+  borderless?: boolean;
+  icon?: ReactElement;
+}
+
+const Tag = <T extends ElementType = "span">({
+  as,
+  children,
+  size = 'normal',
+  borderless,
+  icon,
+  ...props
+}: DynamicHTMLProps<Props<T>, T>) => {
+  const Tag: ElementType = as || 'span';
+
   return (
-    <Link
-      className="bg-gray-50/20 dark:bg-beige/5 rounded-3xl border-2 border-gray-50/50 dark:border-night px-3 py-[6px] text-gray-500 dark:text-beige inline-flex items-center text-body2"
-      href={href}
+    <Tag
+      className={classNames(
+        "bg-gray-50/20 dark:bg-beige/5 rounded-3xl dark:text-beige inline-flex items-center text-body2",
+        size === 'small' && 'px-3 py-[3px]',
+        size === 'normal' && 'px-3 py-[6px]',
+        !borderless && 'border-2 border-gray-50/50 dark:border-night text-gray-500'
+      )}
+      {...props}
     >
-      {children.charAt(0).toUpperCase() + children.slice(1)}
-    </Link>
-  )
+      {icon && React.cloneElement(icon, {
+        height: 20,
+        className: '-ml-[5px] mr-[6px]'
+      })}
+      {children}
+    </Tag>
+  );
 }
 
 export default Tag

@@ -45,7 +45,7 @@ const themeHydration = `
 !function() {
   const preferredDarkModeBySystem = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const savedTheme = localStorage.getItem("selectedTheme");
-  const theme =  savedTheme ? savedTheme : preferredDarkModeBySystem ? 'dark' : 'light';
+  const theme = savedTheme ? savedTheme : preferredDarkModeBySystem ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', theme);
 }();
 `;

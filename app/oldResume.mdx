@@ -1,17 +1,10 @@
 import IconNext from "@/icons/nextjs.svg";
 import IconReact from '@/icons/react.svg';
-import IconNode from '@/icons/nodejs.svg';
 import IconTs from '@/icons/ts.svg';
-import IconRails from '@/icons/rails.svg';
-import IconWebpack from '@/icons/webpack.svg';
-import IconEsBuild from '@/icons/esbuild.svg';
-import IconStorybook from '@/icons/storybook.svg';
 import IconGraphQL from '@/icons/graphql.svg';
-import IconApollo from '@/icons/apollo.svg';
-import IconEmotion from '@/icons/emotion.svg';
-import IconVue from '@/icons/vue.svg';
-import IconElementUI from '@/icons/elementui.svg';
 import MyExperience from '@/components/MyExperience/MyExperience'
+import Technologies from '@/components/Technologies/Technologies'
+import Tag from '@/components/Tag/Tag';
 
 ## 👋 Мое небольшое резюме
 Привет, меня зовут Женя, я Frontend разработчик (но могу и в фуллстек). 
@@ -41,96 +34,12 @@ import MyExperience from '@/components/MyExperience/MyExperience'
 ### ❤️ Любимый стек
 
 <div className="flex gap-2 py-4">
-  <IconNext height={20} className="fill-current"/>
-  <IconReact height={20} />
-  <IconTs height={20} />
-  <IconGraphQL height={20} />
+  <Tag borderless size="small" icon={<IconNext height={20} className="fill-current"/>}>Next.js</Tag>
+  <Tag borderless size="small" icon={<IconReact IconReact={20} />}>React</Tag>
+  <Tag borderless size="small" icon={<IconTs height={20} />}>Typescript</Tag>
+  <Tag borderless size="small" icon={<IconGraphQL height={20} />}>GraphQL</Tag>
 </div>
 
-### С чем работал
-
-<span className="text-md">
-JS Libraries & Frameworks
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-React, Vue, Next, Nuxt
-</span>
-
-<span className="text-md">
-UI Libraries & Frameworks
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Ant, MUI, Shadcn, Element UI, самописные UI библиотеки
-</span>
-
-<span className="text-md">
-State management
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Redux, Redux Toolkit, Apollo, Vuex
-</span>
-
-<span className="text-md">
-Styles
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-PostCSS, Sass, Less, CSS modules, Emotion, Styled components, Tailwind
-</span>
-
-<span className="text-md">
-Bundlers
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Webpack, Esbuild, Rollup, Vite, Turbopack
-</span>
-
-<span className="text-md">
-Node.js web frameworks
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Express, Koa, Socket.io
-</span>
-
-<span className="text-md">
-Databases
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-PostgreSQL, MongoDB, Dynamodb, GraphQL, Redis
-</span>
-
-<span className="text-md">
-ORMs & Query builders
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Mongoose, Knex, Sequelize
-</span>
-
-<span className="text-md">
-Payments
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Stripe, Moonpay, Transak
-</span>
-
-<span className="text-md">
-Analytics
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Google analytics, Posthog
-</span>
-
-<span className="text-md">
-CD/CI
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Docker, Docker dev container, Heroku, GitHub Actions, k8s
-</span>
-
-<span className="text-md">
-Other
-</span>
-<span className="text-body2 text-gray-500 dark:text-text/75">
-Puppeteer, Cheerio, Node.js workers, Telegram bots (telegraf), Discord webhooks, Ruby on Rails (в связке с React)
-</span>
+<Technologies />
 
 <MyExperience />
