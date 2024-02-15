@@ -6,46 +6,19 @@ import IconSber from '@/icons/sber.svg';
 import IconItCanFly from '@/icons/itcanfly.svg';
 import IconOther from '@/icons/other.svg';
 
-import IconNext from "@/icons/nextjs.svg";
 import IconReact from '@/icons/react.svg';
 import IconNode from '@/icons/nodejs.svg';
 import IconTs from '@/icons/ts.svg';
-import IconRails from '@/icons/rails.svg';
-import IconWebpack from '@/icons/webpack.svg';
-import IconEsBuild from '@/icons/esbuild.svg';
-import IconStorybook from '@/icons/storybook.svg';
 import IconGraphQL from '@/icons/graphql.svg';
 import IconApollo from '@/icons/apollo.svg';
 import IconEmotion from '@/icons/emotion.svg';
-import IconPostgreSQL from '@/icons/postgresql.svg';
-import IconDynamoDB from '@/icons/dynamodb.svg';
-
-import IconVue from '@/icons/vue.svg';
-import IconElementUI from '@/icons/elementui.svg';
-import IconArrowDown from '@/icons/arrowdown.svg';
 
 import classNames from 'classnames';
 import styles from './styles.module.css';
 import Tag from '../Tag/Tag';
 import { capitalize } from '@/helpers/capitalize';
 
-const technologyIcons: Record<string, React.FC<any>> = {
-  next: IconNext,
-  node: IconNode,
-  ts: IconTs,
-  react: IconReact,
-  rails: IconRails,
-  webpack: IconWebpack,
-  esbuild: IconEsBuild,
-  storybook: IconStorybook,
-  vue: IconVue,
-  elementUI: IconElementUI,
-  apollo: IconApollo,
-  emotion: IconEmotion,
-  graphQL: IconGraphQL,
-  postgreSQL: IconPostgreSQL,
-  dynamodb: IconDynamoDB,
-}
+
 
 const data = [
   {
@@ -192,7 +165,9 @@ const data = [
       </p>
     </>,
     moreInfo: <>
-      Из интересного могу выделить:
+      <p>
+        Из интересного могу выделить:
+      </p>
 
       <ul>
         <li>
@@ -240,10 +215,12 @@ const data = [
       </p>
     </>,
     moreInfo: <>
-      Ничего примечательного, типичное формошлепство, могу выделить пару своих заслуг - адаптацию под мобильную версию
-      и переезд с express на koa, в процессе которого мы все отрефакторили.
-      Еще из интересного - внедрил JWT аутентификацию, проповедовал БЭМ, получил опыт создания node.js воркеров, нужно было
-      по крону дергать тяжелые запросы и обновлять данные для построения графиков.
+      <p>
+        Ничего примечательного, типичное формошлепство, могу выделить пару своих заслуг - адаптацию под мобильную версию
+        и переезд с express на koa, в процессе которого мы все отрефакторили.
+        Еще из интересного - внедрил JWT аутентификацию, проповедовал БЭМ, получил опыт создания node.js воркеров, нужно было
+        по крону дергать тяжелые запросы и обновлять данные для построения графиков.
+      </p>
     </>,
     technologies: ['vue', 'elementUI', 'postgreSQL'],
   }
@@ -285,7 +262,7 @@ const MyExperience = () => {
               <span className="block mb-2 text-text/80">
                 Стек:
               </span>
-              <div className='flex gap-2 mb-4'>
+              <div className='flex gap-2 mb-4 flex-wrap'>
                 {work.technologies.map(technology =>
                   <Tag borderless size='small' key={technology}>
                     {capitalize(technology)}
