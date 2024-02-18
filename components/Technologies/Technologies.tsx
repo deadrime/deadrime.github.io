@@ -35,7 +35,7 @@ const data = [
   },
   {
     category: 'Payments',
-    items: ["Google", "analytics", "Posthog"]
+    items: ["Stripe", "Moonpay", "Transak"]
   },
   {
     category: 'Analytics',

@@ -15,10 +15,10 @@ const AboutSection = () => {
         <h1 className="text-2xl font-primary pt-8">
           Трофимов Евгений
         </h1>
-        <h2 className="text-md text-text/70 dark:text-beige mt-0 font-normal font-primary">
+        <h2 className="mt-2 block text-md text-text/70 dark:text-beige font-normal font-primary">
           Fullstack developer, middle+/ senior
         </h2>
-        <Contacts />
+        <Contacts className="mt-3" />
       </div>
       <div className={styles.blobs}>
         <Sloth className={styles.sloth} />
@@ -39,7 +39,7 @@ const AboutSection = () => {
           </p>
           <h3 className="pt-8 font-normal text-text/80 text-body1">Любимый стек <span>❤️‍🔥</span></h3>
 
-          <div className="flex gap-2 pt-4 flex-wrap">
+          <div className="flex gap-2 pt-3 flex-wrap">
             <Tag borderless size="small" icon={<IconNext height={20} className="fill-current text-text/90" />}>Next.js</Tag>
             <Tag borderless size="small" icon={<IconReact height={20} />}>React</Tag>
             <Tag borderless size="small" icon={<IconTs height={20} />}>Typescript</Tag>
@@ -47,9 +47,6 @@ const AboutSection = () => {
           </div>
 
         </div>
-        {/* <aside className="md:col-start-8 md:col-span-2 md:sticky top-4 self-start shrink-0 order-first md:order-last">
-          2
-        </aside> */}
       </div>
     </section>
   )

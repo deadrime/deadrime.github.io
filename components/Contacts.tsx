@@ -2,10 +2,13 @@ import IconGithub from '@/icons/github.svg';
 // import IconHabr from '@/icons/habr.svg';
 import IconTelegram from '@/icons/telegram.svg';
 import IconEmail from '@/icons/email2.svg';
+import classNames from 'classnames';
 
-const Contacts = () => {
+const Contacts: React.FC<{
+  className?: string
+}> = ({ className }) => {
   return (
-    <div className="mt-2 flex gap-3 items-center">
+    <div className={classNames('flex gap-3 items-center', className)}>
       <a href="https://github.com/deadrime" target="_blank">
         <IconGithub className="w-6" />
       </a>

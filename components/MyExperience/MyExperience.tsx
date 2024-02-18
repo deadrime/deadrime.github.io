@@ -19,7 +19,6 @@ import Tag from '../Tag/Tag';
 import { capitalize } from '@/helpers/capitalize';
 
 
-
 const data = [
   {
     companyName: 'Human',
@@ -28,7 +27,7 @@ const data = [
     endYear: undefined,
     shortDescription: <>
       <p>
-        HumanIPO — американский стартап, основная идея которого это дать возможность любому человеку выпустить свой токен (акции),
+        <strong>HumanIPO</strong> — американский стартап, основная идея которого это дать возможность любому человеку выпустить свой токен (акции),
         провести свое IPO и раунды инвестиций.
       </p>
       <p>
