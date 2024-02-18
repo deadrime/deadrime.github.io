@@ -35,7 +35,7 @@ const Tag = <T extends ElementType = "span">({
       {icon && React.cloneElement(icon, {
         height: 22,
         width: 22,
-        className: 'mr-[5px]'
+        className: classNames('mr-[5px]', icon.props?.className)
       })}
       {children}
     </Tag>

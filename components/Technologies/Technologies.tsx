@@ -53,7 +53,7 @@ const data = [
 
 const Technologies = () => {
   return (
-    <>
+    <section>
       <h2 className="font-primary text-xl font-normal mt-8 md:mt-36">
         С чем работал
       </h2>
@@ -69,7 +69,7 @@ const Technologies = () => {
           </div>
         ))}
       </div>
-    </>
+    </section>
   )
 }
 

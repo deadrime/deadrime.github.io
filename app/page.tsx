@@ -5,6 +5,8 @@ import { Metadata } from 'next';
 import { getAllArticles, getPaginatedArticles } from '@/helpers/blog';
 import { BlogArticle } from '@/components/Article';
 import AboutSection from '@/components/AboutSection/AboutSection';
+import Technologies from '@/components/Technologies/Technologies';
+import MyExperience from '@/components/MyExperience/MyExperience';
 
 export const metadata: Metadata = {
   title: 'Трофимов Евгений - frontend разработчик',
@@ -34,8 +36,8 @@ const LatestArticles = async () => {
   const { articles, totalCount } = await getPaginatedArticles(3);
 
   return (
-    <>
-      <h2 className="font-primary text-xl font-normal mb-11 block mt-8 md:mt-36">
+    <section className="mt-8 md:mt-36">
+      <h2 className="font-primary text-xl font-normal block mb-11">
         Блог
       </h2>
       <div className="grid gap-5" style={{
@@ -43,18 +45,16 @@ const LatestArticles = async () => {
       }}>
         {articles.map(article => <BlogArticle key={article.slug} article={article} />)}
       </div>
-    </>
+    </section>
   )
 }
 
 export default async function Home() {
-
   return (
     <main>
       <AboutSection />
-      <div className={styles.oldResume}>
-        <OldResume />
-      </div>
+      <Technologies />
+      <MyExperience />
       <LatestArticles />
       <script
         type="application/ld+json"

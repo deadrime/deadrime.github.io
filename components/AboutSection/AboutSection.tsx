@@ -6,10 +6,11 @@ import IconReact from '@/icons/react.svg';
 import IconTs from '@/icons/ts.svg';
 import IconGraphQL from '@/icons/graphql.svg';
 import Sloth from './sloth.svg';
+import Contacts from '../Contacts';
 
 const AboutSection = () => {
   return (
-    <div className="flex flex-col relative test" style={{ minHeight: 'calc(100vh - 5rem)' }}>
+    <section className="flex flex-col relative test" style={{ minHeight: 'calc(100vh - 5rem)' }}>
       <div className="flex flex-col">
         <h1 className="text-2xl font-primary pt-8">
           Трофимов Евгений
@@ -17,6 +18,7 @@ const AboutSection = () => {
         <h2 className="text-md text-text/70 dark:text-beige mt-0 font-normal font-primary">
           Fullstack developer, middle+/ senior
         </h2>
+        <Contacts />
       </div>
       <div className={styles.blobs}>
         <Sloth className={styles.sloth} />
@@ -38,17 +40,18 @@ const AboutSection = () => {
           <h3 className="pt-8 font-normal text-text/80 text-body1">Любимый стек <span>❤️‍🔥</span></h3>
 
           <div className="flex gap-2 pt-4 flex-wrap">
-            <Tag borderless size="small" icon={<IconNext height={20} className="fill-current" />}>Next.js</Tag>
+            <Tag borderless size="small" icon={<IconNext height={20} className="fill-current text-text/90" />}>Next.js</Tag>
             <Tag borderless size="small" icon={<IconReact height={20} />}>React</Tag>
             <Tag borderless size="small" icon={<IconTs height={20} />}>Typescript</Tag>
             <Tag borderless size="small" icon={<IconGraphQL height={20} />}>GraphQL</Tag>
           </div>
+
         </div>
         {/* <aside className="md:col-start-8 md:col-span-2 md:sticky top-4 self-start shrink-0 order-first md:order-last">
           2
         </aside> */}
       </div>
-    </div>
+    </section>
   )
 }
 

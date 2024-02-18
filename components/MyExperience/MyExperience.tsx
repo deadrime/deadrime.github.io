@@ -228,8 +228,8 @@ const data = [
 
 const MyExperience = () => {
   return (
-    <>
-      <h2 className="font-primary text-xl font-normal mt-8 md:mt-36">
+    <section className="mt-8 md:mt-36">
+      <h2 className="font-primary text-xl font-normal">
         Опыт работы
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5 my-11 pl-3 md:pl-0">
@@ -281,7 +281,7 @@ const MyExperience = () => {
           </div>
         ))}
       </div>
-    </>
+    </section>
   )
 }
 
