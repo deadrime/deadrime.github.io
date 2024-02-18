@@ -45,7 +45,7 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
           <div className={classNames(styles.blogContent, 'md:col-span-8')} id="content">
             {children}
           </div>
-          <aside className="md:col-start-10 md:col-span-2 md:sticky top-4 self-start shrink-0 order-first md:order-last">
+          <aside className="md:col-start-10 md:col-end-13 md:sticky top-4 self-start shrink-0 order-first md:order-last">
             <TableOfContent contentId="content" />
           </aside>
         </div>
