@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 import { Metadata } from 'next';
 import { getAllArticles, getPaginatedArticles } from '@/helpers/blog';
 import { BlogArticle } from '@/components/Article';
+import AboutSection from '@/components/AboutSection/AboutSection';
 
 export const metadata: Metadata = {
   title: 'Трофимов Евгений - frontend разработчик',
@@ -50,6 +51,7 @@ export default async function Home() {
 
   return (
     <main>
+      <AboutSection />
       <div className={styles.oldResume}>
         <OldResume />
       </div>
