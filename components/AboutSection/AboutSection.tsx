@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import styles from './AboutSection.module.css';
 import Tag from '../Tag/Tag';
-import Sloth from './sloth.svg';
 import Contacts from '../Contacts';
-import SvgNextjs from '@/iconComponents/Nextjs';
-import SvgReact from '@/iconComponents/React';
-import SvgTs from '@/iconComponents/Ts';
-import SvgGraphql from '@/iconComponents/Graphql';
+import SvgNextjs from '@/svgComponents/Nextjs';
+import SvgReact from '@/svgComponents/React';
+import SvgTs from '@/svgComponents/Ts';
+import SvgGraphql from '@/svgComponents/Graphql';
+import SvgSloth from '@/svgComponents/Sloth';
 
 const AboutSection = () => {
   return (
@@ -21,7 +21,7 @@ const AboutSection = () => {
         <Contacts className="mt-3" />
       </div>
       <div className={styles.blobs}>
-        <Sloth className={styles.sloth} />
+        <SvgSloth className={styles.sloth} />
         <div className={classNames(styles.blob, styles.yellow)}></div>
         <div className={classNames(styles.blob, styles.green)}></div>
         <div className={classNames(styles.blob, styles.red)}></div>

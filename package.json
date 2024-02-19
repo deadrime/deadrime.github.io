@@ -8,7 +8,7 @@
     "start": "next start",
     "export": "next export",
     "lint": "next lint",
-    "svgr": "npx @svgr/cli --out-dir iconComponents --icon 20px --typescript -- icons"
+    "svgr": "npx @svgr/cli --out-dir svgComponents --icon 20px --typescript -- svgs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.0",

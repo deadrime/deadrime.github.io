@@ -4,17 +4,17 @@ import classNames from 'classnames';
 import styles from './styles.module.css';
 import Tag from '../Tag/Tag';
 import { capitalize } from '@/helpers/capitalize';
-import SvgHuman from '@/iconComponents/Human';
-import SvgSber from '@/iconComponents/Sber';
-import SvgFrogogo from '@/iconComponents/Frogogo';
-import SvgItcanfly from '@/iconComponents/Itcanfly';
-import SvgReact from '@/iconComponents/React';
-import SvgTs from '@/iconComponents/Ts';
-import SvgGraphql from '@/iconComponents/Graphql';
-import SvgApollo from '@/iconComponents/Apollo';
-import SvgEmotion from '@/iconComponents/Emotion';
-import SvgNodejs from '@/iconComponents/Nodejs';
-import SvgOther from '@/iconComponents/Other';
+import SvgHuman from '@/svgComponents/Human';
+import SvgSber from '@/svgComponents/Sber';
+import SvgFrogogo from '@/svgComponents/Frogogo';
+import SvgItcanfly from '@/svgComponents/Itcanfly';
+import SvgReact from '@/svgComponents/React';
+import SvgTs from '@/svgComponents/Ts';
+import SvgGraphql from '@/svgComponents/Graphql';
+import SvgApollo from '@/svgComponents/Apollo';
+import SvgEmotion from '@/svgComponents/Emotion';
+import SvgNodejs from '@/svgComponents/Nodejs';
+import SvgOther from '@/svgComponents/Other';
 
 
 const data = [

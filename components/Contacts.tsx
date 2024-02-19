@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import SvgGithub from '@/iconComponents/Github';
-import SvgTelegram from '@/iconComponents/Telegram';
-import SvgEmail2 from '@/iconComponents/Email2';
+import SvgGithub from '@/svgComponents/Github';
+import SvgTelegram from '@/svgComponents/Telegram';
+import SvgEmail2 from '@/svgComponents/Email2';
 
 const Contacts: React.FC<{
   className?: string
