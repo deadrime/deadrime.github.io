@@ -21,19 +21,20 @@
 }
 
 .sloth {
-  z-index: 10;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  animation: levitation 7s infinite ease-in-out;
   display: none;
 
   @media screen(md) {
     display: block;
+    position: absolute;
+    z-index: 10;
+    transform: translateX(-50%);
+    animation: levitation 7s infinite ease-in-out;
+    width: auto;
+    height: 420px;
     opacity: 100%;
     transform: none;
     top: 0px;
-    left: 50px;
+    left: 100px;
   }
 }
 

@@ -8,16 +8,16 @@ const Contacts: React.FC<{
 }> = ({ className }) => {
   return (
     <div className={classNames('flex gap-3 items-center', className)}>
-      <a href="https://github.com/deadrime" target="_blank">
+      <a href="https://github.com/deadrime" aria-label="github" target="_blank">
         <SvgGithub className="w-6" />
       </a>
-      <a href="https://t.me/deadrime" target="_blank">
+      <a href="https://t.me/deadrime" aria-label="telegram" target="_blank">
         <SvgTelegram className="w-6" />
       </a>
-      <a href="mailto:deadrime@yandex.ru" target="_blank">
+      <a href="mailto:deadrime@yandex.ru" aria-label="email" target="_blank">
         <SvgEmail2 className="w-6" />
       </a>
-      <a href="https://career.habr.com/deadrime" target="_blank">
+      <a href="https://career.habr.com/deadrime" aria-label="habr career" target="_blank">
         <span className="text-body1"><b>Хабр</b> Карьера</span>
       </a>
     </div>
