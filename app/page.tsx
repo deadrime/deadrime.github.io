@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   title: 'Трофимов Евгений - frontend разработчик',
   description: 'Мой личный сайт, портфолио и блог',
   openGraph: {
-    title: 'Блог - Трофимов Евгений',
-    description: 'Статьи по веб-разработке - React, Node.js, Typescript',
+    title: 'Трофимов Евгений - frontend разработчик',
+    description: 'Мой личный сайт, портфолио и блог',
     type: 'website',
 
     // type: 'profile',

@@ -5,6 +5,11 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Блог - Трофимов Евгений',
   description: 'Статьи по веб-разработке - React, Node.js, Typescript',
+  openGraph: {
+    title: 'Блог - Трофимов Евгений',
+    description: 'Статьи по веб-разработке - React, Node.js, Typescript',
+    tags: ['Веб-разработка', 'frontend', 'React', 'Javascript', 'Typescript', 'Node.js']
+  }
 }
 
 export default async function Home() {
