@@ -4,14 +4,14 @@ import React, { HTMLProps } from 'react';
 import { Highlight, HighlightProps, PrismTheme, themes } from "prism-react-renderer";
 import classNames from 'classnames';
 import styles from './CodeSnippet.module.css';
-import IconTs from "@/icons/ts.svg";
-import IconJs from "@/icons/js.svg";
-import IconReact from '@/icons/react.svg';
-import IconCss from '@/icons/css.svg';
-import IconHtml from '@/icons/html.svg';
-import IconCopy from '@/icons/copy.svg';
 import { useTheme } from '@/components/ThemeContext';
 import { copyToClipboard } from '@/helpers/copyToClipboard'
+import SvgTs from '@/iconComponents/Ts';
+import SvgReact from '@/iconComponents/React';
+import SvgJs from '@/iconComponents/Js';
+import SvgHtml from '@/iconComponents/Html';
+import SvgCss from '@/iconComponents/Css';
+import SvgCopy from '@/iconComponents/Copy';
 
 export type CodeHighlightProps = {
   code: string;
@@ -69,12 +69,12 @@ type CodeSnippetProps = CodeHighlightProps & HTMLProps<HTMLDivElement> & {
 }
 
 const iconByLanguage: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
-  ts: IconTs,
-  tsx: IconReact,
-  jsx: IconReact,
-  js: IconJs,
-  html: IconHtml,
-  css: IconCss,
+  ts: SvgTs,
+  tsx: SvgReact,
+  jsx: SvgReact,
+  js: SvgJs,
+  html: SvgHtml,
+  css: SvgCss,
 }
 
 export const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language, className, caption, highlightedLines, ...props }) => (
@@ -92,7 +92,7 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language, classN
       {iconByLanguage[language] ? React.createElement(iconByLanguage[language], { className: "w-5" }) : null}
       {caption}
       <button className='ml-auto'>
-        <IconCopy onClick={() => copyToClipboard(code)} />
+        <SvgCopy onClick={() => copyToClipboard(code)} />
       </button>
     </div>
     <CodeHighlight

@@ -11,15 +11,16 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  webpack: (config) => {
+  webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/i,
-      use: [{
-        loader: '@svgr/webpack',
-        options: {
-          dimensions: false,
+      use: [
+        options.defaultLoaders.babel,
+        {
+          loader: '@svgr/webpack',
+          options: { babel: false, dimensions: false, },
         },
-      }],
+      ],
     });
     return config;
   },

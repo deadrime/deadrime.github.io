@@ -1,28 +1,26 @@
 import React from 'react';
 
-import IconHuman from '@/icons/human.svg';
-import IconFrogogo from '@/icons/frogogo.svg';
-import IconSber from '@/icons/sber.svg';
-import IconItCanFly from '@/icons/itcanfly.svg';
-import IconOther from '@/icons/other.svg';
-
-import IconReact from '@/icons/react.svg';
-import IconNode from '@/icons/nodejs.svg';
-import IconTs from '@/icons/ts.svg';
-import IconGraphQL from '@/icons/graphql.svg';
-import IconApollo from '@/icons/apollo.svg';
-import IconEmotion from '@/icons/emotion.svg';
-
 import classNames from 'classnames';
 import styles from './styles.module.css';
 import Tag from '../Tag/Tag';
 import { capitalize } from '@/helpers/capitalize';
+import SvgHuman from '@/iconComponents/Human';
+import SvgSber from '@/iconComponents/Sber';
+import SvgFrogogo from '@/iconComponents/Frogogo';
+import SvgItcanfly from '@/iconComponents/Itcanfly';
+import SvgReact from '@/iconComponents/React';
+import SvgTs from '@/iconComponents/Ts';
+import SvgGraphql from '@/iconComponents/Graphql';
+import SvgApollo from '@/iconComponents/Apollo';
+import SvgEmotion from '@/iconComponents/Emotion';
+import SvgNodejs from '@/iconComponents/Nodejs';
+import SvgOther from '@/iconComponents/Other';
 
 
 const data = [
   {
     companyName: 'Human',
-    companyLogo: IconHuman,
+    companyLogo: SvgHuman,
     startYear: 2022,
     endYear: undefined,
     shortDescription: <>
@@ -82,7 +80,7 @@ const data = [
   },
   {
     companyName: 'Sber',
-    companyLogo: IconSber,
+    companyLogo: SvgSber,
     startYear: 2020,
     endYear: 2021,
     shortDescription: <>
@@ -120,7 +118,7 @@ const data = [
   },
   {
     companyName: 'Frogogo',
-    companyLogo: IconFrogogo,
+    companyLogo: SvgFrogogo,
     startYear: 2019,
     endYear: 2021,
     shortDescription: <>
@@ -155,7 +153,7 @@ const data = [
   },
   {
     companyName: 'ItCanFly',
-    companyLogo: IconItCanFly,
+    companyLogo: SvgItcanfly,
     startYear: 2019,
     endYear: 2019,
     shortDescription: <>
@@ -173,19 +171,19 @@ const data = [
           Создавал графики на <strong>chart.js</strong>. Различная статистика, курс валют и т.п.
 
           <div className="flex gap-2">
-            <IconReact height={20} />
-            <IconTs height={20} />
+            <SvgReact height={20} />
+            <SvgTs height={20} />
           </div>
         </li>
         <li>
           Участвовал в разработке сайта для антикафе https://ziferblat.net/
 
           <div className="flex gap-2">
-            <IconReact height={20} />
-            <IconTs height={20} />
-            <IconGraphQL height={20} />
-            <IconApollo className="fill-current" height={20} />
-            <IconEmotion height={20} />
+            <SvgReact height={20} />
+            <SvgTs height={20} />
+            <SvgGraphql height={20} />
+            <SvgApollo className="fill-current" height={20} />
+            <SvgEmotion height={20} />
           </div>
 
         </li>
@@ -193,9 +191,9 @@ const data = [
           Написал телеграмм бота для персонала. В боте можно выбрать рабочие смены, провести инвентаризацию.
 
           <div className="flex gap-2">
-            <IconTs height={20} />
-            <IconGraphQL height={20} />
-            <IconNode height={20} />
+            <SvgTs height={20} />
+            <SvgGraphql height={20} />
+            <SvgNodejs height={20} />
           </div>
         </li>
       </ul>
@@ -204,7 +202,7 @@ const data = [
   },
   {
     companyName: 'Прочее',
-    companyLogo: IconOther,
+    companyLogo: SvgOther,
     startYear: 2018,
     endYear: 2019,
     shortDescription: <>

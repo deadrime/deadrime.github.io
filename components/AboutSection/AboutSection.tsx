@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import styles from './AboutSection.module.css';
 import Tag from '../Tag/Tag';
-import IconNext from "@/icons/nextjs.svg";
-import IconReact from '@/icons/react.svg';
-import IconTs from '@/icons/ts.svg';
-import IconGraphQL from '@/icons/graphql.svg';
 import Sloth from './sloth.svg';
 import Contacts from '../Contacts';
+import SvgNextjs from '@/iconComponents/Nextjs';
+import SvgReact from '@/iconComponents/React';
+import SvgTs from '@/iconComponents/Ts';
+import SvgGraphql from '@/iconComponents/Graphql';
 
 const AboutSection = () => {
   return (
@@ -40,10 +40,10 @@ const AboutSection = () => {
           <h3 className="pt-8 font-normal text-text/80 text-body1">Любимый стек <span>❤️‍🔥</span></h3>
 
           <div className="flex gap-2 pt-3 flex-wrap">
-            <Tag borderless size="small" icon={<IconNext height={20} className="fill-current text-text/90" />}>Next.js</Tag>
-            <Tag borderless size="small" icon={<IconReact height={20} />}>React</Tag>
-            <Tag borderless size="small" icon={<IconTs height={20} />}>Typescript</Tag>
-            <Tag borderless size="small" icon={<IconGraphQL height={20} />}>GraphQL</Tag>
+            <Tag borderless size="small" icon={<SvgNextjs height={20} className="fill-current text-text/90" />}>Next.js</Tag>
+            <Tag borderless size="small" icon={<SvgReact height={20} />}>React</Tag>
+            <Tag borderless size="small" icon={<SvgTs height={20} />}>Typescript</Tag>
+            <Tag borderless size="small" icon={<SvgGraphql height={20} />}>GraphQL</Tag>
           </div>
 
         </div>
