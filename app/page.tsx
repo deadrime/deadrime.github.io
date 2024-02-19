@@ -1,8 +1,5 @@
-import OldResume from './oldResume.mdx';
-import Link from "next/link";
-import styles from './styles.module.css';
 import { Metadata } from 'next';
-import { getAllArticles, getPaginatedArticles } from '@/helpers/blog';
+import { getPaginatedArticles } from '@/helpers/blog';
 import { BlogArticle } from '@/components/Article';
 import AboutSection from '@/components/AboutSection/AboutSection';
 import Technologies from '@/components/Technologies/Technologies';

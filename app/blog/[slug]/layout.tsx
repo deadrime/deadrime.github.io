@@ -6,6 +6,7 @@ import classNames from "classnames";
 import React from "react";
 import Tag from "@/components/Tag/Tag";
 import dayjs from 'dayjs';
+import { capitalize } from "@/helpers/capitalize";
 
 type ArticleLayoutProps = {
   children: React.ReactNode,
@@ -33,7 +34,9 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
             </h2>
             <div className="flex gap-2 flex-wrap gap-y-1">
               {topics?.map((i) => (
-                <Tag key={i} as={Link} href={`/blog/topics/${i}`}>{i}</Tag>
+                <Tag key={i} borderless as={Link} href={`/blog/topics/${i}`}>
+                  {capitalize(i)}
+                </Tag>
               ))}
             </div>
             <time className="text-body2 text-lilac block mt-4">

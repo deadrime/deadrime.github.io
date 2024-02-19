@@ -10,16 +10,19 @@ type BlogArticleProps = {
 export const BlogArticle: React.FC<BlogArticleProps> = ({
   article
 }) => (
-  <article>
-    {article.image && (
-      <figure className='aspect-[380/200] bg-slate-100/10 rounded-lg mb-3'>
-      </figure>
-    )}
+  <article className='max-w-xl'>
     <Link href={`/blog/${article.slug}`} className='text-text'>
-      <h3 className="mt-0 mb-3 p-0 text-md max-w-sm">
+      {article.image && (
+        <img
+          src={article.image}
+          alt={article.title}
+          className='aspect-[38/20] bg-slate-100/10 rounded-lg mb-3 overflow-hidden object-cover object-center w-full'
+        />
+      )}
+      <h3 className="mt-0 mb-3 p-0 text-md leading-tight">
         {article.title}
       </h3>
-      <span className="max-w-sm text-body2 text-text/70 block mb-4">
+      <span className="text-body2 text-text/70 block mb-4">
         {article.description}
       </span>
     </Link>

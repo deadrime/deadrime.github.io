@@ -18,7 +18,7 @@ export const getAllArticles = async () => {
     return article
   }));
 
-  return articlesData.sort((a, b) => a.publishedTime - b.publishedTime);
+  return articlesData.sort((a, b) => b.publishedTime - a.publishedTime);
 }
 
 export const getPaginatedArticles = async (limit: number, offset = 0) => {
@@ -55,6 +55,7 @@ export const getArticleBySlug = async (slug: string): Promise<Article> => {
 
   const article: Article = {
     component,
+    image: data.image,
     slug: data.slug || slug,
     description: data.description,
     publishedTime,
