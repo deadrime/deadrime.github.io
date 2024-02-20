@@ -57,13 +57,13 @@ const Technologies = () => {
       <h2 className="font-primary text-xl font-normal mt-8 md:mt-36">
         С чем работал
       </h2>
-      <div className="grid gap-5 mt-11" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
+      <div className="grid gap-5 gap-x-6 mt-11" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
         {data.map(item => (
           <div key={item.category} className="flex flex-col gap-2">
             <span className="text-md">
               {item.category}
             </span>
-            <span className="text-body2 text-gray-500 dark:text-text/75">
+            <span className="text-body2 text-gray-500 dark:text-text/75 text-balance">
               {item.items.join(', ')}
             </span>
           </div>

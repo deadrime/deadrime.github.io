@@ -10,7 +10,7 @@ type BlogArticleProps = {
 export const BlogArticle: React.FC<BlogArticleProps> = ({
   article
 }) => (
-  <article className='max-w-xl'>
+  <article className='max-w-xl text-balance'>
     <Link href={`/blog/${article.slug}`} className='text-text'>
       {article.image && (
         <img

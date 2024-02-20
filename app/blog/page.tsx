@@ -16,13 +16,18 @@ export default async function Home() {
   const articles = await getAllArticles();
 
   return (
-    <div className='flex flex-col gap-3'>
-      {articles.map((article, index) =>
-        <BlogArticle
-          key={index}
-          article={article}
-        />
-      )}
-    </div>
+    <>
+      <h1 className="text-2xl font-primary block mb-8">
+        Блог
+      </h1>
+      <div className='flex flex-col gap-3'>
+        {articles.map((article, index) =>
+          <BlogArticle
+            key={index}
+            article={article}
+          />
+        )}
+      </div>
+    </>
   );
 }

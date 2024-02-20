@@ -6,6 +6,7 @@ import React from 'react';
 import ImageComponent from './components/mdxComponents/ImageComponent/ImageComponent';
 import CodePlayground from './components/mdxComponents/CodePlayground/CodePlayground';
 import { calculateLinesToHighlight } from './helpers/codeHightlight';
+import Blockquote from './components/mdxComponents/Blockquote/Blockquote';
 
 type CodeElementProps = HTMLProps<HTMLElement> & {
   filename?: string;
@@ -34,5 +35,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     code: CodeElement,
     CodeDemo: CodeDemo,
     CodePlayground: CodePlayground,
+    blockquote: Blockquote,
   }
 }

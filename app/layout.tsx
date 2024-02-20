@@ -71,19 +71,21 @@ export default function RootLayout({
         />
         <Providers>
           <header style={{
-            maxWidth: 1180,
-          }} className="w-full mx-auto px-3 flex items-center h-20">
+            maxWidth: 'calc(1180px + 1rem)',
+          }} className="w-full mx-auto px-4 flex items-center h-20">
             <Logo />
             <ThemeSwitcher className="ml-auto" />
           </header>
           <main style={{
-            maxWidth: 1180,
-          }} className="w-full mx-auto px-3 py-4 sm:box-content">
+            maxWidth: 'calc(1180px + 1rem)',
+          }} className="w-full mx-auto p-4">
             {children}
           </main>
           <footer
-            style={{ maxWidth: 1180 }}
-            className="w-full mx-auto px-3 py-4 sm:box-content mt-auto"
+            style={{
+              maxWidth: 'calc(1180px + 1rem)'
+            }}
+            className="w-full mx-auto p-4 mt-auto"
           >
             <FooterLogo />
           </footer>
