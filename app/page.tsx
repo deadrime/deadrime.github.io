@@ -6,11 +6,12 @@ import Technologies from '@/components/Technologies/Technologies';
 import MyExperience from '@/components/MyExperience/MyExperience';
 
 export const metadata: Metadata = {
-  title: 'Трофимов Евгений - frontend разработчик',
-  description: 'Мой личный сайт, портфолио и блог',
+  metadataBase: process.env.NODE_ENV === 'development' ? new URL('http://localhost:3000') : new URL('https://zhenya.dev'),
+  title: 'Трофимов Евгений',
+  description: 'Fullstack developer',
   openGraph: {
-    title: 'Трофимов Евгений - frontend разработчик',
-    description: 'Мой личный сайт, портфолио и блог',
+    title: 'Трофимов Евгений',
+    description: 'Fullstack developer',
     type: 'website',
 
     // type: 'profile',
