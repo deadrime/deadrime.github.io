@@ -1,0 +1,33 @@
+.blockquote {
+  position: relative;
+  font-style: italic;
+  /* @apply bg-text/10 rounded-sm; */
+  /* color: var(--color-gray-700); */
+  padding: 0 32px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+  width: fit-content;
+
+  &::before {
+    content: "“";
+    font-family: "Times New Roman", serif;
+    font-size: 4em;
+    line-height: 1;
+    font-weight: bold;
+    position: absolute;
+    left: -10px;
+    top: -30px;
+    opacity: 0.25;
+  }
+  &::after {
+    content: "”";
+    font-family: "Times New Roman", serif;
+    font-size: 4em;
+    line-height: 1;
+    font-weight: bold;
+    position: absolute;
+    right: -8px;
+    top: 20px;
+    opacity: 0.25;
+  }
+}
