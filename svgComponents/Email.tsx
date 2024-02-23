@@ -6,14 +6,21 @@ const SvgEmail = (props: SVGProps<SVGSVGElement>) => (
     width="20px"
     height="20px"
     fill="currentColor"
-    viewBox="2 2 20 20"
+    viewBox="0 0 32 32"
     {...props}
   >
-    <path
-      fillRule="evenodd"
-      d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2s10 4.477 10 10M7.005 9c0-.55.445-1 .995-1h8c.55 0 1 .45 1 1v6c0 .55-.45 1-1 1H8c-.55 0-1-.45-1-1zM12 12.5 8 10v5h8v-5zm0-1L8 9h8z"
-      clipRule="evenodd"
-    />
+    <g clipPath="url(#email_svg__a)">
+      <path
+        fillRule="evenodd"
+        d="M16 32c8.837 0 16-7.163 16-16S24.837 0 16 0 0 7.163 0 16s7.163 16 16 16M8.533 9.28h14.934c.821 0 1.493.672 1.493 1.493v10.454c0 .821-.672 1.493-1.493 1.493H8.533a1.5 1.5 0 0 1-1.493-1.493V10.773c0-.821.672-1.493 1.493-1.493m7.99 7.765 6.048-4.778c.224-.15.298-.523.149-.747-.15-.224-.523-.299-.821-.15L16 15.254l-5.824-3.882c-.299-.15-.597-.075-.821.149-.224.299-.15.672.074.821l5.974 4.704c.373.224.821.224 1.12 0"
+        clipRule="evenodd"
+      />
+    </g>
+    <defs>
+      <clipPath id="email_svg__a">
+        <rect width={32} height={32} fill="#fff" rx={16} />
+      </clipPath>
+    </defs>
   </svg>
 );
 export default SvgEmail;

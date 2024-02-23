@@ -12,13 +12,17 @@ const AboutSection = () => {
   return (
     <section className="flex flex-col relative test" style={{ minHeight: 'calc(100vh - 5rem)' }}>
       <div className="flex flex-col">
-        <h1 className="text-2xl font-primary pt-8">
+        <span className="flex items-center gap-2">
+          <div className="rounded-full bg-green size-[0.625rem]" />
+          <span className="text-primary font-medium">ищу работу 👋</span>
+        </span>
+        <h1 className="text-2xl font-primary pt-3">
           Трофимов Евгений
         </h1>
-        <h2 className="mt-2 block text-md text-text/70 dark:text-beige font-normal font-primary">
+        <h2 className="mt-4 block text-md text-text/70 dark:text-beige font-normal font-primary">
           Fullstack developer, middle+/ senior
         </h2>
-        <Contacts className="mt-3" />
+        <Contacts className="mt-8" />
       </div>
       <div className={styles.blobs}>
         <SvgSloth className={styles.sloth} />
@@ -35,11 +39,9 @@ const AboutSection = () => {
           </p>
           <p>
             У меня <strong>~6 лет</strong> опыта работы, считаю себя отличным разработчиком с интересным бэкграундом.
-            За все время работы решил множество интересных и разносторонних задач.
           </p>
-          <h3 className="pt-8 font-normal text-text/80 text-body1">Любимый стек <span>❤️‍🔥</span></h3>
-
-          <div className="flex gap-2 pt-3 flex-wrap">
+          <h3 className="pt-8 font-normal text-text/80 text-body2">Любимый стек <span>❤️</span></h3>
+          <div className="flex gap-2 pt-2 flex-wrap">
             <Tag borderless size="small" icon={<SvgNextjs height={20} className="fill-current text-text/90" />}>Next.js</Tag>
             <Tag borderless size="small" icon={<SvgReact height={20} />}>React</Tag>
             <Tag borderless size="small" icon={<SvgTs height={20} />}>Typescript</Tag>

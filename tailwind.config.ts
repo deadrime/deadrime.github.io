@@ -40,6 +40,7 @@ const config: Config = {
         'night': '#2C2636',
         'lilac': '#615A6C',
         'beige': '#C2B5A9',
+        'green': '#8AE542'
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
