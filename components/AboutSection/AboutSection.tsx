@@ -10,7 +10,7 @@ import SvgSloth from '@/svgComponents/Sloth';
 
 const AboutSection = () => {
   return (
-    <section className="flex flex-col relative test" style={{ minHeight: 'calc(100vh - 5rem)' }}>
+    <section className="flex flex-col relative test">
       <div className="flex flex-col">
         <span className="flex items-center gap-2">
           <div className="rounded-full bg-green size-[0.625rem]" />
@@ -26,9 +26,9 @@ const AboutSection = () => {
       </div>
       <div className={styles.blobs}>
         <SvgSloth className={styles.sloth} />
-        <div className={classNames(styles.blob, styles.yellow)}></div>
-        <div className={classNames(styles.blob, styles.green)}></div>
-        <div className={classNames(styles.blob, styles.red)}></div>
+        <div className={classNames(styles.blob, styles.color1)}></div>
+        <div className={classNames(styles.blob, styles.color2)}></div>
+        <div className={classNames(styles.blob, styles.color3)}></div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-5 text-body2 text-text/80 pt-8">
         <div className={classNames(styles.blogContent, 'md:col-span-6')} id="content">

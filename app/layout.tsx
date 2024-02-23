@@ -71,19 +71,19 @@ export default function RootLayout({
         />
         <Providers>
           <header style={{
-            maxWidth: 'calc(1180px + 1rem)',
+            maxWidth: 'calc(1180px + 2rem)',
           }} className="w-full mx-auto px-4 flex items-center h-20">
             <Logo />
             <ThemeSwitcher className="ml-auto" />
           </header>
           <main style={{
-            maxWidth: 'calc(1180px + 1rem)',
+            maxWidth: 'calc(1180px + 2rem)',
           }} className="w-full mx-auto p-4">
             {children}
           </main>
           <footer
             style={{
-              maxWidth: 'calc(1180px + 1rem)'
+              maxWidth: 'calc(1180px + 2rem)'
             }}
             className="w-full mx-auto p-4 mt-auto"
           >

@@ -53,8 +53,8 @@ const data = [
 
 const Technologies = () => {
   return (
-    <section>
-      <h2 className="font-primary text-xl font-normal mt-8 md:mt-36">
+    <section className="mt-8 md:mt-40">
+      <h2 className="font-primary text-xl font-normal">
         С чем работал
       </h2>
       <div className="grid gap-5 gap-x-6 mt-11" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }}>
