@@ -1,3 +1,11 @@
+.wrapper {
+  min-height: calc(100vh - 9rem);
+
+  @media screen(sm) {
+    min-height: initial;
+  }
+}
+
 .blobs {
   --color1: rgb(var(--color-primary));
   --color2: #de5e82;

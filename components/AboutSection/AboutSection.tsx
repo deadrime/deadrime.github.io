@@ -10,7 +10,7 @@ import SvgSloth from '@/svgComponents/Sloth';
 
 const AboutSection = () => {
   return (
-    <section className="flex flex-col relative test">
+    <section className={classNames("flex flex-col relative", styles.wrapper)}>
       <div className="flex flex-col">
         <span className="flex items-center gap-2">
           <div className="rounded-full bg-green size-[0.625rem]" />
