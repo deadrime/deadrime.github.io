@@ -1,8 +1,13 @@
 .wrapper {
-  min-height: calc(100vh - 9rem);
+  /* 5rem header + 2rem padding y */
+  min-height: calc(100vh - 7rem);
+  padding-bottom: 5rem;
+  justify-content: center;
 
-  @media screen(sm) {
+  @media screen(md) {
     min-height: initial;
+    padding-bottom: initial;
+    justify-content: start;
   }
 }
 
