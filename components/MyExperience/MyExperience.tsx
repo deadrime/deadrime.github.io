@@ -225,7 +225,7 @@ const data = [
 
 const MyExperience = () => {
   return (
-    <section className="mt-8 md:mt-40">
+    <section className="mt-12 md:mt-40">
       <h2 className="font-primary text-xl font-normal">
         Опыт работы
       </h2>
