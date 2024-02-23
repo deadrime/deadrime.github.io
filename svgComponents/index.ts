@@ -1,5 +1,6 @@
 export { default as Apollo } from "./Apollo";
 export { default as Arrowdown } from "./Arrowdown";
+export { default as Chartjs } from "./Chartjs";
 export { default as Copy } from "./Copy";
 export { default as Css } from "./Css";
 export { default as Dynamodb } from "./Dynamodb";

@@ -15,6 +15,8 @@ import SvgApollo from '@/svgComponents/Apollo';
 import SvgEmotion from '@/svgComponents/Emotion';
 import SvgNodejs from '@/svgComponents/Nodejs';
 import SvgOther from '@/svgComponents/Other';
+import Accordion from '../Accordion/Accordion';
+import SvgChartjs from '@/svgComponents/Chartjs';
 
 
 const data = [
@@ -170,35 +172,57 @@ const data = [
         <li>
           Создавал графики на <strong>chart.js</strong>. Различная статистика, курс валют и т.п.
 
-          <div className="flex gap-2">
-            <SvgReact height={20} />
-            <SvgTs height={20} />
+          <div className="flex gap-2 my-2">
+            <Tag icon={<SvgReact />} borderless size='small'>
+              React
+            </Tag>
+            <Tag icon={<SvgTs />} borderless size='small'>
+              Typescript
+            </Tag>
+            <Tag icon={<SvgChartjs />} borderless size='small'>
+              Chart.js
+            </Tag>
           </div>
         </li>
         <li>
-          Участвовал в разработке сайта для антикафе https://ziferblat.net/
+          Участвовал в разработке сайта для антикафе <a href="https://ziferblat.net/">Циферблат</a>
 
-          <div className="flex gap-2">
-            <SvgReact height={20} />
-            <SvgTs height={20} />
-            <SvgGraphql height={20} />
-            <SvgApollo className="fill-current" height={20} />
-            <SvgEmotion height={20} />
+          <div className="flex gap-2 my-2">
+            <Tag icon={<SvgReact />} borderless size='small'>
+              React
+            </Tag>
+            <Tag icon={<SvgTs />} borderless size='small'>
+              Typescript
+            </Tag>
+            <Tag icon={<SvgGraphql />} borderless size='small'>
+              GraphQL
+            </Tag>
+            <Tag icon={<SvgApollo />} borderless size='small'>
+              Apollo
+            </Tag>
+            <Tag icon={<SvgEmotion />} borderless size='small'>
+              Emotion
+            </Tag>
           </div>
-
         </li>
         <li>
-          Написал телеграмм бота для персонала. В боте можно выбрать рабочие смены, провести инвентаризацию.
+          Написал телеграмм бота для персонала. В боте можно было выбрать рабочие смены, провести инвентаризацию.
 
-          <div className="flex gap-2">
-            <SvgTs height={20} />
-            <SvgGraphql height={20} />
-            <SvgNodejs height={20} />
+          <div className="flex gap-2 my-2">
+            <Tag icon={<SvgTs />} borderless size='small'>
+              Typescript
+            </Tag>
+            <Tag icon={<SvgGraphql />} borderless size='small'>
+              GraphQL
+            </Tag>
+            <Tag icon={<SvgNodejs />} borderless size='small'>
+              Node.js
+            </Tag>
           </div>
         </li>
       </ul>
     </>,
-    technologies: ['react', 'typescript', 'graphQL', 'apollo', 'emotion'],
+    technologies: ['react', 'typescript', 'graphQL', 'apollo', 'emotion', 'chart.js'],
   },
   {
     companyName: 'Прочее',
@@ -263,17 +287,9 @@ const MyExperience = () => {
                   </Tag>
                 )}
               </div>
-              <details className="mb-0">
-                <summary className='marker:text-primary cursor-pointer'>
-                  <span className="text-primary font-semibold">Подробнее</span>
-                  {/* <button>
-                    Подробнее <IconArrowDown width={12} height={12} />
-                  </button> */}
-                </summary>
-                <span className="text-text/80">
-                  {work.moreInfo}
-                </span>
-              </details>
+              <Accordion summary="Подробнее">
+                {work.moreInfo}
+              </Accordion>
             </div>
           </div>
         ))}
