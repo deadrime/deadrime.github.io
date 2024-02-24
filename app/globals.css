@@ -10,26 +10,19 @@
     --font-size-lg: clamp(1.5625rem, 1.4273rem + 0.601vi, 1.9531rem);
     --font-size-xl: clamp(1.9531rem, 1.7841rem + 0.7512vi, 2.4414rem);
     --font-size-2xl: clamp(2.4414rem, 2.2301rem + 0.939vi, 3.0518rem);
-
-    --color-foreground: 226 232 240;
-    --color-background: 23 20 31;
   }
 
   :root[data-theme="dark"] {
     --color-primary: 255 190 152;
-    --color-primary-light: 255 190 152;
     --color-text: 255 246 237;
-    --color-text-accent: 255 255 255;
-    --color-background: 12 10 21;
+    --color-background: 15 13 27;
     --color-border: 55 65 81;
   }
 
   :root[data-theme="light"] {
     --color-primary: 236 109 39;
-    --color-primary-light: 255 190 152;
     --color-text: 30 41 59;
-    --color-background: 255 255 255;
-    --color-border: 55 65 81;
+    --color-background: 255 246 237;
     --color-border: 210 210 210;
   }
 

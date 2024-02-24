@@ -53,7 +53,7 @@ const data = [
 
 const Technologies = () => {
   return (
-    <section className="md:mt-40">
+    <section className="md:mt-40" id="technologies">
       <h2 className="font-primary text-xl font-normal">
         С чем работал
       </h2>

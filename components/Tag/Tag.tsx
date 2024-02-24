@@ -28,7 +28,7 @@ const Tag = <T extends ElementType = "span">({
         size === 'small' && 'px-3 py-[3px]',
         size === 'normal' && 'px-3 py-[6px]',
         icon && '!pl-[5px]',
-        variant === 'filled' && 'bg-gray-50/50 dark:bg-night/30',
+        variant === 'filled' && 'bg-gray-50/50 dark:bg-night/50',
         variant === 'outlined' && 'border-2 border-beige/30 dark:border-night bg-transparent hover:bg-beige/30 hover:border-transparent dark:hover:bg-night'
         // !borderless && 'border-2 border-gray-50/50 dark:border-night text-gray-500',
         // !outlined && 'bg-gray-50/50 dark:bg-night/30',

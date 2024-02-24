@@ -43,11 +43,11 @@
     transform: translateX(-50%);
     animation: levitation 7s infinite ease-in-out;
     width: auto;
-    height: 420px;
+    height: 480px;
     opacity: 100%;
     transform: none;
     top: 0px;
-    left: 100px;
+    left: 75px;
   }
 }
 

@@ -1,5 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
-import { Inter, Fira_Code, Comfortaa, Roboto, Nunito } from "next/font/google";
+import { Fira_Code, Nunito } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import classNames from "classnames";
@@ -74,7 +73,12 @@ export default function RootLayout({
             maxWidth: 'calc(1180px + 2rem)',
           }} className="w-full mx-auto px-4 flex items-center h-20">
             <Logo />
-            <ThemeSwitcher className="ml-auto" />
+            <nav className="mx-auto gap-8 hidden sm:flex text-body2 font-bold">
+              <Link href="/#technologies" className="text-lilac dark:text-beige">С чем работал</Link>
+              <Link href="/#my-experience" className="text-lilac dark:text-beige">Опыт работы</Link>
+              <Link href="/blog" className="text-lilac dark:text-beige">Блог</Link>
+            </nav>
+            <ThemeSwitcher className="ml-auto sm:ml-4" />
           </header>
           <main style={{
             maxWidth: 'calc(1180px + 2rem)',
@@ -85,7 +89,7 @@ export default function RootLayout({
             style={{
               maxWidth: 'calc(1180px + 2rem)'
             }}
-            className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between items-center"
+            className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between sm:items-center flex-col sm:flex-row gap-3"
           >
             <FooterLogo />
             <span className="text-body2 text-lilac">Made with ❤️ by me. Designed by @rina.</span>
