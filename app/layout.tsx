@@ -85,7 +85,7 @@ export default function RootLayout({
             style={{
               maxWidth: 'calc(1180px + 2rem)'
             }}
-            className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between"
+            className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between items-center"
           >
             <FooterLogo />
             <span className="text-body2 text-lilac">Made with ❤️ by me. Designed by @rina.</span>
