@@ -42,10 +42,10 @@ const AboutSection = () => {
           </p>
           <h3 className="pt-8 font-normal text-text/80 text-body2">Любимый стек <span>❤️</span></h3>
           <div className="flex gap-2 pt-2 flex-wrap">
-            <Tag borderless size="small" icon={<SvgNextjs height={20} className="fill-current text-text/90" />}>Next.js</Tag>
-            <Tag borderless size="small" icon={<SvgReact height={20} />}>React</Tag>
-            <Tag borderless size="small" icon={<SvgTs height={20} />}>Typescript</Tag>
-            <Tag borderless size="small" icon={<SvgGraphql height={20} />}>GraphQL</Tag>
+            <Tag variant="filled" size="small" icon={<SvgNextjs height={20} className="fill-current text-text/90" />}>Next.js</Tag>
+            <Tag variant="filled" size="small" icon={<SvgReact height={20} />}>React</Tag>
+            <Tag variant="filled" size="small" icon={<SvgTs height={20} />}>Typescript</Tag>
+            <Tag variant="filled" size="small" icon={<SvgGraphql height={20} />}>GraphQL</Tag>
           </div>
 
         </div>

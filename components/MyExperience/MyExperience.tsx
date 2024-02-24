@@ -173,13 +173,13 @@ const data = [
           Создавал графики на <strong>chart.js</strong>. Различная статистика, курс валют и т.п.
 
           <div className="flex gap-2 my-2 flex-wrap">
-            <Tag icon={<SvgReact />} borderless size='small'>
+            <Tag icon={<SvgReact />} variant="filled" size='small'>
               React
             </Tag>
-            <Tag icon={<SvgTs />} borderless size='small'>
+            <Tag icon={<SvgTs />} variant="filled" size='small'>
               Typescript
             </Tag>
-            <Tag icon={<SvgChartjs />} borderless size='small'>
+            <Tag icon={<SvgChartjs />} variant="filled" size='small'>
               Chart.js
             </Tag>
           </div>
@@ -188,19 +188,19 @@ const data = [
           Участвовал в разработке сайта для антикафе <a href="https://ziferblat.net/">Циферблат</a>
 
           <div className="flex gap-2 my-2 flex-wrap">
-            <Tag icon={<SvgReact />} borderless size='small'>
+            <Tag icon={<SvgReact />} variant="filled" size='small'>
               React
             </Tag>
-            <Tag icon={<SvgTs />} borderless size='small'>
+            <Tag icon={<SvgTs />} variant="filled" size='small'>
               Typescript
             </Tag>
-            <Tag icon={<SvgGraphql />} borderless size='small'>
+            <Tag icon={<SvgGraphql />} variant="filled" size='small'>
               GraphQL
             </Tag>
-            <Tag icon={<SvgApollo />} borderless size='small'>
+            <Tag icon={<SvgApollo />} variant="filled" size='small'>
               Apollo
             </Tag>
-            <Tag icon={<SvgEmotion />} borderless size='small'>
+            <Tag icon={<SvgEmotion />} variant="filled" size='small'>
               Emotion
             </Tag>
           </div>
@@ -209,13 +209,13 @@ const data = [
           Написал телеграмм бота для персонала. В боте можно было выбрать рабочие смены, провести инвентаризацию.
 
           <div className="flex gap-2 my-2 flex-wrap">
-            <Tag icon={<SvgTs />} borderless size='small'>
+            <Tag icon={<SvgTs />} variant="filled" size='small'>
               Typescript
             </Tag>
-            <Tag icon={<SvgGraphql />} borderless size='small'>
+            <Tag icon={<SvgGraphql />} variant="filled" size='small'>
               GraphQL
             </Tag>
-            <Tag icon={<SvgNodejs />} borderless size='small'>
+            <Tag icon={<SvgNodejs />} variant="filled" size='small'>
               Node.js
             </Tag>
           </div>
@@ -282,7 +282,7 @@ const MyExperience = () => {
               </span>
               <div className='flex gap-2 my-4 flex-wrap'>
                 {work.technologies.map(technology =>
-                  <Tag borderless size='small' key={technology}>
+                  <Tag variant="filled" size='small' key={technology}>
                     {capitalize(technology)}
                   </Tag>
                 )}

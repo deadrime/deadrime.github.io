@@ -34,7 +34,7 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
             </h2>
             <div className="flex gap-2 flex-wrap gap-y-1">
               {topics?.map((i) => (
-                <Tag key={i} borderless as={Link} href={`/blog/topics/${i}`}>
+                <Tag key={i} variant="outlined" as={Link} href={`/blog/topics/${i}`}>
                   {capitalize(i)}
                 </Tag>
               ))}

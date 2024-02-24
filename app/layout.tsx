@@ -85,9 +85,11 @@ export default function RootLayout({
             style={{
               maxWidth: 'calc(1180px + 2rem)'
             }}
-            className="w-full mx-auto p-4 mt-auto"
+            className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between"
           >
             <FooterLogo />
+            <span className="text-body2 text-lilac">Made with ❤️ by me. Designed by @rina.</span>
+            <span className="text-beige text-body2">© Трофимов Евгений, 2024</span>
           </footer>
         </Providers>
       </body>

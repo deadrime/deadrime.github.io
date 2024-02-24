@@ -26,9 +26,9 @@ const Accordion: React.FC<DetailsProps> = ({ summary, children, ...props }) => {
           {summary}
         </span>
 
-        <button onClick={e => setOpen(value => !value)}>
+        <span>
           <SvgArrowdown width={12} height={12} className={styles.icon} />
-        </button>
+        </span>
       </summary>
       <span className="text-text/80">
         {children}
