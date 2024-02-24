@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
-import { getPaginatedArticles } from '@/helpers/blog';
-import { BlogArticle } from '@/components/Article';
 import AboutSection from '@/components/AboutSection/AboutSection';
 import Technologies from '@/components/Technologies/Technologies';
 import MyExperience from '@/components/MyExperience/MyExperience';
+import LatestArticles from '@/components/LatestArticles/LatestArticles';
 
 export const metadata: Metadata = {
   metadataBase: process.env.NODE_ENV === 'development' ? new URL('http://localhost:3000') : new URL('https://zhenya.dev'),
@@ -30,22 +29,6 @@ const jsonLd = {
   "sameAs": ["deadrime"]
 }
 
-const LatestArticles = async () => {
-  const { articles, totalCount } = await getPaginatedArticles(3);
-
-  return (
-    <section className="mt-12 md:mt-40">
-      <h2 className="font-primary text-xl font-normal block mb-11">
-        Блог
-      </h2>
-      <div className="grid gap-5" style={{
-        gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))'
-      }}>
-        {articles.map(article => <BlogArticle key={article.slug} article={article} />)}
-      </div>
-    </section>
-  )
-}
 
 export default async function Home() {
   return (
