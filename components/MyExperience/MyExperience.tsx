@@ -172,7 +172,7 @@ const data = [
         <li>
           Создавал графики на <strong>chart.js</strong>. Различная статистика, курс валют и т.п.
 
-          <div className="flex gap-2 my-2">
+          <div className="flex gap-2 my-2 flex-wrap">
             <Tag icon={<SvgReact />} borderless size='small'>
               React
             </Tag>
@@ -187,7 +187,7 @@ const data = [
         <li>
           Участвовал в разработке сайта для антикафе <a href="https://ziferblat.net/">Циферблат</a>
 
-          <div className="flex gap-2 my-2">
+          <div className="flex gap-2 my-2 flex-wrap">
             <Tag icon={<SvgReact />} borderless size='small'>
               React
             </Tag>
@@ -208,7 +208,7 @@ const data = [
         <li>
           Написал телеграмм бота для персонала. В боте можно было выбрать рабочие смены, провести инвентаризацию.
 
-          <div className="flex gap-2 my-2">
+          <div className="flex gap-2 my-2 flex-wrap">
             <Tag icon={<SvgTs />} borderless size='small'>
               Typescript
             </Tag>
