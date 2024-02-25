@@ -24,15 +24,12 @@ const Tag = <T extends ElementType = "span">({
   return (
     <Tag
       className={classNames(
-        "rounded-3xl text-lilac dark:text-beige inline-flex items-center text-body2 transition-colors",
+        "rounded-3xl text-secondary inline-flex items-center text-body2 transition-colors",
         size === 'small' && 'px-3 py-[3px]',
         size === 'normal' && 'px-3 py-[6px]',
         icon && '!pl-[5px]',
-        variant === 'filled' && 'bg-gray-50/50 dark:bg-night/50',
-        variant === 'outlined' && 'border-2 border-beige/30 dark:border-night bg-transparent hover:bg-beige/30 hover:border-transparent dark:hover:bg-night'
-        // !borderless && 'border-2 border-gray-50/50 dark:border-night text-gray-500',
-        // !outlined && 'bg-gray-50/50 dark:bg-night/30',
-        // outlined && 'bg-transparent hover:bg-night'
+        variant === 'filled' && 'bg-details/50',
+        variant === 'outlined' && 'border-2 border-details bg-transparent hover:bg-secondary/30 hover:border-transparent hover:bg-details hover:text-text'
       )}
       {...props}
     >

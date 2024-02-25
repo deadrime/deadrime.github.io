@@ -19,7 +19,7 @@ const AboutSection = () => {
         <h1 className="text-2xl font-primary pt-3">
           Трофимов Евгений
         </h1>
-        <h2 className="mt-4 block text-md text-text/70 dark:text-beige font-normal font-primary">
+        <h2 className="mt-4 block text-md text-secondary font-normal font-primary">
           Fullstack developer, middle+/ senior
         </h2>
         <Contacts className="mt-8" />

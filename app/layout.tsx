@@ -74,9 +74,9 @@ export default function RootLayout({
           }} className="w-full mx-auto px-4 flex items-center h-20">
             <Logo />
             <nav className="mx-auto gap-8 hidden sm:flex text-body2 font-bold">
-              <Link href="/#technologies" className="text-lilac dark:text-beige">С чем работал</Link>
-              <Link href="/#my-experience" className="text-lilac dark:text-beige">Опыт работы</Link>
-              <Link href="/blog" className="text-lilac dark:text-beige">Блог</Link>
+              <Link href="/#technologies" className="text-secondary">С чем работал</Link>
+              <Link href="/#my-experience" className="text-secondary">Опыт работы</Link>
+              <Link href="/blog" className="text-secondary">Блог</Link>
             </nav>
             <ThemeSwitcher className="ml-auto sm:ml-4" />
           </header>
@@ -92,8 +92,8 @@ export default function RootLayout({
             className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between sm:items-center flex-col sm:flex-row gap-3"
           >
             <FooterLogo />
-            <span className="text-body2 text-lilac">Made with ❤️ by me. Designed by @rina.</span>
-            <span className="text-beige text-body2">© Трофимов Евгений, 2024</span>
+            <span className="text-body2 text-secondary">Made with ❤️ by me. Designed by @rina.</span>
+            <span className="text-neutral text-body2">© Трофимов Евгений, 2024</span>
           </footer>
         </Providers>
       </body>

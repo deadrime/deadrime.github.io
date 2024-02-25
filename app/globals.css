@@ -13,16 +13,30 @@
   }
 
   :root[data-theme="dark"] {
-    --color-primary: 255 190 152;
-    --color-text: 255 246 237;
+    /* midnight */
     --color-background: 15 13 27;
+    /* night */
+    --color-details: 44 38 54;
+    /* peach */
+    --color-primary: 255 190 152;
+    /* beige */
+    --color-secondary: 194 181 169;
+    /* light */
+    --color-text: 255 246 237;
+    /* lilac */
+    --color-neutral: 97 90 108;
+    /* for code block */
     --color-border: 55 65 81;
   }
 
   :root[data-theme="light"] {
-    --color-primary: 236 109 39;
-    --color-text: 30 41 59;
+    /* light */
     --color-background: 255 246 237;
+    --color-primary: 220 139 94;
+    --color-secondary: 97 90 108;
+    --color-details: 229 225 222;
+    --color-text: 23 20 31;
+    --color-neutral: 194 181 169;
     --color-border: 210 210 210;
   }
 

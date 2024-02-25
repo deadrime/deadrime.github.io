@@ -24,10 +24,11 @@ const config: Config = {
       },
       colors: {
         'text': 'rgb(var(--color-text) / <alpha-value>)',
-        'text-accent': 'rgb(var(--color-text-accent) / <alpha-value>)',
         'background': 'rgb(var(--color-background) / <alpha-value>)',
         'primary': 'rgb(var(--color-primary) / <alpha-value>)',
-        'primary-light': 'var(--color-primary-light)',
+        'details': 'rgb(var(--color-details) / <alpha-value>)',
+        'secondary': 'rgb(var(--color-secondary) / <alpha-value>)',
+        'neutral': 'rgb(var(--color-neutral) / <alpha-value>)',
         'border': 'rgb(var(--color-border) / <alpha-value>)',
         'gray-900': '#212326',
         'gray-800': '#2D3035',
@@ -35,18 +36,8 @@ const config: Config = {
         'gray-300': '#959393',
         'gray-200': '#C4C4C4',
         'gray-50': '#E9E9E9',
-        'light-gray': '#F5F5F5',
-        'blue-primary': '#00F3FF',
-        'night': '#2C2636',
-        'lilac': '#615A6C',
-        'beige': '#C2B5A9',
         'green': '#8AE542'
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      }
     },
   },
   plugins: [],

@@ -25,11 +25,11 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
       <Link href="/blog" className="mb-8 block">← Блог</Link>
       <div>
         <section className={classNames(styles.patternBg, "overflow-hidden")}>
-          <header className="py-8 border-t-[6px] border-b-2 dark:border-night md:mb-10">
+          <header className="py-8 border-t-[6px] border-b-2 border-details md:mb-10">
             <h1 className="text-2xl font-primary block mb-4">
               {title}
             </h1>
-            <h2 className="font-primary text-md font-normal block mb-8 dark:text-beige text-gray-600">
+            <h2 className="font-primary text-md font-normal block mb-8 text-secondary">
               {description}
             </h2>
             <div className="flex gap-2 flex-wrap gap-y-1">
@@ -39,7 +39,7 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
                 </Tag>
               ))}
             </div>
-            <time className="text-body2 text-lilac block mt-4">
+            <time className="text-body2 text-secondary block mt-4">
               {dayjs(publishedTime).format('D MMMM YYYY')}
             </time>
           </header>

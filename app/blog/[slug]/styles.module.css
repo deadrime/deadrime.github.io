@@ -18,9 +18,9 @@
     margin-bottom: 0.5em;
   }
 
-  strong {
+  /* strong {
     @apply text-text-accent;
-  }
+  } */
 
   ol {
     counter-reset: cupcake;
@@ -34,7 +34,7 @@
   ol li:before {
     @apply text-primary;
 
-    content: counters(cupcake, '.') ' ';
+    content: counters(cupcake, ".") " ";
     font-weight: bold;
     font-family: cursive;
   }
@@ -78,7 +78,7 @@
       @apply text-opacity-100;
     }
 
-    &:has(>code) {
+    &:has(> code) {
       border-block-end: 2px solid;
     }
   }
@@ -93,10 +93,10 @@
     font-family: var(--font-fira);
     font-weight: normal;
     white-space: nowrap;
-    transition: border .3s ease;
+    transition: border 0.3s ease;
   }
 
-  a>code {
+  a > code {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }

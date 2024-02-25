@@ -97,7 +97,7 @@ const data = [
       </p>
       <ul>
         <li>
-          <strong>Супер Шеф</strong> - приложение с готовыми рецептами, можно найти и выбрать готовый рецепт,
+          <strong>Супер Шеф</strong> - приложение с готовыми рецептами, где можно найти и выбрать готовый рецепт,
           чтобы приготовить блюдо
         </li>
         <li>
@@ -125,7 +125,7 @@ const data = [
     endYear: 2021,
     shortDescription: <>
       <p>
-        Frogogo - маркетплейс с прикольной системой лояльности. Удаленка, недельные спринты, утренний стендап, карточки в трелло.
+        <strong>Frogogo</strong> - маркетплейс с прикольной системой лояльности. Удаленка, недельные спринты, утренний стендап, карточки в трелло.
         Когда я только пришел - на фронте жили своей жизнью jQuery + stimulus.
       </p>
     </>,
@@ -243,7 +243,7 @@ const data = [
         по крону дергать тяжелые запросы и обновлять данные для построения графиков.
       </p>
     </>,
-    technologies: ['vue', 'elementUI', 'postgreSQL'],
+    technologies: ['vue', 'elementUI', 'node.js', 'express', 'koa', 'postgreSQL'],
   }
 ]
 
@@ -256,7 +256,7 @@ const MyExperience = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-x-5 my-11 pl-3 md:pl-0">
         {data.map((work) => (
           <div key={work.companyName} className={classNames('contents', styles.companyWrapper)}>
-            <div className="md:col-start-2 md:col-end-4 border-l-2 dark:border-night pt-6">
+            <div className="md:col-start-2 md:col-end-4 border-l-2 border-details pt-6">
               <div className='flex items-center'>
                 {React.createElement(work.companyLogo, {
                   width: 24,
@@ -264,10 +264,10 @@ const MyExperience = () => {
                   className: "bg-background dark:border-0 shrink-0 rounded rounded-full transform -translate-x-1/2 outline outline-8 outline-offset-0 outline-background"
                 })}
                 <div className="relative inline-flex items-center">
-                  <span className="absolute -top-5 text-body2 whitespace-nowrap text-lilac">
+                  <span className="absolute -top-5 text-body2 whitespace-nowrap text-neutral">
                     {work.startYear === work.endYear ? work.startYear : `${work.startYear} - ${work.endYear ?? 'н.в.'}`}
                   </span>
-                  <span className="text-md font-primary block pt-1 md:pt-0" style={{
+                  <span className="text-lg font-primary block pt-1 md:pt-0" style={{
                     verticalAlign: 'text-bottom',
                     lineHeight: '1.5'
                   }}>
@@ -276,7 +276,7 @@ const MyExperience = () => {
                 </div>
               </div>
             </div>
-            <div className="md:col-start-5 md:col-end-12 pl-6 md:pl-0 text-body2 md:pt-6 border-l-2 dark:border-night md:border-l-0">
+            <div className="md:col-start-5 md:col-end-12 pl-6 md:pl-0 text-body2 md:pt-6 border-l-2 border-details md:border-l-0">
               <span className="text-text/80 block">
                 {work.shortDescription}
               </span>
