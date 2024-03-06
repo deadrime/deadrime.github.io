@@ -409,54 +409,63 @@ Object.fromEntries([['name', 'Zhenya'], ['age', 27]]) // { name: 'Zhenya', age: 
 
 ```
 
-`Object.keys(obj)` - вернет массив ключей
+`Object.keys(obj)` - по простому - получить массив ключей.
+Вернет только собственные(без прототипа) и перечисляемые(for...in) свойства.
 
-`Object.values(obj)` - вернет массив значений
-
-<h2 id="functions">Function</h2>
-
-`Function.prototype.call(thisArg, ...args)`  - вызывает функцию с указанным значением this и аргументами.
-
-```ts
-
-function sayHello() {
-  console.log('Hello,', this.name)
-}
-
-// Тоже работает
-const sayHelloArrow = () => {
-  console.log('Hello', this.name)
-}
-
-sayHello.call({ name: "Zhenya" }); // Hello, Zhenya
-sayHelloArrow.call({ name: "Arina" }); // Hello, Arina
-
-// Но вот при попытке переопределить this у стрелочной функции - не сработает
-function person(name) {
-  this.name = name;
-
-  function sayHelloFn() {
-    console.log('Hello', this.name);
-  }
-
-  // this тут всегда будет привязан к this person
-  const sayHelloArrow = () => {
-    console.log('Hello', this.name);
-  }
-
-  return {
-    sayHelloFn,
-    sayHelloArrow
-  }
-}
-
-const somePerson = person("Misha");
-
-somePerson.sayHello(); // Hello, Misha
-somePerson.sayHello.call({ name: "Zhenya" }) // Hello, Zhenya
+```js
+Object.keys({
+  name: 'Zhenya',
+  age: 27,
+}) // ['name', 'age']
 
 ```
 
-`Function.prototype.apply(thisArg, [argsArray])` - тоже самое, что и call, но аргументы передаются в виде массива
+`Object.values(obj)` - вернет массив значений
 
-`Function.prototype.bind(thisArg, ...args)` - создает новую функцию, привязывая ей переданный this
+```js
+Object.values({
+  name: 'Zhenya',
+  age: 27,
+}) // ['Zhenya', 27]
+
+```
+
+<h2 id="functions">Function</h2>
+
+`Function.prototype.call(thisArg, ...args)`  - вызывает функцию с указанным значением `this` и аргументами.
+
+```ts
+
+function multiply(a, b) {
+  this.logger(a * b);
+  return aa * b
+}
+
+multiply.call({ logger: console.log }, 2, 2); // 4
+
+// Мы не можем указать контекст для стрелочной функции
+const addArrowFn = (a, b) => {
+  this.logger(a + b);
+  return a + b;
+}
+
+multiply.call({ logger: console.log }, 2, 2); // TypeError: this.logger is not a function
+
+
+```
+
+`Function.prototype.apply(thisArg, [argsArray])` - тоже самое, что и `call`, но аргументы передаются в виде массива
+
+```ts
+multiply.apply({ logger: console.log }, [2, 3]); // 6
+```
+
+`Function.prototype.bind(thisArg, ...args)` - создает новую функцию, привязывая ей переданный `this`
+
+```ts
+
+const multiplyTwo = add.bind({ logger: console.log }, 2);
+
+multiplyTwo(4); // 8
+
+```
