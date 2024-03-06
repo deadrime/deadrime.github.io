@@ -45,12 +45,12 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
           </header>
         </section>
         <div className="flex flex-col md:grid md:grid-cols-12 gap-5">
+          <aside className="md:col-start-10 md:col-end-13 md:sticky top-4 self-start shrink-0 md:order-last">
+            <TableOfContent contentId="content" />
+          </aside>
           <div className={classNames(styles.blogContent, 'md:col-span-8')} id="content">
             {children}
           </div>
-          <aside className="md:col-start-10 md:col-end-13 md:sticky top-4 self-start shrink-0 order-first md:order-last">
-            <TableOfContent contentId="content" />
-          </aside>
         </div>
       </div>
     </div>

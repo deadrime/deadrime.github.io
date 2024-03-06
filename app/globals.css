@@ -40,6 +40,13 @@
     --color-border: 210 210 210;
   }
 
+  a,
+  summary {
+    &:focus-visible {
+      @apply rounded-md outline-none ring ring-primary ring-offset-2 ring-offset-background;
+    }
+  }
+
   .img-wrapper {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
@@ -122,7 +129,7 @@
     transition: border 0.3s ease;
   }
 
-  a > code {
+  a>code {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
