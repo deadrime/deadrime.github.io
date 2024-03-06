@@ -19,6 +19,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
+        'base': 'var(--font-base)',
         'primary': 'var(--font-primary)',
         'code': 'var(--font-fira), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
       },

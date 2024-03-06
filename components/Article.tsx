@@ -11,7 +11,7 @@ export const BlogArticle: React.FC<BlogArticleProps> = ({
   article
 }) => (
   <article className='max-w-xl text-balance'>
-    <Link href={`/blog/${article.slug}`} className='text-text'>
+    <Link href={`/blog/${article.slug}`} className='text-text mb-4 block'>
       {article.image && (
         <img
           loading='lazy'
@@ -23,7 +23,7 @@ export const BlogArticle: React.FC<BlogArticleProps> = ({
       <h3 className="mt-0 mb-3 p-0 text-md leading-tight">
         {article.title}
       </h3>
-      <span className="text-body2 text-text/70 block mb-4">
+      <span className="text-body2 text-text/70 block">
         {article.description}
       </span>
     </Link>

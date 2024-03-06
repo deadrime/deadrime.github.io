@@ -13,8 +13,8 @@
 
 .blobs {
   --color1: rgb(var(--color-primary));
-  --color2: #de5e82;
-  --color3: #72e3d8;
+  --color2: rgba(134, 112, 145, 1);
+  --color3: rgba(104, 66, 255, 1);
 
   display: none;
   flex-direction: column;
@@ -52,7 +52,7 @@
 }
 
 .blob {
-  @apply hidden md:block blur-2xl dark:blur-3xl opacity-50 dark:opacity-60;
+  @apply hidden md:block blur-2xl dark:blur-3xl opacity-50 dark:opacity-80;
 }
 
 .color1 {
@@ -66,6 +66,7 @@
 }
 
 .color2 {
+  @apply dark:opacity-100;
   background-color: var(--color2);
   position: absolute;
   top: 40px;

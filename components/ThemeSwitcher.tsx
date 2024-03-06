@@ -59,7 +59,11 @@ export const DarkModeToggle = ({
 
   return (
     <button
-      className={classNames("opacity-90 relative rounded w-10 h-8 flex items-center justify-center", className)}
+      className={classNames(
+        "opacity-90 relative rounded w-8 h-8 mr-1 flex items-center justify-center",
+        "focus-within:outline-none focus-within:ring ring-primary ring-offset-2 ring-offset-background",
+        className
+      )}
       onClick={toggleColorMode}
       aria-label={
         isDark ? 'Activate light mode' : 'Activate dark mode'
