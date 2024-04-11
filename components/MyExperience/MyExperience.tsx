@@ -267,7 +267,7 @@ const MyExperience = () => {
                   <span className="absolute -top-5 text-body2 whitespace-nowrap text-neutral">
                     {work.startYear === work.endYear ? work.startYear : `${work.startYear} - ${work.endYear ?? 'н.в.'}`}
                   </span>
-                  <span className="text-lg font-primary block pt-1 md:pt-0" style={{
+                  <span className="text-lg font-primary block" style={{
                     verticalAlign: 'text-bottom',
                     lineHeight: '1.5'
                   }}>

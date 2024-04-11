@@ -14,7 +14,7 @@ const LatestArticles = async () => {
         {totalCount > 3 && (
           <Link
             href="/blog"
-            className="text-body2 ml-auto font-base text-primary"
+            className="text-body2 ml-auto font-base text-primary font-bold"
           >
             Все статьи →
           </Link>
