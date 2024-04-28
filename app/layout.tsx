@@ -92,7 +92,7 @@ export default function RootLayout({
             className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between sm:items-center flex-col sm:flex-row gap-3"
           >
             <FooterLogo />
-            <span className="text-body2 text-secondary">Made with ❤️ by me. Designed by @rina.</span>
+            <span className="text-body2 text-secondary">Made with ❤️ by me. Designed by <a href="https://arina.pw/" target="_blank">@rina</a>.</span>
             <span className="text-neutral text-body2">© Трофимов Евгений, 2024</span>
           </footer>
         </Providers>
