@@ -47,7 +47,6 @@ const AboutSection = () => {
             <Tag variant="filled" size="small" icon={<SvgTs height={20} />}>Typescript</Tag>
             <Tag variant="filled" size="small" icon={<SvgGraphql height={20} />}>GraphQL</Tag>
           </div>
-
         </div>
       </div>
     </section>

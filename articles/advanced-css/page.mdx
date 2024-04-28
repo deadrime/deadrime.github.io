@@ -1,0 +1,281 @@
+import previewImg from './preview.png';
+import Accordion from '../../components/Accordion/Accordion'
+
+export const data = {
+  title: "Шпаргалка по CSS",
+  description: 'И продвинутые CSS штуки',
+  slug: 'advanced-css',
+  publishedTime: '2024-03-09',
+  image: previewImg.src,
+  topics: [
+    'css',
+    'cheatsheet',
+    'interview',
+  ]
+}
+
+<h2 id="array">Единицы измерения</h2>
+
+Помимо стандартных `px` и `%` существует 1001 способ задать размер элементам.
+
+<h3 id="font-based">Зависящие от размера шрифта</h3>
+
+`em` - зависит от `font-size` дочернего элемента
+
+`rem` - зависит от `font-size` элемента `html`
+
+<h3 id="screen-based">Относительно экрана (viewport-а)</h3>
+
+Появились в первую очередь для мобилок
+
+- `vw` - viewport width, % от ширины окна браузера.
+- `vh` - viewport height, % от высоты окна браузера
+- `vmin`, `vmax` - для мобилок, % от меньшей/большей размерности вьюпорта вне зависимости от ориентации
+
+Проблемы - не учитываются размеры элементов браузера, например адресная строка в safari или клавиатура
+
+Чтобы решить эти проблемы - придумали ~~новый костыль~~ модификаторы:
+
+- `svh` - small viewport height, представляет высоту области просмотра, когда пользовательский интерфейс адресной строки еще не уменьшил свой размер. svh отвечает за то содержимое страницы, которое вы будете видеть, когда интерфейс адресной строки растянут до максимума.
+- `lvh` - large viewport height, представляет высоту области просмотра после того, как пользовательский интерфейс адресной строки уменьшил свой размер. lvh отвечает за то содержимое страницы, когда пользовательский интерфейс сжат до минимума.
+- `dvh` - dynamic viewport height - использует любое из значений svh или lvh в зависимости от того, уменьшен ли интерфейс адресной строки. dvh просчитывает переходные состояния между максимальным и минимальным размером UI в браузере.
+- `svw, lvw, dvw` - такая же история для ширины области просмотра
+- `svmin, lvmin, dvmin` - аналог `vmin`, `vmax`
+
+Однако классическую проблему со скроллбаром новые единицы так и не решили - 
+`100svw` = `100dvw` = `100lvw` = `100vw`
+
+<Accordion summary="Решение проблемы со скроллбаром">
+
+```css
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
+/* 100vw не вызовет появление горизонтального скролла */
+.full-width {
+  width: 100vw;
+}
+```
+
+либо
+```css
+body {
+  margin: 0;
+  container-type: inline-size;
+}
+
+.full-width {
+  width: 100vw; /* fallback for older browsers */
+  width: 100cqw; /* 100cqw учитывет сколлбар */
+}
+```
+
+</Accordion>
+
+
+<h3 id="container-based">Зависящие от размера блока</h3>
+
+Можно использовать единицы измерения, которые будут зависить от размера блока
+
+- `cqw`: 1% of a query container's width
+- `cqh`: 1% of a query container's height
+- `cqi`: 1% of a query container's inline size
+- `cqb`: 1% of a query container's block size
+- `cqmin`: The smaller value of either cqi or cqb
+- `cqmax`: The larger value of either cqi or cqb
+
+Чтобы использовать эти единицы измерения, нужно задать `container-type` у родительского контейнера:
+
+<Accordion summary="Объяснение container-type">
+  <img className='w-full max-w-lg' src="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/Basic_concepts_of_logical_properties_and_values/mdn-horizontal.png"/>
+  <img className='w-full max-w-lg' src="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/Basic_concepts_of_logical_properties_and_values/mdn-vertical.png"/>
+</Accordion>
+
+```css
+.container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+.container-child {
+  width: 100cqw; /* всегда будет того же размера, что и my-container */
+}
+```
+
+`cqw` всегда зависит от ширины контейнера, даже если есть вложенность.
+
+```html
+<div className="container">
+  <div className="container-inner">
+    <div className="container-child">
+      Hi
+    </div>
+  </div>
+</div>
+```
+
+```css
+.container {
+  width: 400px;
+  height: 400px;
+  background: blueviolet;
+  container-type: inline-size;
+  container-name: card;
+}
+
+.container-inner {
+  width: 300px;
+}
+
+.container-child {
+  width: 100cqw; /* 400px, а не 300px */
+  height: 40px;
+  background: red;
+}
+
+```
+
+Можно использовать в медиазапросах:
+
+```css
+@container (min-width: 400px) { /* Если ширина ближайшего контейнера больше 400px */
+  .card h2 {
+    font-size: 2em;
+  }
+}
+
+@container card (min-width: 400px) { /* Если ширина контейнера с именем card больше 400px */
+  .card h2 {
+    font-size: 2em;
+  }
+}
+```
+
+<h3 id="aspect-ratio-based">Зависящие от соотношения сторон</h3>
+
+`aspect-ratio` - соотношение ширины к высоте, например 1 / 1 - квадрат, а 16 / 9 - прямоугольник
+
+Можно использовать в медиазапросах, для этого есть `min-aspect-ratio`, `max-aspect-ratio`
+
+```css
+@media screen and (min-aspect-ratio: 16/10) {
+  /* something for wide screens */
+}
+```
+
+<h2 id="selectors">Селекторы</h2>
+
+```css
+/* По id */
+#foo {}
+
+/* По классу */
+.bar {}
+
+/* По наличию аттрибута */
+.input[type]
+
+/* По значению аттрибута */
+.input[type="submit"]
+
+/* Потомок с классом .bar  внетри элемента с классом .foo */
+.foo .bar {}
+
+/* Элемент с классом .foo И классом .bar */
+.foo.bar {}
+
+/* Непосредственная вложенность - .bar может быть только на первом уровне вложенности */
+.foo > .bar {}
+
+/* Стили для .bar, если он расположен сразу после .foo (сосед) */
+.foo + .bar {}
+
+/* Стили для любого .bar, если он расположен после .foo (но не обязательно сосед)*/
+.foo ~ .bar {}
+
+```
+
+<h2 id="pseudo-classes">Псевдоклассы</h2>
+
+Псевдокласс - ключевое слово, добавленное к селектору для уточнения его состояния.
+
+```css
+selector:pseudo-class {
+  property: value;
+}
+```
+
+Самые полезные:
+
+- `:hover` - при наведении
+- `:focus` - при фокусе (tab)
+- `:focus-within` - при фокусе этого элемента или его детей
+- `:active` - при активации, например при зажатии ЛКМ
+- `:checked` - для выбранных `<input type="radio">`, `<input type="checkbox">` или `<option>` внутри `<select>`
+- `:disabled` - для кнопок
+- `:empty` - когда у элемент пуст (нет children), можно применить `.element:empty { display: none }` вместо условного рендеринга 
+- `:first-child` - первый ребенок своего родителя
+- `:first-of-type` - первый ребенок такого типа, например первый `div`
+- `:last-child` - последний ребенок своего родителя
+- `:last-of-type` - последний ребенок такого типа, например последний `div`
+- `:nth-child()` - какой-то конкетный ребенок (1-й, второй, третий, четный, нечетный)
+- `:nth-of-type()` - какой-то конкетный элемент такого типа
+- `:only-child` - единственный ребенок
+- `:only-of-type` - единственный элемент такого типа
+- `:valid`, `:optional`, `:required` - для валидации форм
+- `:visited` - для посещенных ссылок, рудимент если честно
+
+- `:is()` - позволяет проще писать сложный CSS
+
+```css
+.card h1,
+.card h2,
+.card h3 {
+  color: black;
+}
+
+.card :is(h1, h2, h3) {
+  color: black;
+}
+
+a:hover,
+a:focus {
+  color: purple;
+}
+
+a:is(:hover, :focus) {
+  color: purple;
+}
+
+```
+
+- `:where()` похож на :is, но позволяет убить специфичность, идеально для reset
+
+- `:has()` - позволяет проверить наличие у родителя наличие какого-то селектора внутри и выбрать именно родителя
+
+```css
+/* Если в форме есть невалидный инпут - покрась submit кнопку в красный  */
+.my-form:has(input:invalid) button[type="submit"]{
+  background: red;
+}
+```
+
+
+```css
+/*  */
+html:has(.modal.open) {
+  background: red;
+}
+```
+
+<h2 id="pseudo-elements">Псевдоэлементы</h2>
+
+Псевдоэлементы не существуют в HTML разметке, они создаются только с помощью CSS,
+их нельзя создать, выбрать(querySelector-ом) и менять при помощи JS.
+
+`::after` - добавить какой-то контент после элемента (создать псевдоэлемент, который является последним потомком)
+`::before` - до (создать псевдоэлемент, который будет первым потомком)
+`::first-letter` - стилизовать первую букву
+`::first-line` - стилизовать первую линию
