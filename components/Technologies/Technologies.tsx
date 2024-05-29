@@ -46,6 +46,10 @@ const data = [
     items: ["Docker", "Docker dev container", "Heroku", "GitHub Actions", "k8s"]
   },
   {
+    category: 'Testing',
+    items: ["Vitest", "React Testing Library", "Jest", "Mocha", "Cypress"],
+  },
+  {
     category: 'Other',
     items: ["Webhooks", "Puppeteer", "Cheerio", "Node.js workers", "Telegram bots", "Ruby on Rails", "Python"]
   },

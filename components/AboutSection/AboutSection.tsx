@@ -12,10 +12,10 @@ const AboutSection = () => {
   return (
     <section className={classNames("flex flex-col relative", styles.wrapper)}>
       <div className="flex flex-col">
-        <span className="flex items-center gap-2">
+        {/* <span className="flex items-center gap-2">
           <div className="rounded-full bg-green size-[0.625rem]" />
           <span className="text-primary font-medium">ищу работу 👋</span>
-        </span>
+        </span> */}
         <h1 className="text-2xl font-primary pt-3">
           Трофимов Евгений
         </h1>

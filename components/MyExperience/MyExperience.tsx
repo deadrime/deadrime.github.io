@@ -24,7 +24,7 @@ const data = [
     companyName: 'Human',
     companyLogo: SvgHuman,
     startYear: 2022,
-    endYear: undefined,
+    endYear: 2024,
     shortDescription: <>
       <p>
         <strong>HumanIPO</strong> — американский стартап, основная идея которого это дать возможность любому человеку выпустить свой токен (акции),
