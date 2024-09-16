@@ -1,0 +1,40 @@
+export const data = {
+  title: "Hight Order Component in typescript",
+  description: "",
+  slug: 'react-ts-hoc',
+  publishedTime: '2024-09-08',
+  topics: [
+    "react",
+    "typescript",
+  ],
+}
+
+<h4>Hight Order Component in typescript</h4>
+
+```ts
+import React, { useState, useEffect } from 'react';
+
+type WithDataProps = {
+  data: string;
+};
+
+export function withExtraData<P>(
+  WrappedComponent: React.ComponentType<P & WithDataProps>
+) {
+  const ComponentWithExtraData = (props: P) => {
+    const [data, setData] = useState<string | null>(null);
+
+    useEffect(() => {
+      const myData = await loadMyData();
+      setData(myData);
+    }, [])
+
+    if (!data) {
+      return <span>Loading...</span>
+    }
+
+    return <WrappedComponent {...props} data={data} />;
+  };
+  return ComponentWithExtraData;
+}
+```

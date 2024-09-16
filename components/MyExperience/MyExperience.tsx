@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 import Tag from '../Tag/Tag';
 import { capitalize } from '@/helpers/capitalize';
 import SvgHuman from '@/svgComponents/Human';
+import SvgStorm from '@/svgComponents/Storm';
 import SvgSber from '@/svgComponents/Sber';
 import SvgFrogogo from '@/svgComponents/Frogogo';
 import SvgItcanfly from '@/svgComponents/Itcanfly';
@@ -18,8 +19,23 @@ import SvgOther from '@/svgComponents/Other';
 import Accordion from '../Accordion/Accordion';
 import SvgChartjs from '@/svgComponents/Chartjs';
 
-
 const data = [
+  {
+    companyName: 'Storm',
+    companyLogo: SvgStorm,
+    startYear: 2024,
+    endYear: undefined,
+    shortDescription: <>
+      <p>
+        <strong>Storm Trade</strong> — первый и один из крупнейших DEX в сети TON c прямой интеграция в Telegram (TMA).
+        Работает при помощи динамического АММ, предоставляет возможность торговать огромным количеством активов, в том числе с использованием плеча.
+      </p>
+      <p>
+        Я пришел в команду на стадии активного развития, ребятам нужен был Fullstack для разработки и поддержки основной апки, бота и внутренних сервисов.
+      </p>
+    </>,
+    technologies: ['react', 'typescript', 'node.js', 'nest.js', 'graphql', 'apollo', 'redis', 'docker', 'k8s', 'TON'],
+  },
   {
     companyName: 'Human',
     companyLogo: SvgHuman,
@@ -32,7 +48,7 @@ const data = [
       </p>
       <p>
         Когда я пришел, нужно было провести перезапуск. Небольшой командой мы собирали рабочие прототипы приложения,
-        тестировали их на юзерах, показывали инвесторам, искали наиболее удачный концепт
+        тестировали их на юзерах, показывали инвесторам, искали наиболее удачный концепт.
       </p>
     </>,
     moreInfo: <>
@@ -78,7 +94,7 @@ const data = [
         </li>
       </ul>
     </>,
-    technologies: ['react', 'typescript', 'next.js', 'node.js', 'dynamoDB'],
+    technologies: ['react', 'typescript', 'next.js', 'node.js', 'dynamoDB', 'Solana'],
   },
   {
     companyName: 'Sber',
@@ -287,9 +303,9 @@ const MyExperience = () => {
                   </Tag>
                 )}
               </div>
-              <Accordion summary="Подробнее">
+              {work.moreInfo && <Accordion summary="Подробнее">
                 {work.moreInfo}
-              </Accordion>
+              </Accordion>}
             </div>
           </div>
         ))}

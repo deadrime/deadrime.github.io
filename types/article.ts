@@ -25,7 +25,7 @@ export type CreateArticleProps = {
 export type Article = Omit<CreateArticleProps, 'publishedTime' | 'modifiedTime'> & {
   metadata: Metadata & {
     openGraph: OpenGraphArticle
-    jsonLd: WithContext<JsonLdArticle>;
+    jsonLd?: WithContext<JsonLdArticle>;
   };
   component: (props: MDXProps) => JSX.Element;
   publishedTime: number;

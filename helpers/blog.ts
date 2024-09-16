@@ -1,6 +1,7 @@
-import { Article } from "@/types/article";
+import { Article, CreateArticleProps } from "@/types/article";
 import dayjs from "dayjs";
 import fs from 'fs';
+import { MDXProps } from "mdx/types";
 import path from 'path';
 
 const getDirectories = (source: string) =>
@@ -47,16 +48,14 @@ export const getAllTopics = async () => {
   return Array.from(result.values());
 }
 
-export const getArticleBySlug = async (slug: string): Promise<Article> => {
-  const { data, default: component } = await import(`../articles/${slug}/page.mdx`) as typeof import("*.mdx");
-
+export const mapArticleData = async({ component, data }: { data: CreateArticleProps, component: (props: MDXProps) => JSX.Element}): Promise<Article> => {
   const publishedTime = dayjs(data.publishedTime).valueOf();
   const modifiedTime = data?.modifiedTime ? dayjs(data.modifiedTime).valueOf() : undefined;
 
   const article: Article = {
     component,
     image: data.image,
-    slug: data.slug || slug,
+    slug: data.slug,
     description: data.description,
     publishedTime,
     modifiedTime,
@@ -85,4 +84,27 @@ export const getArticleBySlug = async (slug: string): Promise<Article> => {
   }
 
   return article;
+}
+
+export const getArticleBySlug = async (slug: string): Promise<Article> => {
+  const { data, default: component } = await import(`../articles/${slug}/page.mdx`) as typeof import("*.mdx");
+  return mapArticleData({ data, component });
 };
+
+export const getSnippetBySlug = async (slug: string): Promise<Article> => {
+  const { data, default: component } = await import(`../snippets/${slug}/page.mdx`) as typeof import("*.mdx");
+  return mapArticleData({ data, component });
+};
+
+export const getAllSnippets = async () => {
+  const projectDir = process.cwd();
+  const articles = getDirectories(path.join(projectDir, '/snippets'));
+
+  const articlesData = await Promise.all(articles.map(async slug => {
+    const article = await getSnippetBySlug(slug)
+
+    return article
+  }));
+
+  return articlesData.sort((a, b) => b.publishedTime - a.publishedTime);
+}

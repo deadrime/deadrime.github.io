@@ -1,4 +1,4 @@
-import { getAllArticles, getArticleBySlug } from "@/helpers/blog";
+import { getAllArticles, getAllSnippets, getArticleBySlug, getSnippetBySlug } from "@/helpers/blog";
 import { Metadata } from "next";
 import React from "react";
 
@@ -8,8 +8,8 @@ type ArticlePageProps = {
   }
 }
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
-  const article = await getArticleBySlug(params.slug);
+export default async function SnippetPage({ params }: ArticlePageProps) {
+  const article = await getSnippetBySlug(params.slug);
 
   return (
     <>
@@ -27,15 +27,15 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 export async function generateMetadata(
   { params }: ArticlePageProps,
 ): Promise<Metadata> {
-  const article = await getArticleBySlug(params.slug);
+  const article = await getSnippetBySlug(params.slug);
 
   return article.metadata;
 }
 
 export async function generateStaticParams() {
-  const posts = await getAllArticles();
+  const snippets = await getAllSnippets();
 
-  return posts.map((post) => ({
-    slug: post.slug,
+  return snippets.map(({ slug }) => ({
+    slug,
   }))
 }
