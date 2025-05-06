@@ -70,12 +70,13 @@
   }
 
   a {
-    @apply text-primary text-opacity-90;
+    @apply text-primary;
+    --tw-text-opacity: 0.9;
 
     border-block-end: 1px solid;
 
     &:hover {
-      @apply text-opacity-100;
+      --tw-text-opacity: 1;
     }
 
     &:has(> code) {
@@ -96,7 +97,7 @@
     transition: border 0.3s ease;
   }
 
-  a > code {
+  a>code {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
