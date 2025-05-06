@@ -1,7 +1,8 @@
 {
   "extends": [
     "next",
-    "plugin:mdx/recommended"
+    "plugin:mdx/recommended",
+    "plugin:react/recommended"
   ],
   "env": {
     "browser": true,
@@ -15,8 +16,15 @@
     "mdx/language-mapper": {}
   },
   "rules": {
+    "indent": [
+      "error",
+      2
+    ],
     "react-hooks/rules-of-hooks": "warn",
-    "@next/next/no-img-element": "off"
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-unused-vars": "off",
+    "react/prop-types": "off"
   },
   "overrides": [
     {
@@ -43,5 +51,10 @@
         "react/jsx-no-undef": "warn"
       }
     }
-  ]
+  ],
+  "globals": {
+    "NodeJS": true,
+    "JSX": true,
+    "React": true
+  }
 }

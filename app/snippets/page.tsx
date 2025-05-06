@@ -1,9 +1,7 @@
-import { getAllArticles, getAllSnippets } from '@/helpers/blog';
-import { BlogArticle } from '@/components/Article';
+import { getAllSnippets } from '@/helpers/blog';
 import { Metadata } from 'next';
-import { Snippet } from '@/components/Snippet/Snippet';
 import React from 'react';
-import { Test } from './Test';
+import { SnippetsSearch } from '@/components/SnippetsSearch/SnippetsSearch';
 
 export const metadata: Metadata = {
   title: 'Сниппеты - Трофимов Евгений',
@@ -21,17 +19,9 @@ export default async function Home() {
   return (
     <>
       <h1 className="text-2xl font-primary block mb-8">
-        Блог
+        Сниппеты
       </h1>
-      <Test/>
-      <div className='flex flex-col gap-3'>
-        {snippets.map((snippet, index) =>
-          <Snippet
-            key={snippet.slug}
-            snippet={snippet}
-          />
-        )}
-      </div>
+      <SnippetsSearch snippets={snippets.map(({ component, ...rest}) => rest)}/>
     </>
   );
 }
