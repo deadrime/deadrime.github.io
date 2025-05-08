@@ -74,7 +74,7 @@ export default function RootLayout({
             maxWidth: 'calc(1180px + 2rem)',
           }} className="w-full mx-auto px-4 flex items-center h-20">
             <Logo />
-            <nav className="mx-auto gap-8 hidden sm:flex text-body2 font-bold [&>a]:focus-visible:border-b [&>a]:focus-visible:ring-0 [&>a]:focus-visible:rounded-none">
+            <nav className="mx-auto gap-8 hidden sm:flex text-body2 font-bold [&>a]:focus-visible:underline underline-offset-6 [&>a]:focus-visible:outline-8 [&>a]:focus-visible:ring-0 [&>a]:focus-visible:rounded-none">
               <Link href="/#technologies" className="text-secondary">С чем работал</Link>
               <Link href="/#my-experience" className="text-secondary">Опыт работы</Link>
               <Link href="/blog" className="text-secondary">Блог</Link>

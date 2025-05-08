@@ -61,7 +61,7 @@ export const DarkModeToggle = ({
     <button
       className={classNames(
         "opacity-90 relative rounded w-8 h-8 mr-1 flex items-center justify-center cursor-pointer",
-        "focus-within:outline-none focus-within:ring ring-primary ring-offset-2 ring-offset-background",
+        "focus-within:outline-none focus-within:ring-2 ring-primary ring-offset-2 ring-offset-background",
         className
       )}
       onClick={toggleColorMode}

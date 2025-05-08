@@ -117,6 +117,10 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
 
   const hierarchicalHeadings = useMemo(() => getHierarchicalHeadings(headings), [headings]);
 
+  if (hierarchicalHeadings.length === 0) {
+    return null;
+  }
+
   return (
     <div className="mt-4 mb-4">
       <span className='block mb-3 font-semibold text-lg md:text-body2'>СОДЕРЖАНИЕ</span>
