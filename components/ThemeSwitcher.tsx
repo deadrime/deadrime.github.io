@@ -7,7 +7,7 @@ import { CSSProperties, useCallback } from 'react';
 
 const MoonOrSun = animated.svg;
 
-const roundTo = (num: number, decimals = 2) => Math.round((num + Number.EPSILON) * 10 ** decimals) / 10 ** decimals
+const roundTo = (num: number, decimals = 2) => Math.round((num + Number.EPSILON) * 10 ** decimals) / 10 ** decimals;
 
 export const DarkModeToggle = ({
   theme,
@@ -22,7 +22,7 @@ export const DarkModeToggle = ({
   const toggleColorMode = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     onChange(isDark ? 'light' : 'dark');
-  }, [isDark, onChange])
+  }, [isDark, onChange]);
 
   const svgSpring = useSpring({
     transform: isDark ? 'rotate(40deg)' : 'rotate(90deg)',
@@ -60,7 +60,7 @@ export const DarkModeToggle = ({
   return (
     <button
       className={classNames(
-        "opacity-90 relative rounded w-8 h-8 mr-1 flex items-center justify-center",
+        "opacity-90 relative rounded w-8 h-8 mr-1 flex items-center justify-center cursor-pointer",
         "focus-within:outline-none focus-within:ring ring-primary ring-offset-2 ring-offset-background",
         className
       )}
@@ -88,7 +88,7 @@ export const DarkModeToggle = ({
         <animated.circle
           cx="9"
           cy="9"
-          fill="rgb(var(--color-text))"
+          fill="var(--color-text)"
           mask={`url(#moon-mask-${id})`}
           {...sunMoonSpring}
         />
@@ -104,8 +104,8 @@ export const DarkModeToggle = ({
 
             const c = 8; // hypothenuse
 
-            const a = roundTo(centerX + c * Math.cos(angleInRads), 6)
-            const b = roundTo(centerY + c * Math.sin(angleInRads), 6)
+            const a = roundTo(centerX + c * Math.cos(angleInRads), 6);
+            const b = roundTo(centerY + c * Math.sin(angleInRads), 6);
 
             return (
               <animated.circle
@@ -113,7 +113,7 @@ export const DarkModeToggle = ({
                 cx={a}
                 cy={b}
                 r={1.5}
-                fill="rgb(var(--color-text))"
+                fill="var(--color-text)"
                 style={{
                   ...props,
                   transform: transform.to(

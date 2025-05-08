@@ -6,4 +6,4 @@ export const Providers: React.FC<{ children: React.ReactNode }> = ({ children })
       {children}
     </ThemeProvider>
   );
-}
+};

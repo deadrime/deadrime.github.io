@@ -6,11 +6,10 @@ export const data = {
   topics: [
     "react",
     "typescript",
-    "hoc"
   ],
 }
 
-## Component with dynamic tag
+Component with dynamic tag
 
 ```tsx
 export type Prefer<P, T> = P & Omit<T, keyof P>;
@@ -38,11 +37,11 @@ export const Button = <As extends React.ElementType = 'button'>({
 }: DynamicHTMLProps<ButtonProps<As>, As>) => {
   const Tag: React.ElementType = as || 'button';
 
-  return <Tag {...props} className={variant}>{children}</Tag>
-}
+  return <Tag {...props} className={variant}>{children}</Tag>;
+};
 ```
 
-## And with forward ref
+And with forward ref
 
 ```tsx
 // React 🥰
@@ -56,8 +55,8 @@ export const ButtonRaw = <As extends React.ElementType, Ref>(props: DynamicHTMLP
   const { as = 'button', variant, children, ...rest } = props;
   const Tag: React.ElementType = props.as;
 
-  return <Tag {...rest} className={variant} ref={ref}>{children}</Tag>
-}
+  return <Tag {...rest} className={variant} ref={ref}>{children}</Tag>;
+};
 
 const Button = fixedForwardRef(ButtonRaw);
 

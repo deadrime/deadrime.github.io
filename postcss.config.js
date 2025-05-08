@@ -11,8 +11,8 @@ module.exports = {
         'custom-properties': false,
       },
     },
-    'tailwindcss/nesting': {},
-    tailwindcss: {},
+    "@tailwindcss/postcss": {},
+    '@tailwindcss/nesting': 'postcss-nesting',
     autoprefixer: {},
   },
 };

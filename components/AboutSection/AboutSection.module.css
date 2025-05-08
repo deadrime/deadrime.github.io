@@ -1,10 +1,12 @@
+@reference "../../app/app.css";
+
 .wrapper {
   /* 5rem header + 2rem padding y */
   min-height: calc(100vh - 7rem);
   padding-bottom: 5rem;
   justify-content: center;
 
-  @media screen(md) {
+  @media (min-width: theme(--breakpoint-md)) {
     min-height: initial;
     padding-bottom: initial;
     justify-content: start;
@@ -12,7 +14,7 @@
 }
 
 .blobs {
-  --color1: rgb(var(--color-primary));
+  --color1: var(--color-primary);
   --color2: rgba(134, 112, 145, 1);
   --color3: rgba(104, 66, 255, 1);
 
@@ -26,7 +28,7 @@
   width: 100%;
   height: 100%;
 
-  @media screen(sm) {
+  @media (min-width: theme(--breakpoint-sm)) {
     display: flex;
     height: 500px;
     width: 500px;
@@ -36,7 +38,7 @@
 .sloth {
   display: none;
 
-  @media screen(md) {
+  @media (min-width: theme(--breakpoint-md)) {
     display: block;
     position: absolute;
     z-index: 10;

@@ -11,7 +11,7 @@ export const data = {
 
 <h4>Hight Order Component in typescript</h4>
 
-```ts
+```tsx
 import React, { useState, useEffect } from 'react';
 
 type WithDataProps = {
@@ -27,10 +27,10 @@ export function withExtraData<P>(
     useEffect(() => {
       const myData = await loadMyData();
       setData(myData);
-    }, [])
+    }, []);
 
     if (!data) {
-      return <span>Loading...</span>
+      return <span>Loading...</span>;
     }
 
     return <WrappedComponent {...props} data={data} />;

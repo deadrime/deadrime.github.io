@@ -5,7 +5,7 @@ import { Highlight, HighlightProps, PrismTheme, themes } from "prism-react-rende
 import classNames from 'classnames';
 import styles from './CodeSnippet.module.css';
 import { useTheme } from '@/components/ThemeContext';
-import { copyToClipboard } from '@/helpers/copyToClipboard'
+import { copyToClipboard } from '@/helpers/copyToClipboard';
 import SvgTs from '@/svgComponents/Ts';
 import SvgReact from '@/svgComponents/React';
 import SvgJs from '@/svgComponents/Js';
@@ -26,17 +26,18 @@ const codeDarkTheme: PrismTheme = {
     ...themes.oneDark.plain,
     background: 'rgb(18 14 31)',
   }
-}
+};
 
 // TODO: Use prettier?
 export const CodeHighlight: React.FC<CodeHighlightProps> = ({ code, language = 'tsx', highlightedLines, className }) => {
   const { theme } = useTheme();
+
   return (
     <Highlight code={code.trim().replace(/\t/g, '  ')} language={language} theme={theme === 'dark' ? codeDarkTheme : themes.oneLight}>
       {({ style, tokens, getLineProps, getTokenProps }) => (
         <div
           style={style}
-          className={classNames(styles.codeHighlight, className, 'flex overflow-x-auto py-3 font-code')}
+          className={classNames(styles.codeHighlight, className, 'flex overflow-x-auto py-3 font-fira')}
         >
           <div className='w-auto'>
             {tokens.map((line, i) => {
@@ -54,14 +55,14 @@ export const CodeHighlight: React.FC<CodeHighlightProps> = ({ code, language = '
                     <span key={key} {...getTokenProps({ token })} />
                   ))}
                 </div>
-              )
+              );
             })}
           </div>
         </div>
       )}
     </Highlight>
-  )
-}
+  );
+};
 
 type CodeSnippetProps = CodeHighlightProps & HTMLProps<HTMLDivElement> & {
   caption?: string;
@@ -75,11 +76,11 @@ const iconByLanguage: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = 
   js: SvgJs,
   html: SvgHtml,
   css: SvgCss,
-}
+};
 
 export const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language, className, caption, highlightedLines, ...props }) => (
   <div
-    className={classNames(className, styles.codeSnippet, "text-body1 border border-gray-100 dark:border-gray-700 rounded-sm overflow-hidden")}
+    className={classNames(className, styles.codeSnippet, "text-body2 border border-gray-100 dark:border-gray-700 rounded-sm overflow-hidden")}
     data-lang={language}
     data-caption={caption}
     {...props}
@@ -91,7 +92,7 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language, classN
       )}>
       {iconByLanguage[language] ? React.createElement(iconByLanguage[language], { className: "w-5" }) : null}
       {caption}
-      <button className='ml-auto'>
+      <button className='ml-auto cursor-pointer'>
         <SvgCopy onClick={() => copyToClipboard(code)} />
       </button>
     </div>
@@ -102,6 +103,6 @@ export const CodeSnippet: React.FC<CodeSnippetProps> = ({ code, language, classN
       highlightedLines={highlightedLines}
     />
   </div>
-)
+);
 
 export default CodeSnippet;

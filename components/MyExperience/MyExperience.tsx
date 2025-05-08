@@ -261,7 +261,7 @@ const data = [
     </>,
     technologies: ['vue', 'elementUI', 'node.js', 'express', 'koa', 'postgreSQL'],
   }
-]
+];
 
 const MyExperience = () => {
   return (
@@ -311,7 +311,7 @@ const MyExperience = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default MyExperience;

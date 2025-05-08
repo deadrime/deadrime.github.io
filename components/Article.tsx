@@ -17,7 +17,7 @@ export const BlogArticle: React.FC<BlogArticleProps> = ({
           loading='lazy'
           src={article.image}
           alt={article.title}
-          className='aspect-[38/20] bg-slate-100/10 rounded-lg mb-3 overflow-hidden object-cover object-center w-full'
+          className='aspect-38/20 bg-slate-100/10 rounded-lg mb-3 overflow-hidden object-cover object-center w-full'
         />
       )}
       <h3 className="mt-0 mb-3 p-0 text-md leading-tight">
@@ -34,4 +34,4 @@ export const BlogArticle: React.FC<BlogArticleProps> = ({
       Читать →
     </Link>
   </article>
-)
+);

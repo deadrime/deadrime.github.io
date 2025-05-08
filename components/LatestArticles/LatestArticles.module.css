@@ -1,9 +1,11 @@
+@reference "../../app/app.css";
+
 .articlesWrapper {
   display: grid;
   gap: 1.25rem;
   grid-template-columns: 1fr;
 
-  @media screen(md) {
+  @media (min-width: theme(--breakpoint-md)) {
     grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   }
 }

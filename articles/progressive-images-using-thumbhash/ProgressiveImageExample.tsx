@@ -23,7 +23,7 @@ const ProgressiveImageExample: React.FC<LazyImageProps> = () => {
   const [loading, setLoading] = useState(false);
 
   const runDemo = useCallback(async () => {
-    const { src: base64 } = thumbToImageSrc(thumbHash)
+    const { src: base64 } = thumbToImageSrc(thumbHash);
     setImgSrc(base64);
     setLoading(true);
     const image = await loadImage(originalImageSrc);

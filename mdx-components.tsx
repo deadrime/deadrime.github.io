@@ -1,4 +1,4 @@
-import type { MDXComponents } from 'mdx/types'
+import type { MDXComponents } from 'mdx/types';
 import { HTMLProps } from 'react';
 import CodeDemo from './components/mdxComponents/CodeDemo/CodeDemo';
 import CodeSnippet from './components/mdxComponents/CodeSnippet/CodeSnippet';
@@ -19,13 +19,13 @@ const CodeElement: React.FC<CodeElementProps> = ({ children, className, filename
     const language = className.split('language-')[1];
     const highlightedLines = calculateLinesToHighlight(hl);
 
-    return <CodeSnippet caption={caption || filename} code={String(children)} language={language} highlightedLines={highlightedLines} />
+    return <CodeSnippet caption={caption || filename} code={String(children)} language={language} highlightedLines={highlightedLines} />;
   }
 
   return (
     <code className={className}>{children}</code>
-  )
-}
+  );
+};
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -36,5 +36,5 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     CodeDemo: CodeDemo,
     CodePlayground: CodePlayground,
     blockquote: Blockquote,
-  }
+  };
 }

@@ -1,9 +1,9 @@
 "use client";
-import { Article } from '@/types/article'
-import { useFuzzySearchList } from '@nozbe/microfuzz/react'
-import { SnippetPreview } from '../Snippet/SnippetPreview'
-import { useState } from 'react'
-import useDebounce from '@/hooks/useDebounce'
+import { Article } from '@/types/article';
+import { useFuzzySearchList } from '@nozbe/microfuzz/react';
+import { SnippetPreview } from '../Snippet/SnippetPreview';
+import { useState } from 'react';
+import useDebounce from '@/hooks/useDebounce';
 import { TextInput } from '../TextInput/TextInput';
 
 type SnippetsSearchProps = {
@@ -18,7 +18,7 @@ export const SnippetsSearch: React.FC<SnippetsSearchProps> = ({
 
   useDebounce(() => {
     setDebouncedQuery(query);
-  }, 200, [query])
+  }, 200, [query]);
 
   const filteredList = useFuzzySearchList({
     list: snippets,
@@ -29,7 +29,7 @@ export const SnippetsSearch: React.FC<SnippetsSearchProps> = ({
       item,
       score, matches: [titleHighlightRanges, descriptionHighlightRanges]
     }) => ({ item, titleHighlightRanges, descriptionHighlightRanges })
-  })
+  });
   
   const noResults = debouncedQuery.length > 0 && filteredList.length === 0;
 
@@ -39,12 +39,12 @@ export const SnippetsSearch: React.FC<SnippetsSearchProps> = ({
         value={query}
         placeholder="Поиск..."
         onChange={e => setQuery(e.target.value)}
-        className="mb-4"
+        className="mb-6"
       />
       {noResults && <div>
         Ничего не найдено
       </div>}
-      <div className='flex flex-col gap-3'>
+      <div className='flex flex-col gap-3 w-max'>
         {filteredList.map(({ item, titleHighlightRanges, descriptionHighlightRanges }) => 
           <SnippetPreview
             key={item.slug}
@@ -55,5 +55,5 @@ export const SnippetsSearch: React.FC<SnippetsSearchProps> = ({
         )}
       </div>
     </div>
-  )
-}
+  );
+};

@@ -11,4 +11,4 @@ export const Snippet: React.FC<SnippetPreviewProps> = ({
   <article className='text-balance'>
     {createElement(snippet.component)}
   </article>
-)
+);

@@ -26,7 +26,7 @@ export async function generateImageThumb(img: HTMLImageElement) {
   canvas.width = w;
   canvas.height = h;
   if (!c) {
-    throw new Error('Canvas error')
+    throw new Error('Canvas error');
   }
   c.drawImage(img, 0, 0, w, h);
   // Достаем массив пикселей

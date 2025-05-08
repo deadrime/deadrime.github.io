@@ -36,8 +36,8 @@ export const Button = <As extends React.ElementType = 'button'>({
 }: DynamicHTMLProps<ButtonProps<As>, As>) => {
   const Tag: React.ElementType = as || 'button';
 
-  return <Tag {...props}>{children}</Tag>
-}
+  return <Tag {...props}>{children}</Tag>;
+};
 
 function fixedForwardRef<T, P = {}>(
   render: (props: P, ref: React.Ref<T>) => React.ReactNode
@@ -50,8 +50,8 @@ export const ButtonRaw = <As extends React.ElementType, Ref>(props: DynamicHTMLP
   const { as = 'button', variant, children, ...rest } = props;
   const Tag: React.ElementType = props.as;
 
-  return <Tag {...rest} className={variant} ref={ref}>{children}</Tag>
-}
+  return <Tag {...rest} className={variant} ref={ref}>{children}</Tag>;
+};
 
 const Button2 = fixedForwardRef(ButtonRaw);
 
@@ -61,7 +61,7 @@ export const Test = () => {
 
   console.log({
     ref
-  })
+  });
 
-  return <Button2 as="a" ref={ref} variant='primary'>Test</Button2>
-}
+  return <Button2 as="a" ref={ref} variant='primary'>Test</Button2>;
+};

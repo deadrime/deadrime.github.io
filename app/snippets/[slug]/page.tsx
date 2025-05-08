@@ -1,4 +1,4 @@
-import { getAllArticles, getAllSnippets, getArticleBySlug, getSnippetBySlug } from "@/helpers/blog";
+import { getAllSnippets, getSnippetBySlug } from "@/helpers/blog";
 import { Metadata } from "next";
 import React from "react";
 
@@ -13,7 +13,7 @@ export default async function SnippetPage({ params }: ArticlePageProps) {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col justify-between">
+      <div className="flex flex-col">
         {React.createElement(article.component)}
       </div>
       {article.metadata && <script
@@ -37,5 +37,5 @@ export async function generateStaticParams() {
 
   return snippets.map(({ slug }) => ({
     slug,
-  }))
+  }));
 }

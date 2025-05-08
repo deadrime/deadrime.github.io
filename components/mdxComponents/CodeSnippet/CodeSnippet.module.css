@@ -30,13 +30,13 @@
       width: var(--sb-size);
       height: var(--sb-size);
     }
-    
+
     &::-webkit-scrollbar-track {
       background: var(--sb-track-color);
       border-radius: 8px;
       display: none;
     }
-    
+
     &::-webkit-scrollbar-thumb {
       transition: all .2s;
       background: var(--sb-thumb-color);

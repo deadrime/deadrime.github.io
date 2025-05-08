@@ -16,18 +16,20 @@ export const SnippetPreview: React.FC<SnippetPreviewProps> = ({
   descriptionHighlightRanges,
 }) => {
   return (
-    <Link href={`/snippets/${snippet.slug}`} className='text-balance flex flex-col gap-2'>
-      <span className='text-body1 text-primary'>
+    <Link href={`/snippets/${snippet.slug}`} className='group text-balance flex flex-col gap-2 focus-visible:ring-transparent'>
+      <span className='text-body1 text-primary self-start group-focus-within:underline underline-offset-6'>
         <Highlight
-          className="text-text bg-primary/50"
-          style={{}}
+          className="bg-primary/40"
+          style={{
+            color: 'hsl(from var(--color-primary) calc(h + 5) s l)'
+          }}
           text={snippet.title}
           ranges={titleHighlightRanges}
         />
       </span>
       <span className='text-body2 text-text'>
         <Highlight
-          className="text-text bg-primary/50"
+          className="bg-primary/40"
           style={{}}
           text={snippet.description}
           ranges={descriptionHighlightRanges}
@@ -35,9 +37,9 @@ export const SnippetPreview: React.FC<SnippetPreviewProps> = ({
       </span>
       <div className='flex gap-1'>
         {snippet.topics.map(tag => 
-          <Tag variant="outlined" size="small" key={tag}>{tag}</Tag>
+          <Tag key={tag} variant="outlined" size="small"  className='pointer-events-none capitalize'>{tag}</Tag>
         )}
       </div>
     </Link>
-  )
-}
+  );
+};

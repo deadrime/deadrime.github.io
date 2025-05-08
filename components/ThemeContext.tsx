@@ -63,8 +63,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     <ThemeContext.Provider value={{ theme: selectedTheme, changeTheme: handleThemeChange }}>
       {children}
     </ThemeContext.Provider>
-  )
-}
+  );
+};
 
 export const useTheme = () => {
   const { theme, changeTheme } = useContext(ThemeContext);
@@ -72,5 +72,5 @@ export const useTheme = () => {
   return {
     theme,
     changeTheme
-  }
-}
+  };
+};

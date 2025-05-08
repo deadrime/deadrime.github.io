@@ -34,7 +34,7 @@ const Accordion: React.FC<DetailsProps> = ({ summary, children, ...props }) => {
         {children}
       </span>
     </details>
-  )
-}
+  );
+};
 
 export default Accordion;

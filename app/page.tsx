@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     // username: 'deadrime',
     // gender: 'male'
   }
-}
+};
 
 const jsonLd = {
   "@context": "http://schema.org/",
@@ -27,8 +27,7 @@ const jsonLd = {
   "name": "Трофимов Евгений",
   "jobTitle": "Fullstack developer",
   "sameAs": ["deadrime"]
-}
-
+};
 
 export default async function Home() {
   return (
