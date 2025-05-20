@@ -1,0 +1,163 @@
+4:I[5613,[],""]
+5:I[1778,[],""]
+6:I[1769,["250","static/chunks/250-3faa0e36002daf98.js","314","static/chunks/314-64afcbd10bc49ae0.js","185","static/chunks/app/layout-b0cc5591e7303032.js"],"ThemeProvider"]
+7:I[5250,["911","static/chunks/d2af3f89-6e209f03df9fa45c.js","252","static/chunks/252-2ea642cf9e9db853.js","250","static/chunks/250-3faa0e36002daf98.js","873","static/chunks/873-a2ff44a899b97394.js","678","static/chunks/app/snippets/%5Bslug%5D/layout-f99b297c2ebc508c.js"],""]
+8:I[5630,["250","static/chunks/250-3faa0e36002daf98.js","314","static/chunks/314-64afcbd10bc49ae0.js","185","static/chunks/app/layout-b0cc5591e7303032.js"],""]
+0:["2ozi6BZ0huEpiCTScf0W1",[[["",{"children":["snippets",{"children":[["slug","use-paginated-data","d"],{"children":["__PAGE__?{\"slug\":\"use-paginated-data\"}",{}]}]}]},"$undefined","$undefined",true],["",{"children":["snippets",{"children":[["slug","use-paginated-data","d"],{"children":["__PAGE__",{},["$L1","$L2",null]]},[null,"$L3",null]]},["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","snippets","children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","styles":[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/f4230e59f7f9dce4.css","precedence":"next","crossOrigin":""}]]}]]},[null,["$","html",null,{"lang":"en","suppressHydrationWarning":true,"children":["$","body",null,{"className":"__variable_1e6e46 __variable_47de37 __variable_9963e4 min-h-screen flex flex-col gap-4","children":[["$","script",null,{"id":"theme-hydration","dangerouslySetInnerHTML":{"__html":"\n!function() {\n  const preferredDarkModeBySystem = window.matchMedia(\"(prefers-color-scheme: dark)\").matches;\n  const savedTheme = localStorage.getItem(\"selectedTheme\");\n  const theme = savedTheme ? savedTheme : preferredDarkModeBySystem ? 'dark' : 'light';\n  document.documentElement.setAttribute('data-theme', theme);\n}();\n"}}],["$","$L6",null,{"children":[["$","header",null,{"style":{"maxWidth":"calc(1180px + 2rem)"},"className":"w-full mx-auto px-4 flex items-center h-20","children":[["$","$L7",null,{"href":"/","className":"font-fira text-md","children":["<","Zhenya",">"]}],["$","nav",null,{"className":"mx-auto gap-8 hidden sm:flex text-body2 font-bold [&>a]:focus-visible:underline underline-offset-6 [&>a]:focus-visible:outline-8 [&>a]:focus-visible:ring-0 [&>a]:focus-visible:rounded-none","children":[["$","$L7",null,{"href":"/#technologies","className":"text-secondary","children":"С чем работал"}],["$","$L7",null,{"href":"/#my-experience","className":"text-secondary","children":"Опыт работы"}],["$","$L7",null,{"href":"/blog","className":"text-secondary","children":"Блог"}],["$","$L7",null,{"href":"/snippets","className":"text-secondary","children":"Сниппеты"}]]}],["$","$L8",null,{"className":"ml-auto sm:ml-4"}]]}],["$","main",null,{"style":{"maxWidth":"calc(1180px + 2rem)"},"className":"w-full mx-auto p-4","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":[["$","title",null,{"children":"404: This page could not be found."}],["$","div",null,{"style":{"fontFamily":"system-ui,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"","height":"100vh","textAlign":"center","display":"flex","flexDirection":"column","alignItems":"center","justifyContent":"center"},"children":["$","div",null,{"children":[["$","style",null,{"dangerouslySetInnerHTML":{"__html":"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}],["$","h1",null,{"className":"next-error-h1","style":{"display":"inline-block","margin":"0 20px 0 0","padding":"0 23px 0 0","fontSize":24,"fontWeight":500,"verticalAlign":"top","lineHeight":"49px"},"children":"404"}],["$","div",null,{"style":{"display":"inline-block"},"children":["$","h2",null,{"style":{"fontSize":14,"fontWeight":400,"lineHeight":"49px","margin":0},"children":"This page could not be found."}]}]]}]}]],"notFoundStyles":[],"styles":null}]}],["$","footer",null,{"style":{"maxWidth":"calc(1180px + 2rem)"},"className":"w-full mx-auto p-4 pt-8 mt-auto flex justify-between sm:items-center flex-col sm:flex-row gap-3","children":[["$","$L7",null,{"href":"/","className":"font-fira text-md","children":["</","Zhenya",">"]}],["$","span",null,{"className":"text-body2 text-secondary","children":["Made with ❤️ by me. Designed by ",["$","a",null,{"href":"https://arina.pw/","target":"_blank","rel":"noreferrer","children":"@rina"}],"."]}],["$","span",null,{"className":"text-neutral text-body2","children":"© Трофимов Евгений, 2024"}]]}]]}]]}]}],null]],[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/a0f667c0efa3a60d.css","precedence":"next","crossOrigin":""}]],"$L9"]]]]
+a:I[943,["911","static/chunks/d2af3f89-6e209f03df9fa45c.js","252","static/chunks/252-2ea642cf9e9db853.js","250","static/chunks/250-3faa0e36002daf98.js","873","static/chunks/873-a2ff44a899b97394.js","678","static/chunks/app/snippets/%5Bslug%5D/layout-f99b297c2ebc508c.js"],""]
+d:I[378,["911","static/chunks/d2af3f89-6e209f03df9fa45c.js","252","static/chunks/252-2ea642cf9e9db853.js","250","static/chunks/250-3faa0e36002daf98.js","873","static/chunks/873-a2ff44a899b97394.js","678","static/chunks/app/snippets/%5Bslug%5D/layout-f99b297c2ebc508c.js"],"PaginationExample"]
+b:T5eb,import { useCallback, useEffect, useState } from "react";
+
+export type PaginatedResponse<Data, ExtraPayload extends Record<string, unknown>> = {
+  data: Data[];
+  totalCount: number;
+  extra?: ExtraPayload
+}
+
+export type PaginationParams = {
+  limit: number;
+  offset: number;
+};
+
+export type UsePaginatedDataProps<Data, ExtraPayload extends Record<string, unknown>> = {
+  queryFn: (params: PaginationParams) => Promise<PaginatedResponse<Data, ExtraPayload>>;
+  limit?: number;
+  initialOffset?: number;
+};
+
+export const usePaginatedData = <Data, ExtraPayload extends Record<string, unknown>>(params: UsePaginatedDataProps<Data, ExtraPayload>) => {
+  const { queryFn, limit = 10, initialOffset = 0 } = params;
+  const [offset, setOffset] = useState(initialOffset);
+  const [pages, setPages] = useState<PaginatedResponse<Data, ExtraPayload>[]>([]);
+  const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
+
+  const loadMore = useCallback(async () => {
+    setIsFetchingNextPage(true);
+    const nextData = await queryFn({
+      limit,
+      offset,
+    });
+
+    setPages(prev => [...prev, nextData]);
+    setOffset(offset + limit);
+    setIsFetchingNextPage(false);
+  }, [queryFn, offset, limit]);
+
+  useEffect(() => {
+    loadMore();
+  }, []);
+
+  const data = pages.flatMap(page => page.data);
+  const totalCount = pages[0]?.totalCount || null;
+  const hasNextPage = totalCount !== null && data.length < totalCount;
+
+  return {
+    data,
+    loadMore,
+    hasNextPage,
+    isFetchingNextPage,
+  };
+};
+c:T555,const CurrentUserBadge = () => (
+  <span className="inline-flex px-2 py-[2px] bg-secondary text-body2 text-text rounded-lg">Me</span>
+);
+
+export const PaginationExample = () => {
+  const {
+    data,
+    extra,
+    hasNextPage,
+    isFetchingNextPage,
+    loadMore,
+  } = usePaginatedData({
+    queryFn: async ({ limit, offset }) => {
+      const result = await getContacts(limit, offset);
+      console.log(result);
+      return result;
+    },
+    limit: 5,
+  });
+
+  const currentUserContact = extra?.currentUserContact;
+
+  return (
+    <div className="flex flex-col gap-2">
+      {extra && (
+        <span className="text-body1">Current user: {extra.currentUserContact.firstName} {extra.currentUserContact.lastName}</span>
+      )}
+      {data.map(contact => {
+        const { firstName, lastName, id,phoneNumber  } = contact;
+        const isMe = currentUserContact?.id === id;
+
+        return (
+          <div key={id} className="flex flex-col">
+            <span className="text-body2">{firstName} {lastName} {isMe && <CurrentUserBadge />}</span>
+            <span className="text-body2">{phoneNumber}</span>
+          </div>
+        );
+      })}
+      {isFetchingNextPage && <span>Загрузка...</span>}
+      {hasNextPage && 
+        <button disabled={isFetchingNextPage} onClick={loadMore}>Загрузить еще</button>
+      }
+    </div>
+  );
+};
+
+e:T5c9,import { useInfiniteQuery } from '@tanstack/react-query';
+
+export type PaginatedResponse<Data, ExtraPayload extends Record<string, unknown>> = {
+  data: Data[];
+  totalCount: number;
+} & ExtraPayload;
+
+export type PaginationParams = {
+  limit: number;
+  offset: number;
+};
+
+export type UsePaginatedDataProps<Data, ExtraPayload extends Record<string, unknown>> = {
+  queryKey: string[];
+  queryFn: (params: PaginationParams) => Promise<PaginatedResponse<Data, ExtraPayload>>;
+  limit?: number;
+  initialPageParam?: number;
+  enabled?: boolean;
+};
+
+export const usePaginatedData = <Data, ExtraPayload extends Record<string, unknown>>({
+  queryKey,
+  queryFn,
+  limit = 6,
+  initialPageParam = 0,
+  enabled = true,
+}: UsePaginatedDataProps<Data, ExtraPayload>) => {
+  const { data, ...rest } = useInfiniteQuery({
+    queryKey,
+    queryFn: ({ pageParam = initialPageParam }) =>
+      queryFn({
+        limit,
+        offset: pageParam,
+      }),
+    enabled,
+    initialPageParam,
+    getNextPageParam: (curr, all, lastPageParam) => {
+      return lastPageParam + limit;
+    },
+  });
+
+  const allData = data?.pages?.reduce<Data[]>((acc, curr) => [...acc, ...(curr.data || [])], []) || [];
+  const lastPage = data?.pages?.[data?.pages?.length - 1] || { totalCount: 0, data: null };
+  const { totalCount, data: _data, ...extraPayload } = lastPage;
+
+  return {
+    ...(extraPayload as ExtraPayload),
+    ...rest,
+    hasNextPage: allData?.length < totalCount,
+    data: allData,
+  };
+};
+2:[["$","div",null,{"className":"flex flex-col","children":[["$","pre",null,{"children":["$","$La",null,{"caption":"$undefined","code":"$b","language":"ts","highlightedLines":[]}]}],"\n",["$","p",null,{"children":"Пример ответа от сервера:"}],"\n",["$","p",null,{"children":["$","code",null,{"className":"$undefined","children":"GET /contacts?limit=5&offset=0"}]}],"\n",["$","pre",null,{"children":["$","$La",null,{"caption":"$undefined","code":"{\n  \"data\": [\n    {\n      \"phoneNumber\": \"579-620-1008 x091\",\n      \"firstName\": \"Daron\",\n      \"lastName\": \"Beier\",\n      \"id\": \"681b3a4c1f6fb92e663aed96\"\n    },\n    {\n      \"phoneNumber\": \"648-821-9569 x43505\",\n      \"firstName\": \"Arjun\",\n      \"lastName\": \"Huels\",\n      \"id\": \"681b3a4c1f6fb92e663aed97\"\n    },\n    {\n      \"phoneNumber\": \"(976) 309-4472 x6703\",\n      \"firstName\": \"Taryn\",\n      \"lastName\": \"Haley\",\n      \"id\": \"681b3a4c1f6fb92e663aed98\"\n    },\n    {\n      \"phoneNumber\": \"(570) 564-0845 x804\",\n      \"firstName\": \"Rylan\",\n      \"lastName\": \"Bechtelar\",\n      \"id\": \"681b3a4c1f6fb92e663aed99\"\n    },\n    {\n      \"phoneNumber\": \"425-254-1355 x157\",\n      \"firstName\": \"Stephen\",\n      \"lastName\": \"Cartwright\",\n      \"id\": \"681b3a4c1f6fb92e663aed9a\"\n    }\n  ],\n  \"totalCount\": 38,\n  \"extra\": {\n    \"currentUserContact\": {\n      \"phoneNumber\": \"(570) 564-0845 x804\",\n      \"firstName\": \"Rylan\",\n      \"lastName\": \"Bechtelar\",\n      \"id\": \"681b3a4c1f6fb92e663aed99\"\n    }\n  }\n}\n","language":"json","highlightedLines":[]}]}],"\n",["$","p",null,{"children":"Пример использования:"}],"\n",["$","pre",null,{"children":["$","$La",null,{"caption":"$undefined","code":"$c","language":"tsx","highlightedLines":[]}]}],"\n",["$","div",null,{"className":"p-4 border-1 border-gray-100 dark:border-gray-700 rounded-lg flex flex-col items-center justify-center bg-[#fafafa] dark:bg-transparent","children":["$","$Ld",null,{}]}],"\n",["$","p",null,{"children":["Используя ",["$","a",null,{"href":"https://tanstack.com/query/latest","rel":"nofollow","target":"_blank","children":["$","code",null,{"className":"$undefined","children":"@tanstack/react-query"}]}]]}],"\n",["$","pre",null,{"children":["$","$La",null,{"caption":"$undefined","code":"$e","language":"ts","highlightedLines":[]}]}]]}],["$","script",null,{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@type\":\"Article\",\"@context\":\"https://schema.org\",\"author\":{\"@type\":\"Person\",\"name\":\"Трофимов Евгений\",\"jobTitle\":\"Fullstack developer\",\"sameAs\":\"deadrime\",\"gender\":\"male\"}}"}}]]
+f:["slug","use-paginated-data","d"]
+3:["$","div",null,{"className":"flex flex-col","children":[["$","$L7",null,{"href":"/snippets","className":"mb-8 block self-start","children":"← Сниппеты"}],["$","div",null,{"children":[["$","section",null,{"className":"overflow-hidden","children":["$","header",null,{"className":"py-8 border-t-[6px] border-b-2 border-details md:mb-10","children":[["$","h1",null,{"className":"text-2xl font-primary block mb-4","children":"usePaginatedData"}],["$","h2",null,{"className":"font-primary text-md font-normal block mb-8 text-secondary","children":"Type-friendly hook to work with pagination"}],["$","time",null,{"className":"text-body2 text-secondary block mt-4","children":"7 мая 2025"}]]}]}],["$","div",null,{"className":"flex flex-col md:grid md:grid-cols-12 gap-5","children":["$","div",null,{"className":"md:col-span-8","id":"content","children":["$","$L4",null,{"parallelRouterKey":"children","segmentPath":["children","snippets","children","$f","children"],"loading":"$undefined","loadingStyles":"$undefined","loadingScripts":"$undefined","hasLoading":false,"error":"$undefined","errorStyles":"$undefined","errorScripts":"$undefined","template":["$","$L5",null,{}],"templateStyles":"$undefined","templateScripts":"$undefined","notFound":"$undefined","notFoundStyles":"$undefined","styles":[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/b628b1366cf828c3.css","precedence":"next","crossOrigin":""}]]}]}]}]]}]]}]
+9:[["$","meta","0",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","1",{"charSet":"utf-8"}],["$","title","2",{"children":"usePaginatedData"}],["$","meta","3",{"name":"description","content":"Type-friendly hook to work with pagination"}],["$","link","4",{"rel":"manifest","href":"/manifest.webmanifest"}],["$","meta","5",{"property":"og:title","content":"usePaginatedData"}],["$","meta","6",{"property":"og:description","content":"Type-friendly hook to work with pagination"}],["$","meta","7",{"property":"og:type","content":"article"}],["$","meta","8",{"name":"twitter:card","content":"summary"}],["$","meta","9",{"name":"twitter:title","content":"usePaginatedData"}],["$","meta","10",{"name":"twitter:description","content":"Type-friendly hook to work with pagination"}],["$","link","11",{"rel":"icon","href":"/favicon.ico","type":"image/x-icon","sizes":"48x48"}],["$","link","12",{"rel":"apple-touch-icon","href":"/apple-icon.png?97f8e0a57e43deaa","type":"image/png","sizes":"180x180"}],["$","meta","13",{"name":"next-size-adjust"}]]
+1:null
