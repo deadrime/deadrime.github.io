@@ -5,9 +5,9 @@ export const ImageUploader = () => {
     <div>
       <input type="file" onChange={async (e) => {
         if (!e.target.files?.length) {
-          return
+          return;
         }
-        const file = e.target.files[0]
+        const file = e.target.files[0];
         const formData = new FormData();
         formData.append("file", file);
         try {
@@ -25,4 +25,4 @@ export const ImageUploader = () => {
       }} />
     </div>
   );
-}
+};

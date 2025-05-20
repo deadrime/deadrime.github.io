@@ -28,5 +28,5 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ code, language, onChange
         className={styles.editor}
       />
     </div>
-  )
-}
+  );
+};

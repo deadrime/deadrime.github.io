@@ -1,7 +1,8 @@
 {
   "extends": [
     "next",
-    "plugin:mdx/recommended"
+    "plugin:mdx/recommended",
+    "plugin:react/recommended"
   ],
   "env": {
     "browser": true,
@@ -15,8 +16,26 @@
     "mdx/language-mapper": {}
   },
   "rules": {
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "react-hooks/rules-of-hooks": "warn",
-    "@next/next/no-img-element": "off"
+    "react/jsx-indent": [
+      "error",
+      2
+    ],
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-unused-vars": "off",
+    "react/prop-types": "off",
+    "semi": [
+      "error",
+      "always"
+    ]
   },
   "overrides": [
     {
@@ -26,7 +45,10 @@
         "plugin:mdx/recommended"
       ],
       "rules": {
-        "react/jsx-no-undef": "warn"
+        "react/jsx-no-undef": "warn",
+        "semi": "off",
+        "react/jsx-indent": "off",
+        "indent": "off"
       }
     },
     {
@@ -43,5 +65,10 @@
         "react/jsx-no-undef": "warn"
       }
     }
-  ]
+  ],
+  "globals": {
+    "NodeJS": true,
+    "JSX": true,
+    "React": true
+  }
 }

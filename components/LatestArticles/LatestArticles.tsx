@@ -24,7 +24,7 @@ const LatestArticles = async () => {
         {articles.map(article => <BlogArticle key={article.slug} article={article} />)}
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default LatestArticles;

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef } from "react";
 
 export const useThrottledCallback = <
   Props extends readonly unknown[],
@@ -15,11 +15,11 @@ export const useThrottledCallback = <
       if (timeoutId) {
         clearTimeout(timeoutId);
       }
-    }
-  }, [state])
+    };
+  }, [state]);
 
   const throttledCb = useCallback((...props: Props) => {
-    state.current.tmpProps = props
+    state.current.tmpProps = props;
 
     if (state.current.timeoutId) {
       return;
@@ -28,8 +28,8 @@ export const useThrottledCallback = <
     state.current.timeoutId = setTimeout(() => {
       state.current.timeoutId = undefined;
       cb(...state.current.tmpProps);
-    }, wait)
-  }, deps)
+    }, wait);
+  }, deps);
 
-  return throttledCb// as (props: Props) => Return;
-}
+  return throttledCb;// as (props: Props) => Return;
+};

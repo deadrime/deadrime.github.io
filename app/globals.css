@@ -1,60 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@reference "./app.css";
 
 @layer base {
-  :root {
-    --font-size-body2: clamp(0.9rem, 0.7308rem + 0.3077vi, 1rem);
-    --font-size-body1: clamp(1rem, 0.9135rem + 0.3846vi, 1.25rem);
-    --font-size-md: clamp(1.25rem, 1.1418rem + 0.4808vi, 1.375rem);
-    --font-size-lg: clamp(1.5625rem, 1.4273rem + 0.601vi, 1.9531rem);
-    --font-size-xl: clamp(1.9531rem, 1.7841rem + 0.7512vi, 2.4414rem);
-    --font-size-2xl: clamp(2.4414rem, 2.2301rem + 0.939vi, 3.0518rem);
-  }
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    width: 100vw;
+    overflow-x: hidden;
 
-  :root[data-theme="dark"] {
-    /* midnight */
-    --color-background: 15 13 27;
-    /* night */
-    --color-details: 44 38 54;
-    /* peach */
-    --color-primary: 255 190 152;
-    /* beige */
-    --color-secondary: 194 181 169;
-    /* light */
-    --color-text: 255 246 237;
-    /* lilac */
-    --color-neutral: 97 90 108;
-    /* for code block */
-    --color-border: 55 65 81;
-  }
+    --sb-size: 14px;
+    --sb-track-color: transparent;
+    --sb-thumb-color: #a6accd6f;
+    --sb-thumb-padding: 4px;
 
-  :root[data-theme="light"] {
-    /* light */
-    --color-background: 255 246 237;
-    --color-primary: 220 139 94;
-    --color-secondary: 97 90 108;
-    --color-details: 229 225 222;
-    --color-text: 23 20 31;
-    --color-neutral: 194 181 169;
-    --color-border: 210 210 210;
-  }
+    &::-webkit-scrollbar {
+      width: var(--sb-size);
+      height: var(--sb-size);
+    }
 
-  a,
-  summary {
-    &:focus-visible {
-      @apply rounded-md outline-none ring ring-primary ring-offset-2 ring-offset-background;
+    &::-webkit-scrollbar-track {
+      background: var(--sb-track-color);
+      border-radius: 8px;
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      transition: all 0.2s;
+      background: var(--sb-thumb-color);
+      border-radius: 10px;
+      background-color: var(--sb-thumb-color);
+      border: var(--sb-thumb-padding) solid transparent;
+      background-clip: content-box;
     }
   }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
 
   .img-wrapper {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
   }
-
-  /* strong {
-    @apply text-text-accent;
-  } */
 
   details {
     margin-bottom: 1em;
@@ -91,7 +80,7 @@
 
   h2 {
     margin-top: 1em;
-    font-size: var(--font-size-lg);
+    font-size: var(--text-lg);
 
     &:first-child {
       margin-top: 0;
@@ -101,14 +90,14 @@
   h3 {
     margin-top: 1em;
     margin-bottom: 0.5em;
-    font-size: var(--font-size-md);
+    font-size: var(--text-md);
   }
 
   a {
-    @apply text-primary text-opacity-90;
+    @apply text-primary/90;
 
     &:hover {
-      @apply text-opacity-100;
+      @apply text-primary;
     }
 
     &:has(> code) {
@@ -133,53 +122,11 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
-}
 
-html {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-  width: 100vw;
-  overflow-x: hidden;
-
-  --sb-size: 14px;
-  --sb-track-color: transparent;
-  --sb-thumb-color: #a6accd6f;
-  --sb-thumb-padding: 4px;
-
-  &::-webkit-scrollbar {
-    width: var(--sb-size);
-    height: var(--sb-size);
+  body {
+    @apply bg-background text-body1 font-base text-text;
+    line-height: 1.55;
   }
-
-  &::-webkit-scrollbar-track {
-    background: var(--sb-track-color);
-    border-radius: 8px;
-    display: none;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    transition: all 0.2s;
-    background: var(--sb-thumb-color);
-    border-radius: 10px;
-    background-color: var(--sb-thumb-color);
-    border: var(--sb-thumb-padding) solid transparent;
-    background-clip: content-box;
-  }
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body {
-  color: rgb(var(--color-text));
-  background-color: rgb(var(--color-background));
-  font-family: var(--font-base);
-  font-size: var(--font-size-body1);
-  line-height: 1.55;
-  /* transition: color 250ms ease 0s, background 350ms ease 0s, border .3s; */
 }
 
 @layer utilities {

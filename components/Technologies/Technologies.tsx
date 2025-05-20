@@ -7,7 +7,7 @@ const data = [
   },
   {
     category: 'UI Libraries & Frameworks',
-    items: ["Ant", "MUI", "Shadcn", "Element", "UI", "самописные UI библиотеки"]
+    items: ["Chakra UI", "Ant", "MUI", "Shadcn", "Element UI", "самописные UI библиотеки"]
   },
   {
     category: 'State management',
@@ -15,15 +15,15 @@ const data = [
   },
   {
     category: 'Styles',
-    items: ["PostCSS", "Sass", "Less", "CSS modules", "Emotion", "Styled components", "Tailwind"]
+    items: ["PostCSS", "Tailwind", "CSS modules", "Sass", "Less", "Emotion", "Styled components"]
   },
   {
     category: 'Bundlers',
-    items: ["Webpack", "Esbuild", "Vite", "Turbopack", "Rollup", "Gulp"]
+    items: ["Vite", "Webpack", "Turbopack", "Rollup", "Esbuild", "Gulp"]
   },
   {
     category: 'Node.js frameworks',
-    items: ["Express", "Koa", "Socket.io"]
+    items: ["Nest.js", "Express", "Koa", "Socket.io"]
   },
   {
     category: 'Databases',
@@ -31,7 +31,7 @@ const data = [
   },
   {
     category: 'ORMs & Query builders',
-    items: ["Mongoose", "Knex", "Sequelize"]
+    items: ["TypeORM", "Prisma", "Mongoose", "Knex", "Sequelize"]
   },
   {
     category: 'Payments',
@@ -39,7 +39,7 @@ const data = [
   },
   {
     category: 'Analytics',
-    items: ["Google analytics", "Posthog"]
+    items: ["Posthog", "Google analytics"]
   },
   {
     category: 'CD/CI',
@@ -53,7 +53,7 @@ const data = [
     category: 'Other',
     items: ["Webhooks", "Puppeteer", "Cheerio", "Node.js workers", "Telegram bots", "Ruby on Rails", "Python"]
   },
-]
+];
 
 const Technologies = () => {
   return (
@@ -74,7 +74,7 @@ const Technologies = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default Technologies;

@@ -16,10 +16,10 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       <div className="flex min-h-screen flex-col justify-between">
         {React.createElement(article.component)}
       </div>
-      <script
+      {article.metadata && <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(article.metadata.jsonLd) }}
-      />
+      />}
     </>
   );
 }
@@ -37,5 +37,5 @@ export async function generateStaticParams() {
 
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }

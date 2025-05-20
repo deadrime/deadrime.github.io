@@ -1,12 +1,12 @@
 export const calculateLinesToHighlight = (linesStr = '') => {
   if (!linesStr) {
-    return []
+    return [];
   }
 
   const lines = linesStr.trim().replace(' ', '').split(',');
 
   if (!lines) {
-    return []
+    return [];
   }
 
   const result = lines.reduce((acc, curr) => {

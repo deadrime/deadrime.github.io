@@ -6,6 +6,7 @@ import SvgNextjs from '@/svgComponents/Nextjs';
 import SvgReact from '@/svgComponents/React';
 import SvgTs from '@/svgComponents/Ts';
 import SvgGraphql from '@/svgComponents/Graphql';
+import Nodejs from '@/svgComponents/Nodejs';
 import SvgSloth from '@/svgComponents/Sloth';
 
 const AboutSection = () => {
@@ -40,17 +41,17 @@ const AboutSection = () => {
             Интересует позиция <strong>frontend разработчика</strong> (или fullstack с беком на node.js).
             Хочу работать с современным стеком технологий и талантливыми людьми, у которых я мог бы учиться и расти.
           </p>
-          <h3 className="pt-8 font-normal text-text/80 text-body2">Любимый стек <span>❤️</span></h3>
+          <h3 className="pt-8 font-normal text-text/80 text-body2">Основной стек</h3>
           <div className="flex gap-2 pt-2 flex-wrap">
             <Tag variant="filled" size="small" icon={<SvgNextjs height={20} className="fill-current text-text/90" />}>Next.js</Tag>
             <Tag variant="filled" size="small" icon={<SvgReact height={20} />}>React</Tag>
             <Tag variant="filled" size="small" icon={<SvgTs height={20} />}>Typescript</Tag>
-            <Tag variant="filled" size="small" icon={<SvgGraphql height={20} />}>GraphQL</Tag>
+            <Tag variant="filled" size="small" icon={<Nodejs height={20} />}>Node.js</Tag>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default AboutSection;

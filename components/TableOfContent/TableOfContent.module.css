@@ -1,5 +1,7 @@
+@reference "tailwindcss";
+
 .headingList {
-  & ol {
-    padding-left: 1rem;
+  & ol>li>* {
+    @apply pl-5;
   }
 }

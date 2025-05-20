@@ -21,8 +21,8 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
   const { title, description, topics, publishedTime } = article;
 
   return (
-    <div>
-      <Link href="/blog" className="mb-8 block">← Блог</Link>
+    <div className="flex flex-col">
+      <Link href="/blog" className="mb-8 block self-start">← Блог</Link>
       <div>
         <section className={classNames(styles.patternBg, "overflow-hidden")}>
           <header className="py-8 border-t-[6px] border-b-2 border-details md:mb-10">

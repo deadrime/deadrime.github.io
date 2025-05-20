@@ -1,0 +1,24 @@
+export const data = {
+  title: "useDebounce",
+  description: "Type-friendly useDebounce hook",
+  slug: 'use-debounce',
+  publishedTime: '2025-05-07',
+  topics: [
+    "react",
+    "typescript",
+    "hook"
+  ],
+}
+
+и
+
+```ts
+import { useEffect } from "react";
+import useTimeout from "./useTimeout";
+
+export default function useDebounce<Cb extends (...args: never[]) => unknown>(callback: Cb, delay: number, dependencies: unknown[]) {
+  const { reset, clear } = useTimeout(callback, delay);
+  useEffect(reset, [...dependencies, reset]);
+  useEffect(clear, []);
+}
+```

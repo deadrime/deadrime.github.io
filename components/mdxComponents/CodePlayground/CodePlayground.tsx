@@ -5,12 +5,12 @@ const CodePlayground: React.FC<{ children: React.ReactElement | React.ReactEleme
     return {
       filename: i.props.children.props.filename,
       caption: i.props.children.props.caption,
-    }
-  })
+    };
+  });
   return <div className="flex flex-col gap-2">
     {JSON.stringify(childrenInfo)}
     {children}
-  </div>
-}
+  </div>;
+};
 
 export default CodePlayground;

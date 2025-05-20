@@ -32,11 +32,11 @@ const getHierarchicalHeadings = (headings: Heading[]) => {
       });
     }
 
-    return acc
-  }, [])
+    return acc;
+  }, []);
 
   return result;
-}
+};
 
 const useActiveHeading = (headings: Heading[], topOffset = 400) => {
   const [activeHeadingId, setActiveHeading] = React.useState<string>('');
@@ -74,11 +74,11 @@ const useActiveHeading = (headings: Heading[], topOffset = 400) => {
       handleScroll();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headings])
+  }, [headings]);
 
   useEffect(() => {
     if (!headings.length) {
-      return
+      return;
     }
 
     window.addEventListener('scroll', throttledHandleScroll);
@@ -97,10 +97,10 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
   const activeHeadingId = useActiveHeading(headings);
 
   useEffect(() => {
-    const content = document.getElementById(contentId)
+    const content = document.getElementById(contentId);
 
     if (!content) {
-      return
+      return;
     }
 
     const headings = Array.from(content.querySelectorAll<HTMLElement>("h2, h3, h4"))
@@ -110,40 +110,46 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
           text: element.innerText,
           level: Number(element.nodeName.charAt(1)),
           element,
-        }
-      })
+        };
+      });
     setHeadings(headings);
-  }, [contentId])
+  }, [contentId]);
 
-  const hierarchicalHeadings = useMemo(() => getHierarchicalHeadings(headings), [headings])
+  const hierarchicalHeadings = useMemo(() => getHierarchicalHeadings(headings), [headings]);
+
+  if (hierarchicalHeadings.length === 0) {
+    return null;
+  }
 
   return (
     <div className="mt-4 mb-4">
       <span className='block mb-3 font-semibold text-lg md:text-body2'>СОДЕРЖАНИЕ</span>
-      <HeadingList items={hierarchicalHeadings} activeHeadingId={activeHeadingId} />
-      {/* <a className={classNames('opacity-0', {
-        'opacity-100': !!activeHeadingId
-      })}>Scroll to top</a> */}
+      <HeadingList
+        items={hierarchicalHeadings}
+        activeHeadingId={activeHeadingId}
+        className='[&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3 border-l-1 border-gray-600/50'
+      />
     </div>
-  )
-}
+  );
+};
 
 type HeadingListProps = {
   items: HierarchicalHeading[]
   activeHeadingId: string
   inner?: boolean
+  className?: string;
 }
 
-const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, inner }) => (
-  <ol className={classNames(styles.headingList, 'flex flex-col gap-3')}>
+const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, className, inner }) => (
+  <ol className={classNames(styles.headingList, 'flex flex-col gap-3', className)}>
     {items.map(i =>
-      <li className='flex flex-col gap-3' key={i.id}>
-        <a href={`#${i.id}`} className={classNames('text-body2', {
-          ['text-primary']: activeHeadingId === i.id,
+      <li className={classNames('flex flex-col gap-3')} key={i.id}>
+        <a href={`#${i.id}`} className={classNames('text-body2 border-l-1 border-transparent', {
           ['text-text']: activeHeadingId !== i.id,
+          ['text-primary border-primary!']: activeHeadingId === i.id,
         })}>{i.text}</a>
         {i.children?.length > 0 && <HeadingList items={i.children} activeHeadingId={activeHeadingId} inner={true} />}
       </li>
     )}
   </ol>
-)
+);

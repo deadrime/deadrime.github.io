@@ -19,10 +19,10 @@ const SvgLight = (props: SVGProps<SVGSVGElement>) => (
       cx={9}
       cy={9}
       r={8}
-      fill="rgb(var(--color-text))"
+      fill="var(--color-text)"
       mask="url(#light_svg__a)"
     />
-    <g fill="rgb(var(--color-text))">
+    <g fill="var(--color-text)">
       <circle
         cx={17}
         cy={9}

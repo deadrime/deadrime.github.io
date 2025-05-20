@@ -25,8 +25,8 @@ export const data = {
 При этом всегда стоит держать в голове, что среднестатистический пользователь вашего сайта скорее всего зайдет с мобильного телефона.
 И у него вряд ли будет быстрый мобильный интернет. А медленный интернет накладывает свои ограничения:
 
-1. UI может прыгать, пока все картинки не загрузятся (сделаем допущение, что вы не хотите или не можете привести все картинки к одному размеру)
-2. При медленном интернете или если сервер слишком далеко от пользователя, он будет видеть огрызки картинок, что прямо скажем не красиво.
+UI может прыгать, пока все картинки не загрузятся (сделаем допущение, что вы не хотите или не можете привести все картинки к одному размеру)
+При медленном интернете или если сервер слишком далеко от пользователя, он будет видеть огрызки картинок, что прямо скажем не красиво.
 
 <Image
   src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJtZTh4dGJ2bDBiMnVuZHJkMmc2cWQxZzFkdGdzOXJxYjdhbGYzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QIQTfximd3AuQ/giphy.gif"
@@ -44,15 +44,15 @@ export const data = {
 
 <CodeDemo caption="Пример использования thumbhash">
   <ProgressiveImageExample />
-</CodeDemo>
+  </CodeDemo>
 
-Еще примеры можно найти на официальном сайте: https://evanw.github.io/thumbhash/
+  Еще примеры можно найти на официальном сайте: https://evanw.github.io/thumbhash/
 
-<h2 id="generate-thumbhash-on-client-side">Генерация thumbhash на клиенте</h2>
+  <h2 id="generate-thumbhash-on-client-side">Генерация thumbhash на клиенте</h2>
 
-Рассмотрим кейс, когда пользователь создает новый пост и сам загружает изображение. В этом случае сгенерировать thumb можно прямо на клиенте.
+  Рассмотрим кейс, когда пользователь создает новый пост и сам загружает изображение. В этом случае сгенерировать thumb можно прямо на клиенте.
 
-Для начала загрузка изображения - тут все стандартно, подписываемся на `onChange` у инпута и достаем оттуда файл
+  Для начала загрузка изображения - тут все стандартно, подписываемся на `onChange` у инпута и достаем оттуда файл
 
 
 ```tsx
@@ -75,7 +75,7 @@ const getImageUrl = (file: File) => {
   // For example we just create url on client-side
   const url = URL.createObjectURL(file); 
   return url;
-}
+};
 
 export default function App() {
   const [originalImageSrc, setOriginalImageSrc] = useState("");
@@ -101,9 +101,9 @@ export default function App() {
 }
 ```
 
-Теперь нам необходимо считать файл как картинку, чтобы создать миниатюру.
+  Теперь нам необходимо считать файл как картинку, чтобы создать миниатюру.
 
-Для этого напишем небольшой хелпер, который загружает картинку по переданному url и возвращает `HTMLImageElement`
+  Для этого напишем небольшой хелпер, который загружает картинку по переданному url и возвращает `HTMLImageElement`
 
 ```ts
 const loadImage = (imageUrl: string) => {
@@ -118,7 +118,7 @@ const loadImage = (imageUrl: string) => {
 };
 ```
 
-Теперь необходимо создать миниатюру изображения, для этого воспользуемся `canvas`:
+  Теперь необходимо создать миниатюру изображения, для этого воспользуемся `canvas`:
 
 ```ts
 const size = Math.max(img.width, img.height);
@@ -133,9 +133,9 @@ canvas.height = h;
 c.drawImage(img, 0, 0, w, h);
 ```
 
-После чего достаем из полученной миниатюры [`ImageData`](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) и скармливаем полученный массив пикселей методу `rgbaToThumbHash`.
+  После чего достаем из полученной миниатюры [`ImageData`](https://developer.mozilla.org/en-US/docs/Web/API/ImageData) и скармливаем полученный массив пикселей методу `rgbaToThumbHash`.
 
-Полученный **Uint8Array** я конвертирую в **base64** строку, которую мы затем можем сохранить на сервере.
+  Полученный **Uint8Array** я конвертирую в **base64** строку, которую мы затем можем сохранить на сервере.
 
 
 ```ts hl="14,16,18"
@@ -152,43 +152,43 @@ async function generateImageThumb(img: HTMLImageElement) {
   canvas.width = w;
   canvas.height = h;
   c.drawImage(img, 0, 0, w, h);
-	// Get pixels array
+  // Get pixels array
   const pixels = c.getImageData(0, 0, w, h);
-	// Get thumbhash (Uint8Array)
+  // Get thumbhash (Uint8Array)
   const hash = rgbaToThumbHash(w, h, pixels.data);
-	// convert Uint8Array to base64 string
+  // convert Uint8Array to base64 string
   const binString = String.fromCodePoint(...hash);
   return btoa(binString);
 }
 ```
 
-В результате этих махинаций мы получаем такую строку
+  В результате этих махинаций мы получаем такую строку
 
 ```txt
 0ucJJgoHiHeId5eYV4d3hneYiHiPiPc=
 ```
 
-Весит она всего 32 байта
+  Весит она всего 32 байта
 
 ```ts
-new Blob(["0ucJJgoHiHeId5eYV4d3hneYiHiPiPc="]).size // 32
+new Blob(["0ucJJgoHiHeId5eYV4d3hneYiHiPiPc="]).size; // 32
 ```
 
-Ее можно сохранить на сервере и присылать вместе с объектом поста
+  Ее можно сохранить на сервере и присылать вместе с объектом поста
 
 ```ts
 [
-	{
-		id: '1',
-		title: 'Post title',
-		image: '/path/to/image1.png',
-		thumbhash: '0ucJJgoHiHeId5eYV4d3hneYiHiPiPc=',
-	},
-	// ...
-]
+  {
+    id: '1',
+    title: 'Post title',
+    image: '/path/to/image1.png',
+    thumbhash: '0ucJJgoHiHeId5eYV4d3hneYiHiPiPc=',
+  },
+  // ...
+];
 ```
 
-Далее на клиенте нужно преобразовать ее сначала в Uint8Array, а затем в base64 картинку
+  Далее на клиенте нужно преобразовать ее сначала в Uint8Array, а затем в base64 картинку
 
 ```ts
 const thumbToImageSrc = (thumb: string) => {
@@ -199,7 +199,7 @@ const thumbToImageSrc = (thumb: string) => {
 };
 ```
 
-Наконец нам нужен компонент, который будет запускать загрузку оригинальной картинки и отображать thumbhash миниатюру на время загрузки
+  Наконец нам нужен компонент, который будет запускать загрузку оригинальной картинки и отображать thumbhash миниатюру на время загрузки
 
 ```tsx
 type ProgressiveImageProps = {
@@ -228,9 +228,9 @@ const ProgressiveImage: React.FC<ProgressiveImageProps> = ({ src: originalImageS
 };
 ```
 
-<h2 id="generate-thumbhash-on-server-side">Генерация thumbhash на сервере</h2>
+  <h2 id="generate-thumbhash-on-server-side">Генерация thumbhash на сервере</h2>
 
-Скорее всего будет использоваться [`FormData`](https://developer.mozilla.org/ru/docs/Web/API/FormData), чтобы загрузить файл на сервер.
+  Скорее всего будет использоваться [`FormData`](https://developer.mozilla.org/ru/docs/Web/API/FormData), чтобы загрузить файл на сервер.
 
 ```ts
 export async function POST(request: NextRequest) {
@@ -246,21 +246,21 @@ export async function POST(request: NextRequest) {
   }
 
   const arrayBuffer = await file.arrayBuffer();
-	const buffer = Buffer.from(arrayBuffer);
+  const buffer = Buffer.from(arrayBuffer);
 
   const url = await uploadFile(buffer); // save file on your server somehow
-	const thumbhash = await generateThumbhash(buffer); // We need to implement this
+  const thumbhash = await generateThumbhash(buffer); // We need to implement this
 
-	return NextResponse.json({
-		url,
+  return NextResponse.json({
+    url,
     thumbhash
-  })
+  });
 }
 ```
 
-<h3 id="generate-thumbhash-on-server-side-using-canvas">При помощи canvas</h3>
+  <h3 id="generate-thumbhash-on-server-side-using-canvas">При помощи canvas</h3>
 
-Чтобы сгенерировать thumbhash, нужно считать данные изображения, только вот сервере у нас нет нативной поддержки canvas и нужно будет воспользоваться сторонней библиотекой, например https://www.npmjs.com/package/canvas
+  Чтобы сгенерировать thumbhash, нужно считать данные изображения, только вот сервере у нас нет нативной поддержки canvas и нужно будет воспользоваться сторонней библиотекой, например https://www.npmjs.com/package/canvas
 
 ```ts
 import { createCanvas, loadImage } from "canvas";
@@ -269,29 +269,29 @@ async function loadImageAndConvertToHashWithCanvas(
   buffer: Buffer
 ) {
   const maxSize = 100;
-	// load image
+  // load image
   const image = await loadImage(buffer);
   const width = image.width;
   const height = image.height;
-	// calculate new size
+  // calculate new size
   const scale = Math.min(maxSize / width, maxSize / height);
   const resizedWidth = Math.floor(width * scale);
   const resizedHeight = Math.floor(height * scale);
-	// create thumb with new size
+  // create thumb with new size
   const canvas = createCanvas(resizedWidth, resizedHeight);
   const ctx = canvas.getContext("2d");
   ctx.drawImage(image, 0, 0, resizedWidth, resizedHeight);
-	// get pixels array
+  // get pixels array
   const imageData = ctx.getImageData(0, 0, resizedWidth, resizedHeight);
   const rgba = new Uint8Array(imageData.data.buffer);
-	// generate thumbhash
+  // generate thumbhash
   const hash = rgbaToThumbHash(resizedWidth, resizedHeight, rgba);
-	// convert it to base64
+  // convert it to base64
   const base64 = Buffer.from(hash).toString('base64');
   return base64;
 }
 ```
-<h3 id="generate-thumbhash-on-server-side-using-sharp">При помощи sharp</h3>
+  <h3 id="generate-thumbhash-on-server-side-using-sharp">При помощи sharp</h3>
 
 Так же можно воспользоваться библиотекой sharp
 
@@ -299,14 +299,14 @@ async function loadImageAndConvertToHashWithCanvas(
 import sharp from "sharp";
 
 const loadImageAndConvertToHashWithSharp = async (buffer: Buffer) => {
-	// load image
+  // load image
   const sharpImage = sharp(buffer);
   const imageMetadata = await sharpImage.metadata();
-	// calculate new size
+  // calculate new size
   const size = Math.max(imageMetadata.width || 1, imageMetadata.height || 1);
   const w = Math.round(100 * (imageMetadata.width || 1) / size);
   const h = Math.round(100 * (imageMetadata.height || 1) / size);
-	// create thumb with new size
+  // create thumb with new size
   const { data } = await sharpImage
     .resize({
       withoutEnlargement: true,
@@ -315,11 +315,11 @@ const loadImageAndConvertToHashWithSharp = async (buffer: Buffer) => {
     })
     .ensureAlpha() // rgbaToThumbHash require 4 channals
     .raw()
-    .toBuffer({ resolveWithObject: true })
-	// generate thumbhash
+    .toBuffer({ resolveWithObject: true });
+  // generate thumbhash
   const hash = rgbaToThumbHash(w, h, data);
-	// convert it to base64
+  // convert it to base64
   const base64 = Buffer.from(hash).toString('base64');
   return base64;
-}
+};
 ```

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Статьи по веб-разработке - React, Node.js, Typescript',
     tags: ['Веб-разработка', 'frontend', 'React', 'Javascript', 'Typescript', 'Node.js']
   }
-}
+};
 
 export default async function Home() {
   const articles = await getAllArticles();

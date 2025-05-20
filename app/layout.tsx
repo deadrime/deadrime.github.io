@@ -1,5 +1,6 @@
 import { Fira_Code, Nunito } from "next/font/google";
 import localFont from "next/font/local";
+import "./app.css";
 import "./globals.css";
 import classNames from "classnames";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
@@ -32,12 +33,12 @@ const firaCode = Fira_Code({
 });
 
 const Logo = () => {
-  return <Link href={"/"} className="font-code text-md">{'<'}Zhenya{'>'}</Link>
-}
+  return <Link href={"/"} className="font-fira text-md">{'<'}Zhenya{'>'}</Link>;
+};
 
 const FooterLogo = () => {
-  return <Link href={"/"} className="font-code text-md">{'</'}Zhenya{'>'}</Link>
-}
+  return <Link href={"/"} className="font-fira text-md">{'</'}Zhenya{'>'}</Link>;
+};
 
 // TODO: Think about
 const themeHydration = `
@@ -73,10 +74,11 @@ export default function RootLayout({
             maxWidth: 'calc(1180px + 2rem)',
           }} className="w-full mx-auto px-4 flex items-center h-20">
             <Logo />
-            <nav className="mx-auto gap-8 hidden sm:flex text-body2 font-bold">
+            <nav className="mx-auto gap-8 hidden sm:flex text-body2 font-bold [&>a]:focus-visible:underline underline-offset-6 [&>a]:focus-visible:outline-8 [&>a]:focus-visible:ring-0 [&>a]:focus-visible:rounded-none">
               <Link href="/#technologies" className="text-secondary">С чем работал</Link>
               <Link href="/#my-experience" className="text-secondary">Опыт работы</Link>
               <Link href="/blog" className="text-secondary">Блог</Link>
+              <Link href="/snippets" className="text-secondary">Сниппеты</Link>
             </nav>
             <ThemeSwitcher className="ml-auto sm:ml-4" />
           </header>
@@ -92,7 +94,7 @@ export default function RootLayout({
             className="w-full mx-auto p-4 pt-8 mt-auto flex justify-between sm:items-center flex-col sm:flex-row gap-3"
           >
             <FooterLogo />
-            <span className="text-body2 text-secondary">Made with ❤️ by me. Designed by <a href="https://arina.pw/" target="_blank">@rina</a>.</span>
+            <span className="text-body2 text-secondary">Made with ❤️ by me. Designed by <a href="https://arina.pw/" target="_blank" rel="noreferrer">@rina</a>.</span>
             <span className="text-neutral text-body2">© Трофимов Евгений, 2024</span>
           </footer>
         </Providers>

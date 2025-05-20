@@ -28,13 +28,13 @@ const data = [
     shortDescription: <>
       <p>
         <strong>Storm Trade</strong> — первый и один из крупнейших DEX в сети TON c прямой интеграция в Telegram (TMA).
-        Работает на основе динамического АММ, предоставляет возможность торговать огромным количеством активов, в том числе с использованием плеча.
+        Работает при помощи динамического АММ, предоставляет возможность торговать огромным количеством активов, в том числе с использованием плеча.
       </p>
       <p>
-        Я пришел в команду на стадии активного развития, ребятам нужен был fullstack для разработки и поддержки основной апки, бота, лендинга и внутренних сервисов.
+        Я пришел в команду на стадии активного развития, ребятам нужен был Fullstack для разработки и поддержки основной апки, бота и внутренних сервисов.
       </p>
     </>,
-    technologies: ['react', 'typescript', 'node.js', 'nest.js', 'graphql', 'apollo', 'docker', 'k8s', 'TON'],
+    technologies: ['react', 'typescript', 'node.js', 'nest.js', 'graphql', 'apollo', 'redis', 'docker', 'k8s', 'TON'],
   },
   {
     companyName: 'Human',
@@ -261,7 +261,7 @@ const data = [
     </>,
     technologies: ['vue', 'elementUI', 'node.js', 'express', 'koa', 'postgreSQL'],
   }
-]
+];
 
 const MyExperience = () => {
   return (
@@ -311,7 +311,7 @@ const MyExperience = () => {
         ))}
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default MyExperience;

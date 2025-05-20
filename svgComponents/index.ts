@@ -26,6 +26,7 @@ export { default as Rails } from "./Rails";
 export { default as React } from "./React";
 export { default as Sber } from "./Sber";
 export { default as Sloth } from "./Sloth";
+export { default as Storm } from "./Storm";
 export { default as Storybook } from "./Storybook";
 export { default as Telegram } from "./Telegram";
 export { default as Ts } from "./Ts";

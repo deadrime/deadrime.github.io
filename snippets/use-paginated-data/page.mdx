@@ -1,0 +1,233 @@
+import { PaginationExample } from '../../components/Pagination/PaginationExample'
+
+export const data = {
+  title: "usePaginatedData",
+  description: "Type-friendly hook to work with pagination",
+  slug: 'use-paginated-data',
+  publishedTime: '2025-05-07',
+  topics: [
+    "react",
+    "typescript",
+    "hook",
+    "pagination",
+    "infinite loading"
+  ],
+};
+
+```ts
+import { useCallback, useEffect, useState } from "react";
+
+export type PaginatedResponse<Data, ExtraPayload extends Record<string, unknown>> = {
+  data: Data[];
+  totalCount: number;
+  extra?: ExtraPayload
+}
+
+export type PaginationParams = {
+  limit: number;
+  offset: number;
+};
+
+export type UsePaginatedDataProps<Data, ExtraPayload extends Record<string, unknown>> = {
+  queryFn: (params: PaginationParams) => Promise<PaginatedResponse<Data, ExtraPayload>>;
+  limit?: number;
+  initialOffset?: number;
+};
+
+export const usePaginatedData = <Data, ExtraPayload extends Record<string, unknown>>(params: UsePaginatedDataProps<Data, ExtraPayload>) => {
+  const { queryFn, limit = 10, initialOffset = 0 } = params;
+  const [offset, setOffset] = useState(initialOffset);
+  const [pages, setPages] = useState<PaginatedResponse<Data, ExtraPayload>[]>([]);
+  const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
+
+  const loadMore = useCallback(async () => {
+    setIsFetchingNextPage(true);
+    const nextData = await queryFn({
+      limit,
+      offset,
+    });
+
+    setPages(prev => [...prev, nextData]);
+    setOffset(offset + limit);
+    setIsFetchingNextPage(false);
+  }, [queryFn, offset, limit]);
+
+  useEffect(() => {
+    loadMore();
+  }, []);
+
+  const data = pages.flatMap(page => page.data);
+  const totalCount = pages[0]?.totalCount || null;
+  const hasNextPage = totalCount !== null && data.length < totalCount;
+
+  return {
+    data,
+    loadMore,
+    hasNextPage,
+    isFetchingNextPage,
+  };
+};
+```
+
+Пример ответа от сервера:
+
+`GET /contacts?limit=5&offset=0`
+
+```json
+{
+  "data": [
+    {
+      "phoneNumber": "579-620-1008 x091",
+      "firstName": "Daron",
+      "lastName": "Beier",
+      "id": "681b3a4c1f6fb92e663aed96"
+    },
+    {
+      "phoneNumber": "648-821-9569 x43505",
+      "firstName": "Arjun",
+      "lastName": "Huels",
+      "id": "681b3a4c1f6fb92e663aed97"
+    },
+    {
+      "phoneNumber": "(976) 309-4472 x6703",
+      "firstName": "Taryn",
+      "lastName": "Haley",
+      "id": "681b3a4c1f6fb92e663aed98"
+    },
+    {
+      "phoneNumber": "(570) 564-0845 x804",
+      "firstName": "Rylan",
+      "lastName": "Bechtelar",
+      "id": "681b3a4c1f6fb92e663aed99"
+    },
+    {
+      "phoneNumber": "425-254-1355 x157",
+      "firstName": "Stephen",
+      "lastName": "Cartwright",
+      "id": "681b3a4c1f6fb92e663aed9a"
+    }
+  ],
+  "totalCount": 38,
+  "extra": {
+    "currentUserContact": {
+      "phoneNumber": "(570) 564-0845 x804",
+      "firstName": "Rylan",
+      "lastName": "Bechtelar",
+      "id": "681b3a4c1f6fb92e663aed99"
+    }
+  }
+}
+```
+
+Пример использования:
+
+```tsx
+const CurrentUserBadge = () => (
+  <span className="inline-flex px-2 py-[2px] bg-secondary text-body2 text-text rounded-lg">Me</span>
+);
+
+export const PaginationExample = () => {
+  const {
+    data,
+    extra,
+    hasNextPage,
+    isFetchingNextPage,
+    loadMore,
+  } = usePaginatedData({
+    queryFn: async ({ limit, offset }) => {
+      const result = await getContacts(limit, offset);
+      console.log(result);
+      return result;
+    },
+    limit: 5,
+  });
+
+  const currentUserContact = extra?.currentUserContact;
+
+  return (
+    <div className="flex flex-col gap-2">
+      {extra && (
+        <span className="text-body1">Current user: {extra.currentUserContact.firstName} {extra.currentUserContact.lastName}</span>
+      )}
+      {data.map(contact => {
+        const { firstName, lastName, id,phoneNumber  } = contact;
+        const isMe = currentUserContact?.id === id;
+
+        return (
+          <div key={id} className="flex flex-col">
+            <span className="text-body2">{firstName} {lastName} {isMe && <CurrentUserBadge />}</span>
+            <span className="text-body2">{phoneNumber}</span>
+          </div>
+        );
+      })}
+      {isFetchingNextPage && <span>Загрузка...</span>}
+      {hasNextPage && 
+        <button disabled={isFetchingNextPage} onClick={loadMore}>Загрузить еще</button>
+      }
+    </div>
+  );
+};
+
+```
+
+<CodeDemo caption="Пример использования">
+  <PaginationExample />
+</CodeDemo>
+
+
+Используя [`@tanstack/react-query`](https://tanstack.com/query/latest)
+
+```ts
+import { useInfiniteQuery } from '@tanstack/react-query';
+
+export type PaginatedResponse<Data, ExtraPayload extends Record<string, unknown>> = {
+  data: Data[];
+  totalCount: number;
+} & ExtraPayload;
+
+export type PaginationParams = {
+  limit: number;
+  offset: number;
+};
+
+export type UsePaginatedDataProps<Data, ExtraPayload extends Record<string, unknown>> = {
+  queryKey: string[];
+  queryFn: (params: PaginationParams) => Promise<PaginatedResponse<Data, ExtraPayload>>;
+  limit?: number;
+  initialPageParam?: number;
+  enabled?: boolean;
+};
+
+export const usePaginatedData = <Data, ExtraPayload extends Record<string, unknown>>({
+  queryKey,
+  queryFn,
+  limit = 6,
+  initialPageParam = 0,
+  enabled = true,
+}: UsePaginatedDataProps<Data, ExtraPayload>) => {
+  const { data, ...rest } = useInfiniteQuery({
+    queryKey,
+    queryFn: ({ pageParam = initialPageParam }) =>
+      queryFn({
+        limit,
+        offset: pageParam,
+      }),
+    enabled,
+    initialPageParam,
+    getNextPageParam: (curr, all, lastPageParam) => {
+      return lastPageParam + limit;
+    },
+  });
+
+  const allData = data?.pages?.reduce<Data[]>((acc, curr) => [...acc, ...(curr.data || [])], []) || [];
+  const lastPage = data?.pages?.[data?.pages?.length - 1] || { totalCount: 0, data: null };
+  const { totalCount, data: _data, ...extraPayload } = lastPage;
+
+  return {
+    ...(extraPayload as ExtraPayload),
+    ...rest,
+    hasNextPage: allData?.length < totalCount,
+    data: allData,
+  };
+};
+```
