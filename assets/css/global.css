@@ -1,0 +1,123 @@
+@reference "./main.css";
+
+@layer base {
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    width: 100vw;
+    overflow-x: hidden;
+
+    --sb-size: 14px;
+    --sb-track-color: transparent;
+    --sb-thumb-color: #a6accd6f;
+    --sb-thumb-padding: 4px;
+
+    &::-webkit-scrollbar {
+      width: var(--sb-size);
+      height: var(--sb-size);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--sb-track-color);
+      border-radius: 8px;
+      display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      transition: all 0.2s;
+      background: var(--sb-thumb-color);
+      border-radius: 10px;
+      background-color: var(--sb-thumb-color);
+      border: var(--sb-thumb-padding) solid transparent;
+      background-clip: content-box;
+    }
+  }
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+
+
+  .img-wrapper {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  details {
+    margin-bottom: 1em;
+  }
+
+  ul {
+    padding-left: 1em;
+    margin-bottom: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    li {
+      list-style: disc;
+    }
+  }
+
+  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  pre {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  h2,
+  h3,
+  h4 {
+    scroll-margin-top: 0.25em;
+    font-weight: 700;
+  }
+
+  h2 {
+    margin-top: 1em;
+    font-size: var(--text-lg);
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-size: var(--text-md);
+  }
+
+  a {
+    @apply text-primary/90;
+
+    &:hover {
+      @apply text-primary;
+    }
+
+    &:has(> code) {
+      border-block-end: 2px solid;
+    }
+  }
+
+  a>code {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  body {
+    @apply bg-background text-body1 font-base text-text;
+    line-height: 1.55;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

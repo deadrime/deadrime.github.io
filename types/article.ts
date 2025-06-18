@@ -1,33 +1,11 @@
-import { MDXProps } from "mdx/types";
-import { Metadata } from "next";
-import { Article as JsonLdArticle, WithContext } from 'schema-dts';
+import { z } from '@nuxt/content'
 
-type OpenGraphArticle = Metadata['openGraph'] & {
-  type: 'article';
-  publishedTime?: string;
-  modifiedTime?: string;
-  expirationTime?: string;
-  authors?: null | string | URL | Array<string | URL>;
-  section?: null | string;
-  tags?: null | string | Array<string>;
-};
+export const ArticleSchema = z.object({
+  date: z.string(),
+  topics: z.array(z.string()),
+  title: z.string(),
+  description: z.string(),
+  previewImg: z.string(),
+})
 
-export type CreateArticleProps = {
-  title: string;
-  description: string;
-  slug: string;
-  publishedTime: string;
-  modifiedTime?: string;
-  image?: string;
-  topics: string[];
-}
-
-export type Article = Omit<CreateArticleProps, 'publishedTime' | 'modifiedTime'> & {
-  metadata: Metadata & {
-    openGraph: OpenGraphArticle
-    jsonLd?: WithContext<JsonLdArticle>;
-  };
-  component: (props: MDXProps) => JSX.Element;
-  publishedTime: number;
-  modifiedTime?: number;
-};
+export type Article = typeof ArticleSchema._type

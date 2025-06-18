@@ -1,0 +1,639 @@
+---
+date: 2024-02-12
+title: Пишем свой redux-toolkit
+description: Как работает @reduxjs/toolkit, реализация его упрощенной версии
+topics: ["react", "redux", "typescript", "state-manager"]
+previewImg: /images/own-redux-preview.webp
+---
+
+<h2 id="motivation">Мотивация</h2>
+
+Как правило мы задумываемся о глобальном стейте, когда приложение обрастает какой-то сложной бизнес логикой и прокидывать пропсы становится больно.
+В случае с более менее легкой бизнес логикой можно обойтись `React Context`. Но когда уже не хватает и его - на помощь приходит стейт менеджер,
+например редакс. Обычно в качестве примера использования редакса показывают TODO лист, что на мой взгляд тупо - мне трудно представить
+себе туду лист, который был бы достаточно сложен, что для него бы мог потребоваться глобальный стейт.
+Скорее вы будете хранить в стейте профиль авторизованного юзера или какие-то сложные структуры,
+которые нужно уметь находить разными способами, скажем `profileById`, `profileByUsername` или `noteIdsByWeekTs`, `noteIdsByDayTs`.
+
+Глобальный стейт решает 3 основный задачи - хранить, записывать и доставать данные. Чем удобнее, тем лучше.
+Redux предлагает редьюсеры, экшены и селекторы для этих задач.
+Если говорить про [стандартную реализацию](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers){target="_blank"},
+то про про удобство говорить не приходится, switch case конструкция для экшенов - это боль.
+Разработчики редакса тоже так подумали и изобрели красивую обертку под названием **Redux Toolkit.**
+Однако они умудрились превратить **3.33 kB** в **37 kB** и это наталкивает на мысль, что они напихали слишком много лишнего.
+Возможно, им следовало бы остановиться на методе `createSlice`,
+который позволяет создавать редьюсер и экшены без лишней головной боли, а так же хуке useSlectors.
+Именно эти вещи я и хочу реализовать самостоятельно. Это будет интересно еще и точки зрения типизации.
+
+<h2 id="api">API</h2>
+
+Для начала нужно прикинуть, что именно мы хотим получить на выходе.
+В рамках данной статьи я хочу реализовать метод createSlice, где можно было бы создать экшены и селекторы,
+а так же useSelector для доступа к данным из реакт компонента и dispatch для вызова экшенов
+
+```ts [usersSlice.ts]
+
+type User = {
+  id: string;
+  username: string;
+  displayName: string;
+}
+
+export const usersSlice = createSlice({
+  name: 'users',
+  defaultState: {
+    userById: {} as Record<string, User>,
+    usernameById: {} as Record<string, string>,
+  },
+  actions: {
+    addUser: (state, user: User) => {
+      // state должен иметь тот же тип, что и defaultState
+      state.userById[user.id] = user;
+      state.usernameById[user.username] = user.id;
+    },
+    deleteUser: (state, userId: string) => {
+      const user = state.userById[userId];
+      delete state.usernameById[user.username];
+      delete state.userById[userId];
+    }
+  },
+  selectors: {
+    selectUserByUsername: (state, username: string) => state.userById[state.usernameById[username]],
+  }
+});
+
+usersSlice.actions;// экшены
+usersSlice.selectors;// селекторы
+
+// ...
+
+// SomeComponent.tsx
+
+// user Должен иметь тип User
+const user = useSelector(state => state.selectUserByUsername(state.users, 'someUsername'));
+
+const addUser = useCallback(() => {
+  dispatch(
+    // Аргументом addUser должен быть объект User
+    usersSlice.actions.addUser({
+      id: '2',
+      username: 'username2',
+      displayName: 'some display name',
+    })
+  );
+}, [dispatch]);
+```
+
+<h2 id="implementation">Реализация</h2>
+
+Для начала определимся с параметрами `createSlice` и набросаем небольшой черновик:
+
+
+
+```ts
+type SliceActionCreator<State, Payload = any> = (
+  state: State,
+  payload: Payload
+) => void;
+
+type SliceSelector<State, Payload = unknown, SelectorReturn = unknown> = (
+  state: State,
+  payload: Payload
+) => SelectorReturn;
+
+type CreateSliceProps<
+  Name extends string,
+  State extends Record<string, unknown>,
+  Actions extends Record<string, SliceActionCreator<State>>,
+  Selectors extends Record<string, SliceSelector<State>>
+> = {
+  name: Name;
+  actions: Actions;
+  defaultState: State;
+  selectors: Selectors;
+};
+
+export const createSlice = <
+  Name extends string,
+  State extends Record<string, unknown>,
+  Actions extends Record<string, SliceActionCreator<State>>,
+  Selectors extends Record<string, SliceSelector<State>>
+>({
+    name,
+    actions,
+    defaultState,
+    selectors,
+  }: CreateSliceProps<Name, State, Actions, Selectors>) => {
+  let sliceActions; // TODO
+  let reducer; // TODO
+  let sliceSelectors; // TODO
+
+  return {
+    reducer,
+    selectors: sliceSelectors,
+    actions: sliceActions,
+  };
+};
+
+```
+
+План такой - сначала реализовать экшены, потом редьюсер и в самом конце - селекторы.
+
+<h2 id="actions">Экшены</h2>
+
+Экшен представляет из себя объект с обязательным полем `type` и опциональным `payload`
+
+```ts
+type Action<Type extends string = string, Payload = unknown> = {
+  type: Type;
+  payload?: Payload;
+};
+```
+
+Пусть, если в метод createSlice прокинуты
+
+```ts
+const props = {
+  name: 'users',
+  actions: {
+    addUser: (state, user: User) => {
+      state.userById[user.id] = user;
+      state.usernameById[user.username] = user.id;
+    },
+    deleteUser: (state, userId: string) => {
+      const user = state.userById[userId];
+      delete state.usernameById[user.username];
+      delete state.userById[userId];
+    }
+  }
+};
+```
+
+то мы будем генерировать два actionType:
+
+users/addUser
+users/deleteUser
+
+и два экшена -
+
+```ts
+const addUser = (user: User) => ({
+  type: "users/addUser",
+  payload: user,
+});
+
+const deleteUser = (userId: string) => ({
+  type: "users/deleteUser",
+  payload: user,
+});
+```
+
+Префикс с названием слайса добавлен для удобства и для того, чтобы предотвратить конфликт экшенов с одинаковыми названиями.
+
+Нам понадобится два новых типа - `ActionKey` и `ActionType`
+
+это ключи переданного объекта actions, а `ActionType` - это экшены, которые генерирует слайс, те же ключи, но с префиксом, 
+
+Для создания типа `ActionType` используется небольшой генерик хелпер `Scoped`
+
+
+```ts
+type Scoped<String extends string, Scope extends string> = `${Scope}/${String}`;
+
+export const createSlice = <
+  Name extends string,
+  State extends Record<string, unknown>,
+  Actions extends Record<string, SliceActionCreator<State>>,
+  ActionKey extends Extract<keyof Actions, string>,
+  ScopedActionType extends Scoped<ActionKey, Name>,
+  ActionPayload extends Parameters<Actions[ActionKey]>[1],
+  Action extends { type: ScopedActionType, payload: ActionPayload },
+>({
+    name,
+    actions,
+    defaultState,
+    selectors,
+  }: CreateSliceProps<Name, State, Actions, Selectors>) => {
+  const actionKeys = Object.keys(actions) as ActionKey[];
+  const actionTypeByActionKey = actionKeys.reduce((acc, action) => {
+    const scopedActionType = `${name}/${action}` as ScopedActionType;
+    acc[scopedActionType] = action;
+    return acc;
+  }, {} as Record<ScopedActionType, ActionKey>);
+
+  const reducer = (state: State = defaultState, action: Action) => {
+    const nextState = produce(state, draft => {
+      const actionType = actionTypeByActionKey[action.type];
+      actions[actionType]?.(draft as State, action.payload);
+    });
+    return nextState;
+  };
+
+  const sliceActions = actionKeys.reduce((acc, curr) => {
+    acc[curr] = (payload) => {
+      const scopedActionType = `${name}/${curr}` as ScopedActionType;
+
+      return {
+        type: scopedActionType,
+        payload,
+      };
+    };
+    return acc;
+  }, {} as {
+    [ActionKey in Extract<keyof Actions, string>]: (payload: Parameters<Actions[ActionKey]>[1]) => { type: Scoped<ActionKey, Name>, payload: P }
+  });
+
+  return {
+    actions: sliceActions,
+  };
+};
+```
+
+Остановлюсь на некоторых аспектах типизации чуть подробнее
+
+должен быть генериком, который будет на лету подхватывать ключи из переданного объекта `Actions`.
+У объекта в качестве ключа помимо строки может быть число или символ.
+Чтобы избежать проблем с типизацией, нужно достать только строки при помощи  `Extract<keyof Actions, string>`
+
+Чтобы сгенерировать экшены с правильным payload (чтобы у `addUser` была поддержка типизации и аргументом был именно `user: User`),
+нужно достать второй аргумент из переданного коллбека. Для этого воспользуемся хелпером `Parameters`
+и укажем нужный `ActionKey`-  `Parameters<Actions[ActionType]>[1]`
+
+Проверим, что все работает правильно:
+
+```ts
+export const usersSlice = createSlice({
+  name: 'users',
+  defaultState: {
+    userById: {} as Record<string, User>,
+    usernameById: {} as Record<string, string>,
+  },
+  actions: {
+    addUser: (state, user: User) => {
+      // state должен иметь тот же тип, что и defaultState
+      state.userById[user.id] = user;
+      state.usernameById[user.username] = user.id;
+    },
+    deleteUser: (state, userId: string) => {
+      const user = state.userById[userId];
+      delete state.usernameById[user.username];
+      delete state.userById[userId];
+    }
+  },
+  selectors: {
+    selectUserByUsername: (state, username: string) => state.userById[state.usernameById[username]],
+  }
+});
+
+usersSlice.actions; // можно навести на actions и увидеть его тип
+```
+
+![Подсказка в vs code](/images/actions-type-hightlight.png)
+
+<h2 id="reducer">Редьюсер</h2>
+
+По своей сути редьюсер - это чистая функция, которая принимает два аргумента - `state` и `action` и возвращает `nextState`.
+Очень важно при этом, чтобы стейт был иммутабельным, ради этого обычно используются страшные конструкции вроде 
+
+```ts
+const nextState = {
+  ...state,
+  userById: {
+    ...state.userById,
+    [user.id]: user, 
+  }
+};
+```
+
+Чтобы облегчить себе жизнь, для создания иммутабельного стейта предлагаю использовать
+https://www.npmjs.com/package/immer](https://github.com/immerjs/immer), в частности метод
+produce](https://immerjs.github.io/immer/produce)
+
+таким образом все, что нам нужно - это вызвать внутри `produce` нужный коллбек (экшен), передав туда драфт стейта и payload экшена
+
+```ts
+const reducer = (state: State = defaultState, action: Action) => {
+  const nextState = produce(state, draft => {
+    actions[action.type]?.(draft as State, action.payload);
+  });
+  return nextState;
+};
+```
+
+<h2 id="selectors">Селекторы</h2>
+
+Для работы в связке с react + redux используется хук `useSelector` .
+
+Чтобы реакт знал и мог реагировать (делать ререндер компонента) на изменения в стейте существует метод
+useSyncExternalStore](https://react.dev/reference/react/useSyncExternalStore) 
+
+Например, чтобы получить актуальный стейт, можно написать следующий код:
+
+```ts
+const useStore = () => {
+  const state = useSyncExternalStore(
+    myStore.subscribe,
+    myStore.getState,
+  );
+
+  return state;
+};
+```
+
+Мы могли бы даже использовать селектор, чтобы достать из стора нужные нам данные,
+однако такая реализация будет реагировать на **любые** изменения в стейте.
+
+Мы же хотим, чтобы наш useSelector реагировал только на изменения результата селектора, а не всего стейта.
+Т.е. чтобы селектор
+
+```ts
+const username = useSelector(state => state.users.usersById['some-id'].username);
+```
+
+реагировал только на изменение username конкретного юзера (с id = “some-id”).
+
+Предлагаю не писать велосипед и использовать `useSyncExternalStoreWithSelector`.
+Это модифицированная версия `useSyncExternalStore` c поддержкой селекторов и мемоизацией.
+
+Таким образом хелпер для создания `useSelector` будет выглядеть следующим образом:
+
+```ts
+import type { Store as ReduxStore } from 'redux';
+import { useSyncExternalStoreWithSelector } from 'use-sync-external-store/with-selector';
+
+export const createUseSelector = <
+  Store extends ReduxStore,
+  State extends ReturnType<Store['getState']>,
+>(store: Store) => {
+  const useSelector = <Selector extends (state: State) => unknown>(selector: Selector) => {
+    return useSyncExternalStoreWithSelector(
+      store.subscribe,
+      store.getState,
+      store.getState,
+      selector
+    ) as ReturnType<Selector>;
+  };
+
+  return useSelector;
+};
+```
+
+
+<h2 id="global-store">Глобальный стор</h2>
+
+В redux-toolkit есть метод `configureStore` для создания глобального стора.
+Предлагаю написать минималистичную версию, которая лишь объединяет редьюсеры и создает store
+
+```ts
+import type { Reducer } from 'redux';
+
+type SliceAction<Type extends string = string, Payload = unknown> = {
+  type: Type,
+  payload: Payload,
+}
+
+type SimpleSlice<Name extends string, ReducerType extends Reducer<any, any>> = {
+  name: Name;
+  reducer: ReducerType,
+}
+
+type TypesFromSlices<T> = T extends readonly { name: infer Name extends string, reducer: Reducer<infer State, infer Action> }[]
+  ? Action extends SliceAction<infer Type, infer Payload>
+  ? {
+    action: SliceAction<Type, Payload>,
+    state: { [P in Name]: State }
+  } : never : never
+
+export const configureStore = <
+  Slice extends SimpleSlice<string, Reducer<any, any, any>>,
+  State extends TypesFromSlices<Slice[]>['state'],
+  Action extends TypesFromSlices<Slice[]>['action'],
+>(slices: Slice[]) => {
+  const reducersByName = slices.reduce((acc, current) => {
+    acc[current.name] = current.reducer;
+    return acc;
+  }, {} as Record<string, Reducer>);
+
+  const reducer = combineReducers(reducersByName) as Reducer<State, Action>;
+
+  const store = createStore(reducer);
+
+  return {
+    store,
+  };
+};
+```
+
+Чтобы правильно типизировать созданный стор, нужно указать стейт и экшены редьюсера,
+который будет создан при помощи `combineReducers`.
+Мы можем извлечь стейт и экшены из редьюсеров при помощи `infer`.
+В хелпере `TypesFromSlices` мы постепенно проверяем сначала, что `T` расширяет массив объектов,
+где есть два интересующих нас поля - `name` и `reducer`. Мы можем вытащить типы этих полей при помощи `infer`.
+Похожим образом при помощи `infer` можно вытащить типы `State` и `Action`.
+Из `Action` в свою очередь можно достать `Type` и `Payload`.
+После этого мы можем вернуть извлеченные типы для `action` и `state`
+
+
+<h2 id="bring-all-together">Собираем все вместе</h2>
+
+```ts [myReduxToolkit.ts]
+
+import { createStore, combineReducers } from 'redux';
+import type { Store as ReduxStore, Reducer } from 'redux';
+import { produce } from 'immer';
+import { useSyncExternalStoreWithSelector } from 'use-sync-external-store/with-selector';
+
+type SliceActionCreator<State, Payload = any> = (state: State, payload: Payload) => void
+
+type SliceSelector<State, Payload = any> = (state: State, payload: Payload) => void
+
+type Scoped<String extends string, Scope extends string> = `${Scope}/${String}`;
+
+type CreateSliceProps<
+  Name extends string,
+  State extends Record<string, unknown>,
+  Actions extends Record<string, SliceActionCreator<State>>,
+  Selectors extends Record<string, SliceSelector<State>>
+> = {
+  name: Name
+  actions: Actions
+  defaultState: State
+  selectors: Selectors
+}
+
+export const createSlice = <
+  Name extends string,
+  State extends Record<string, unknown>,
+  Actions extends Record<string, SliceActionCreator<State>>,
+  ActionKey extends Extract<keyof Actions, string>,
+  ScopedActionType extends Scoped<ActionKey, Name>,
+  Selectors extends Record<string, SliceSelector<State>>,
+  ActionPayload extends Parameters<Actions[ActionKey]>[1],
+  Action extends { type: ScopedActionType, payload: ActionPayload },
+>({
+    name,
+    actions,
+    defaultState,
+    selectors,
+  }: CreateSliceProps<Name, State, Actions, Selectors>) => {
+  const actionKeys = Object.keys(actions) as ActionKey[];
+  const actionTypeByActionKey = actionKeys.reduce((acc, action) => {
+    const scopedActionType = `${name}/${action}` as ScopedActionType;
+    acc[scopedActionType] = action;
+    return acc;
+  }, {} as Record<ScopedActionType, ActionKey>);
+
+  const reducer = (state: State = defaultState, action: Action) => {
+    const nextState = produce(state, draft => {
+      const actionType = actionTypeByActionKey[action.type];
+      actions[actionType]?.(draft as State, action.payload);
+    });
+    return nextState;
+  };
+
+  const sliceActions = actionKeys.reduce((acc, curr) => {
+    acc[curr] = (payload) => {
+      const scopedActionType = `${name}/${curr}` as ScopedActionType;
+
+      return {
+        type: scopedActionType,
+        payload,
+      };
+    };
+    return acc;
+  }, {} as {
+    [ActionKey in Extract<keyof Actions, string>]: <P extends Parameters<Actions[ActionKey]>[1]>(payload: P) => { type: Scoped<ActionKey, Name>, payload: P }
+  });
+
+  return {
+    name,
+    reducer,
+    actions: sliceActions,
+    selectors: selectors,
+  };
+};
+
+type SliceAction<Type extends string = string, Payload = unknown> = {
+  type: Type,
+  payload: Payload,
+}
+
+type SimpleSlice<Name extends string, ReducerType extends Reducer<any, any>> = {
+  name: Name;
+  reducer: ReducerType,
+}
+
+type TypesFromSlices<T> = T extends { name: infer Name extends string, reducer: Reducer<infer State, infer Action> }[]
+  ? Action extends SliceAction<infer Type, infer Payload>
+  ? {
+    action: SliceAction<Type, Payload>,
+    state: { [P in Name]: State }
+  } : never : never
+
+export const configureStore = <
+  Slice extends SimpleSlice<string, Reducer<any, any, any>>,
+  State extends TypesFromSlices<Slice[]>['state'],
+  Action extends TypesFromSlices<Slice[]>['action'],
+>(slices: Slice[]) => {
+  const reducersByName = slices.reduce((acc, current) => {
+    acc[current.name] = current.reducer;
+    return acc;
+  }, {} as Record<string, Reducer>);
+
+  const reducer = combineReducers(reducersByName) as Reducer<State, Action>;
+
+  const store = createStore(reducer);
+
+  return {
+    store,
+  };
+};
+
+export const createUseSelector = <
+  Store extends ReduxStore,
+  State extends ReturnType<Store['getState']>,
+>(store: Store) => {
+  const useSelector = <Selector extends (state: State) => unknown>(selector: Selector) => {
+    return useSyncExternalStoreWithSelector(
+      store.subscribe,
+      store.getState,
+      store.getState,
+      selector
+    ) as ReturnType<Selector>;
+  };
+
+  return useSelector;
+};
+
+```
+
+```ts [store/users/slice.ts]
+import { createSlice } from "@/myReduxToolkit";
+
+type User = {
+  id: string;
+  username: string;
+  displayName: string;
+}
+
+export const usersSlice = createSlice({
+  name: 'users',
+  defaultState: {
+    userById: {} as Record<string, User>,
+    usernameById: {} as Record<string, string>,
+  },
+  actions: {
+    addUser: (state, user: User) => {
+      state.userById[user.id] = user;
+      state.usernameById[user.username] = user.id;
+    },
+    deleteUser: (state, userId: string) => {
+      const user = state.userById[userId];
+      delete state.usernameById[user.username];
+      delete state.userById[userId];
+    }
+  },
+  selectors: {
+    selectUserByUsername: (state, username: string) => state.userById[state.usernameById[username]],
+    selectAllUsers: (state) => Object.values(state.userById),
+  }
+});
+
+```
+
+```ts [store/index.ts]
+import { configureStore, createUseSelector } from '@/myReduxToolkit';
+import { usersSlice } from './users/slice';
+
+export const { store } = configureStore([usersSlice]);
+
+export const useSelector = createUseSelector(store);
+
+```
+
+```tsx [components/SomeComponent.tsx]
+const Test = () => {
+  const allUsers = useSelector(state => usersSlice.selectors.selectAllUsers(state.users));
+
+  console.log({
+    allUsers
+  });
+
+  return <div>
+    <button onClick={() => {
+      console.log(usersSlice.actions);
+      store.dispatch(usersSlice.actions.addUser({
+        displayName: String(Math.random()),
+        id: String(Math.random()),
+        username: String(Math.random()),
+      }));
+      console.log(store.getState());
+    }}>Add new user</button>
+
+    {allUsers.map((user) => <div key={user.username}>
+      <p>{user.displayName}</p>
+      <p>@{user.username}</p>
+    </div>)}
+  </div>;
+};
+```
