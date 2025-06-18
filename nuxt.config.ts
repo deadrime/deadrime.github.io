@@ -6,7 +6,6 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/fonts',
     '@nuxt/eslint',
-    '@nuxt/scripts',
     'nuxt-shiki',
     '@pinia/nuxt',
     'nuxt-svgo',
@@ -32,18 +31,6 @@ export default defineNuxtConfig({
   },
   postcss: {
     plugins: {
-      'postcss-preset-env': {
-        autoprefixer: {
-          flexbox: 'no-2009',
-        },
-        stage: 3,
-        features: {
-          'custom-media-queries': true,
-          'nesting-rules': false,
-          'custom-properties': false,
-        },
-      },
-      '@tailwindcss/postcss': {},
       '@tailwindcss/nesting': 'postcss-nesting',
       'autoprefixer': {},
     },
