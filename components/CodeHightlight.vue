@@ -45,7 +45,6 @@ const html = await highlighter.codeToHtml(props.code.trim(), {
     transformerNotationHighlight(),
     transformerNotationFocus(),
     transformerMetaHighlight(),
-    // transformerRemoveLineBreak(),
   ],
   themes: {
     light: oneLight,
@@ -60,47 +59,61 @@ const html = await highlighter.codeToHtml(props.code.trim(), {
 <style lang="css">
 @reference "~/assets/css/main.css";
 
-html[data-theme='dark'] .shiki,
-html[data-theme='dark'] .shiki span {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-  font-style: var(--shiki-dark-font-style) !important;
-  font-weight: var(--shiki-dark-font-weight) !important;
-  text-decoration: var(--shiki-dark-text-decoration) !important;
+html[data-theme='dark'] {
+  & .shiki, & .shiki span {
+    color: var(--shiki-dark) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+
+  & .shiki .line {
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  & .shiki .line.highlighted {
+    background-color: #24c5ff33 !important;
+  }
 }
 
-html[data-theme='light'] .shiki,
-html[data-theme='light'] .shiki span {
-  color: var(--shiki-light) !important;
-  background-color: var(--shiki-light-bg) !important;
-  font-style: var(--shiki-light-font-style) !important;
-  font-weight: var(--shiki-light-font-weight) !important;
-  text-decoration: var(--shiki-light-text-decoration) !important;
+html[data-theme='light'] {
+  & .shiki, & .shiki span {
+    color: var(--shiki-light) !important;
+    font-style: var(--shiki-light-font-style) !important;
+    font-weight: var(--shiki-light-font-weight) !important;
+    text-decoration: var(--shiki-light-text-decoration) !important;
+  }
+
+  & .shiki .line {
+    background-color: var(--shiki-light-bg) !important;
+  }
+
+  & .shiki .line.highlighted {
+    background-color: #ddd3 !important;
+  }
 }
 
 .pre-body {
   @apply overflow-x-auto;
 
-  & code {
-    @apply bg-[var(--shiki-light-bg)] dark:bg-[var(--shiki-dark-bg)];
+  & .shiki {
+    @apply py-3;
+  }
 
-    width: max-content;
-    display: block;
-    /* min-width: max-content; */
-    font-family: var(--font-fira);
+  & code {
+    @apply block font-fira min-w-max w-full bg-[var(--shiki-light-bg)] dark:bg-[var(--shiki-dark-bg)];
   }
 
   & .line {
     @apply px-4 w-full inline-block;
     transition: filter .35s, opacity .35s;
-    --code-line-bg: rgba(72, 62, 62, 0.2);
+
     &:last-of-type:empty {
       display: none;
     }
   }
 
   & .line.highlighted {
-    background: var(--code-line-bg);
     box-shadow: inset 2px 0px 0px rgb(20, 158, 202);
   }
 

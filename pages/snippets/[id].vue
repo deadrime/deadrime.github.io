@@ -9,8 +9,10 @@ const { data: page } = await useAsyncData('snipper' + route.path, () => {
 </script>
 
 <template>
-  <ContentRenderer
-    v-if="page"
-    :value="page"
-  />
+  <NuxtLayout name="snippet">
+    <ContentRenderer
+      v-if="page"
+      :value="page"
+    />
+  </NuxtLayout>
 </template>

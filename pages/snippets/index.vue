@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-const { data: posts } = await useAsyncData('snippets', () => {
+import SnippetsSearch from '~/components/SnippetsSearch.vue'
+
+const { data: snippets } = await useAsyncData('snippets', () => {
   return queryCollection('snippets').all()
 })
 </script>
 
 <template>
   <div>
-    <NuxtLink
-      v-for="post in posts"
-      :key="post.id"
-      :to="post.path"
-    >
-      {{ post.id }}
-      {{ post.path }}
-    </NuxtLink>
+    <h1 class="text-xl font-primary block mb-6">
+      Сниппеты
+    </h1>
+
+    <SnippetsSearch :snippets="snippets || []" />
   </div>
 </template>

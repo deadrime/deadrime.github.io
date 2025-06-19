@@ -50,6 +50,7 @@ export default defineNuxtConfig({
         src: '/fonts/IgraSans.woff2',
         weight: 400,
         style: 'normal',
+        preload: true,
       },
       {
         name: 'Nunito',

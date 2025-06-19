@@ -1,11 +1,14 @@
 <template>
   <ol
     ref="wrapper"
-    class="headingList flex flex-col gap-3 relative [&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3 [&_ol>li>*]:pl-5! border-l-1 border-gray-200/50 dark:border-gray-600/50"
+    class="headingList flex flex-col gap-3 relative [&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3 border-l-2 border-gray-200/30 dark:border-gray-600/50"
+    :class="{
+      ['border-none ml-3']: inner,
+    }"
   >
     <motion.div
       v-if="!inner"
-      class="absolute w-[2px] left-0 bg-primary rounded-[2px] -translate-x-1/2"
+      class="absolute w-[2px] left-0 bg-primary rounded-[2px] -translate-x-[2px]"
       :animate="{
         top: marker.top,
         height: marker.height,
@@ -25,7 +28,7 @@
     >
       <NuxtLink
         :href="`#${item.id}`"
-        class="text-body2 border-l-1 border-transparent"
+        class="text-body2 border-l-2 border-transparent"
         :class="{
           ['text-text']: activeHeadingId !== item.id,
           ['text-primary']: activeHeadingId === item.id,

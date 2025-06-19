@@ -7,7 +7,7 @@ previewImg: /images/image-thumb-preview.webp
 ---
 
 <h2 id="why">Зачем оно вообще нужно</h2>
-2
+
 Для начала поговорим про цифры. Если вы когда-нибудь делали аналитику сайта - то вы в курсе, что изображения весьма прожорливые. Скорее всего даже более прожорливые, чем ваш бандл.
 Перед тем, как пытаться оптимизировать что-либо еще - лучше начать именно с картинок.
 
@@ -19,17 +19,14 @@ previewImg: /images/image-thumb-preview.webp
 UI может прыгать, пока все картинки не загрузятся (сделаем допущение, что вы не хотите или не можете привести все картинки к одному размеру)
 При медленном интернете или если сервер слишком далеко от пользователя, он будет видеть огрызки картинок, что прямо скажем не красиво.
 
-<Image
-  src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJtZTh4dGJ2bDBiMnVuZHJkMmc2cWQxZzFkdGdzOXJxYjdhbGYzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QIQTfximd3AuQ/giphy.gif"
-  alt="Раздражает, правда?"
-/>
+![Раздражает, правда?](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJtZTh4dGJ2bDBiMnVuZHJkMmc2cWQxZzFkdGdzOXJxYjdhbGYzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QIQTfximd3AuQ/giphy.gif)
 
 А еще пользователь у нас очень привередливый и если мы не покажем ему хоть что-то в течении первых пары секунд - скорее всего мы его потеряем.
 Именно проблему **показать хоть что-то** и призвана решить прогрессивная загрузка изображений. 
 
 Идея заключается в том, что мы показываем пользователю миниатюру в низком разрешении, пока грузим оригинальную картинку.
 
-{/* <Image {...tgExample} alt="Пример из telegram"/> */}
+![Пример из telegram](/images/progressive-images-using-thumbhash/telegram-example.png)
 
 Для реализации такого подхода я выбрал либу thumbhash, она весит < 4kb и позволяет хранить хеш весом всего 30-40 байт.
 
@@ -124,7 +121,7 @@ c.drawImage(img, 0, 0, w, h);
 Полученный **Uint8Array** я конвертирую в **base64** строку, которую мы затем можем сохранить на сервере.
 
 
-```ts {14,16,18}
+```ts {15,17,19}
 import { rgbaToThumbHash } from 'thumbhash';
 
 async function generateImageThumb(img: HTMLImageElement) {

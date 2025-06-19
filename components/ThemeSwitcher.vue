@@ -109,10 +109,14 @@ const getSunPartStyle = (i: number): Variant => {
     }
   }
 
+  const { x: x1, y: y1 } = calculateSunPartXy(i, 0)
+  const { x: x2, y: y2 } = calculateSunPartXy(i, 8)
+
   return {
     width,
     height,
-    ...calculateSunPartXy(i, 8),
+    x: [x1, x2],
+    y: [y1, y2],
   }
 }
 </script>
