@@ -23,9 +23,16 @@
 
 <script lang="ts" setup>
 import { usePost } from '~/hooks/usePost'
+import { usePostSeo } from '~/hooks/usePostSeo'
 
 const route = useRoute()
 const post = await usePost(route.path)
+
+if (!post.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Post not found', fatal: true })
+}
+
+usePostSeo(post.value)
 
 const { data: related } = await useAsyncData('surround' + route.path, () => {
   return queryCollectionItemSurroundings('articles', route.path)

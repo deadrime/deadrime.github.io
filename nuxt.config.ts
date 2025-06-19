@@ -16,6 +16,13 @@ export default defineNuxtConfig({
     rootTag: 'body',
     rootAttrs: {
       id: 'app',
+      lang: 'ru',
+    },
+    head: {
+      link: [{
+        rel: 'apple-touch-icon',
+        href: '/apple-icon.png',
+      }],
     },
   },
   css: ['~/assets/css/main.css', '~/assets/css/global.css'],
@@ -54,7 +61,9 @@ export default defineNuxtConfig({
       },
       {
         name: 'Nunito',
+        style: 'ital',
         subsets: ['latin', 'cyrillic'],
+        weight: 400,
         weights: [300, 400, 500, 700],
         display: 'swap',
         provider: 'google',

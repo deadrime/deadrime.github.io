@@ -9,7 +9,7 @@
   --text-2xl: clamp(2.4414rem, 2.2301rem + 0.939vi, 3.0518rem);
 
   /* Font families */
-  --font-base: system-ui, sans-serif;
+  --font-base: 'Nunito', system-ui, sans-serif;
   --font-primary: 'Igra Sans';
   --font-fira: 'Fira Code', monospace;
 

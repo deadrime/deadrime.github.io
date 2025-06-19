@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import SnippetsSearch from '~/components/SnippetsSearch.vue'
 
+useSeoMeta({
+  title: 'Сниппеты - Трофимов Евгений',
+})
+
 const { data: snippets } = await useAsyncData('snippets', () => {
   return queryCollection('snippets').all()
 })

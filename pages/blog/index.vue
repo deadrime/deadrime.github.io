@@ -11,6 +11,10 @@
 <script lang="ts" setup>
 import ArticlePreview from '~/components/ArticlePreview.vue'
 
+useSeoMeta({
+  title: 'Блог - Трофимов Евгений',
+})
+
 const { data: posts } = await useAsyncData('blog', () => {
   return queryCollection('articles').all()
 })
