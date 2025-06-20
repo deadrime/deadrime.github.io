@@ -1,6 +1,7 @@
 <template>
   <motion.button
     class="w-[32px] h-[32px] overflow-hidden cursor-pointer"
+    aria-label="Toggle theme"
     @hover-start="isHovered = true"
     @hover-end="isHovered = false"
     @press-start="isPressed = true"
@@ -21,19 +22,19 @@
     <motion.div
       class="bg-black dark:bg-red rounded-full absolute"
       :style="{ x: sunX, y: sunY, width: sunSizePx, height: sunSizePx }"
-      :animate="{ scale: isPressed ? 0.75 : isHovered ? 1.1 : 1, background: themeStore.theme ==='dark' ? '#fff' : 'var(--color-black)' }"
+      :animate="{ scale: isPressed ? 0.75 : isHovered ? 1.1 : 1, background: theme ==='dark' ? '#fff' : 'var(--color-black)' }"
       :transition="{
         duration: 0.5,
       }"
     />
     <AnimatePresence>
       <motion.div
-        v-if="themeStore.theme === 'dark'"
+        v-if="theme === 'dark'"
         class="absolute bg-white rounded-full"
         :class="{
-          ['bg-background']: themeStore.theme ==='dark',
+          ['bg-background']: theme ==='dark',
         }"
-        :style="{ width: sunSizePx, height: sunSizePx, y: sunY, background: themeStore.theme ==='dark' ? 'var(--color-background)' : '--color-background' }"
+        :style="{ width: sunSizePx, height: sunSizePx, y: sunY, background: theme ==='dark' ? 'var(--color-background)' : '--color-background' }"
         :initial="{ x: 50, y: -5 }"
         :animate="{ x: sunX / 2 + sunX, y: sunY - 2 }"
         :exit="{ x: sunX, scale: [1, 0], y: sunY, background: 'var(--color-black)' }"
@@ -52,11 +53,11 @@ import { motion, AnimatePresence, type Variant } from 'motion-v'
 const isHovered = ref(false)
 const isPressed = ref(false)
 
-const themeStore = useThemeStore()
-
-const toggleTheme = () => {
-  themeStore.setTheme(themeStore.theme === 'dark' ? 'light' : 'dark')
-}
+const { theme, toggleTheme } = inject<{
+  theme: globalThis.Ref<'dark' | 'light', 'dark' | 'light'>
+  setTheme: (newTheme: 'dark' | 'light') => void
+  toggleTheme: () => void
+}>('theme')!
 
 const sunParticleCount = 8
 const sunR = 12.5
@@ -81,7 +82,7 @@ const calculateSunPartXy = (i: number, distance = 20) => {
 const getSunPartStyle = (i: number): Variant => {
   const width = r, height = r
 
-  if (themeStore.theme === 'dark') {
+  if (theme.value === 'dark') {
     return {
       width,
       height,

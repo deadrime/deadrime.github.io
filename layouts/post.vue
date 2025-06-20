@@ -65,8 +65,6 @@ const article = await usePost(route.path)
 
 const toc = article.value!.body.toc!
 
-console.log({ toc })
-
 const { title, description, topics, date } = article.value!
 </script>
 

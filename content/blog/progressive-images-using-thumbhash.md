@@ -26,9 +26,12 @@ UI может прыгать, пока все картинки не загруз
 
 Идея заключается в том, что мы показываем пользователю миниатюру в низком разрешении, пока грузим оригинальную картинку.
 
+
 ![Пример из telegram](/images/progressive-images-using-thumbhash/telegram-example.png)
 
 Для реализации такого подхода я выбрал либу thumbhash, она весит < 4kb и позволяет хранить хеш весом всего 30-40 байт.
+
+:code-example{projectId="react-ts-c9v55cdz" openFile="ProgressiveImageExample.tsx" height=600}
 
 Еще примеры можно найти на официальном сайте: https://evanw.github.io/thumbhash/
 

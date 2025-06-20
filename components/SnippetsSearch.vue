@@ -6,7 +6,7 @@
       class="mb-6"
       @change="query = $event"
     />
-    <div v-if="!findedSnippets.length">
+    <div v-if="snippets.length > 0 && !findedSnippets.length">
       Ничего не найдено
     </div>
     <div class="flex flex-col gap-3 w-max">
@@ -22,42 +22,54 @@
 </template>
 
 <script lang="ts" setup>
-import createFuzzySearch from '@nozbe/microfuzz'
-import type { SnippetsCollectionItem } from '@nuxt/content'
+import { useFuse } from '@vueuse/integrations/useFuse'
 import { useDebounce } from '@vueuse/core'
+import type { SnippetsCollectionItem } from '@nuxt/content'
+
+import type { RangeTuple } from 'fuse.js'
 import TextInput from './TextInput.vue'
 import SnippetPreview from './SnippetPreview.vue'
 
-const { snippets } = defineProps<{ snippets: SnippetsCollectionItem[] }>()
-
+const MIN_CHAR_COUNT = 2
 const query = ref('')
 const debouncedQuery = useDebounce(query, 200)
 
-const fuzzySearch = createFuzzySearch(snippets, {
-  getText: (item: SnippetsCollectionItem) => [item.title, item.description],
+const { snippets } = defineProps<{ snippets: SnippetsCollectionItem[] }>()
+
+const { fuse } = useFuse(debouncedQuery, snippets, {
+  fuseOptions: {
+    includeMatches: true,
+    distance: 500,
+    minMatchCharLength: MIN_CHAR_COUNT,
+    keys: [
+      { name: 'title', getFn: snippet => snippet.title },
+      { name: 'description', getFn: snippet => snippet.description },
+    ],
+  },
 })
 
 const findedSnippets = computed(() => {
-  if (!debouncedQuery.value) {
+  if (!debouncedQuery.value || debouncedQuery.value.length < MIN_CHAR_COUNT) {
     return snippets.map(i => ({
       item: i,
-      score: 1,
       titleHighlightRanges: [],
       descriptionHighlightRanges: [],
     }))
   }
 
-  const searchResult = fuzzySearch(debouncedQuery.value)
+  const results = fuse.value.search(debouncedQuery.value)
 
-  return searchResult.map((i) => {
-    const [titleHighlightRanges, descriptionHighlightRanges] = i.matches
+  return results.map(({ item, matches }) => {
+    const matchesByField = (matches || [])?.reduce((acc, curr) => {
+      acc[curr.key!] = curr.indices
+      return acc
+    }, {} as Record<string, readonly RangeTuple[]>)
 
-    return ({
-      item: i.item,
-      score: i.score,
-      titleHighlightRanges: titleHighlightRanges || [],
-      descriptionHighlightRanges: descriptionHighlightRanges || [],
-    })
+    return {
+      item: item,
+      titleHighlightRanges: [...matchesByField['title'] || []],
+      descriptionHighlightRanges: [...matchesByField['description'] || []],
+    }
   })
 })
 </script>

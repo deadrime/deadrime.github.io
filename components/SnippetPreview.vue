@@ -39,14 +39,18 @@
 
 <script lang="ts" setup>
 import type { SnippetsCollectionItem } from '@nuxt/content'
-import type { HighlightRanges } from '@nozbe/microfuzz'
+import type { RangeTuple } from 'fuse.js'
 import SearchHighlight from './SearchHightlight.vue'
 
 const {
   snippet,
   titleHighlightRanges,
   descriptionHighlightRanges,
-} = defineProps<{ snippet: SnippetsCollectionItem, titleHighlightRanges: HighlightRanges, descriptionHighlightRanges: HighlightRanges }>()
+} = defineProps<{
+  snippet: SnippetsCollectionItem
+  titleHighlightRanges: RangeTuple[]
+  descriptionHighlightRanges: RangeTuple[]
+}>()
 </script>
 
 <style>

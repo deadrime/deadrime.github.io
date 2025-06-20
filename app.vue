@@ -1,6 +1,4 @@
 <template>
-  <!-- <NuxtRouteAnnouncer />
-    <NuxtWelcome /> -->
   <NuxtLoadingIndicator />
   <NuxtLayout name="default">
     <NuxtPage />
@@ -19,6 +17,9 @@ useHead({
   ],
   bodyAttrs: {
     class: 'flex flex-col gap-4 min-h-screen',
+  },
+  htmlAttrs: {
+    lang: 'ru',
   },
 })
 

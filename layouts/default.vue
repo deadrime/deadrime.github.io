@@ -68,6 +68,32 @@
 import { NuxtLink } from '#components'
 import ThemeSwitcher from '~/components/ThemeSwitcher.vue'
 
+const getInitialTheme = () => {
+  if (import.meta.server) return 'dark'
+  const preferredDarkModeBySystem = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const savedTheme = localStorage.getItem('selectedTheme') as 'dark' | 'light'
+  const theme: 'dark' | 'light' = savedTheme ? savedTheme : preferredDarkModeBySystem ? 'dark' : 'light'
+  return theme
+}
+
+const theme = ref<'dark' | 'light'>(getInitialTheme())
+
+const setTheme = (newTheme: 'dark' | 'light') => {
+  theme.value = newTheme
+  document.documentElement.setAttribute('data-theme', newTheme)
+  localStorage.setItem('selectedTheme', newTheme)
+}
+
+const toggleTheme = () => {
+  setTheme(theme.value === 'dark' ? 'light' : 'dark')
+}
+
+provide('theme', {
+  theme,
+  setTheme,
+  toggleTheme,
+})
+
 const Logo = () => (
   <NuxtLink href="/" class="font-fira text-md">
     {'<'}
