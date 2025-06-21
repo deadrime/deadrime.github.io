@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div
     class="pre-body flex flex-col rounded-sm overflow-hidden"
@@ -82,6 +83,7 @@ html[data-theme='light'] {
     font-style: var(--shiki-light-font-style) !important;
     font-weight: var(--shiki-light-font-weight) !important;
     text-decoration: var(--shiki-light-text-decoration) !important;
+    background-color: var(--shiki-light-bg) !important;
   }
 
   & .shiki .line {

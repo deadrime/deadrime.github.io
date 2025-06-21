@@ -2,7 +2,6 @@
   <div
     class="codeSnippet text-body2 border border-gray-100 dark:border-gray-700 rounded-sm overflow-hidden"
     :data-lang="language"
-    data-caption="???"
   >
     <div
       class="caption flex items-center gap-1 text-gray-700 dark:text-white rounded-t overflow-hidden px-4 py-2 bg-gray-100 dark:bg-[#201b31]"
