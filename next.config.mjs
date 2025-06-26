@@ -24,22 +24,23 @@ const nextConfig = {
     });
     return config;
   },
-  experimental: {
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: [{
-            loader: '@svgr/webpack',
-            options: {
-              dimensions: false,
-            },
-          }],
-          as: '*.js',
-        },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: [{
+          loader: '@svgr/webpack',
+          options: {
+            dimensions: false,
+          },
+        }],
+        as: '*.js',
       },
     },
   },
   reactStrictMode: false,
+  experimental: {
+    mdxRs: true,
+  }
 };
 
 const withMDX = createMDX({

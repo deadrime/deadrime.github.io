@@ -3,12 +3,18 @@ import { getAllTopics, getArticlesForTopic } from "@/helpers/blog";
 import { BlogArticle } from "@/components/Article";
 
 type TopicPageProps = {
-  params: {
+  params: Promise<{
     topic: string
-  }
+  }>
 }
 
-export default async function TopicPage({ params: { topic } }: TopicPageProps) {
+export default async function TopicPage(props: TopicPageProps) {
+  const params = await props.params;
+
+  const {
+    topic
+  } = params;
+
   const articles = await getArticlesForTopic(topic);
   return (
     <main className="flex flex-col">

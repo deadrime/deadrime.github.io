@@ -10,12 +10,18 @@ import { capitalize } from "@/helpers/capitalize";
 
 type ArticleLayoutProps = {
   children: React.ReactNode,
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
-export default async function Layout({ children, params }: ArticleLayoutProps) {
+export default async function Layout(props: ArticleLayoutProps) {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   const slug = params.slug;
   const article = await getArticleBySlug(slug);
   const { title, description, topics, publishedTime } = article;

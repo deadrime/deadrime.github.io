@@ -3,12 +3,13 @@ import { Metadata } from "next";
 import React from "react";
 
 type ArticlePageProps = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
-export default async function ArticlePage({ params }: ArticlePageProps) {
+export default async function ArticlePage(props: ArticlePageProps) {
+  const params = await props.params;
   const article = await getArticleBySlug(params.slug);
 
   return (
@@ -24,9 +25,8 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   );
 }
 
-export async function generateMetadata(
-  { params }: ArticlePageProps,
-): Promise<Metadata> {
+export async function generateMetadata(props: ArticlePageProps): Promise<Metadata> {
+  const params = await props.params;
   const article = await getArticleBySlug(params.slug);
 
   return article.metadata;
