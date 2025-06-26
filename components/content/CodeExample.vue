@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapper"
-    class="w-full rounded-md overflow-hidden"
+    class="w-full rounded-md overflow-hidden mt-3"
   >
     <div ref="iframe" />
   </div>
