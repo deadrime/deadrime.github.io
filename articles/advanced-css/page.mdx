@@ -59,7 +59,7 @@ body {
 }
 ```
 
-  либо
+либо
 ```css
 body {
   margin: 0;
@@ -72,26 +72,26 @@ body {
 }
 ```
 
-  </Accordion>
+</Accordion>
 
 
-  <h3 id="container-based">Зависящие от размера блока</h3>
+<h3 id="container-based">Зависящие от размера блока</h3>
 
-  Можно использовать единицы измерения, которые будут зависить от размера блока
+Можно использовать единицы измерения, которые будут зависить от размера блока
 
-  : 1% of a query container's width
-  : 1% of a query container's height
-  : 1% of a query container's inline size
-  : 1% of a query container's block size
-  : The smaller value of either cqi or cqb
-  : The larger value of either cqi or cqb
+- `cqw`: 1% of a query container's width
+- `cqh`: 1% of a query container's height
+- `cqi`: 1% of a query container's inline size
+- `cqb`: 1% of a query container's block size
+- `cqmin`: The smaller value of either cqi or cqb
+- `cqmax`: The larger value of either cqi or cqb
 
-  Чтобы использовать эти единицы измерения, нужно задать `container-type` у родительского контейнера:
+Чтобы использовать эти единицы измерения, нужно задать `container-type` у родительского контейнера:
 
-  <Accordion summary="Объяснение container-type">
-    <img className='w-full max-w-lg' src="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/Basic_concepts_of_logical_properties_and_values/mdn-horizontal.png"/>
-    <img className='w-full max-w-lg' src="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/Basic_concepts_of_logical_properties_and_values/mdn-vertical.png"/>
-    </Accordion>
+<Accordion summary="Объяснение container-type">
+  <img className='w-full max-w-lg' src="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/Basic_concepts_of_logical_properties_and_values/mdn-horizontal.png"/>
+  <img className='w-full max-w-lg' src="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values/Basic_concepts_of_logical_properties_and_values/mdn-vertical.png"/>
+</Accordion>
 
 ```css
 .container {
@@ -104,7 +104,7 @@ body {
 }
 ```
 
-    всегда зависит от ширины контейнера, даже если есть вложенность.
+`cqw` всегда зависит от ширины контейнера, даже если есть вложенность.
 
 ```html
 <div className="container">
@@ -137,7 +137,7 @@ body {
 
 ```
 
-    Можно использовать в медиазапросах:
+Можно использовать в медиазапросах:
 
 ```css
 @container (min-width: 400px) { /* Если ширина ближайшего контейнера больше 400px */
@@ -153,11 +153,11 @@ body {
 }
 ```
 
-    <h3 id="aspect-ratio-based">Зависящие от соотношения сторон</h3>
+<h3 id="aspect-ratio-based">Зависящие от соотношения сторон</h3>
 
-    соотношение ширины к высоте, например 1 / 1 - квадрат, а 16 / 9 - прямоугольник
+`aspect-ratio` - соотношение ширины к высоте, например 1 / 1 - квадрат, а 16 / 9 - прямоугольник
 
-    Можно использовать в медиазапросах, для этого есть `min-aspect-ratio`, `max-aspect-ratio`
+Можно использовать в медиазапросах, для этого есть `min-aspect-ratio`, `max-aspect-ratio`
 
 ```css
 @media screen and (min-aspect-ratio: 16/10) {
@@ -165,7 +165,7 @@ body {
 }
 ```
 
-    <h2 id="selectors">Селекторы</h2>
+<h2 id="selectors">Селекторы</h2>
 
 ```css
 /* По id */
@@ -197,9 +197,9 @@ body {
 
 ```
 
-    <h2 id="pseudo-classes">Псевдоклассы</h2>
+<h2 id="pseudo-classes">Псевдоклассы</h2>
 
-    Псевдокласс - ключевое слово, добавленное к селектору для уточнения его состояния.
+Псевдокласс - ключевое слово, добавленное к селектору для уточнения его состояния.
 
 ```css
 selector:pseudo-class {
@@ -207,27 +207,27 @@ selector:pseudo-class {
 }
 ```
 
-    Самые полезные:
+Самые полезные:
 
-    при наведении
-    при фокусе (tab)
-    при фокусе этого элемента или его детей
-    при активации, например при зажатии ЛКМ
-    для выбранных `<input type="radio">`, `<input type="checkbox">` или `<option>` внутри `<select>`
-    для кнопок
-    когда у элемент пуст (нет children), можно применить `.element:empty { display: none }` вместо условного рендеринга 
-    первый ребенок своего родителя
-    первый ребенок такого типа, например первый `div`
-    последний ребенок своего родителя
-    последний ребенок такого типа, например последний `div`
-    какой-то конкетный ребенок (1-й, второй, третий, четный, нечетный)
-    какой-то конкетный элемент такого типа
-    единственный ребенок
-    единственный элемент такого типа
-    , `:optional`, `:required` - для валидации форм
-    для посещенных ссылок, рудимент если честно
+- `:hover` - при наведении
+- `:focus` - при фокусе (tab)
+- `:focus-within` - при фокусе этого элемента или его детей
+- `:active` - при активации, например при зажатии ЛКМ
+- `:checked` - для выбранных `<input type="radio">`, `<input type="checkbox">` или `<option>` внутри `<select>`
+- `:disabled` - для кнопок
+- `:empty` - когда у элемент пуст (нет children), можно применить `.element:empty { display: none }` вместо условного рендеринга 
+- `:first-child` - первый ребенок своего родителя
+- `:first-of-type` - первый ребенок такого типа, например первый `div`
+- `:last-child` - последний ребенок своего родителя
+- `:last-of-type` - последний ребенок такого типа, например последний `div`
+- `:nth-child()` - какой-то конкетный ребенок (1-й, второй, третий, четный, нечетный)
+- `:nth-of-type()` - какой-то конкетный элемент такого типа
+- `:only-child` - единственный ребенок
+- `:only-of-type` - единственный элемент такого типа
+- `:valid`, `:optional`, `:required` - для валидации форм
+- `:visited` - для посещенных ссылок, рудимент если честно
 
-    позволяет проще писать сложный CSS
+- `:is()` - позволяет проще писать сложный CSS
 
 ```css
 .card h1,
@@ -251,9 +251,9 @@ a:is(:hover, :focus) {
 
 ```
 
-    похож на :is, но позволяет убить специфичность, идеально для reset
+- `:where()` похож на :is, но позволяет убить специфичность, идеально для reset
 
-    позволяет проверить наличие у родителя наличие какого-то селектора внутри и выбрать именно родителя
+- `:has()` - позволяет проверить наличие у родителя наличие какого-то селектора внутри и выбрать именно родителя
 
 ```css
 /* Если в форме есть невалидный инпут - покрась submit кнопку в красный  */
@@ -270,12 +270,12 @@ html:has(.modal.open) {
 }
 ```
 
-    <h2 id="pseudo-elements">Псевдоэлементы</h2>
+<h2 id="pseudo-elements">Псевдоэлементы</h2>
 
-    Псевдоэлементы не существуют в HTML разметке, они создаются только с помощью CSS,
+Псевдоэлементы не существуют в HTML разметке, они создаются только с помощью CSS,
 их нельзя создать, выбрать(querySelector-ом) и менять при помощи JS.
 
-  добавить какой-то контент после элемента (создать псевдоэлемент, который является последним потомком)
-    до (создать псевдоэлемент, который будет первым потомком)
-    стилизовать первую букву
-  стилизовать первую линию
+- `::after` - добавить какой-то контент после элемента (создать псевдоэлемент, который является последним потомком)
+- `::before` - до (создать псевдоэлемент, который будет первым потомком)
+- `::first-letter` - стилизовать первую букву
+- `::first-line` - стилизовать первую линию
