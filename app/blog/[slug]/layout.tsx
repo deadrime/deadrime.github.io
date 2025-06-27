@@ -24,7 +24,7 @@ export default async function Layout(props: ArticleLayoutProps) {
 
   const slug = params.slug;
   const article = await getArticleBySlug(slug);
-  const { title, description, topics, publishedTime } = article;
+  const { title, description, topics, publishedTime, toc } = article;
 
   return (
     <div className="flex flex-col">
@@ -52,7 +52,7 @@ export default async function Layout(props: ArticleLayoutProps) {
         </section>
         <div className="flex flex-col md:grid md:grid-cols-12 gap-5">
           <aside className="md:col-start-10 md:col-end-13 md:sticky top-4 self-start shrink-0 md:order-last">
-            <TableOfContent contentId="content" />
+            <TableOfContent toc={toc} />
           </aside>
           <div className={classNames(styles.blogContent, 'md:col-span-8')} id="content">
             {children}

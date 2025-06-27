@@ -1,48 +1,33 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import styles from './TableOfContent.module.css';
 import React from 'react';
 import classNames from 'classnames';
 import { useThrottledCallback } from '@/hooks/useThrottledCallback';
+import { TocItem } from '@/types/article';
 
-type Heading = {
-  id: string;
-  text: string;
-  level: number;
-  element: HTMLElement;
-}
+const unwrapHeading = (links: TocItem[]) => {
+  const result: TocItem[] = []
 
-type HierarchicalHeading = Heading & {
-  children: HierarchicalHeading[]
-}
-
-const getHierarchicalHeadings = (headings: Heading[]) => {
-  const result = headings.reduce<HierarchicalHeading[]>((acc, curr) => {
-    if (curr.level === 2) {
-      acc.push({
-        ...curr,
-        children: [],
-      });
-    } else {
-      const parent = acc.toReversed().find(i => i.level < curr.level) as HierarchicalHeading;
-      parent.children.push({
-        ...curr,
-        children: [],
-      });
+  const addLink = (link: TocItem) => {
+    result.push(link)
+    if (link.children) {
+      link.children.forEach(addLink)
     }
+  }
 
-    return acc;
-  }, []);
+  links.forEach(addLink)
 
-  return result;
-};
+  return result
+}
 
-const useActiveHeading = (headings: Heading[], topOffset = 400) => {
+const useActiveHeading = (headings: TocItem[], topOffset = 400) => {
   const [activeHeadingId, setActiveHeading] = React.useState<string>('');
 
   const handleScroll = useCallback(() => {
-    let headingBoxes = headings.map(({ id, element }) => {
+    let headingBoxes = unwrapHeading(headings).map(({ id }) => {
+      const element = document.getElementById(id)!;
       return { id, box: element.getBoundingClientRect() };
     });
 
@@ -73,7 +58,6 @@ const useActiveHeading = (headings: Heading[], topOffset = 400) => {
     if (headings.length > 0) {
       handleScroll();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headings]);
 
   useEffect(() => {
@@ -86,38 +70,15 @@ const useActiveHeading = (headings: Heading[], topOffset = 400) => {
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
     };
-  }, [activeHeadingId, throttledHandleScroll, headings, topOffset]);
+  }, [throttledHandleScroll, headings, topOffset]);
 
   return activeHeadingId;
 };
 
-export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) => {
-  const [headings, setHeadings] = useState<Heading[]>([]);
+export const TableOfContent: React.FC<{ toc: TocItem[] }> = ({ toc }) => {
+  const activeHeadingId = useActiveHeading(toc);
 
-  const activeHeadingId = useActiveHeading(headings);
-
-  useEffect(() => {
-    const content = document.getElementById(contentId);
-
-    if (!content) {
-      return;
-    }
-
-    const headings = Array.from(content.querySelectorAll<HTMLElement>("h2, h3, h4"))
-      .map((element) => {
-        return {
-          id: element.id || element.querySelector('a[href]')?.getAttribute('href')?.substring(1) || element.innerText, // TODO: use translit
-          text: element.innerText,
-          level: Number(element.nodeName.charAt(1)),
-          element,
-        };
-      });
-    setHeadings(headings);
-  }, [contentId]);
-
-  const hierarchicalHeadings = useMemo(() => getHierarchicalHeadings(headings), [headings]);
-
-  if (hierarchicalHeadings.length === 0) {
+  if (toc.length === 0) {
     return null;
   }
 
@@ -125,7 +86,7 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
     <div className="mt-4 mb-4">
       <span className='block mb-3 font-semibold text-lg md:text-body2'>СОДЕРЖАНИЕ</span>
       <HeadingList
-        items={hierarchicalHeadings}
+        items={toc}
         activeHeadingId={activeHeadingId}
         className='[&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3 border-l-1 border-gray-600/50'
       />
@@ -134,7 +95,7 @@ export const TableOfContent: React.FC<{ contentId: string }> = ({ contentId }) =
 };
 
 type HeadingListProps = {
-  items: HierarchicalHeading[]
+  items: TocItem[]
   activeHeadingId: string
   inner?: boolean
   className?: string;
