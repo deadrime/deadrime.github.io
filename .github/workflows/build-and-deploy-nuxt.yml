@@ -1,6 +1,7 @@
 name: Build and deploy nuxt
 
 on:
+  workflow_dispatch:
   push:
     # Pattern matched against refs/tags
     tags:        
