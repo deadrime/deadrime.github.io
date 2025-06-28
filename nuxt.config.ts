@@ -75,4 +75,9 @@ export default defineNuxtConfig({
     defaultImport: 'component',
     svgo: true,
   },
+  nitro: {
+    prerender: {
+      autoSubfolderIndex: false
+    }
+  }
 })
