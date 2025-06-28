@@ -1,5 +1,11 @@
 name: Build and deploy nuxt
 
+on:
+  push:
+    # Pattern matched against refs/tags
+    tags:        
+      - '*'           # Push events to every tag not containing /
+
 permissions:
   contents: write
 
