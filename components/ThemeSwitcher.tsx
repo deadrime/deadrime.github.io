@@ -59,7 +59,7 @@ export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ theme, onThemeCh
     }
 
     const { x: x1, y: y1 } = calculateSunPartXy(i, 0);
-    const { x: x2, y: y2 } = calculateSunPartXy(i, 8);
+    const { x: x2, y: y2 } = calculateSunPartXy(i, 7);
 
     return {
       width,

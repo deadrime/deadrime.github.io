@@ -88,7 +88,7 @@ export const TableOfContent: React.FC<{ toc: TocItem[] }> = ({ toc }) => {
       <HeadingList
         items={toc}
         activeHeadingId={activeHeadingId}
-        className='[&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3 border-l-1 border-gray-600/50'
+        className='[&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3'
       />
     </div>
   );
