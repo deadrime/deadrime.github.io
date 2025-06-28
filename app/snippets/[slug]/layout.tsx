@@ -2,9 +2,7 @@ import { getSnippetBySlug } from "@/helpers/blog";
 import Link from "next/link";
 import classNames from "classnames";
 import React from "react";
-import Tag from "@/components/Tag/Tag";
 import dayjs from 'dayjs';
-import { capitalize } from "@/helpers/capitalize";
 
 type ArticleLayoutProps = {
   children: React.ReactNode,
@@ -22,7 +20,7 @@ export default async function Layout(props: ArticleLayoutProps) {
 
   const slug = params.slug;
   const snippet = await getSnippetBySlug(slug);
-  const { title, description, topics, publishedTime } = snippet;
+  const { title, description, date } = snippet!;
 
   return (
     <div className="flex flex-col">
@@ -36,15 +34,8 @@ export default async function Layout(props: ArticleLayoutProps) {
             <h2 className="font-primary text-md font-normal block mb-8 text-secondary">
               {description}
             </h2>
-            {/* <div className="flex gap-2 flex-wrap gap-y-1">
-              {topics?.map((i) => (
-                <Tag key={i} variant="outlined" as={Link} href={`/blog/topics/${i}`}>
-                  {capitalize(i)}
-                </Tag>
-              ))}
-            </div> */}
             <time className="text-body2 text-secondary block mt-4">
-              {dayjs(publishedTime).format('D MMMM YYYY')}
+              {dayjs(date).format('D MMMM YYYY')}
             </time>
           </header>
         </section>

@@ -32,7 +32,7 @@ const loadCollectionItem = async <S extends Schema>(itemPath: string, collection
   };
 };
 
-export const getPaginatedItems = async <T extends unknown[]>(items: T, limit: number, offset = 0) => {
+export const getPaginatedItems = async <T>(items: T[], limit: number, offset = 0) => {
   return {
     articles: items.slice(offset, limit),
     totalCount: items.length,

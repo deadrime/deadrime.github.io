@@ -43,6 +43,8 @@ const nextConfig = {
   reactStrictMode: false,
   experimental: {
     mdxRs: false,
+    browsersListForSwc: true,
+    legacyBrowsers: false
   }
 };
 

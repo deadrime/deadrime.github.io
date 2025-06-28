@@ -8,7 +8,7 @@ interface Props<T> {
   children?: ReactNode;
   size?: 'small' | 'normal';
   variant: 'filled' | 'outlined'
-  icon?: ReactElement;
+  icon?: ReactElement<React.SVGProps<SVGSVGElement>>;
 }
 
 const Tag = <T extends ElementType = "span">({
