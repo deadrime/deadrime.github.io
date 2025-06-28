@@ -7,6 +7,7 @@ import ImageComponent from './components/mdxComponents/ImageComponent/ImageCompo
 import CodePlayground from './components/mdxComponents/CodePlayground/CodePlayground';
 import { calculateLinesToHighlight } from './helpers/codeHightlight';
 import Blockquote from './components/mdxComponents/Blockquote/Blockquote';
+import Accordion from './components/Accordion/Accordion';
 
 type CodeElementProps = HTMLProps<HTMLElement> & {
   filename?: string;
@@ -36,5 +37,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     CodeDemo: CodeDemo,
     CodePlayground: CodePlayground,
     blockquote: Blockquote,
+    Accordion: Accordion,
   };
 }

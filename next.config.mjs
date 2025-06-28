@@ -3,6 +3,9 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypeMdxCodeProps from 'rehype-mdx-code-props';
 import remarkGfm from "remark-gfm";
 import codeTitle from "remark-code-title";
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -39,14 +42,14 @@ const nextConfig = {
   },
   reactStrictMode: false,
   experimental: {
-    mdxRs: true,
+    mdxRs: false,
   }
 };
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm, codeTitle],
+    remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter, remarkGfm, codeTitle],
     rehypePlugins: [
       [rehypeExternalLinks, {
         rel: ['nofollow'],
@@ -54,10 +57,10 @@ const withMDX = createMDX({
       }],
       [rehypeMdxCodeProps, {
         tagName: 'code'
-      }]
+      }],
+      rehypeUnwrapImages
     ],
-    // providerImportSource: "@mdx-js/react",
-  }
+  },
 });
 
 export default withMDX(nextConfig);

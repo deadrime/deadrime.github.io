@@ -1,5 +1,6 @@
 import { getAllArticles, getArticleBySlug } from "@/helpers/blog";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import React from "react";
 
 type ArticlePageProps = {
@@ -11,6 +12,10 @@ type ArticlePageProps = {
 export default async function ArticlePage(props: ArticlePageProps) {
   const params = await props.params;
   const article = await getArticleBySlug(params.slug);
+
+  if (!article) {
+    return notFound();
+  }
 
   return (
     <>
@@ -27,7 +32,7 @@ export default async function ArticlePage(props: ArticlePageProps) {
 
 export async function generateMetadata(props: ArticlePageProps): Promise<Metadata> {
   const params = await props.params;
-  const article = await getArticleBySlug(params.slug);
+  const article = (await getArticleBySlug(params.slug))!;
 
   return article.metadata;
 }
@@ -35,7 +40,9 @@ export async function generateMetadata(props: ArticlePageProps): Promise<Metadat
 export async function generateStaticParams() {
   const posts = await getAllArticles();
 
-  return posts.map((post) => ({
+  const result = posts.map((post) => ({
     slug: post.slug,
   }));
+
+  return result;
 }

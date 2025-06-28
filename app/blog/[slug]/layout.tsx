@@ -7,6 +7,7 @@ import React from "react";
 import Tag from "@/components/Tag/Tag";
 import dayjs from 'dayjs';
 import { capitalize } from "@/helpers/capitalize";
+import { notFound } from "next/navigation";
 
 type ArticleLayoutProps = {
   children: React.ReactNode,
@@ -24,7 +25,12 @@ export default async function Layout(props: ArticleLayoutProps) {
 
   const slug = params.slug;
   const article = await getArticleBySlug(slug);
-  const { title, description, topics, publishedTime, toc } = article;
+
+  if (!article) {
+    return notFound();
+  }
+
+  const { title, description, topics, toc, date } = article;
 
   return (
     <div className="flex flex-col">
@@ -46,7 +52,7 @@ export default async function Layout(props: ArticleLayoutProps) {
               ))}
             </div>
             <time className="text-body2 text-secondary block mt-4">
-              {dayjs(publishedTime).format('D MMMM YYYY')}
+              {dayjs(date).format('D MMMM YYYY')}
             </time>
           </header>
         </section>

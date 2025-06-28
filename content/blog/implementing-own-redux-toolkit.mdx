@@ -1,19 +1,10 @@
-import actionsTypeHightlightImg from './actions-type-hightlight.png';
-import previewImg from './preview.webp';
-
-export const data = {
-  title: "Пишем свой redux-toolkit",
-  description: "Как работает @reduxjs/toolkit, реализация его упрощенной версии",
-  slug: 'implementing-own-redux-toolkit',
-  publishedTime: '2024-02-12',
-  topics: [
-    "react",
-    "redux",
-    "typescript",
-    "state-manager"
-  ],
-  image: previewImg.src,
-}
+---
+date: 2024-02-12
+title: Пишем свой redux-toolkit
+description: Как работает @reduxjs/toolkit, реализация его упрощенной версии
+topics: ["react", "redux", "typescript", "state-manager"]
+previewImg: /images/own-redux-preview.webp
+---
 
 <h2 id="motivation">Мотивация</h2>
 
@@ -71,8 +62,8 @@ export const usersSlice = createSlice({
   }
 });
 
-usersSlice.actions// экшены
-usersSlice.selectors// селекторы
+usersSlice.actions;// экшены
+usersSlice.selectors;// селекторы
 
 // ...
 
@@ -89,8 +80,8 @@ const addUser = useCallback(() => {
       username: 'username2',
       displayName: 'some display name',
     })
-  )
-}, [dispatch])
+  );
+}, [dispatch]);
 ```
 
 <h2 id="implementation">Реализация</h2>
@@ -128,11 +119,11 @@ export const createSlice = <
   Actions extends Record<string, SliceActionCreator<State>>,
   Selectors extends Record<string, SliceSelector<State>>
 >({
-  name,
-  actions,
-  defaultState,
-  selectors,
-}: CreateSliceProps<Name, State, Actions, Selectors>) => {
+    name,
+    actions,
+    defaultState,
+    selectors,
+  }: CreateSliceProps<Name, State, Actions, Selectors>) => {
   let sliceActions; // TODO
   let reducer; // TODO
   let sliceSelectors; // TODO
@@ -175,7 +166,7 @@ const props = {
       delete state.userById[userId];
     }
   }
-}
+};
 ```
 
 то мы будем генерировать два actionType:
@@ -218,25 +209,25 @@ export const createSlice = <
   ActionPayload extends Parameters<Actions[ActionKey]>[1],
   Action extends { type: ScopedActionType, payload: ActionPayload },
 >({
-  name,
-  actions,
-  defaultState,
-  selectors,
-}: CreateSliceProps<Name, State, Actions, Selectors>) => {
+    name,
+    actions,
+    defaultState,
+    selectors,
+  }: CreateSliceProps<Name, State, Actions, Selectors>) => {
   const actionKeys = Object.keys(actions) as ActionKey[];
   const actionTypeByActionKey = actionKeys.reduce((acc, action) => {
     const scopedActionType = `${name}/${action}` as ScopedActionType;
     acc[scopedActionType] = action;
     return acc;
-  }, {} as Record<ScopedActionType, ActionKey>)
+  }, {} as Record<ScopedActionType, ActionKey>);
 
   const reducer = (state: State = defaultState, action: Action) => {
     const nextState = produce(state, draft => {
-      const actionType = actionTypeByActionKey[action.type]
+      const actionType = actionTypeByActionKey[action.type];
       actions[actionType]?.(draft as State, action.payload);
-    })
+    });
     return nextState;
-  }
+  };
 
   const sliceActions = actionKeys.reduce((acc, curr) => {
     acc[curr] = (payload) => {
@@ -245,17 +236,17 @@ export const createSlice = <
       return {
         type: scopedActionType,
         payload,
-      }
-    }
+      };
+    };
     return acc;
   }, {} as {
     [ActionKey in Extract<keyof Actions, string>]: (payload: Parameters<Actions[ActionKey]>[1]) => { type: Scoped<ActionKey, Name>, payload: P }
-  })
+  });
 
   return {
     actions: sliceActions,
-  }
-}
+  };
+};
 ```
 
 Остановлюсь на некоторых аспектах типизации чуть подробнее
@@ -306,12 +297,12 @@ usersSlice.actions; // можно навести на actions и увидеть 
 
 ```ts
 const nextState = {
-	...state,
-	userById: {
-		...state.userById,
-		[user.id]: user, 
-	}
-}
+  ...state,
+  userById: {
+    ...state.userById,
+    [user.id]: user, 
+  }
+};
 ```
 
 Чтобы облегчить себе жизнь, для создания иммутабельного стейта предлагаю использовать
@@ -324,9 +315,9 @@ const nextState = {
 const reducer = (state: State = defaultState, action: Action) => {
   const nextState = produce(state, draft => {
     actions[action.type]?.(draft as State, action.payload);
-  })
+  });
   return nextState;
-}
+};
 ```
 
 <h2 id="selectors">Селекторы</h2>
@@ -346,7 +337,7 @@ const useStore = () => {
   );
 
   return state;
-}
+};
 ```
 
 Мы могли бы даже использовать селектор, чтобы достать из стора нужные нам данные,
@@ -367,7 +358,7 @@ const username = useSelector(state => state.users.usersById['some-id'].username)
 Таким образом хелпер для создания `useSelector` будет выглядеть следующим образом:
 
 ```ts
-import type { Store as ReduxStore } from 'redux'
+import type { Store as ReduxStore } from 'redux';
 import { useSyncExternalStoreWithSelector } from 'use-sync-external-store/with-selector';
 
 export const createUseSelector = <
@@ -381,10 +372,10 @@ export const createUseSelector = <
       store.getState,
       selector
     ) as ReturnType<Selector>;
-  }
+  };
 
   return useSelector;
-}
+};
 ```
 
 
@@ -429,8 +420,8 @@ export const configureStore = <
 
   return {
     store,
-  }
-}
+  };
+};
 ```
 
 Чтобы правильно типизировать созданный стор, нужно указать стейт и экшены редьюсера,
@@ -447,8 +438,8 @@ export const configureStore = <
 
 ```ts filename="myReduxToolkit.ts"
 
-import { createStore, combineReducers } from 'redux'
-import type { Store as ReduxStore, Reducer } from 'redux'
+import { createStore, combineReducers } from 'redux';
+import type { Store as ReduxStore, Reducer } from 'redux';
 import { produce } from 'immer';
 import { useSyncExternalStoreWithSelector } from 'use-sync-external-store/with-selector';
 
@@ -480,25 +471,25 @@ export const createSlice = <
   ActionPayload extends Parameters<Actions[ActionKey]>[1],
   Action extends { type: ScopedActionType, payload: ActionPayload },
 >({
-  name,
-  actions,
-  defaultState,
-  selectors,
-}: CreateSliceProps<Name, State, Actions, Selectors>) => {
+    name,
+    actions,
+    defaultState,
+    selectors,
+  }: CreateSliceProps<Name, State, Actions, Selectors>) => {
   const actionKeys = Object.keys(actions) as ActionKey[];
   const actionTypeByActionKey = actionKeys.reduce((acc, action) => {
     const scopedActionType = `${name}/${action}` as ScopedActionType;
     acc[scopedActionType] = action;
     return acc;
-  }, {} as Record<ScopedActionType, ActionKey>)
+  }, {} as Record<ScopedActionType, ActionKey>);
 
   const reducer = (state: State = defaultState, action: Action) => {
     const nextState = produce(state, draft => {
-      const actionType = actionTypeByActionKey[action.type]
+      const actionType = actionTypeByActionKey[action.type];
       actions[actionType]?.(draft as State, action.payload);
-    })
+    });
     return nextState;
-  }
+  };
 
   const sliceActions = actionKeys.reduce((acc, curr) => {
     acc[curr] = (payload) => {
@@ -507,20 +498,20 @@ export const createSlice = <
       return {
         type: scopedActionType,
         payload,
-      }
-    }
+      };
+    };
     return acc;
   }, {} as {
     [ActionKey in Extract<keyof Actions, string>]: <P extends Parameters<Actions[ActionKey]>[1]>(payload: P) => { type: Scoped<ActionKey, Name>, payload: P }
-  })
+  });
 
   return {
     name,
     reducer,
     actions: sliceActions,
     selectors: selectors,
-  }
-}
+  };
+};
 
 type SliceAction<Type extends string = string, Payload = unknown> = {
   type: Type,
@@ -555,8 +546,8 @@ export const configureStore = <
 
   return {
     store,
-  }
-}
+  };
+};
 
 export const createUseSelector = <
   Store extends ReduxStore,
@@ -569,10 +560,10 @@ export const createUseSelector = <
       store.getState,
       selector
     ) as ReturnType<Selector>;
-  }
+  };
 
   return useSelector;
-}
+};
 
 ```
 
@@ -626,7 +617,7 @@ const Test = () => {
 
   console.log({
     allUsers
-  })
+  });
 
   return <div>
     <button onClick={() => {
@@ -636,13 +627,13 @@ const Test = () => {
         id: String(Math.random()),
         username: String(Math.random()),
       }));
-      console.log(store.getState())
+      console.log(store.getState());
     }}>Add new user</button>
 
     {allUsers.map((user) => <div key={user.username}>
       <p>{user.displayName}</p>
       <p>@{user.username}</p>
     </div>)}
-  </div>
-}
+  </div>;
+};
 ```

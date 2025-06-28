@@ -1,17 +1,13 @@
-"use client";
-// function forwardRef<T, P = {}>(
-//   render: (props: P, ref: React.Ref<T>) => React.ReactNode | null
-// ): (props: P & React.RefAttributes<T>) => React.ReactNode | null;
+---
+date: 2024-09-08
+topics: ['react', 'typescript']
+title: Component dynamic tag
+description: Use react component as another component
+---
 
-// type GenericForwardRef = <El, P = {}>(props: P, ref: React.Ref<T>) => React.ReactNode | null
+Component with dynamic tag
 
-// type GenericForwardRef<Props, El extends HTMLElement> = (
-//   props: Props & { ref?: React.ForwardedRef<El> }
-// ) => ReturnType<typeof ClickableListInner>; 
-
-import React from 'react';
-import { ComponentPropsWithoutRef, ElementType, forwardRef, useRef } from 'react';
-
+```tsx
 export type Prefer<P, T> = P & Omit<T, keyof P>;
 
 export type ElementPropsWithoutRef<T extends ElementType> = Pick<
@@ -32,19 +28,24 @@ type ButtonProps<As extends React.ElementType> = {
 export const Button = <As extends React.ElementType = 'button'>({
   as,
   children, 
+  variant,
   ...props 
 }: DynamicHTMLProps<ButtonProps<As>, As>) => {
   const Tag: React.ElementType = as || 'button';
 
-  return <Tag {...props}>{children}</Tag>;
+  return <Tag {...props} className={variant}>{children}</Tag>;
 };
+```
 
+And with forward ref
+
+```tsx
+// React 🥰
 function fixedForwardRef<T, P = {}>(
   render: (props: P, ref: React.Ref<T>) => React.ReactNode
 ): (props: P & React.RefAttributes<T>) => React.ReactNode {
   return React.forwardRef(render) as any;
 }
-
 
 export const ButtonRaw = <As extends React.ElementType, Ref>(props: DynamicHTMLProps<ButtonProps<As>, As>, ref: Ref) => {
   const { as = 'button', variant, children, ...rest } = props;
@@ -53,15 +54,6 @@ export const ButtonRaw = <As extends React.ElementType, Ref>(props: DynamicHTMLP
   return <Tag {...rest} className={variant} ref={ref}>{children}</Tag>;
 };
 
-const Button2 = fixedForwardRef(ButtonRaw);
+const Button = fixedForwardRef(ButtonRaw);
 
-
-export const Test = () => {
-  const ref = useRef<HTMLLinkElement>();
-
-  console.log({
-    ref
-  });
-
-  return <Button2 as="a" ref={ref} variant='primary'>Test</Button2>;
-};
+```

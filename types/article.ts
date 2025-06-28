@@ -1,3 +1,4 @@
+import { ArticleFrontmatter } from "@/schemas/article";
 import { MDXProps } from "mdx/types";
 import { Metadata } from "next";
 import { JSX } from "react";
@@ -20,23 +21,13 @@ type OpenGraphArticle = Metadata['openGraph'] & {
   tags?: null | string | Array<string>;
 };
 
-export type CreateArticleProps = {
-  title: string;
-  description: string;
+export type Article = {
+  path: string;
   slug: string;
-  publishedTime: string;
-  modifiedTime?: string;
-  image?: string;
-  topics: string[];
-}
-
-export type Article = Omit<CreateArticleProps, 'publishedTime' | 'modifiedTime'> & {
   metadata: Metadata & {
     openGraph: OpenGraphArticle
     jsonLd?: WithContext<JsonLdArticle>;
   };
   component: (props: MDXProps) => JSX.Element;
-  publishedTime: number;
-  modifiedTime?: number;
   toc: TocItem[];
-};
+} & ArticleFrontmatter;

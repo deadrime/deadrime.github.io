@@ -1,27 +1,29 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
-type ITheme = {
-  theme: 'light' | 'dark';
-  changeTheme: (theme: ITheme['theme']) => void;
+export type Theme = 'light' | 'dark';
+
+type ThemeContextType = {
+  theme: Theme;
+  changeTheme: (theme: ThemeContextType['theme']) => void;
 }
 
-export const ThemeContext = createContext<ITheme>({
+export const ThemeContext = createContext<ThemeContextType>({
   theme: 'light',
   changeTheme: () => { }
 });
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [selectedTheme, setSelectedTheme] = useState<ITheme['theme']>('dark');
+  const [selectedTheme, setSelectedTheme] = useState<ThemeContextType['theme']>('dark');
 
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
 
     const updateTheme = () => {
-      const storedTheme = window?.localStorage.getItem('selectedTheme') as ITheme['theme'];
-      const setTheme = (theme: ITheme['theme']) => {
+      const storedTheme = window?.localStorage.getItem('selectedTheme') as ThemeContextType['theme'];
+      const setTheme = (theme: ThemeContextType['theme']) => {
         document.documentElement.setAttribute('data-theme', theme);
         setSelectedTheme(theme);
       };
@@ -53,7 +55,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   }, []);
 
-  const handleThemeChange = useCallback((themeName: ITheme['theme']) => {
+  const handleThemeChange = useCallback((themeName: ThemeContextType['theme']) => {
     setSelectedTheme(themeName);
     document.documentElement.setAttribute('data-theme', themeName);
     localStorage.setItem('selectedTheme', themeName);

@@ -8,19 +8,19 @@ import { useThrottledCallback } from '@/hooks/useThrottledCallback';
 import { TocItem } from '@/types/article';
 
 const unwrapHeading = (links: TocItem[]) => {
-  const result: TocItem[] = []
+  const result: TocItem[] = [];
 
   const addLink = (link: TocItem) => {
-    result.push(link)
+    result.push(link);
     if (link.children) {
-      link.children.forEach(addLink)
+      link.children.forEach(addLink);
     }
-  }
+  };
 
-  links.forEach(addLink)
+  links.forEach(addLink);
 
-  return result
-}
+  return result;
+};
 
 const useActiveHeading = (headings: TocItem[], topOffset = 400) => {
   const [activeHeadingId, setActiveHeading] = React.useState<string>('');
@@ -28,10 +28,10 @@ const useActiveHeading = (headings: TocItem[], topOffset = 400) => {
   const handleScroll = useCallback(() => {
     let headingBoxes = unwrapHeading(headings).map(({ id }) => {
       const element = document.getElementById(id)!;
-      return { id, box: element.getBoundingClientRect() };
+      return { id, box: element?.getBoundingClientRect() };
     });
 
-    headingBoxes = headingBoxes.filter((box) => !!box);
+    headingBoxes = headingBoxes.filter((box) => !!box.box);
 
     let firstHeadingInViewport = headingBoxes.find(({ box }) => {
       return (
