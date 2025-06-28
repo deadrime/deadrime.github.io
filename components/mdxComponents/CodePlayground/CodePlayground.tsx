@@ -1,7 +1,7 @@
 import React from "react";
 
 const CodePlayground: React.FC<{ children: React.ReactElement | React.ReactElement[] }> = ({ children }) => {
-  const childrenInfo = React.Children.map(children, i => {
+  const childrenInfo = React.Children.map(children, (i: any) => {
     return {
       filename: i.props.children.props.filename,
       caption: i.props.children.props.caption,

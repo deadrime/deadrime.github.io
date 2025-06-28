@@ -7,18 +7,30 @@ import React from "react";
 import Tag from "@/components/Tag/Tag";
 import dayjs from 'dayjs';
 import { capitalize } from "@/helpers/capitalize";
+import { notFound } from "next/navigation";
 
 type ArticleLayoutProps = {
   children: React.ReactNode,
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 
-export default async function Layout({ children, params }: ArticleLayoutProps) {
+export default async function Layout(props: ArticleLayoutProps) {
+  const params = await props.params;
+
+  const {
+    children
+  } = props;
+
   const slug = params.slug;
   const article = await getArticleBySlug(slug);
-  const { title, description, topics, publishedTime } = article;
+
+  if (!article) {
+    return notFound();
+  }
+
+  const { title, description, topics, toc, date } = article;
 
   return (
     <div className="flex flex-col">
@@ -40,13 +52,13 @@ export default async function Layout({ children, params }: ArticleLayoutProps) {
               ))}
             </div>
             <time className="text-body2 text-secondary block mt-4">
-              {dayjs(publishedTime).format('D MMMM YYYY')}
+              {dayjs(date).format('D MMMM YYYY')}
             </time>
           </header>
         </section>
         <div className="flex flex-col md:grid md:grid-cols-12 gap-5">
           <aside className="md:col-start-10 md:col-end-13 md:sticky top-4 self-start shrink-0 md:order-last">
-            <TableOfContent contentId="content" />
+            <TableOfContent toc={toc} />
           </aside>
           <div className={classNames(styles.blogContent, 'md:col-span-8')} id="content">
             {children}

@@ -1,131 +1,151 @@
 "use client";
 
+import { Theme, useTheme } from './ThemeContext';
+import { CSSProperties, useState } from 'react';
+import { AnimatePresence, HTMLMotionProps, motion } from 'motion/react';
 import classNames from 'classnames';
-import { useTheme } from './ThemeContext';
-import { useSpring, useTrail, animated } from '@react-spring/web';
-import { CSSProperties, useCallback } from 'react';
 
-const MoonOrSun = animated.svg;
+type DarkModeToggleProps = HTMLMotionProps<'button'> & {
+  theme: Theme;
+  onThemeChange: (theme: Theme) => void
+}
 
-const roundTo = (num: number, decimals = 2) => Math.round((num + Number.EPSILON) * 10 ** decimals) / 10 ** decimals;
+export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ theme, onThemeChange, className, ...props }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
 
-export const DarkModeToggle = ({
-  theme,
-  onChange,
-  size = 18,
-  id = 'light-switch',
-  className,
-  ...props
-}: any) => {
-  const isDark = theme === 'dark';
+  const sunParticleCount = 8;
+  const sunR = 12.5;
+  const sunSizePx = `${sunR}px`;
 
-  const toggleColorMode = useCallback((event: React.MouseEvent) => {
-    event.preventDefault();
-    onChange(isDark ? 'light' : 'dark');
-  }, [isDark, onChange]);
+  const Cx = 32 / 2;
+  const Cy = 0;
+  const r = 2.5;
 
-  const svgSpring = useSpring({
-    transform: isDark ? 'rotate(40deg)' : 'rotate(90deg)',
-    immediate: false,
-  });
+  const sunX = Cx - sunR / 2;
+  const sunY = Cy - sunR / 2;
 
-  const maskSpring = useSpring({
-    cx: isDark ? 10 : 25,
-    cy: isDark ? 2 : 0,
-    immediate: false,
-    config: {
-      mass: 3,
-      friction: 21,
-    },
-  });
+  const calculateSunPartXy = (i: number, distance = 20) => {
+    const angle = (2 * Math.PI * i) / sunParticleCount;
+    const x = Cx + (distance + r) * Math.cos(angle) - r / 2;
+    const y = Cy + (distance + r) * Math.sin(angle) - r / 2;
+    return { x, y };
+  };
 
-  const sunMoonSpring = useSpring({
-    r: isDark ? 8 : 5,
-    immediate: false
-  });
+  const getSunPartStyle = (i: number) => {
+    const width = r;
+    const height = r;
 
-  const sunDotAngles = [0, 60, 120, 180, 240, 300];
+    if (theme === 'dark') {
+      const { x, y } = calculateSunPartXy(i, 0);
+      return {
+        width,
+        height,
+        scale: 1.15,
+        opacity: [1, 0],
+        x,
+        y,
+      };
+    }
 
-  const sunDotTrail = useTrail(sunDotAngles.length, {
-    transform: isDark ? 0 : 1,
-    transformOrigin: 'center center',
-    immediate: false,
-    config: {
-      duration: 90,
-      tension: 350,
-      friction: 30,
-    },
-  });
+    if (isPressed) {
+      return {
+        ...calculateSunPartXy(i, 4),
+        width,
+        height,
+        opacity: 1,
+        scale: 0.75,
+      };
+    }
+
+    const { x: x1, y: y1 } = calculateSunPartXy(i, 0);
+    const { x: x2, y: y2 } = calculateSunPartXy(i, 7);
+
+    return {
+      width,
+      height,
+      opacity: 1,
+      x: [x1, x2],
+      y: [y1, y2],
+    };
+  };
 
   return (
-    <button
-      className={classNames(
-        "opacity-90 relative rounded w-8 h-8 mr-1 flex items-center justify-center cursor-pointer",
-        "focus-within:outline-none focus-within:ring-2 ring-primary ring-offset-2 ring-offset-background",
-        className
-      )}
-      onClick={toggleColorMode}
-      aria-label={
-        isDark ? 'Activate light mode' : 'Activate dark mode'
-      }
-      title={isDark ? 'Activate light mode' : 'Activate dark mode'}
+    <motion.button
+      className={classNames("w-[32px] h-[32px] relative overflow-hidden cursor-pointer", className)}
+      aria-label="Toggle theme"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        setIsPressed(false);
+      }}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onTouchStart={() => setIsPressed(true)}
+      onTouchEnd={() => setIsPressed(false)}
+      onClick={() => {
+        onThemeChange(theme === 'light' ? 'dark' : 'light');
+      }}
       {...props}
     >
-      <MoonOrSun
-        className="relative overflow-visible"
-        width={size}
-        height={size}
-        viewBox="0 0 18 18"
-        style={{
-          transform: svgSpring.transform
-        }}
-      >
-        <mask id={`moon-mask-${id}`}>
-          <rect x="0" y="0" width="18" height="18" fill="#FFF" />
-          <animated.circle {...maskSpring} r="8" fill="black" />
-        </mask>
-
-        <animated.circle
-          cx="9"
-          cy="9"
-          fill="var(--color-text)"
-          mask={`url(#moon-mask-${id})`}
-          {...sunMoonSpring}
+      {/* Солнечные лучи */}
+      {Array.from({ length: sunParticleCount }, (_, i) => (
+        <motion.div
+          key={i + theme}
+          initial={{
+            ...getSunPartStyle(0),
+            opacity: 0
+          }}
+          animate={getSunPartStyle(i)}
+          transition={{ duration: 0.35, ease: 'easeInOut' }}
+          className="absolute bg-black rounded-full"
         />
+      ))}
 
-        {/* Sun dots */}
-        <g>
-          {sunDotTrail.map(({ transform, ...props }, index) => {
-            const angle = sunDotAngles[index];
-            const centerX = 9;
-            const centerY = 9;
+      {/* Солнце */}
+      <motion.div
+        className="absolute rounded-full bg-black dark:bg-red"
+        style={{
+          width: sunSizePx,
+          height: sunSizePx,
+          x: sunX,
+          y: sunY,
+        }}
+        initial={{
+          scale: 1,
+        }}
+        animate={{
+          scale: isPressed ? 0.75 : isHovered ? 1.1 : 1,
+          background: theme === 'dark' ? '#fff' : 'var(--color-black)',
+        }}
+        transition={{ duration: 0.35 }}
+      />
 
-            const angleInRads = (angle / 180) * Math.PI;
-
-            const c = 8; // hypothenuse
-
-            const a = roundTo(centerX + c * Math.cos(angleInRads), 6);
-            const b = roundTo(centerY + c * Math.sin(angleInRads), 6);
-
-            return (
-              <animated.circle
-                key={angle}
-                cx={a}
-                cy={b}
-                r={1.5}
-                fill="var(--color-text)"
-                style={{
-                  ...props,
-                  transform: transform.to(
-                    (t) => `scale(${t})`
-                  ),
-                }}
-              />
-            );
-          })}
-        </g>
-      </MoonOrSun>
-    </button>
+      {theme === 'dark' && (
+        <motion.div
+          className="absolute rounded-full bg-white"
+          key="moon"
+          style={{
+            width: sunSizePx,
+            height: sunSizePx,
+            y: sunY,
+            background: 'var(--color-background)',
+          }}
+          initial={{ x: 50, y: -5 }}
+          animate={{
+            x: sunX / 2 + sunX,
+            y: sunY - 2,
+          }}
+          exit={{
+            x: sunX,
+            y: sunY,
+            scale: [1, 0],
+            background: 'var(--color-black)',
+          }}
+          transition={{ duration: 0.2, ease: 'linear' }}
+        />
+      )}
+    </motion.button>
   );
 };
 
@@ -138,7 +158,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcher> = (props) => {
   const { theme: selectedTheme, changeTheme } = useTheme();
 
   return (
-    <DarkModeToggle theme={selectedTheme} onChange={changeTheme} {...props} />
+    <DarkModeToggle theme={selectedTheme} onThemeChange={changeTheme} {...props} />
   );
 };
 

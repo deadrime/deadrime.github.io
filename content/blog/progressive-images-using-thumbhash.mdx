@@ -1,19 +1,12 @@
-import ProgressiveImageExample from './ProgressiveImageExample';
-import tgExample from './telegram-example.png';
-import previewSrc from './preview.webp';
+---
+date: 2024-01-22
+title: Progressive images при помощи base64 миниатюр
+description: Прогрессивная загрузка изображений при помощи создания миниатюр в thumbhash и их использование в React
+topics: ["images", "react", "node.js"]
+previewImg: /images/image-thumb-preview.webp
+---
 
-export const data = {
-  title: "Progressive images при помощи base64 миниатюр",
-  description: 'Прогрессивная загрузка изображений при помощи создания миниатюр в thumbhash и их использование в React',
-  slug: 'progressive-images-using-thumbhash',
-  publishedTime: '2024-01-22',
-  topics: [
-    'images',
-    'react',
-    'node.js',
-  ],
-  image: previewSrc.src,
-}
+import ProgressiveImageExample from '@/examples/progressive-image/ProgressiveImageExample';
 
 <h2 id="why">Зачем оно вообще нужно</h2>
 
@@ -28,17 +21,14 @@ export const data = {
 1. UI может прыгать, пока все картинки не загрузятся (сделаем допущение, что вы не хотите или не можете привести все картинки к одному размеру)
 2. При медленном интернете или если сервер слишком далеко от пользователя, он будет видеть огрызки картинок, что прямо скажем не красиво.
 
-<Image
-  src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJtZTh4dGJ2bDBiMnVuZHJkMmc2cWQxZzFkdGdzOXJxYjdhbGYzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QIQTfximd3AuQ/giphy.gif"
-  alt="Раздражает, правда?"
-/>
+![Раздражает, правда?](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXJtZTh4dGJ2bDBiMnVuZHJkMmc2cWQxZzFkdGdzOXJxYjdhbGYzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/QIQTfximd3AuQ/giphy.gif)
 
 А еще пользователь у нас очень привередливый и если мы не покажем ему хоть что-то в течении первых пары секунд - скорее всего мы его потеряем.
 Именно проблему **показать хоть что-то** и призвана решить прогрессивная загрузка изображений. 
 
 Идея заключается в том, что мы показываем пользователю миниатюру в низком разрешении, пока грузим оригинальную картинку.
 
-<Image {...tgExample} alt="Пример из telegram"/>
+![Пример из telegram](/images/telegram-example.png)
 
 Для реализации такого подхода я выбрал либу thumbhash, она весит < 4kb и позволяет хранить хеш весом всего 30-40 байт.
 
@@ -75,7 +65,7 @@ const getImageUrl = (file: File) => {
   // For example we just create url on client-side
   const url = URL.createObjectURL(file); 
   return url;
-}
+};
 
 export default function App() {
   const [originalImageSrc, setOriginalImageSrc] = useState("");
@@ -152,11 +142,11 @@ async function generateImageThumb(img: HTMLImageElement) {
   canvas.width = w;
   canvas.height = h;
   c.drawImage(img, 0, 0, w, h);
-	// Get pixels array
+  // Get pixels array
   const pixels = c.getImageData(0, 0, w, h);
-	// Get thumbhash (Uint8Array)
+  // Get thumbhash (Uint8Array)
   const hash = rgbaToThumbHash(w, h, pixels.data);
-	// convert Uint8Array to base64 string
+  // convert Uint8Array to base64 string
   const binString = String.fromCodePoint(...hash);
   return btoa(binString);
 }
@@ -171,21 +161,21 @@ async function generateImageThumb(img: HTMLImageElement) {
 Весит она всего 32 байта
 
 ```ts
-new Blob(["0ucJJgoHiHeId5eYV4d3hneYiHiPiPc="]).size // 32
+new Blob(["0ucJJgoHiHeId5eYV4d3hneYiHiPiPc="]).size; // 32
 ```
 
 Ее можно сохранить на сервере и присылать вместе с объектом поста
 
 ```ts
 [
-	{
-		id: '1',
-		title: 'Post title',
-		image: '/path/to/image1.png',
-		thumbhash: '0ucJJgoHiHeId5eYV4d3hneYiHiPiPc=',
-	},
-	// ...
-]
+  {
+    id: '1',
+    title: 'Post title',
+    image: '/path/to/image1.png',
+    thumbhash: '0ucJJgoHiHeId5eYV4d3hneYiHiPiPc=',
+  },
+  // ...
+];
 ```
 
 Далее на клиенте нужно преобразовать ее сначала в Uint8Array, а затем в base64 картинку
@@ -246,15 +236,15 @@ export async function POST(request: NextRequest) {
   }
 
   const arrayBuffer = await file.arrayBuffer();
-	const buffer = Buffer.from(arrayBuffer);
+  const buffer = Buffer.from(arrayBuffer);
 
   const url = await uploadFile(buffer); // save file on your server somehow
-	const thumbhash = await generateThumbhash(buffer); // We need to implement this
+  const thumbhash = await generateThumbhash(buffer); // We need to implement this
 
-	return NextResponse.json({
-		url,
+  return NextResponse.json({
+    url,
     thumbhash
-  })
+  });
 }
 ```
 
@@ -269,24 +259,24 @@ async function loadImageAndConvertToHashWithCanvas(
   buffer: Buffer
 ) {
   const maxSize = 100;
-	// load image
+  // load image
   const image = await loadImage(buffer);
   const width = image.width;
   const height = image.height;
-	// calculate new size
+  // calculate new size
   const scale = Math.min(maxSize / width, maxSize / height);
   const resizedWidth = Math.floor(width * scale);
   const resizedHeight = Math.floor(height * scale);
-	// create thumb with new size
+  // create thumb with new size
   const canvas = createCanvas(resizedWidth, resizedHeight);
   const ctx = canvas.getContext("2d");
   ctx.drawImage(image, 0, 0, resizedWidth, resizedHeight);
-	// get pixels array
+  // get pixels array
   const imageData = ctx.getImageData(0, 0, resizedWidth, resizedHeight);
   const rgba = new Uint8Array(imageData.data.buffer);
-	// generate thumbhash
+  // generate thumbhash
   const hash = rgbaToThumbHash(resizedWidth, resizedHeight, rgba);
-	// convert it to base64
+  // convert it to base64
   const base64 = Buffer.from(hash).toString('base64');
   return base64;
 }
@@ -299,14 +289,14 @@ async function loadImageAndConvertToHashWithCanvas(
 import sharp from "sharp";
 
 const loadImageAndConvertToHashWithSharp = async (buffer: Buffer) => {
-	// load image
+  // load image
   const sharpImage = sharp(buffer);
   const imageMetadata = await sharpImage.metadata();
-	// calculate new size
+  // calculate new size
   const size = Math.max(imageMetadata.width || 1, imageMetadata.height || 1);
   const w = Math.round(100 * (imageMetadata.width || 1) / size);
   const h = Math.round(100 * (imageMetadata.height || 1) / size);
-	// create thumb with new size
+  // create thumb with new size
   const { data } = await sharpImage
     .resize({
       withoutEnlargement: true,
@@ -315,11 +305,11 @@ const loadImageAndConvertToHashWithSharp = async (buffer: Buffer) => {
     })
     .ensureAlpha() // rgbaToThumbHash require 4 channals
     .raw()
-    .toBuffer({ resolveWithObject: true })
-	// generate thumbhash
+    .toBuffer({ resolveWithObject: true });
+  // generate thumbhash
   const hash = rgbaToThumbHash(w, h, data);
-	// convert it to base64
+  // convert it to base64
   const base64 = Buffer.from(hash).toString('base64');
   return base64;
-}
+};
 ```
