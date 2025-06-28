@@ -1,10 +1,4 @@
-name: Build and deploy
-
-on:
-  push:
-    branches: ["nuxt"]
-  pull_request:
-    branches: ["nuxt"]
+name: Build and deploy nuxt
 
 permissions:
   contents: write
