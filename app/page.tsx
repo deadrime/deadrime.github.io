@@ -31,7 +31,7 @@ const jsonLd = {
 
 export default async function Home() {
   return (
-    <main>
+    <>
       <AboutSection />
       <Technologies />
       <MyExperience />
@@ -40,6 +40,6 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-    </main>
+    </>
   );
 }

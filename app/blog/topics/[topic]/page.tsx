@@ -17,7 +17,7 @@ export default async function TopicPage(props: TopicPageProps) {
 
   const articles = await getArticlesForTopic(topic);
   return (
-    <main className="flex flex-col">
+    <div className="flex flex-col">
       <h2 className="font-primary text-xl font-normal mt-8 md:mt-36 mb-4 md:mb-11">
         Статьи с тегом #{topic}
       </h2>
@@ -29,7 +29,7 @@ export default async function TopicPage(props: TopicPageProps) {
           />
         )}
       </div>
-    </main>
+    </div>
   );
 }
 
