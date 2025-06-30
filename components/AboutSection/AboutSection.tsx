@@ -2,12 +2,11 @@ import classNames from 'classnames';
 import styles from './AboutSection.module.css';
 import Tag from '../Tag/Tag';
 import Contacts from '../Contacts';
-import SvgNextjs from '@/svgComponents/Nextjs';
-import SvgReact from '@/svgComponents/React';
-import SvgTs from '@/svgComponents/Ts';
-import SvgGraphql from '@/svgComponents/Graphql';
-import Nodejs from '@/svgComponents/Nodejs';
-import SvgSloth from '@/svgComponents/Sloth';
+import IconNextJs from '@/assets/icons/nextjs.svg?react'
+import IconReact from '@/assets/icons/react.svg?react'
+import IconTypeScript from '@/assets/icons/ts.svg?react'
+import IconNodeJs from '@/assets/icons/nodejs.svg?react'
+import Sloth from '@/assets/images/sloth.svg?react'
 
 const AboutSection = () => {
   return (
@@ -26,7 +25,7 @@ const AboutSection = () => {
         <Contacts className="mt-8" />
       </div>
       <div className={styles.blobs}>
-        <SvgSloth className={styles.sloth} />
+        <Sloth className={styles.sloth} />
         <div className={classNames(styles.blob, styles.color1)}></div>
         <div className={classNames(styles.blob, styles.color2)}></div>
         <div className={classNames(styles.blob, styles.color3)}></div>
@@ -43,10 +42,10 @@ const AboutSection = () => {
           </p>
           <h3 className="pt-8 font-normal text-text/80 text-body2">Основной стек</h3>
           <div className="flex gap-2 pt-2 flex-wrap">
-            <Tag variant="filled" size="small" icon={<SvgNextjs height={20} className="fill-current text-text/90" />}>Next.js</Tag>
-            <Tag variant="filled" size="small" icon={<SvgReact height={20} />}>React</Tag>
-            <Tag variant="filled" size="small" icon={<SvgTs height={20} />}>Typescript</Tag>
-            <Tag variant="filled" size="small" icon={<Nodejs height={20} />}>Node.js</Tag>
+            <Tag variant="filled" size="small" icon={<IconNextJs height={20} className="fill-current text-text/90" />}>Next.js</Tag>
+            <Tag variant="filled" size="small" icon={<IconReact height={20} />}>React</Tag>
+            <Tag variant="filled" size="small" icon={<IconTypeScript height={20} />}>Typescript</Tag>
+            <Tag variant="filled" size="small" icon={<IconNodeJs height={20} />}>Node.js</Tag>
           </div>
         </div>
       </div>

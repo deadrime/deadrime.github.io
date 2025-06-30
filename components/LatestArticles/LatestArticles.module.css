@@ -1,4 +1,4 @@
-@reference "../../app/app.css";
+@reference "../../layouts/tailwind.css";
 
 .articlesWrapper {
   display: grid;

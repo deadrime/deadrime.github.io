@@ -1,4 +1,4 @@
-@reference "../../app/app.css";
+@reference "../../layouts/tailwind.css";
 
 .wrapper {
   /* 5rem header + 2rem padding y */

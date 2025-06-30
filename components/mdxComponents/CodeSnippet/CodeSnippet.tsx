@@ -6,12 +6,12 @@ import classNames from 'classnames';
 import styles from './CodeSnippet.module.css';
 import { useTheme } from '@/components/ThemeContext';
 import { copyToClipboard } from '@/helpers/copyToClipboard';
-import SvgTs from '@/svgComponents/Ts';
-import SvgReact from '@/svgComponents/React';
-import SvgJs from '@/svgComponents/Js';
-import SvgHtml from '@/svgComponents/Html';
-import SvgCss from '@/svgComponents/Css';
-import SvgCopy from '@/svgComponents/Copy';
+import SvgTs from '@/assets/icons/ts.svg?react';
+import SvgReact from '@/assets/icons/react.svg?react';
+import SvgJs from '@/assets/icons/js.svg?react';
+import SvgHtml from '@/assets/icons/html.svg?react';
+import SvgCss from '@/assets/icons/css.svg?react';
+import SvgCopy from '@/assets/icons/copy.svg?react';
 
 export type CodeHighlightProps = {
   code: string;

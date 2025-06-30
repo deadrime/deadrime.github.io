@@ -1,7 +1,7 @@
-import { Article } from '@/types/article';
-import Link from 'next/link';
+import { Article } from 'content-collections';
 import Tag from './Tag/Tag';
 import { capitalize } from '@/helpers/capitalize';
+import { Link } from './Link';
 
 type BlogArticleProps = {
   article: Article;

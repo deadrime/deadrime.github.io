@@ -1,11 +1,11 @@
-import { Article } from '@/types/article';
 import { HighlightRanges } from '@nozbe/microfuzz';
 import { Highlight } from '@nozbe/microfuzz/react';
-import Link from 'next/link';
 import Tag from '@/components/Tag/Tag';
+import { Snippet } from 'content-collections';
+import { Link } from '../Link';
 
 type SnippetPreviewProps = {
-  snippet: Omit<Article, 'component'>;
+  snippet: Snippet;
   titleHighlightRanges: HighlightRanges | null;
   descriptionHighlightRanges: HighlightRanges | null;
 }

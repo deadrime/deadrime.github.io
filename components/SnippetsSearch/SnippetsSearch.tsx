@@ -1,10 +1,9 @@
-"use client";
-import { Article } from '@/types/article';
 import { useFuzzySearchList } from '@nozbe/microfuzz/react';
 import { SnippetPreview } from '../Snippet/SnippetPreview';
 import { useState } from 'react';
 import useDebounce from '@/hooks/useDebounce';
 import { TextInput } from '../TextInput/TextInput';
+import { Article } from 'content-collections';
 
 type SnippetsSearchProps = {
   snippets: Omit<Article, 'component'>[]
@@ -47,7 +46,7 @@ export const SnippetsSearch: React.FC<SnippetsSearchProps> = ({
       <div className='flex flex-col gap-3 w-max'>
         {filteredList.map(({ item, titleHighlightRanges, descriptionHighlightRanges }) => 
           <SnippetPreview
-            key={item.slug}
+            key={item.path}
             snippet={item}
             titleHighlightRanges={titleHighlightRanges}
             descriptionHighlightRanges={descriptionHighlightRanges}

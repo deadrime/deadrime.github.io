@@ -6,8 +6,6 @@ topics: ["images", "react", "node.js"]
 previewImg: /images/image-thumb-preview.webp
 ---
 
-import ProgressiveImageExample from '@/examples/progressive-image/ProgressiveImageExample';
-
 <h2 id="why">Зачем оно вообще нужно</h2>
 
 Для начала поговорим про цифры. Если вы когда-нибудь делали аналитику сайта - то вы в курсе, что изображения весьма прожорливые. Скорее всего даже более прожорливые, чем ваш бандл.
@@ -28,13 +26,11 @@ import ProgressiveImageExample from '@/examples/progressive-image/ProgressiveIma
 
 Идея заключается в том, что мы показываем пользователю миниатюру в низком разрешении, пока грузим оригинальную картинку.
 
-![Пример из telegram](/images/telegram-example.png)
+![Пример из telegram](/images/progressive-images-using-thumbhash/telegram-example.png)
 
 Для реализации такого подхода я выбрал либу thumbhash, она весит < 4kb и позволяет хранить хеш весом всего 30-40 байт.
 
-<CodeDemo caption="Пример использования thumbhash">
-  <ProgressiveImageExample />
-</CodeDemo>
+<CodeDemo projectId="react-ts-c9v55cdz" openFile="rogressiveImageExample.tsx" height={600}/>
 
 Еще примеры можно найти на официальном сайте: https://evanw.github.io/thumbhash/
 

@@ -1,0 +1,52 @@
+@reference "../../../layouts/tailwind.css";
+
+.blogContent {
+  scroll-behavior: smooth;
+  font-family: var(--font-base);
+  /* font-weight: 500; */
+
+  :global(.img-wrapper) {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  ol {
+    counter-reset: cupcake;
+    padding-left: 0.5em;
+  }
+
+  ol li {
+    counter-increment: cupcake;
+  }
+
+  ol li:before {
+    @apply text-primary;
+
+    content: counters(cupcake, ".") " ";
+    font-weight: bold;
+    font-family: cursive;
+  }
+
+  pre {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  code {
+    @apply border border-border;
+
+    padding-block: 0.05em;
+    padding-inline: 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+    font-family: var(--font-fira);
+    font-weight: normal;
+    white-space: nowrap;
+    transition: border 0.3s ease;
+  }
+
+  a>code {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

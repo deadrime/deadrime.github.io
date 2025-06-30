@@ -2,22 +2,22 @@ import React from 'react';
 
 import classNames from 'classnames';
 import styles from './styles.module.css';
-import Tag from '../Tag/Tag';
+import Tag from '@/components/Tag/Tag';
+import Accordion from '@/components/Accordion/Accordion';
+import SvgHuman from '@/assets/icons/human.svg?react'
+import SvgStorm from '@/assets/icons/storm.svg?react'
+import SvgSber from '@/assets/icons/sber.svg?react'
+import SvgFrogogo from '@/assets/icons/frogogo.svg?react'
+import SvgItcanfly from '@/assets/icons/itcanfly.svg?react'
+import SvgReact from '@/assets/icons/react.svg?react'
+import SvgTs from '@/assets/icons/ts.svg?react'
+import SvgGraphql from '@/assets/icons/graphql.svg?react'
+import SvgApollo from '@/assets/icons/apollo.svg?react'
+import SvgEmotion from '@/assets/icons/emotion.svg?react'
+import SvgNodejs from '@/assets/icons/nodejs.svg?react'
+import SvgOther from '@/assets/icons/other.svg?react'
+import SvgChartjs from '@/assets/icons/chartjs.svg?react'
 import { capitalize } from '@/helpers/capitalize';
-import SvgHuman from '@/svgComponents/Human';
-import SvgStorm from '@/svgComponents/Storm';
-import SvgSber from '@/svgComponents/Sber';
-import SvgFrogogo from '@/svgComponents/Frogogo';
-import SvgItcanfly from '@/svgComponents/Itcanfly';
-import SvgReact from '@/svgComponents/React';
-import SvgTs from '@/svgComponents/Ts';
-import SvgGraphql from '@/svgComponents/Graphql';
-import SvgApollo from '@/svgComponents/Apollo';
-import SvgEmotion from '@/svgComponents/Emotion';
-import SvgNodejs from '@/svgComponents/Nodejs';
-import SvgOther from '@/svgComponents/Other';
-import Accordion from '../Accordion/Accordion';
-import SvgChartjs from '@/svgComponents/Chartjs';
 
 const data = [
   {

@@ -1,9 +1,7 @@
-"use client";
-
 import classNames from "classnames";
 import { FormEvent, useCallback, useState } from "react";
 import styles from './Accordion.module.css';
-import SvgArrowdown from "@/svgComponents/Arrowdown";
+import SvgArrowdown from "@/assets/icons/arrowdown.svg?react";
 
 type DetailsProps = React.ComponentPropsWithoutRef<"details"> & {
   summary: React.ReactNode;
@@ -20,7 +18,7 @@ const Accordion: React.FC<DetailsProps> = ({ summary, children, ...props }) => {
   }, []);
 
   return (
-    <details className={styles.details} open={open} onChange={onToggle}>
+    <details className={styles.details} open={open} onChange={onToggle} {...props}>
       <summary className={classNames(styles.summary)}>
         <span className="text-primary font-semibold select-none">
           {summary}

@@ -1,17 +1,19 @@
-import { getPaginatedArticles } from "@/helpers/blog";
+// import { getPaginatedArticles } from "@/helpers/blog";
+import { useData } from "vike-react/useData";
+import { Link } from "../Link";
 import { BlogArticle } from "../Article";
 import styles from './LatestArticles.module.css';
-import classNames from "classnames";
-import Link from "next/link";
+import { Data } from "@/pages/index/+data";
 
-const LatestArticles = async () => {
-  const { articles, totalCount } = await getPaginatedArticles(3);
+const LatestArticles = () => {
+  const data = useData<Data>();
+  const { latestArticles, totalArticlesCount }  = data;
 
   return (
     <section className="mt-12 md:mt-40">
       <h2 className="font-primary text-xl font-normal mb-11 flex items-center">
         Блог
-        {totalCount > 3 && (
+        {totalArticlesCount > 3 && (
           <Link
             href="/blog"
             className="text-body2 ml-auto font-base text-primary font-bold"
@@ -21,7 +23,7 @@ const LatestArticles = async () => {
         )}
       </h2>
       <div className={styles.articlesWrapper}>
-        {articles.map(article => <BlogArticle key={article.slug} article={article} />)}
+        {latestArticles.map(article => <BlogArticle key={article.slug} article={article} />)}
       </div>
     </section>
   );

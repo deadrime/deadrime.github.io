@@ -1,11 +1,9 @@
-"use client";
-
 import { useCallback, useEffect, useRef, useState } from 'react';
 import React from 'react';
 import classNames from 'classnames';
 import { useThrottledCallback } from '@/hooks/useThrottledCallback';
-import { TocItem } from '@/types/article';
 import { motion } from 'motion/react';
+import { TocItem } from '@/types/tocItem';
 
 const unwrapHeading = (links: TocItem[]) => {
   const result: TocItem[] = [];
