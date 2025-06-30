@@ -1,0 +1,58 @@
+---
+date: 2024-09-08
+topics: ['vite', 'node.js', 'webpack']
+title: How to import multiple files
+description: Pattern matching + subfolders
+---
+
+<h2 id="node">Node.js</h2>
+
+Для node.js можно использовать [`fast-glob`](https://www.npmjs.com/package/fast-glob)
+
+```ts
+import fg from 'fast-glob';
+
+const myFolder = path.join(process.cwd(), '/content');
+const entries = await fg([`${myFolder}/**/*.{md,mdx}`]);
+```
+
+<h2 id="webpack">Webpack</h2>
+
+[Official docs](https://webpack.js.org/guides/dependency-management/#requirecontext)
+
+syntax:
+```ts
+require.context(
+  directory,
+  (useSubdirectories = true),
+  (regExp = /^\.\/.*$/),
+  (mode = 'sync')
+);
+```
+example:
+```ts
+const imagesCtx = require.context('/public/images', false, /\.(png|jpe?g|svg|webp|avif)$/);
+```
+
+<h2 id="vite">Vite</h2>
+
+[Official docs](https://vite.dev/guide/features.html#glob-import)
+
+```ts
+const modules = import.meta.glob('./dir/*.js');
+```
+
+```json filename="tsconfig.json"
+{
+  "compilerOptions": {
+    "types": ["vite/client"]
+  }
+}
+```
+
+<h2 id="patterns">Паттерны</h2>
+
+- `some-folder/*.json` - все файлы json в папке `some-folder`
+- `some-folder/**/*.json` - включая вложенные папки
+- `.{md,mdx}` - несколько расширений
+- `/\.(png|jpe?g|svg|webp|avif)$/` - несколько расширений через regExp

@@ -83,7 +83,8 @@
     font-size: 0.9em;
     font-family: var(--font-fira);
     font-weight: normal;
-    white-space: nowrap;
+    white-space: break-spaces;
+    display: inline-flex;
     transition: border 0.3s ease;
   }
 
