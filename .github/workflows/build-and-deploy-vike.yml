@@ -22,11 +22,11 @@ jobs:
       # Pick your own package manager and build script
       - run: npm install
       - run: npm run build
-      - run: touch ./dist/.nojekyll && echo 'zhenya.dev' > ./dist/CNAME
+      - run: touch ./dist/client/.nojekyll && echo 'zhenya.dev' > ./dist/client/CNAME
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/public
+          path: ./dist/client
   # Deployment job
   deploy:
     # Add a dependency to the build job
