@@ -10,6 +10,7 @@ import webfontDownload from 'vite-plugin-webfont-dl';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import tailwindcssNesting from '@tailwindcss/nesting'
+import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 
 export default defineConfig({
   plugins: [
@@ -37,6 +38,7 @@ export default defineConfig({
       }
     }),
     tsconfigPaths(),
+    cssInjectedByJsPlugin(),
     // webfontDownload([
     //   'https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap',
     //   'https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap',
@@ -46,10 +48,11 @@ export default defineConfig({
   ],
   build: {
     target: "es2022",
+    // cssCodeSplit: false,
   },
   css: {
     postcss: {
       plugins: [tailwindcssNesting(postcssNesting)],
     },
-  }
+  },
 });

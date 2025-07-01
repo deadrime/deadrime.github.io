@@ -32,6 +32,7 @@
     "unified": "^11.0.5",
     "vike": "^0.4.235",
     "vike-react": "^0.6.4",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-webfont-dl": "^3.10.5",
     "vite-tsconfig-paths": "^5.1.4"
   },
