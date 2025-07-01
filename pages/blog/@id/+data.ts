@@ -2,8 +2,9 @@
 
 import type { PageContextServer } from "vike/types";
 import { useConfig } from "vike-react/useConfig";
-import { allArticles } from 'content-collections';
+import { allArticles, Article } from 'content-collections';
 import { render } from "vike/abort";
+import { getArticleSeo } from "@/helpers/getArticleSeo";
 
 export type Data = Awaited<ReturnType<typeof data>>;
 
@@ -18,7 +19,7 @@ export const data = async (pageContext: PageContextServer) => {
   }
 
   config({
-    title: article.title,
+    ...getArticleSeo(article)
   });
 
   return article
