@@ -1,28 +1,39 @@
-"use client";
+'use client';
 
-import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 export type Theme = 'light' | 'dark';
 
 type ThemeContextType = {
   theme: Theme;
   changeTheme: (theme: ThemeContextType['theme']) => void;
-}
+};
 
 export const ThemeContext = createContext<ThemeContextType>({
   theme: 'light',
-  changeTheme: () => { }
+  changeTheme: () => {},
 });
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [selectedTheme, setSelectedTheme] = useState<ThemeContextType['theme']>('dark');
+export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [selectedTheme, setSelectedTheme] =
+    useState<ThemeContextType['theme']>('dark');
 
   useEffect(() => {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
 
     const updateTheme = () => {
-      const storedTheme = window?.localStorage.getItem('selectedTheme') as ThemeContextType['theme'];
+      const storedTheme = window?.localStorage.getItem(
+        'selectedTheme',
+      ) as ThemeContextType['theme'];
       const setTheme = (theme: ThemeContextType['theme']) => {
         document.documentElement.setAttribute('data-theme', theme);
         setSelectedTheme(theme);
@@ -55,14 +66,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   }, []);
 
-  const handleThemeChange = useCallback((themeName: ThemeContextType['theme']) => {
-    setSelectedTheme(themeName);
-    document.documentElement.setAttribute('data-theme', themeName);
-    localStorage.setItem('selectedTheme', themeName);
-  }, []);
+  const handleThemeChange = useCallback(
+    (themeName: ThemeContextType['theme']) => {
+      setSelectedTheme(themeName);
+      document.documentElement.setAttribute('data-theme', themeName);
+      localStorage.setItem('selectedTheme', themeName);
+    },
+    [],
+  );
 
   return (
-    <ThemeContext.Provider value={{ theme: selectedTheme, changeTheme: handleThemeChange }}>
+    <ThemeContext.Provider
+      value={{ theme: selectedTheme, changeTheme: handleThemeChange }}
+    >
       {children}
     </ThemeContext.Provider>
   );
@@ -73,6 +89,6 @@ export const useTheme = () => {
 
   return {
     theme,
-    changeTheme
+    changeTheme,
   };
 };
