@@ -1,14 +1,11 @@
-import { Article } from 'content-collections';
-import { createElement } from 'react';
+import { type Article } from 'content-collections';
 
 type SnippetPreviewProps = {
   snippet: Article;
-}
+};
 
-export const Snippet: React.FC<SnippetPreviewProps> = ({
-  snippet
-}) => (
-  <article className='text-balance'>
+export const Snippet: React.FC<SnippetPreviewProps> = ({}) => (
+  <article className="text-balance">
     TODO
     {/* {createElement(snippet.component)} */}
   </article>

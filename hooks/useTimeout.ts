@@ -1,8 +1,11 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from 'react';
 
-export default function useTimeout<Cb extends (...args: never[]) => unknown>(callback: Cb, delay: number) {
+export default function useTimeout<Cb extends (...args: never[]) => unknown>(
+  callback: Cb,
+  delay: number,
+) {
   const callbackRef = useRef(callback);
-  const timeoutRef = useRef<NodeJS.Timeout>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     callbackRef.current = callback;
@@ -13,7 +16,9 @@ export default function useTimeout<Cb extends (...args: never[]) => unknown>(cal
   }, [delay]);
 
   const clear = useCallback(() => {
-    timeoutRef.current && clearTimeout(timeoutRef.current);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   }, []);
 
   useEffect(() => {

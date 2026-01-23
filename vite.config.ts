@@ -9,7 +9,7 @@ import vike from 'vike/plugin';
 import { defineConfig } from 'vite';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 import svgr from 'vite-plugin-svgr';
-import webfontDownload from 'vite-plugin-webfont-dl';
+// import webfontDownload from 'vite-plugin-webfont-dl';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({

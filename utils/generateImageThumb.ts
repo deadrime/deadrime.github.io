@@ -2,7 +2,7 @@ import {
   rgbaToThumbHash,
   thumbHashToDataURL,
   thumbHashToApproximateAspectRatio,
-} from "thumbhash";
+} from 'thumbhash';
 
 export const loadImage = (imageUrl: string) => {
   return new Promise<HTMLImageElement>((resolve) => {
@@ -21,8 +21,8 @@ export async function generateImageThumb(img: HTMLImageElement) {
   const h = (img.height = Math.round((100 * img.height) / size));
 
   // Создаем из картинки миниатюру (100x100 maximum size)
-  const canvas = document.createElement("canvas");
-  const c = canvas.getContext("2d");
+  const canvas = document.createElement('canvas');
+  const c = canvas.getContext('2d');
   canvas.width = w;
   canvas.height = h;
   if (!c) {

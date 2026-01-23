@@ -1,26 +1,41 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-export type PaginatedResponse<Data, ExtraPayload extends Record<string, unknown>> = {
+export type PaginatedResponse<
+  Data,
+  ExtraPayload extends Record<string, unknown>,
+> = {
   data: Data[];
   totalCount: number;
-  extra?: ExtraPayload
-}
+  extra?: ExtraPayload;
+};
 
 export type PaginationParams = {
   limit: number;
   offset: number;
 };
 
-export type UsePaginatedDataProps<Data, ExtraPayload extends Record<string, unknown>> = {
-  queryFn: (params: PaginationParams) => Promise<PaginatedResponse<Data, ExtraPayload>>;
+export type UsePaginatedDataProps<
+  Data,
+  ExtraPayload extends Record<string, unknown>,
+> = {
+  queryFn: (
+    params: PaginationParams,
+  ) => Promise<PaginatedResponse<Data, ExtraPayload>>;
   limit?: number;
   initialOffset?: number;
 };
 
-export const usePaginatedData = <Data, ExtraPayload extends Record<string, unknown>>(params: UsePaginatedDataProps<Data, ExtraPayload>) => {
+export const usePaginatedData = <
+  Data,
+  ExtraPayload extends Record<string, unknown>,
+>(
+  params: UsePaginatedDataProps<Data, ExtraPayload>,
+) => {
   const { queryFn, limit = 10, initialOffset = 0 } = params;
   const [offset, setOffset] = useState(initialOffset);
-  const [pages, setPages] = useState<PaginatedResponse<Data, ExtraPayload>[]>([]);
+  const [pages, setPages] = useState<PaginatedResponse<Data, ExtraPayload>[]>(
+    [],
+  );
   const [isFetchingNextPage, setIsFetchingNextPage] = useState(false);
 
   const loadMore = useCallback(async () => {
@@ -30,7 +45,7 @@ export const usePaginatedData = <Data, ExtraPayload extends Record<string, unkno
       offset,
     });
 
-    setPages(prev => [...prev, nextData]);
+    setPages((prev) => [...prev, nextData]);
     setOffset(offset + limit);
     setIsFetchingNextPage(false);
   }, [queryFn, offset, limit]);
@@ -39,7 +54,7 @@ export const usePaginatedData = <Data, ExtraPayload extends Record<string, unkno
     loadMore();
   }, []);
 
-  const data = pages.flatMap(page => page.data);
+  const data = pages.flatMap((page) => page.data);
   const extra = pages[0]?.extra || null;
   const totalCount = pages[0]?.totalCount || null;
   const hasNextPage = totalCount !== null && data.length < totalCount;

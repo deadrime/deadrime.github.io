@@ -1,26 +1,28 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useMemo, useState, useCallback, useEffect } from "react";
-import { thumbToImageSrc, loadImage, generateImageThumb } from "@/utils/generateImageThumb";
-import classNames from "classnames";
+import { useMemo, useState, useCallback, useEffect } from 'react';
+import {
+  thumbToImageSrc,
+  loadImage,
+  generateImageThumb,
+} from '@/utils/generateImageThumb';
 import exampleImage from './example.jpg';
 
 type LazyImageProps = {
   src: string;
   thumbHash: string;
-} & React.ComponentPropsWithoutRef<"img">;
+} & React.ComponentPropsWithoutRef<'img'>;
 
 const ProgressiveImageExample: React.FC<LazyImageProps> = () => {
-  const [originalImageSrc, setOriginalImageSrc] = useState(exampleImage.src);
+  const [originalImageSrc] = useState(exampleImage);
   const [thumbHash, setThumbHash] = useState('6WgKHQiFhXCIZ3eId4Z4eHdwiQh2');
   const { src: thumbSrc, aspectRatio } = useMemo(
     () => thumbToImageSrc(thumbHash),
-    [thumbHash]
+    [thumbHash],
   );
 
   const [imgSrc, setImgSrc] = useState(thumbSrc);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   const runDemo = useCallback(async () => {
     const { src: base64 } = thumbToImageSrc(thumbHash);

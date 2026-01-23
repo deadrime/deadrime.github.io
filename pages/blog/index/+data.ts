@@ -1,4 +1,4 @@
-import { useConfig } from "vike-react/useConfig";
+import { useConfig } from 'vike-react/useConfig';
 import { allArticles } from 'content-collections';
 
 export const data = async () => {

@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from 'react';
 import sdk, { type EmbedOptions, type VM } from '@stackblitz/sdk';
-import { useTheme } from "@/components/ThemeContext";
+import { useTheme } from '@/components/ThemeContext';
 
-type CodeDemoProps = { projectId: string } & EmbedOptions
+type CodeDemoProps = { projectId: string } & EmbedOptions;
 
 const CodeDemo: React.FC<CodeDemoProps> = ({
   projectId,
@@ -19,47 +19,40 @@ const CodeDemo: React.FC<CodeDemoProps> = ({
 
   const cleanUp = useCallback(() => {
     if (!iframeRef.current || !wrapperRef.current) {
-      return
+      return;
     }
-    const frames = wrapperRef.current.querySelectorAll('iframe')
+    const frames = wrapperRef.current.querySelectorAll('iframe');
 
-    frames.forEach(i => i.remove())
-  }, [wrapperRef, iframeRef])
+    frames.forEach((i) => i.remove());
+  }, [wrapperRef, iframeRef]);
 
   const initIframe = useCallback(async () => {
     if (!iframeRef.current) {
-      return
+      return;
     }
-    vm.current = await sdk.embedProjectId(
-      iframeRef.current,
-      projectId,
-      {
-        ...restProps,
-        forceEmbedLayout,
-        view,
-        height,
-        width,
-        theme: theme,
-      },
-    )
-  }, [theme, iframeRef])
+    vm.current = await sdk.embedProjectId(iframeRef.current, projectId, {
+      ...restProps,
+      forceEmbedLayout,
+      view,
+      height,
+      width,
+      theme: theme,
+    });
+  }, [theme, iframeRef]);
 
   useEffect(() => {
     if (!iframeRef.current || !wrapperRef.current) {
-      return
+      return;
     }
     initIframe();
     return cleanUp;
-  }, [initIframe])
+  }, [initIframe]);
 
   return (
-    <div
-      ref={wrapperRef}
-      className="w-full rounded-md overflow-hidden mt-3"
-    >
+    <div ref={wrapperRef} className="w-full rounded-md overflow-hidden mt-3">
       <div ref={iframeRef} />
     </div>
-  )
-}
+  );
+};
 
 export default CodeDemo;

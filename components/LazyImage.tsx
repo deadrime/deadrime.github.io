@@ -1,16 +1,14 @@
-"use client";
+'use client';
 
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
-import React from "react";
-import { useMemo, useState, useCallback, useEffect } from "react";
-import { thumbToImageSrc, loadImage } from "@/utils/generateImageThumb";
-import classNames from "classnames";
+import type React from 'react';
+import { useMemo, useState, useCallback, useEffect } from 'react';
+import { thumbToImageSrc, loadImage } from '@/utils/generateImageThumb';
+import classNames from 'classnames';
 
 type LazyImageProps = {
   src: string;
   thumbHash: string;
-} & React.ComponentPropsWithoutRef<"img">;
+} & React.ComponentPropsWithoutRef<'img'>;
 
 export const LazyImage: React.FC<LazyImageProps> = ({
   src: originalImageSrc,
@@ -20,11 +18,14 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   ...props
 }) => {
   const { src: thumb, aspectRatio } = useMemo(
-    () => (thumbHash ? thumbToImageSrc(thumbHash) : {
-      src: '',
-      aspectRatio: undefined
-    }),
-    [thumbHash]
+    () =>
+      thumbHash
+        ? thumbToImageSrc(thumbHash)
+        : {
+            src: '',
+            aspectRatio: undefined,
+          },
+    [thumbHash],
   );
   const [imgSrc, setImgSrc] = useState(thumb ? thumb : originalImageSrc);
   const [loading, setLoading] = useState(false);
@@ -57,15 +58,15 @@ export const LazyImage: React.FC<LazyImageProps> = ({
       <br />
       <div
         style={{
-          background: loading ? `url(${thumb})` : "",
-          backgroundSize: "100%",
-          display: loading ? "inline-flex" : "none",
+          background: loading ? `url(${thumb})` : '',
+          backgroundSize: '100%',
+          display: loading ? 'inline-flex' : 'none',
         }}
       >
         <img
           src={imgSrc}
           loading="lazy"
-          className={classNames(className, "lazy-image", {
+          className={classNames(className, 'lazy-image', {
             loading,
           })}
           style={{

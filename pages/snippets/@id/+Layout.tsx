@@ -1,29 +1,29 @@
-import classNames from "classnames";
-import React from "react";
+import classNames from 'classnames';
+import type React from 'react';
 import dayjs from 'dayjs';
-import { render } from "vike/abort";
-import { Link } from "@/components/Link";
-import { useData } from "vike-react/useData";
-import { SnippetPageData } from "./+data";
+import { render } from 'vike/abort';
+import { Link } from '@/components/Link';
+import { useData } from 'vike-react/useData';
+import { type SnippetPageData } from './+data';
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const snippet = useData<SnippetPageData>();
 
   if (!snippet) {
-    throw render(404)
+    throw render(404);
   }
 
   const { title, description, date } = snippet;
 
   return (
     <div className="flex flex-col">
-      <Link href="/snippets" className="mb-8 block self-start">← Сниппеты</Link>
+      <Link href="/snippets" className="mb-8 block self-start">
+        ← Сниппеты
+      </Link>
       <div>
-        <section className={classNames("overflow-hidden")}>
+        <section className={classNames('overflow-hidden')}>
           <header className="py-8 border-t-[6px] border-b-2 border-details md:mb-10">
-            <h1 className="text-2xl font-primary block mb-4">
-              {title}
-            </h1>
+            <h1 className="text-2xl font-primary block mb-4">{title}</h1>
             <h2 className="font-primary text-md font-normal block mb-8 text-secondary">
               {description}
             </h2>
@@ -40,6 +40,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       </div>
     </div>
   );
-}
+};
 
-export default Layout
+export default Layout;

@@ -1,4 +1,4 @@
-import { BlockquoteHTMLAttributes, HTMLProps } from 'react';
+import { type HTMLProps } from 'react';
 import styles from './Blockquote.module.css';
 
 const Blockquote: React.FC<HTMLProps<HTMLElement>> = ({ children }) => {

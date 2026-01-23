@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { useThrottledCallback } from '@/hooks/useThrottledCallback';
 import { motion } from 'motion/react';
-import { TocItem } from '@/types/tocItem';
+import { type TocItem } from '@/types/tocItem';
 
 const unwrapHeading = (links: TocItem[]) => {
   const result: TocItem[] = [];
@@ -33,7 +32,9 @@ const useActiveHeading = (headings: TocItem[], topOffset = 400) => {
 
     let firstHeadingInViewport = headingBoxes.find(({ box }) => {
       return (
-        box.bottom > 0 && box.bottom < topOffset && box.bottom <= window.innerHeight
+        box.bottom > 0 &&
+        box.bottom < topOffset &&
+        box.bottom <= window.innerHeight
       );
     });
 
@@ -50,7 +51,11 @@ const useActiveHeading = (headings: TocItem[], topOffset = 400) => {
     }
   }, [activeHeadingId, headings, topOffset]);
 
-  const throttledHandleScroll = useThrottledCallback(handleScroll, [handleScroll], 100);
+  const throttledHandleScroll = useThrottledCallback(
+    handleScroll,
+    [handleScroll],
+    100,
+  );
 
   useEffect(() => {
     if (headings.length > 0) {
@@ -82,25 +87,32 @@ export const TableOfContent: React.FC<{ toc: TocItem[] }> = ({ toc }) => {
 
   return (
     <div className="mt-4 mb-4">
-      <span className='block mb-3 font-semibold text-lg md:text-body2'>СОДЕРЖАНИЕ</span>
+      <span className="block mb-3 font-semibold text-lg md:text-body2">
+        СОДЕРЖАНИЕ
+      </span>
       <HeadingList
         items={toc}
         activeHeadingId={activeHeadingId}
-        className='[&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3'
+        className="[&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3"
       />
     </div>
   );
 };
 
 type HeadingListProps = {
-  items: TocItem[]
-  activeHeadingId: string
-  inner?: boolean
+  items: TocItem[];
+  activeHeadingId: string;
+  inner?: boolean;
   className?: string;
-}
+};
 
-const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, className, inner }) => {
-  const [marker, setMarker] = useState({ top: 0, height: 0});
+const HeadingList: React.FC<HeadingListProps> = ({
+  items,
+  activeHeadingId,
+  className,
+  inner,
+}) => {
+  const [marker, setMarker] = useState({ top: 0, height: 0 });
   const wrapperRef = useRef<HTMLOListElement>(null);
 
   const updateMarker = useCallback(() => {
@@ -109,14 +121,16 @@ const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, class
     }
 
     if (!activeHeadingId) {
-      setMarker(({height}) => ({
+      setMarker(({ height }) => ({
         top: height / 2,
         height: 0,
       }));
       return;
     }
 
-    const activeLink = wrapperRef.current!.querySelector(`a[href="#${activeHeadingId}"]`);
+    const activeLink = wrapperRef.current!.querySelector(
+      `a[href="#${activeHeadingId}"]`,
+    );
 
     if (!activeLink) {
       return;
@@ -136,9 +150,16 @@ const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, class
   }, [updateMarker, activeHeadingId]);
 
   return (
-    <ol ref={wrapperRef} className={classNames('flex flex-col gap-3 relative [&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3 border-l-2 border-gray-200/30 dark:border-gray-600/50', {
-      ['border-none ml-3']: inner,
-    }, className)}>
+    <ol
+      ref={wrapperRef}
+      className={classNames(
+        'flex flex-col gap-3 relative [&*>li]:-ml-px [&*>li>*:not(ol)]:pl-3 border-l-2 border-gray-200/30 dark:border-gray-600/50',
+        {
+          ['border-none ml-3']: inner,
+        },
+        className,
+      )}
+    >
       {!inner && (
         <motion.div
           className="absolute w-[2px] left-0 bg-primary rounded-[2px] -translate-x-[2px]"
@@ -153,15 +174,26 @@ const HeadingList: React.FC<HeadingListProps> = ({ items, activeHeadingId, class
           }}
         />
       )}
-      {items.map(i =>
+      {items.map((i) => (
         <li className={classNames('flex flex-col gap-3 relative')} key={i.id}>
-          <a href={`#${i.id}`} className={classNames('text-body2 border-l-2 border-transparent', {
-            ['text-text']: activeHeadingId !== i.id,
-            ['text-primary']: activeHeadingId === i.id,
-          })}>{i.text}</a>
-          {i.children?.length > 0 && <HeadingList inner items={i.children} activeHeadingId={activeHeadingId} />}
+          <a
+            href={`#${i.id}`}
+            className={classNames('text-body2 border-l-2 border-transparent', {
+              ['text-text']: activeHeadingId !== i.id,
+              ['text-primary']: activeHeadingId === i.id,
+            })}
+          >
+            {i.text}
+          </a>
+          {i.children?.length > 0 && (
+            <HeadingList
+              inner
+              items={i.children}
+              activeHeadingId={activeHeadingId}
+            />
+          )}
         </li>
-      )}
+      ))}
     </ol>
   );
 };

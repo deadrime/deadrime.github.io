@@ -1,4 +1,4 @@
-import z from "zod";
+import z from 'zod';
 
 export const articleFrontmatterSchema = z.object({
   title: z.string(),
@@ -8,4 +8,4 @@ export const articleFrontmatterSchema = z.object({
   previewImg: z.string().optional(),
 });
 
-export type ArticleFrontmatter = typeof articleFrontmatterSchema['_type'];
+export type ArticleFrontmatter = (typeof articleFrontmatterSchema)['_type'];

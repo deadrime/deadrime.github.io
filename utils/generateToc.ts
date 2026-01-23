@@ -4,7 +4,7 @@ import remarkRehype from 'remark-rehype';
 import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
 import { load } from 'cheerio';
-import { TocItem } from '@/types/tocItem';
+import { type TocItem } from '@/types/tocItem';
 
 export const generateToc = async (rawMarkdown: string) => {
   const result = await unified()
@@ -18,16 +18,20 @@ export const generateToc = async (rawMarkdown: string) => {
 
   const headings = $html(':is(h1,h2,h3)[id]').toArray();
 
-  const toc = buildToc(headings.map(i => ({
-    id: i.attributes.find(i => i.name === 'id')!.value,
-    tagName: i.tagName,
-    textContent: load(i).text(),
-  })));
+  const toc = buildToc(
+    headings.map((i) => ({
+      id: i.attributes.find((i) => i.name === 'id')!.value,
+      tagName: i.tagName,
+      textContent: load(i).text(),
+    })),
+  );
 
   return toc;
 };
 
-const buildToc = (elements: { tagName: string; id: string; textContent: string }[]): TocItem[] => {
+const buildToc = (
+  elements: { tagName: string; id: string; textContent: string }[],
+): TocItem[] => {
   const toc: TocItem[] = [];
   const stack: TocItem[] = [];
 

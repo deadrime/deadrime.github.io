@@ -1,13 +1,13 @@
 // import { getPaginatedArticles } from "@/helpers/blog";
-import { useData } from "vike-react/useData";
-import { Link } from "../Link";
-import { BlogArticle } from "../Article";
+import { useData } from 'vike-react/useData';
+import { Link } from '../Link';
+import { BlogArticle } from '../Article';
 import styles from './LatestArticles.module.css';
-import { Data } from "@/pages/index/+data";
+import { type Data } from '@/pages/index/+data';
 
 const LatestArticles = () => {
   const data = useData<Data>();
-  const { latestArticles, totalArticlesCount }  = data;
+  const { latestArticles, totalArticlesCount } = data;
 
   return (
     <section className="mt-12 md:mt-40">
@@ -23,7 +23,9 @@ const LatestArticles = () => {
         )}
       </h2>
       <div className={styles.articlesWrapper}>
-        {latestArticles.map(article => <BlogArticle key={article.slug} article={article} />)}
+        {latestArticles.map((article) => (
+          <BlogArticle key={article.slug} article={article} />
+        ))}
       </div>
     </section>
   );

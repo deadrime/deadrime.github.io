@@ -1,7 +1,7 @@
-import AboutSection from "@/components/AboutSection/AboutSection.js";
-import Technologies from "@/components/Technologies/Technologies.js";
-import MyExperience from "@/components/MyExperience/MyExperience.js";
-import LatestArticles from "@/components/LatestArticles/LatestArticles.js";
+import AboutSection from '@/components/AboutSection/AboutSection.js';
+import Technologies from '@/components/Technologies/Technologies.js';
+import MyExperience from '@/components/MyExperience/MyExperience.js';
+import LatestArticles from '@/components/LatestArticles/LatestArticles.js';
 
 export default function Page() {
   return (

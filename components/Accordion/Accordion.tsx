@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FormEvent, useCallback, useState } from 'react';
+import { type FormEvent, useCallback, useState } from 'react';
 import styles from './Accordion.module.css';
 import SvgArrowdown from '@/assets/icons/arrowdown.svg?react';
 

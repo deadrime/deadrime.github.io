@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from 'react';
 
 export const useThrottledCallback = <
   Props extends readonly unknown[],
   Return,
-  Cb extends (...props: Props) => Return
->(cb: Cb, deps: unknown[], wait: number) => {
-  const state = useRef<{ tmpProps: Props, timeoutId?: NodeJS.Timeout }>({
+  Cb extends (...props: Props) => Return,
+>(
+  cb: Cb,
+  deps: unknown[],
+  wait: number,
+) => {
+  const state = useRef<{ tmpProps: Props; timeoutId?: NodeJS.Timeout }>({
     tmpProps: [] as unknown as Props,
   });
 
@@ -31,5 +35,5 @@ export const useThrottledCallback = <
     }, wait);
   }, deps);
 
-  return throttledCb;// as (props: Props) => Return;
+  return throttledCb; // as (props: Props) => Return;
 };

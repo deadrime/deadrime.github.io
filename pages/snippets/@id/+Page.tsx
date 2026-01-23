@@ -1,6 +1,6 @@
-import { useData } from "vike-react/useData";
-import { MDX } from "@/components/MDX";
-import { SnippetPageData } from "./+data";
+import { useData } from 'vike-react/useData';
+import { MDX } from '@/components/MDX';
+import { type SnippetPageData } from './+data';
 
 export default function Page() {
   const snippet = useData<SnippetPageData>();

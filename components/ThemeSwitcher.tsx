@@ -1,16 +1,21 @@
-"use client";
+'use client';
 
-import { Theme, useTheme } from './ThemeContext';
-import { CSSProperties, useState } from 'react';
-import { AnimatePresence, HTMLMotionProps, motion } from 'motion/react';
+import { type Theme, useTheme } from './ThemeContext';
+import { type CSSProperties, useState } from 'react';
+import { type HTMLMotionProps, motion } from 'motion/react';
 import classNames from 'classnames';
 
 type DarkModeToggleProps = HTMLMotionProps<'button'> & {
   theme: Theme;
-  onThemeChange: (theme: Theme) => void
-}
+  onThemeChange: (theme: Theme) => void;
+};
 
-export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ theme, onThemeChange, className, ...props }) => {
+export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({
+  theme,
+  onThemeChange,
+  className,
+  ...props
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
@@ -72,7 +77,10 @@ export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ theme, onThemeCh
 
   return (
     <motion.button
-      className={classNames("w-[32px] h-[32px] relative overflow-hidden cursor-pointer", className)}
+      className={classNames(
+        'w-[32px] h-[32px] relative overflow-hidden cursor-pointer',
+        className,
+      )}
       aria-label="Toggle theme"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
@@ -94,7 +102,7 @@ export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ theme, onThemeCh
           key={i + theme}
           initial={{
             ...getSunPartStyle(0),
-            opacity: 0
+            opacity: 0,
           }}
           animate={getSunPartStyle(i)}
           transition={{ duration: 0.35, ease: 'easeInOut' }}
@@ -152,13 +160,17 @@ export const DarkModeToggle: React.FC<DarkModeToggleProps> = ({ theme, onThemeCh
 type ThemeSwitcher = {
   className?: string;
   style?: CSSProperties;
-}
+};
 
 const ThemeSwitcher: React.FC<ThemeSwitcher> = (props) => {
   const { theme: selectedTheme, changeTheme } = useTheme();
 
   return (
-    <DarkModeToggle theme={selectedTheme} onThemeChange={changeTheme} {...props} />
+    <DarkModeToggle
+      theme={selectedTheme}
+      onThemeChange={changeTheme}
+      {...props}
+    />
   );
 };
 

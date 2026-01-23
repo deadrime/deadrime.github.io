@@ -1,4 +1,4 @@
-import { useConfig } from "vike-react/useConfig";
+import { useConfig } from 'vike-react/useConfig';
 import { allSnippets } from 'content-collections';
 
 export type SnippetsPageData = Awaited<ReturnType<typeof data>>;
