@@ -1,7 +1,7 @@
 const data = [
   {
     category: 'JS Libraries & Frameworks',
-    items: ['React', 'Vue', 'Next', 'Nuxt'],
+    items: ['React', 'Vue', 'Next', 'Nuxt', 'Vike'],
   },
   {
     category: 'UI Libraries & Frameworks',
@@ -16,7 +16,7 @@ const data = [
   },
   {
     category: 'State management',
-    items: ['Redux', 'Redux Toolkit', 'Apollo', 'Vuex'],
+    items: ['Zustand', 'Redux', 'Redux Toolkit', 'Apollo', 'Vuex'],
   },
   {
     category: 'Styles',
@@ -71,13 +71,13 @@ const data = [
   {
     category: 'Other',
     items: [
+      'Strapi',
+      'Tolgee',
       'Webhooks',
       'Puppeteer',
       'Cheerio',
       'Node.js workers',
       'Telegram bots',
-      'Ruby on Rails',
-      'Python',
     ],
   },
 ];
