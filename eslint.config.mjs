@@ -71,6 +71,7 @@ const eslintConfig = [
       "react/prop-types": 0,
       "react/jsx-filename-extension": [1, { extensions: [".tsx"] }],
       "react/jsx-no-useless-fragment": "warn",
+      "react/display-name": 0,
 
       "prettier/prettier": [
         "warn",

@@ -1,59 +1,96 @@
 ---
 date: 2024-09-08
 topics: ['react', 'typescript']
-title: Component dynamic tag
-description: Use react component as another component
+title: Polymorphic component
+description: React component with dynamic tag (as prop)
 ---
 
-Component with dynamic tag
+Компонент с динамическим тегом — проп `as` определяет какой элемент будет отрендерен.
+
+## Утилитный тип
 
 ```tsx
-export type Prefer<P, T> = P & Omit<T, keyof P>;
+import { type ComponentPropsWithRef, type ElementType } from 'react';
 
-export type ElementPropsWithoutRef<T extends ElementType> = Pick<
-  ComponentPropsWithoutRef<T>,
-  keyof ComponentPropsWithoutRef<T>
->;
-
-export type DynamicHTMLProps<OwnProps, Type extends ElementType> = Prefer<
-  OwnProps,
-  ElementPropsWithoutRef<Type>
->;
-
-type ButtonProps<As extends React.ElementType> = {
-  variant: 'primary' | 'secondary'
-  as: As
-}
-
-export const Button = <As extends React.ElementType = 'button'>({
-  as,
-  children, 
-  variant,
-  ...props 
-}: DynamicHTMLProps<ButtonProps<As>, As>) => {
-  const Tag: React.ElementType = as || 'button';
-
-  return <Tag {...props} className={variant}>{children}</Tag>;
-};
+type PolymorphicProps<
+  C extends ElementType,
+  OwnProps = Record<string, never>,
+> = OwnProps &
+  Omit<ComponentPropsWithRef<C>, keyof OwnProps | 'as'> & {
+    as?: C;
+  };
 ```
 
-And with forward ref
+## React 19+
+
+В React 19 `ref` можно передавать как обычный проп — `forwardRef` не нужен:
 
 ```tsx
-// React 🥰
-function fixedForwardRef<T, P = {}>(
-  render: (props: P, ref: React.Ref<T>) => React.ReactNode
-): (props: P & React.RefAttributes<T>) => React.ReactNode {
-  return React.forwardRef(render) as any;
-}
-
-export const ButtonRaw = <As extends React.ElementType, Ref>(props: DynamicHTMLProps<ButtonProps<As>, As>, ref: Ref) => {
-  const { as = 'button', variant, children, ...rest } = props;
-  const Tag: React.ElementType = props.as;
-
-  return <Tag {...rest} className={variant} ref={ref}>{children}</Tag>;
+type BoxOwnProps = {
+  padding?: 'sm' | 'md' | 'lg';
 };
 
-const Button = fixedForwardRef(ButtonRaw);
+export const Box = <C extends ElementType = 'div'>({
+  as,
+  padding = 'md',
+  className,
+  children,
+  ref,
+  ...props
+}: PolymorphicProps<C, BoxOwnProps>) => {
+  const Component = as || 'div';
 
+  return (
+    <Component ref={ref} {...props} className={`p-${padding} ${className || ''}`}>
+      {children}
+    </Component>
+  );
+};
+
+```
+Использование:
+
+```tsx
+<Box>Default div</Box>
+<Box as="a" href="/link">Link</Box>
+<Box as="section" ref={sectionRef}>...</Box>
+```
+
+## React 18 и ниже
+
+Понадобиться хелпер `fixedForwardRef` + generic функция:
+
+```tsx
+import { forwardRef, type ElementType } from 'react';
+
+// Хелпер для сохранения дженериков в forwardRef
+function fixedForwardRef<T, P>(
+  render: (props: P, ref: React.Ref<T>) => React.ReactNode,
+) {
+  return forwardRef(render as any) as (
+    props: P & React.RefAttributes<T>,
+  ) => React.ReactNode;
+}
+```
+Пример:
+```tsx
+type BoxOwnProps = {
+  padding?: 'sm' | 'md' | 'lg';
+};
+
+const BoxRaw = <C extends ElementType = 'div'>(
+  props: PolymorphicProps<C, BoxOwnProps>,
+  ref: React.Ref<Element>,
+) => {
+  const { as, padding = 'md', className, children, ...rest } = props;
+  const Component = as || 'div';
+
+  return (
+    <Component ref={ref} {...rest} className={`p-${padding} ${className || ''}`}>
+      {children}
+    </Component>
+  );
+};
+
+export const Box = fixedForwardRef(BoxRaw);
 ```
